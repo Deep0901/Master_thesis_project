@@ -1,0 +1,248 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "description": "Benchmark queries for evaluating the OGD search system",
+    "domains": ["environment", "mobility"],
+    "languages": ["en", "de", "fr"],
+    "thesis": "Improving Access to Swiss OGD through Fuzzy HCIR"
+  },
+  "queries": [
+    {
+      "id": "ENV-001",
+      "domain": "environment",
+      "language": "en",
+      "query": "air quality pollution data Zurich",
+      "variants": [
+        "Luftqualität Zürich",
+        "qualité de l'air Zurich",
+        "air pollution measurements"
+      ],
+      "expected_themes": ["environment", "air quality"],
+      "temporal_hint": null,
+      "quality_hint": null,
+      "difficulty": "easy",
+      "notes": "Direct keyword match expected"
+    },
+    {
+      "id": "ENV-002",
+      "domain": "environment",
+      "language": "en",
+      "query": "recent water quality measurements rivers",
+      "variants": [
+        "aktuelle Wasserqualität Flüsse",
+        "récentes mesures qualité eau rivières"
+      ],
+      "expected_themes": ["environment", "water"],
+      "temporal_hint": "recent",
+      "quality_hint": null,
+      "difficulty": "medium",
+      "notes": "Temporal modifier 'recent' should influence ranking"
+    },
+    {
+      "id": "ENV-003",
+      "domain": "environment",
+      "language": "de",
+      "query": "Lärmbelastung Städte Schweiz",
+      "variants": [
+        "noise pollution Swiss cities",
+        "pollution sonore villes Suisse"
+      ],
+      "expected_themes": ["environment", "noise", "health"],
+      "temporal_hint": null,
+      "quality_hint": null,
+      "difficulty": "medium",
+      "notes": "German query with geographic scope"
+    },
+    {
+      "id": "ENV-004",
+      "domain": "environment",
+      "language": "en",
+      "query": "biodiversity species data national parks",
+      "variants": [
+        "Biodiversität Nationalpark",
+        "biodiversité données espèces"
+      ],
+      "expected_themes": ["environment", "biodiversity", "nature"],
+      "temporal_hint": null,
+      "quality_hint": null,
+      "difficulty": "hard",
+      "notes": "More specialized query, may have fewer matches"
+    },
+    {
+      "id": "ENV-005",
+      "domain": "environment",
+      "language": "en",
+      "query": "complete climate data temperature precipitation",
+      "variants": [
+        "vollständige Klimadaten",
+        "données climatiques complètes"
+      ],
+      "expected_themes": ["environment", "climate", "weather"],
+      "temporal_hint": null,
+      "quality_hint": "complete",
+      "difficulty": "medium",
+      "notes": "Quality modifier 'complete' should influence ranking"
+    },
+    {
+      "id": "MOB-001",
+      "domain": "mobility",
+      "language": "en",
+      "query": "traffic statistics Swiss highways",
+      "variants": [
+        "Verkehrsstatistik Autobahn Schweiz",
+        "statistiques trafic autoroutes Suisse"
+      ],
+      "expected_themes": ["mobility", "traffic", "transport"],
+      "temporal_hint": null,
+      "quality_hint": null,
+      "difficulty": "easy",
+      "notes": "Direct match for mobility domain"
+    },
+    {
+      "id": "MOB-002",
+      "domain": "mobility",
+      "language": "en",
+      "query": "public transport punctuality trains",
+      "variants": [
+        "Pünktlichkeit öffentlicher Verkehr Züge",
+        "ponctualité transports publics trains"
+      ],
+      "expected_themes": ["mobility", "public transport", "rail"],
+      "temporal_hint": null,
+      "quality_hint": null,
+      "difficulty": "medium",
+      "notes": "Specific to rail transport"
+    },
+    {
+      "id": "MOB-003",
+      "domain": "mobility",
+      "language": "de",
+      "query": "aktuelle Velowege Infrastruktur",
+      "variants": [
+        "recent bicycle paths infrastructure",
+        "pistes cyclables récentes"
+      ],
+      "expected_themes": ["mobility", "cycling", "infrastructure"],
+      "temporal_hint": "recent",
+      "quality_hint": null,
+      "difficulty": "hard",
+      "notes": "German with temporal modifier, specific topic"
+    },
+    {
+      "id": "MOB-004",
+      "domain": "mobility",
+      "language": "en",
+      "query": "electric vehicle charging stations locations",
+      "variants": [
+        "Elektrofahrzeug Ladestationen",
+        "bornes recharge véhicules électriques"
+      ],
+      "expected_themes": ["mobility", "electric vehicles", "infrastructure"],
+      "temporal_hint": null,
+      "quality_hint": null,
+      "difficulty": "medium",
+      "notes": "Modern mobility topic"
+    },
+    {
+      "id": "MOB-005",
+      "domain": "mobility",
+      "language": "fr",
+      "query": "accidents routiers statistiques cantons",
+      "variants": [
+        "road accident statistics cantons",
+        "Verkehrsunfälle Statistik Kantone"
+      ],
+      "expected_themes": ["mobility", "safety", "accidents"],
+      "temporal_hint": null,
+      "quality_hint": null,
+      "difficulty": "medium",
+      "notes": "French query on sensitive topic"
+    },
+    {
+      "id": "VAGUE-001",
+      "domain": "environment",
+      "language": "en",
+      "query": "environmental data around Geneva area",
+      "variants": [
+        "Umweltdaten Region Genf",
+        "données environnementales région Genève"
+      ],
+      "expected_themes": ["environment"],
+      "temporal_hint": null,
+      "quality_hint": null,
+      "difficulty": "hard",
+      "notes": "Vague query - tests fuzzy handling of imprecise terms"
+    },
+    {
+      "id": "VAGUE-002",
+      "domain": "mobility",
+      "language": "en",
+      "query": "something about commuting patterns",
+      "variants": [
+        "Pendlerverkehr irgendwie",
+        "quelque chose sur les trajets domicile-travail"
+      ],
+      "expected_themes": ["mobility", "commuting"],
+      "temporal_hint": null,
+      "quality_hint": null,
+      "difficulty": "hard",
+      "notes": "Very vague query - tests system robustness"
+    },
+    {
+      "id": "MULTI-001",
+      "domain": "both",
+      "language": "en",
+      "query": "environmental impact of transport emissions CO2",
+      "variants": [
+        "Umweltauswirkungen Verkehr Emissionen",
+        "impact environnemental transport émissions"
+      ],
+      "expected_themes": ["environment", "mobility", "emissions"],
+      "temporal_hint": null,
+      "quality_hint": null,
+      "difficulty": "medium",
+      "notes": "Cross-domain query spanning environment and mobility"
+    },
+    {
+      "id": "SPECIFIC-001",
+      "domain": "environment",
+      "language": "en",
+      "query": "PM2.5 particulate matter measurements Basel 2023",
+      "variants": [
+        "PM2.5 Feinstaub Basel 2023",
+        "PM2.5 particules fines Bâle 2023"
+      ],
+      "expected_themes": ["environment", "air quality"],
+      "temporal_hint": "2023",
+      "quality_hint": null,
+      "difficulty": "hard",
+      "notes": "Very specific query with technical term and year"
+    },
+    {
+      "id": "TEMPORAL-001",
+      "domain": "mobility",
+      "language": "en",
+      "query": "very recent traffic accident data",
+      "variants": [
+        "ganz aktuelle Verkehrsunfalldaten",
+        "données très récentes accidents"
+      ],
+      "expected_themes": ["mobility", "safety"],
+      "temporal_hint": "very_recent",
+      "quality_hint": null,
+      "difficulty": "medium",
+      "notes": "Strong temporal modifier should heavily weight recency"
+    }
+  ],
+  "evaluation_metrics": {
+    "precision_at_k": [5, 10, 20],
+    "recall_at_k": [10, 20],
+    "ndcg_at_k": [10],
+    "mean_reciprocal_rank": true,
+    "user_satisfaction": {
+      "scale": "1-5",
+      "dimensions": ["relevance", "ordering", "explanation_quality"]
+    }
+  },
+  "ground_truth_notes": "Ground truth relevance judgments to be collected through:\n1. Expert annotation (2-3 domain experts)\n2. User study participants (n=15-20)\n3. Inter-annotator agreement via Krippendorff's alpha"
+}

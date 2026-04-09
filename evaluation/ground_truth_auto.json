@@ -1,0 +1,3388 @@
+{
+  "ENV-01": {
+    "query": {
+      "query_id": "ENV-01",
+      "query_text": "Aktuelle Luftqualitätsdaten für Schweizer Städte",
+      "query_language": "de",
+      "domain": "environment",
+      "intent": "Find current air quality measurements for Swiss cities",
+      "expected_themes": [
+        "envi",
+        "heal"
+      ],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "ba3e50ef-193e-4bb9-aec4-14f0c60c9f18",
+        "dataset_title": "Statistik der Schweizer Städte 2020",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.631789"
+      },
+      {
+        "dataset_id": "46c3da32-b46b-4244-8ce2-2a532c11dc8b",
+        "dataset_title": "Statistik der Schweizer Städte 2021",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.631789"
+      },
+      {
+        "dataset_id": "4ac2c7c8-c53c-43db-8812-249a8ae8587a",
+        "dataset_title": "Statistik der Schweizer Städte 2022",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.631789"
+      },
+      {
+        "dataset_id": "51c60b7b-95dc-4170-8553-b3d56b1fa5c3",
+        "dataset_title": "Statistik der Schweizer Städte 2023",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.631789"
+      },
+      {
+        "dataset_id": "170cdbf1-6750-47df-88f3-4af662acf880",
+        "dataset_title": "Statistik der Schweizer Städte 2024",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.631789"
+      },
+      {
+        "dataset_id": "ad5e9cb5-ad98-4714-82e9-d037f496f39f",
+        "dataset_title": "Statistik der Schweizer Städte 2019",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "257361e4-b678-4786-a059-e45ba6cf0e8f",
+        "dataset_title": "Statistik der Schweizer Städte 2025",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "a122768e-236f-4129-a6b1-343013ed24fe",
+        "dataset_title": "Geteilte Mikromobilität: Aktuelle Verfügbarkeit",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "d27547c7-fa71-49d9-b750-96a3d4262bfa",
+        "dataset_title": "Aktuelle Temperaturen der Gartenbäder",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "0e0163ff-10d7-447f-a79b-f51269e32659",
+        "dataset_title": "Aktuelle Baustellen Stadt St.Gallen",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "83168f03-6f2a-4050-801a-4335a2c031f4",
+        "dataset_title": "Aktuelle Bevölkerung nach Geschlecht",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "8aad8ce1-f2c5-4e8d-aa31-a155ad3e6f33",
+        "dataset_title": "Aktuelle Tiefbauprojekte im öffentlichen Grund",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "d8f84c7c-a51b-4a7b-8e07-576595bd50f0",
+        "dataset_title": "Kennzahlen der Schweizer Pflegeheime",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "b6826bf9-604f-4303-8ce1-00b988b3187e",
+        "dataset_title": "Aktuelle Belegung der öffentlichen Parkhäuser Basel",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "36d9a4e8-430b-4c00-aa28-54606e07527d",
+        "dataset_title": "Wohnverhältnisse nach Bewohnertyp für die 10 grössten Städte 2021-2023 kumuliert",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "e58ccf1e-6de5-4173-9fdf-ff00d16ed7db",
+        "dataset_title": "Aktuelle Auflistung von Videokameras der Stadtverwaltung Zürich",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "0c12491c-a3c8-4028-abb2-cf5aa7d1fbf6",
+        "dataset_title": "Wohnverhältnisse nach Bewohnertyp für die 10 grössten Städte 2017-2019 kumuliert",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "6049b319-8ca5-4534-b0ce-a7313bda4baf",
+        "dataset_title": "Wohnverhältnisse nach Bewohnertyp für die 10 grössten Städte 2018-2020 kumuliert",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "6f07cf22-bdea-488d-b977-79a3b045797e",
+        "dataset_title": "Wohnverhältnisse nach Bewohnertyp für die 10 grössten Städte 2016-2018 kumuliert",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "e851366d-f56d-4ccc-927f-b559d50fa26a",
+        "dataset_title": "Wohnverhältnisse nach Bewohnertyp für die 10 grössten Städte 2019-2021 kumuliert",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "d7019079-3a6a-4d6b-b6f1-159a2c3c6085",
+        "dataset_title": "Wohnverhältnisse nach Bewohnertyp für die 10 grössten Städte 2020-2022 kumuliert",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "30488fe3-ca3d-4924-acaa-e68835eb4415",
+        "dataset_title": "Aktuelle Auflistung von Videokameras der Stadtverwaltung Zürich",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "aecac91d-2228-4f57-8580-474a1180095d",
+        "dataset_title": "Studienintensität an Schweizer Hochschulen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "362148f4-9b52-4e84-a7b4-956906397819",
+        "dataset_title": "Berufsmaturitätsquote Schweizer Kantone",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "1d38a201-8edf-451b-a287-f734e7bc7a07",
+        "dataset_title": "Angebote der Innovationsförderung im Energiebereich für Schweizer Firmen und Forschungsinstitute",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "0801e9fc-1c14-4b9b-9d1b-5ea00944c9ad",
+        "dataset_title": "Aktuelle Wahl- bzw. Abstimmungsresultate Kanton St.Gallen",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "bfabef85-aa15-4960-afc5-28e774f79a88",
+        "dataset_title": "Aktuelle ständige Wohnbevölkerung nach Herkunft und Altersklasse",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "d7befdaa-8437-4663-b8f8-07521d2c7f06",
+        "dataset_title": "Durchschnittlicher Mietpreis nach Zimmerzahl und Bezugsdauer der Wohnung, für die grössten Städte",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "67921c01-a249-47d7-976e-53ef446098e2",
+        "dataset_title": "Kulturausgaben der Städte - nach Kulturbereichen",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      },
+      {
+        "dataset_id": "c88f5b66-4b81-4771-a7cc-4c6e1a5d3839",
+        "dataset_title": "Kulturausgaben der Städte - nach Ausgabenkategorien",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:58:59.634210"
+      }
+    ]
+  },
+  "ENV-02": {
+    "query": {
+      "query_id": "ENV-02",
+      "query_text": "Biodiversität und Artenschutz in der Schweiz",
+      "query_language": "de",
+      "domain": "environment",
+      "intent": "Find datasets about biodiversity and species protection",
+      "expected_themes": [
+        "envi",
+        "agri"
+      ],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "4a3c802f-fe0f-4f66-a8ba-2f5dbb2e558a",
+        "dataset_title": "Sachplan Biodiversität",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "a40b8a2a-459c-452b-9030-e1e3a3f8a030",
+        "dataset_title": "Labiola Biodiversität",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "44898834-1713-49b1-a103-be9a1a096807",
+        "dataset_title": "Pflege- und Aufwertungskonzept Rotsee",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "8f49eb92-1cbc-4da4-a005-506783411520",
+        "dataset_title": "Internetnutzerinnen und -nutzer in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "eeeead6c-fd3e-4e07-82fe-333084d396d2",
+        "dataset_title": "Ökologische Vernetzungsprojekte",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "6f5fa86c-d6f4-4f44-979c-5d0295d3aa6a",
+        "dataset_title": "Religion und Spiritualität in der Schweiz",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "a5323de5-9898-4a97-a206-621a188d560e",
+        "dataset_title": "Kantonale Schutzverordnungen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "67d98127-02a5-4283-839e-e9911210b349",
+        "dataset_title": "Kommunale Schutzverordnung Krienser Hochwald",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "09922803-fed2-467d-b968-e018efced675",
+        "dataset_title": "Reptilienvorkommen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "2f476acc-4b3a-44a3-95be-4c332ea5a5a1",
+        "dataset_title": "Marderartige Kleinraubtiere",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "23d5a86e-1476-4fba-a381-77ffee0ecf82",
+        "dataset_title": "Aufwertungskonzept Schiltwald 2004 - 2009",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "e7d05cb3-8cc6-442a-81ed-aca051735526",
+        "dataset_title": "Wildtierkorridore",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "02d39321-be7c-4d51-a7fb-ab1b77fb2b38",
+        "dataset_title": "Monatliche Heizgradtage und Kühlgradtage in der Schweiz (gewichtet) ",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "5b3d5c50-127d-487f-b517-1ecadbb41e98",
+        "dataset_title": "Vernetzungsachsen Kleintiere",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "28d302c5-6169-4bc8-9f77-c2c4945272f5",
+        "dataset_title": "Hundeleinenpflicht im Wald",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "2f3ecfee-19bb-401c-9b7a-dadf1945996f",
+        "dataset_title": "Biogas aus Hofdünger in der Schweiz",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "36b8590a-3d38-4018-a628-73ba4e53e684",
+        "dataset_title": "Artenhotspots",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "0e7f61c9-561d-45fd-9067-52e38d7531a5",
+        "dataset_title": "Sprachliche Praktiken in der Schweiz",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "6f14a0da-b2c0-4862-a2ca-1cffbaab6d0f",
+        "dataset_title": "Lebensraum Auerhuhn Kanton Luzern, potentiell, generalisiert",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "9d742ac4-7d3c-4721-87f3-59817c967274",
+        "dataset_title": "Witterung in der Schweiz",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "c67612f1-b1d4-4f0a-8e98-f5fbf84cc0f1",
+        "dataset_title": "Verhütung in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "c2c41538-9ab4-4764-8ffa-1f8292dbcbd5",
+        "dataset_title": "Religiöse und spirituelle Praktiken und Glaubensformen in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "143fa0d8-226c-4e65-bf2b-7edfabf1b581",
+        "dataset_title": "Tabakkonsum in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "90872cbc-0bb4-4545-8713-702a0d1c55dc",
+        "dataset_title": "Wälder mit Vorrangfunktion",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "40815ab9-dea3-4639-bc5a-8898c442f9a8",
+        "dataset_title": "Gemüse in der Schweiz",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "bfccec42-c7e0-42d9-bc8c-58284ae98846",
+        "dataset_title": "Studierende und Abschlüsse auf Tertiärstufe in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "c373843e-0d26-4644-bdb1-1369be7052e2",
+        "dataset_title": "Frauen und Männer in der akademische Karriere in der Schweiz, Studierende und Forscher/innen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "8bb6a0f7-8347-4dcc-9312-d5239609db68",
+        "dataset_title": "Frauen und Männer in der akademische Karriere in der Schweiz, Studierende und Forscher/innen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "ac98a692-3e83-402b-8064-4dd38bfe177e",
+        "dataset_title": "Frauen und Männer in der akademische Karriere in der Schweiz, Studierende und Forscher/innen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      },
+      {
+        "dataset_id": "870c27cd-fbbe-40c5-8d38-83a79f6f34d0",
+        "dataset_title": "Frauen und Männer in der akademische Karriere in der Schweiz, Studierende und Forscher/innen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:00.598718"
+      }
+    ]
+  },
+  "ENV-03": {
+    "query": {
+      "query_id": "ENV-03",
+      "query_text": "Wasserqualität in Schweizer Seen und Flüssen",
+      "query_language": "de",
+      "domain": "environment",
+      "intent": "Find water quality monitoring data",
+      "expected_themes": [
+        "envi"
+      ],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "9fe148fb-458a-4c1e-ab77-ef9ff9338065",
+        "dataset_title": "Badewasserqualität in öffentlichen Badeanstalten an Flüssen und Seen im Kanton Zürich",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.560488"
+      },
+      {
+        "dataset_id": "3db9530e-7874-44fe-90fa-379ed56cbb91",
+        "dataset_title": "Wasserqualität an Badeplätzen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "3867bfb9-44b9-42c6-b313-1da768d14746",
+        "dataset_title": "Seen und Weiher",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "c08e1973-b6b8-4bcd-a5f8-515d99aa65eb",
+        "dataset_title": "Phosphorgehalt in Seen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "e0044755-d9ee-4730-a4ea-613c473ca70e",
+        "dataset_title": "Ökomorphologie Seen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "e20c5c4a-d8fd-40ca-b638-ea386b2a9c68",
+        "dataset_title": "Fängeranlagen in Bächen und Flüssen - Standort und Informationen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "ecc1bdbd-afb3-4603-938f-66afa22784f1",
+        "dataset_title": "Regionale Untersuchungsgebiete Wasserqualität",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "87dfb3b7-cfcd-49e9-8229-11f542b50f65",
+        "dataset_title": "Fängeranlagen in Bächen und Flüssen - Standort und Informationen (WFS)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "2212a6dd-a373-45e1-a960-6281b53e7a20",
+        "dataset_title": "Fängeranlagen in Bächen und Flüssen - Standort und Informationen (WMS)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "a06b1c8d-240e-4787-98b5-f4484cea80d9",
+        "dataset_title": "Oekomorphologie Seen (WMS)",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "c5cd081b-341e-458a-85ca-c87617868e2c",
+        "dataset_title": "Korrektionsprojekte von Flüssen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "6d00584c-ea08-4aba-b450-3f19609dae32",
+        "dataset_title": "Mikrobiologische Wasserqualität der offiziellen Strandbäder",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "a2b527a5-ac19-4053-90c1-aa120f9ca57d",
+        "dataset_title": "Temperatur, Nitrat- und Phosphatgehalt von vier Flüssen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "5a96a834-eec5-4172-b38f-c4039c6c1813",
+        "dataset_title": "Fischlaichgebiete der drei grossen Seen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "0ea4bf46-f546-4cdc-9dbc-253eed4791e7",
+        "dataset_title": "Potenzialstudien und Publikationen zur Wärmenutzung aus Seen und Grundwasser",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "0e247aa0-e219-4fd6-8be9-1c2965900089",
+        "dataset_title": "Wasserentnahmen aus Oberflächengewässern",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "aecac91d-2228-4f57-8580-474a1180095d",
+        "dataset_title": "Studienintensität an Schweizer Hochschulen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "fbc697c2-cc76-470e-8e1b-8fa92fe1d698",
+        "dataset_title": "Indikatoren zur Schweizer Film- und Kinolandschaft",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "cf479929-14c0-4a7a-9273-cdfb2b785443",
+        "dataset_title": "Mitarbeit und soziale Absicherung in der Schweizer Landwirtschaft 2020",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "362148f4-9b52-4e84-a7b4-956906397819",
+        "dataset_title": "Berufsmaturitätsquote Schweizer Kantone",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "d8f84c7c-a51b-4a7b-8e07-576595bd50f0",
+        "dataset_title": "Kennzahlen der Schweizer Pflegeheime",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "d9339038-9edc-4978-b7f6-727085fd40c6",
+        "dataset_title": "Medienrechtliche Aspekte: Schweizer Presserat: Beschwerden und Stellungnahmen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "170cdbf1-6750-47df-88f3-4af662acf880",
+        "dataset_title": "Statistik der Schweizer Städte 2024",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "ad5e9cb5-ad98-4714-82e9-d037f496f39f",
+        "dataset_title": "Statistik der Schweizer Städte 2019",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "4ac2c7c8-c53c-43db-8812-249a8ae8587a",
+        "dataset_title": "Statistik der Schweizer Städte 2022",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "ba3e50ef-193e-4bb9-aec4-14f0c60c9f18",
+        "dataset_title": "Statistik der Schweizer Städte 2020",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "46c3da32-b46b-4244-8ce2-2a532c11dc8b",
+        "dataset_title": "Statistik der Schweizer Städte 2021",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "5a2afe9a-8178-4b06-9c1f-97f30e8926f6",
+        "dataset_title": "Gymnasiale Maturitätsquote Schweizer Kantone",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "51c60b7b-95dc-4170-8553-b3d56b1fa5c3",
+        "dataset_title": "Statistik der Schweizer Städte 2023",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      },
+      {
+        "dataset_id": "c926368a-99b4-482d-bdbd-59f313d61f0d",
+        "dataset_title": "Monatlicher Bruttolohn SchweizerInnen und AusländerInnen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:01.561473"
+      }
+    ]
+  },
+  "ENV-04": {
+    "query": {
+      "query_id": "ENV-04",
+      "query_text": "Lärmbelastung und Lärmkarten Schweiz",
+      "query_language": "de",
+      "domain": "environment",
+      "intent": "Find noise pollution maps and measurements",
+      "expected_themes": [
+        "envi",
+        "regi"
+      ],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "70e647a8-9971-4900-802d-7305d5d624ae",
+        "dataset_title": "Lärmbelastungskataster für Haupt- und übrige Strassen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "50afa295-b629-4d3b-ad2c-eabe8310d7ac",
+        "dataset_title": "Strategische Lärmkarte - Lärmbelastung LDEN",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "1640d75e-dfb0-4cfb-86b6-0a551d9ac224",
+        "dataset_title": "Strategische Lärmkarte - Lärmbelastung LNight",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "8f49eb92-1cbc-4da4-a005-506783411520",
+        "dataset_title": "Internetnutzerinnen und -nutzer in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "6f5fa86c-d6f4-4f44-979c-5d0295d3aa6a",
+        "dataset_title": "Religion und Spiritualität in der Schweiz",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "c2c41538-9ab4-4764-8ffa-1f8292dbcbd5",
+        "dataset_title": "Religiöse und spirituelle Praktiken und Glaubensformen in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "02d39321-be7c-4d51-a7fb-ab1b77fb2b38",
+        "dataset_title": "Monatliche Heizgradtage und Kühlgradtage in der Schweiz (gewichtet) ",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "bfccec42-c7e0-42d9-bc8c-58284ae98846",
+        "dataset_title": "Studierende und Abschlüsse auf Tertiärstufe in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "03294d2b-9e7a-4ca8-83b4-84c3f6e2cdec",
+        "dataset_title": "3D-Strassenlärmbelastungskataster",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "06ccdae5-33f5-48a8-8d94-551c62c6b7a2",
+        "dataset_title": "SchweizMobil-Routen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "cf7dfd5e-fa1d-498f-8c3a-40834275c0af",
+        "dataset_title": "Licht-Markt Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "b89691ff-6a3e-4482-b02e-b0c9b929cff1",
+        "dataset_title": "Arbeitsorganisation und Arbeitszeitgestaltung in der Schweiz und im europäischen Vergleich 2019",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "0d768be6-9ece-481c-aeea-71c7d2f6e7a6",
+        "dataset_title": "Absatz- und Stromverbrauchswerte von Elektro- und elektronischen Geräte in der Schweiz",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "0e7f61c9-561d-45fd-9067-52e38d7531a5",
+        "dataset_title": "Sprachliche Praktiken in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "319b8990-78aa-4b49-8938-e39b6d083769",
+        "dataset_title": "Nationalratswahlen: Zeitreihen zur Wahlbeteiligung und zum Frauenanteil in % (Schweiz und Kantone)",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "2f3ecfee-19bb-401c-9b7a-dadf1945996f",
+        "dataset_title": "Biogas aus Hofdünger in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "991e76d5-676d-4d1b-aec2-ba4217b19ac8",
+        "dataset_title": "Nationalratswahlen (Parteistimmen, fiktive Wählende und Parteistärke seit 1971: Schweiz und Kantone)",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "03b7c920-cbc4-4985-91c9-a8410eb88896",
+        "dataset_title": "Freizügigkeitsabkommen Schweiz-EU",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "980fe735-5f42-406c-b73e-cc341d62df50",
+        "dataset_title": "Vereinbarkeit von Beruf und Familie in der Schweiz und im europäischen Vergleich 2018",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "c373843e-0d26-4644-bdb1-1369be7052e2",
+        "dataset_title": "Frauen und Männer in der akademische Karriere in der Schweiz, Studierende und Forscher/innen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "8bb6a0f7-8347-4dcc-9312-d5239609db68",
+        "dataset_title": "Frauen und Männer in der akademische Karriere in der Schweiz, Studierende und Forscher/innen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "ac98a692-3e83-402b-8064-4dd38bfe177e",
+        "dataset_title": "Frauen und Männer in der akademische Karriere in der Schweiz, Studierende und Forscher/innen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "870c27cd-fbbe-40c5-8d38-83a79f6f34d0",
+        "dataset_title": "Frauen und Männer in der akademische Karriere in der Schweiz, Studierende und Forscher/innen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "6724497f-b324-42d2-8911-5bd2492c06a0",
+        "dataset_title": "Frauen und Männer in der akademische Karriere in der Schweiz, Studierende und Forscher/innen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "b0f5d933-33ed-45b1-97f8-b209ae9babb3",
+        "dataset_title": "Frauen und Männer in der akademische Karriere in der Schweiz, Studierende und Forscher/innen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "c9545e6b-49e9-4838-9151-fc6f57367427",
+        "dataset_title": "Entwicklung des Nahrungsmittelverbrauches in der Schweiz. Je Kopf und Jahr",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "bbfff887-c5fe-42ba-95bd-85e7ddd48727",
+        "dataset_title": "F+E-Personal in der Schweiz, nach Sektor und Tätigkeit",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "e5e5cc97-4241-417c-86bc-20e87c912448",
+        "dataset_title": "Stromlandschaft Schweiz",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "162dad12-79ea-496d-9088-83e9172e1fb2",
+        "dataset_title": "Kontrollen Energieetiketten und Mindestanforderungen bei Elektrogeräten in der Schweiz",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      },
+      {
+        "dataset_id": "c9d4d947-a839-4ea9-96eb-864d530fe24c",
+        "dataset_title": "Statistisches Jahrbuch der Schweiz 2005",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:02.516730"
+      }
+    ]
+  },
+  "ENV-05": {
+    "query": {
+      "query_id": "ENV-05",
+      "query_text": "Klimawandel und CO2-Emissionen Schweiz",
+      "query_language": "de",
+      "domain": "environment",
+      "intent": "Find climate change and emissions data",
+      "expected_themes": [
+        "envi",
+        "ener"
+      ],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "55d84485-7d0a-4f99-83b3-e146cdbb51b1",
+        "dataset_title": "CO2-Emissionen im Gebäudebereich nach Energieträgern und Gemeinden",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.565464"
+      },
+      {
+        "dataset_id": "71d2a8c1-11e4-4a79-9e35-37d864324054",
+        "dataset_title": "CO2-Emissionen nach Energieträger, Gemeinde und Jahr (seit 2018)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.565464"
+      },
+      {
+        "dataset_id": "8ff254fb-703b-40fa-bb7f-80207ad8ee3b",
+        "dataset_title": "CO2-Emissionen im Gebäudebereich nach Energieträgern (Ebene Kanton)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.565464"
+      },
+      {
+        "dataset_id": "458a6f99-da5d-432d-af06-577857bba69e",
+        "dataset_title": "Energieverbrauch und CO2-Ausstoss pro Energiebezugsfläche nach Bauperiode",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.565464"
+      },
+      {
+        "dataset_id": "18372511-711b-4e4d-acfb-3a89597eca7c",
+        "dataset_title": "CO2-Gesetz",
+        "relevance": 0,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.565464"
+      },
+      {
+        "dataset_id": "7d0f324b-65f6-4d2c-ac67-4aefd0e480e4",
+        "dataset_title": "Fernwärme, CO2-Entlastung",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.565464"
+      },
+      {
+        "dataset_id": "edcc92fd-99b6-498c-baea-3bc154833df2",
+        "dataset_title": "Material- und Energieflüsse Schweiz und St.Gallen (EMPA MATCH) Synthese 2020 Konsum (Tonnen & CO2eq)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.565464"
+      },
+      {
+        "dataset_id": "b29fc849-78d0-45d5-84be-02e23eb3e5a3",
+        "dataset_title": "Material- und Energieflüsse Schweiz und St.Gallen (EMPA MATCH) Synthese 2020 Entsorgungswege (Tonnen & CO2eq)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.565464"
+      },
+      {
+        "dataset_id": "ea815911-6a15-4364-8635-f17736e071a1",
+        "dataset_title": "Treibhausgasemissionen im Kanton Zürich",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.565464"
+      },
+      {
+        "dataset_id": "ca850381-2c74-4633-a0f3-7c4e98f7d716",
+        "dataset_title": "CO2-Gesamtemissionen nach Energieträgern (Ebene Kanton)",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.565464"
+      },
+      {
+        "dataset_id": "81c01e2e-5959-44f7-84f2-0ea680190870",
+        "dataset_title": " Personenwagenbestand nach CO2-Emissionsklasse (NEFZ), mittlere CO2-Emission und Altersklasse Jahr von 2013 bis 2022",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.565464"
+      },
+      {
+        "dataset_id": "aab8c22f-ea85-4e1b-81eb-363c4687d551",
+        "dataset_title": "Coronavirus (COVID-19): SARS-CoV-2 im Abwasser und positiv auf SARS-CoV-2 getestete Personen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.565464"
+      },
+      {
+        "dataset_id": "34161755-5d48-47b0-80cf-b36038d92f98",
+        "dataset_title": "SARS-CoV-2 (Covid-19)",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.565464"
+      },
+      {
+        "dataset_id": "10f42dfe-d6a7-4ef6-a430-4c69ef697598",
+        "dataset_title": "Strassenlärm - Emissionen",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.565464"
+      },
+      {
+        "dataset_id": "f1ccbbae-8629-4448-a209-617e8da3c27d",
+        "dataset_title": "Vollzugsresultate der CO2-Emissionsvorschriften für Personenwagen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.566470"
+      },
+      {
+        "dataset_id": "f8c59e66-c2be-4028-b33d-b0c820b1d31c",
+        "dataset_title": " Erstzugelassene Personenwagen nach Leistungsklasse, Treibstoffart, CO2-Emissionsklasse sowie mittlere CO2-Emission",
+        "relevance": 0,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.566470"
+      },
+      {
+        "dataset_id": "1bdaa0ee-32e4-47c2-bd30-1dad11813ac5",
+        "dataset_title": "Treibhausgas-Fussabdruck – Tausend Tonnen CO2-Äquivalente",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.566470"
+      },
+      {
+        "dataset_id": "0249066e-5352-46d8-8dcc-7ba62705ff92",
+        "dataset_title": "CO2 Sensoren in den Innenräumen der Stadtverwaltung St.Gallen",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.566470"
+      },
+      {
+        "dataset_id": "7d1f50f4-38db-4bd7-b775-89e83360f062",
+        "dataset_title": "FACE: Stillberg CO2 enrichment and soil warming study",
+        "relevance": 0,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.566470"
+      },
+      {
+        "dataset_id": "cf9baa46-6b85-4ec4-be3d-5104e9e37b86",
+        "dataset_title": "Nitrogen availability under trees exposed to CO2 enrichment (FACE)",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.566470"
+      },
+      {
+        "dataset_id": "cfdb115e-2dd9-4813-a834-0fda47a3186b",
+        "dataset_title": "Luftschadstoffemissionen im Kanton Zürich",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.566470"
+      },
+      {
+        "dataset_id": "6c5a601c-3c1a-4f81-bb43-07e31d4fa6cc",
+        "dataset_title": "Vollzugsresultate der CO2-Emissionsvorschriften für Lieferwagen und leichte Sattelschlepper",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.566470"
+      },
+      {
+        "dataset_id": "81d27b05-0d3f-4491-8f9c-f0a6b17e64a3",
+        "dataset_title": "Bestand der Personenwagen nach technischen Merkmalen (2/2)",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.566470"
+      },
+      {
+        "dataset_id": "d9b01106-17e0-4b3e-aa36-374f92f781af",
+        "dataset_title": "Emissionen des Strassenverkehrs",
+        "relevance": 0,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.566470"
+      },
+      {
+        "dataset_id": "ad3a4a10-cf8e-4d34-be68-7cbd4a4d8958",
+        "dataset_title": "CO2-Emissionen aus Brennstoffen (witterungsbereinigt) und Treibstoffen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.566470"
+      },
+      {
+        "dataset_id": "3dc55c2b-f97e-4398-aba5-e96f5b6c0e79",
+        "dataset_title": " CO2-Emissionen neuverkaufter Personenwagen nach Kennzahl und Treibstoff seit 2002",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.566470"
+      },
+      {
+        "dataset_id": "5d393665-c0c1-4851-9ef8-88e5b70955a7",
+        "dataset_title": "Neue Inverkehrsetzungen von Personenwagen nach technischen Merkmalen (2/2)",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.566470"
+      },
+      {
+        "dataset_id": "310099ce-0f2f-4f4c-969b-27fc89ec2e6b",
+        "dataset_title": "Entwicklung der Schadstoff-Emissionen",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.566470"
+      },
+      {
+        "dataset_id": "5530b423-1457-4380-a744-b86e9069e550",
+        "dataset_title": "Strassenverkehrslärm Emissionen IST Nacht",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.566470"
+      },
+      {
+        "dataset_id": "6f2751e3-cffb-4613-bcb6-5e830ff2e630",
+        "dataset_title": "Strassenverkehrslärm Emissionen IST Tag",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:03.566470"
+      }
+    ]
+  },
+  "MOB-01": {
+    "query": {
+      "query_id": "MOB-01",
+      "query_text": "Öffentlicher Verkehr Fahrplandaten Schweiz",
+      "query_language": "de",
+      "domain": "mobility",
+      "intent": "Find public transport timetable/schedule data",
+      "expected_themes": [
+        "mobi",
+        "regi"
+      ],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "54584fc5-9958-4b62-9d1d-d31df77623ad",
+        "dataset_title": "öffentlicher Verkehr",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "8de4f7b7-45ed-4926-93f6-68ea47f0a1d7",
+        "dataset_title": "Öffentlicher Verkehr: Haltekanten (öffentlich)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "0786e547-17aa-43f4-8f8a-caefa265fcdb",
+        "dataset_title": "Öffentlicher Verkehr",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "b94115a8-1f10-4aaa-b8ab-49168847126c",
+        "dataset_title": "Güteklassen öffentlicher Verkehr",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "5a3c276a-44b3-420d-8faa-9dc459b6b6bd",
+        "dataset_title": "Pünktlichkeitswerte öffentlicher Verkehr",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "4f13d6d5-4b4d-4544-8e23-a60e4e0ece0e",
+        "dataset_title": "Liniennetz öffentlicher Verkehr",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "59be5ca1-161a-4689-bbb0-3826f7fbcf67",
+        "dataset_title": "Öffentlicher Verkehr: Haltestelleneinzugsgebiete mit Angebotsstufen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "9335d260-da85-4470-ae28-cfe2b97a2f32",
+        "dataset_title": "Finanzflussrechnung Strasseninfrastruktur und öffentlicher Verkehr",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "22698a23-8627-4cdf-a8cd-10d68aabe7d6",
+        "dataset_title": "Oeffentlicher Verkehr",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "96c80e89-421f-49a8-915f-cf1a389f6d50",
+        "dataset_title": "Öffentlicher Verkehr: Haltestellen und Liniennetze Bahn, Bus und Schiff",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "1297c5f8-b2ca-47cd-a1ea-32d6178a7407",
+        "dataset_title": "Netz des öffentlichen Verkehrs",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "1f3e675a-f8eb-4deb-84f9-30c206478eaa",
+        "dataset_title": "Haltestellen des öffentlichen Verkehrs",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "46c1bc66-6b3c-44e3-856a-06c0335e3aff",
+        "dataset_title": "Kantonaler Richtplan, Elemente Verkehr",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "9c9b5eff-d36e-4323-9e9e-9dd1b17812f7",
+        "dataset_title": "Teilhaltestellen des öffentlichen Verkehrs",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "049621cb-f2d6-4426-bf61-ca978999665a",
+        "dataset_title": "Liniennetz des öffentlichen Verkehrs",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "696c8847-0cad-43eb-873e-96521dea9c5e",
+        "dataset_title": "Haltestellen des öffentlichen Verkehrs",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "a6ab3361-37d2-4739-bc9c-9803b32a3bd5",
+        "dataset_title": "Tarifzonen des öffentlichen Verkehrs",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "8f5f2ec7-faab-47e2-8998-3fcfe0e9122c",
+        "dataset_title": "Haltestellen des öffentlichen Verkehrs",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "68797637-f408-4fb3-a5ad-848cb41b58ff",
+        "dataset_title": "Kommunaler Richtplan Verkehr",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "4140e509-acf5-4a50-8868-686113b95864",
+        "dataset_title": "Mobilität und Verkehr",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "f386dab4-f902-4d3f-82e3-2d6d906bd492",
+        "dataset_title": "Mobilität und Verkehr",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "fed12d57-d66d-4658-8596-6fb837237ce2",
+        "dataset_title": "WFS Haltestellen des öffentlichen Verkehrs",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "fdbf6453-f018-4b28-b385-13955468b15a",
+        "dataset_title": "WMS Haltestellen des öffentlichen Verkehrs",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "1ed1ca36-2227-433d-8e6b-1a959c34782e",
+        "dataset_title": "Öffentliche Parkierungsanlagen",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "ba208a82-13c0-4052-8bca-3bd5691c3a73",
+        "dataset_title": "Kantonaler Nutzungsplan Verkehr: Perimeter",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "93065083-d4a7-41b3-8adf-b035e7291077",
+        "dataset_title": "Öffentlicher Raum",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "af1e8673-1b51-4815-af98-d8ad2125824f",
+        "dataset_title": "Parkplätze (öffentlich)",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "c23a09f4-df02-4f5f-b7bc-14519bffc78d",
+        "dataset_title": "Verkehrs- und Velozählungen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "8b08000f-d568-4681-98b9-f0fc1e6887bb",
+        "dataset_title": "Öffentliche Parkfelder",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      },
+      {
+        "dataset_id": "2d30ce8e-fea8-453d-bf97-3cb2164f7f18",
+        "dataset_title": "Öffentliches Grundeigentum",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:04.575737"
+      }
+    ]
+  },
+  "MOB-02": {
+    "query": {
+      "query_id": "MOB-02",
+      "query_text": "Verkehrsunfälle Statistik Schweiz",
+      "query_language": "de",
+      "domain": "mobility",
+      "intent": "Find traffic accident statistics",
+      "expected_themes": [
+        "mobi",
+        "just"
+      ],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "54594836-a7e6-43b3-967c-411eab2e7ade",
+        "dataset_title": "Verkehrsunfälle 2019",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "585c28b4-b33f-46e7-8eb7-4a18b602007f",
+        "dataset_title": "Verkehrsunfälle 2020",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "b2b5bde3-2dc1-4c60-ac40-7e8391f99d38",
+        "dataset_title": "Verkehrsunfälle 2021",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "343411d9-b47c-4453-a07f-b9614924ff60",
+        "dataset_title": "Verkehrsunfälle 2022",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "379b86d9-65d2-49e5-a9ab-c0f673c6c2ad",
+        "dataset_title": "Verkehrsunfälle 2023",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "badcb4d8-2ff9-47b0-a165-ebdc50ec3b57",
+        "dataset_title": "Statistik Sonnenenergie",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "27098f15-5c79-4835-b9a4-bcfd47499bc1",
+        "dataset_title": "Polizeilich registrierte Verkehrsunfälle im Kanton Zürich seit 2011",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "7470756d-0484-429f-bd20-549fd438104b",
+        "dataset_title": "Statistik der Sonderpädagogik",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "ba3e50ef-193e-4bb9-aec4-14f0c60c9f18",
+        "dataset_title": "Statistik der Schweizer Städte 2020",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "4ac2c7c8-c53c-43db-8812-249a8ae8587a",
+        "dataset_title": "Statistik der Schweizer Städte 2022",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "51c60b7b-95dc-4170-8553-b3d56b1fa5c3",
+        "dataset_title": "Statistik der Schweizer Städte 2023",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "257361e4-b678-4786-a059-e45ba6cf0e8f",
+        "dataset_title": "Statistik der Schweizer Städte 2025",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "ad5e9cb5-ad98-4714-82e9-d037f496f39f",
+        "dataset_title": "Statistik der Schweizer Städte 2019",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "170cdbf1-6750-47df-88f3-4af662acf880",
+        "dataset_title": "Statistik der Schweizer Städte 2024",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "46c3da32-b46b-4244-8ce2-2a532c11dc8b",
+        "dataset_title": "Statistik der Schweizer Städte 2021",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "661f44cb-acb0-4590-8c2e-519682fd8187",
+        "dataset_title": "Statistik der Unternehmensdemografie (UDEMO)",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "79a4b0bd-3f77-4beb-9033-2a94af6bf9dd",
+        "dataset_title": "Polizeilich registrierte Verkehrsunfälle auf dem Stadtgebiet Zürich seit 2011",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "c548c438-49f3-46bc-9bb8-3338767f22cb",
+        "dataset_title": "Karten der öffentlichen Statistik",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "03a2c6e0-8440-4c95-bb86-fa5fa218637c",
+        "dataset_title": "Grundbuch- und Notariatsverwaltung: Statistik Beglaubigungen",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "dd68db39-8dda-4fc6-8fe5-5e8450297720",
+        "dataset_title": "Statistik der Jugendstrafrechtspflege des Kantons Zürich",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "c9d4d947-a839-4ea9-96eb-864d530fe24c",
+        "dataset_title": "Statistisches Jahrbuch der Schweiz 2005",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "8a26e045-a613-4791-98ae-b69165c30aa2",
+        "dataset_title": "Schweizerische Statistik der erneuerbaren Energien",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "bc38ed81-1356-4721-8da0-e5cc613efe4f",
+        "dataset_title": "Statistik Elektrizitätsverbrauch Widerstandsheizungen bei den Haushalten",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "8ae04e8d-58c6-4ed4-91e0-17d8510a64e5",
+        "dataset_title": "Statistik Siedlungsabfälle auf Ebene Kanton ab 2006",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "72981622-0e39-42fd-b66e-07c360eacffd",
+        "dataset_title": "Statistik zur Anzahl Vorstösse im Grossen Rat",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "64aa8b51-0a38-4f18-a720-a4d2a0470da1",
+        "dataset_title": "Publikationsreihe «Statistik der Stadt Zürich», 1904-1954",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "2a887898-e1e9-4032-a902-9cf921755012",
+        "dataset_title": "Statistikdatenbank STADA Fachstelle für Statistik Kanton St.Gallen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "bf75a8bb-9e06-4aaa-ac7f-4c157d0ca688",
+        "dataset_title": "Publikationsarchiv Amt für Daten und Statistik BL (seit 2000)",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.524587"
+      },
+      {
+        "dataset_id": "d2ce7a54-743c-430e-bc47-1ee618762a64",
+        "dataset_title": "Arealstatistik der Schweiz: Vergleich 1979/85, 1992/97, 2004/09, 2013/18",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.525588"
+      },
+      {
+        "dataset_id": "fc74b1ea-f9c6-47a5-81bb-1662b3ea49c1",
+        "dataset_title": "Statistikdatenbank STADA2 Fachstelle für Statistik Kanton St.Gallen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:05.525588"
+      }
+    ]
+  },
+  "MOB-03": {
+    "query": {
+      "query_id": "MOB-03",
+      "query_text": "Elektromobilität Ladestationen Schweiz",
+      "query_language": "de",
+      "domain": "mobility",
+      "intent": "Find electric vehicle charging station locations",
+      "expected_themes": [
+        "mobi",
+        "ener"
+      ],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "3f0a6cf4-56d3-4f9f-bfad-ba8928485d01",
+        "dataset_title": "Smarte Strasse: Elektroauto-Ladestationen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "857f62bb-5892-4b5f-891f-7cd2f408e182",
+        "dataset_title": "Standorte der IWB Ladestationen für Elektroautos",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "772069a3-ed82-4f75-9394-60d8514d8b8d",
+        "dataset_title": "Belegung der Elektroauto-Ladestationen der IWB",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "efef1e0c-b55d-4b34-9cd9-4327bf38d85a",
+        "dataset_title": "Zeitreihe der Belegung der Elektroauto-Ladestationen der IWB",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "f31baffc-a84a-4755-b1d9-183a9365b5a4",
+        "dataset_title": "Rohdaten-Zeitreihe der Belegung der Elektroauto-Ladestationen der IWB",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "19345c84-c78c-4a62-bc3c-dd2ac372c1c4",
+        "dataset_title": "E-Ladestationen der kantonalen Verwaltung Zürich",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "d59f7920-ebe1-455f-b108-0d2d3337a3e4",
+        "dataset_title": "Anzahl E-Autos und Ladestationen pro Gemeinde",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "df6ecca9-1097-46ad-aa71-97f3f1a32f51",
+        "dataset_title": "Ladestationen für Elektroautos",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "03b7c920-cbc4-4985-91c9-a8410eb88896",
+        "dataset_title": "Freizügigkeitsabkommen Schweiz-EU",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "e5e5cc97-4241-417c-86bc-20e87c912448",
+        "dataset_title": "Stromlandschaft Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "9d742ac4-7d3c-4721-87f3-59817c967274",
+        "dataset_title": "Witterung in der Schweiz",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "143fa0d8-226c-4e65-bf2b-7edfabf1b581",
+        "dataset_title": "Tabakkonsum in der Schweiz",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "c67612f1-b1d4-4f0a-8e98-f5fbf84cc0f1",
+        "dataset_title": "Verhütung in der Schweiz",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "40815ab9-dea3-4639-bc5a-8898c442f9a8",
+        "dataset_title": "Gemüse in der Schweiz",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "b1247f12-0a7e-4003-a674-12bf7aacecdf",
+        "dataset_title": "Bevölkerung: Heimat Schweiz [Pers.]",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "cf7dfd5e-fa1d-498f-8c3a-40834275c0af",
+        "dataset_title": "Licht-Markt Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "35791fb5-7549-46c2-bb8c-ce76d9495a4f",
+        "dataset_title": "Strassenlärmimmissionen der Stadt Zürich - Zustand 2022 und Szenarien",
+        "relevance": 0,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "ccd6ff9b-b1e0-4328-acbc-dd139a79522d",
+        "dataset_title": "Landwirtschaftliche Nutzungsflächen Schweiz",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "8fbf6a03-0eec-4c16-95a2-997c6a9d0c88",
+        "dataset_title": "Güterverkehr in der Schweiz 2019",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "4427ef3a-1ae1-4ffc-86b3-6ed7a1d75a29",
+        "dataset_title": "Güterverkehr in der Schweiz 2020",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "d5f1675f-5067-43d5-a396-dee8181ebdb9",
+        "dataset_title": "Güterverkehr in der Schweiz 2021",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "085bf4e0-5c6b-4fdb-abe4-c4e97e5d52fe",
+        "dataset_title": "Güterverkehr in der Schweiz 2022",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "cd3d97fc-9fd7-4e07-905d-f9cf51b68697",
+        "dataset_title": "Güterverkehr in der Schweiz 2023",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "06ccdae5-33f5-48a8-8d94-551c62c6b7a2",
+        "dataset_title": "SchweizMobil-Routen",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "0e7f61c9-561d-45fd-9067-52e38d7531a5",
+        "dataset_title": "Sprachliche Praktiken in der Schweiz",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "d6883c60-c599-4686-9c90-c373e7010269",
+        "dataset_title": "Sprachliche Praktiken in der Schweiz",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "9bd36230-4298-4cd7-a4dd-8a425540d27d",
+        "dataset_title": "Die Ölsaaten in der Schweiz",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "8911fd97-d5fc-4e1f-9b74-82d2855712cd",
+        "dataset_title": "Das Nutzgeflügel in der Schweiz",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "2f3ecfee-19bb-401c-9b7a-dadf1945996f",
+        "dataset_title": "Biogas aus Hofdünger in der Schweiz",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      },
+      {
+        "dataset_id": "86f69317-96eb-40fb-bc70-cddda3a40ed4",
+        "dataset_title": "Karte der Wasserkraftanlagen der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:06.486645"
+      }
+    ]
+  },
+  "MOB-04": {
+    "query": {
+      "query_id": "MOB-04",
+      "query_text": "Veloverkehr und Radwege in der Schweiz",
+      "query_language": "de",
+      "domain": "mobility",
+      "intent": "Find bicycle traffic and cycling infrastructure data",
+      "expected_themes": [
+        "mobi",
+        "regi"
+      ],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "76062dbc-01d5-4468-9e24-151684a3fb17",
+        "dataset_title": "Veloinfrastruktur Radwege und Radstreifen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.496423"
+      },
+      {
+        "dataset_id": "389e4170-ff7a-4b57-a3d8-b0651b778dd9",
+        "dataset_title": "Verkehrszähldaten Veloverkehr in Winterthur",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.496423"
+      },
+      {
+        "dataset_id": "aa58272d-5f2a-4f9f-96af-16d899d85134",
+        "dataset_title": "Radwege (WMS)",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.496423"
+      },
+      {
+        "dataset_id": "c8a391ad-b022-48ca-badc-cbb7a20dc34a",
+        "dataset_title": "Radwege (WFS)",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.496423"
+      },
+      {
+        "dataset_id": "7bf13204-cfff-4ab7-9d8e-ca66f74d5c76",
+        "dataset_title": "WFS Veloinfrastruktur Radwege und Radstreifen auf Staatsstrassen und Velorouten",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.496423"
+      },
+      {
+        "dataset_id": "1f381e0e-ed5d-4290-96a4-d99124bf05cf",
+        "dataset_title": "WMS Veloinfrastruktur Radwege und Radstreifen auf Staatsstrassen und Velorouten",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.496423"
+      },
+      {
+        "dataset_id": "a602acbb-16f8-44a6-859c-78e0af6ee6ce",
+        "dataset_title": "Veranstaltungen mit potenziellem Einfluss auf Veloverkehr",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.496423"
+      },
+      {
+        "dataset_id": "06ccdae5-33f5-48a8-8d94-551c62c6b7a2",
+        "dataset_title": "SchweizMobil-Routen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.496423"
+      },
+      {
+        "dataset_id": "8f49eb92-1cbc-4da4-a005-506783411520",
+        "dataset_title": "Internetnutzerinnen und -nutzer in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.496423"
+      },
+      {
+        "dataset_id": "6f5fa86c-d6f4-4f44-979c-5d0295d3aa6a",
+        "dataset_title": "Religion und Spiritualität in der Schweiz",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.496423"
+      },
+      {
+        "dataset_id": "0777f0c4-b030-4767-89eb-b364d5e76580",
+        "dataset_title": "Verkehrsnachfrage im ÖV, MIV und im Veloverkehr nach Gemeinden und Regionen im Kanton Zürich",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.496423"
+      },
+      {
+        "dataset_id": "02d39321-be7c-4d51-a7fb-ab1b77fb2b38",
+        "dataset_title": "Monatliche Heizgradtage und Kühlgradtage in der Schweiz (gewichtet) ",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.496423"
+      },
+      {
+        "dataset_id": "2f3ecfee-19bb-401c-9b7a-dadf1945996f",
+        "dataset_title": "Biogas aus Hofdünger in der Schweiz",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.496423"
+      },
+      {
+        "dataset_id": "0e7f61c9-561d-45fd-9067-52e38d7531a5",
+        "dataset_title": "Sprachliche Praktiken in der Schweiz",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.496423"
+      },
+      {
+        "dataset_id": "9d742ac4-7d3c-4721-87f3-59817c967274",
+        "dataset_title": "Witterung in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.497429"
+      },
+      {
+        "dataset_id": "c67612f1-b1d4-4f0a-8e98-f5fbf84cc0f1",
+        "dataset_title": "Verhütung in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.497429"
+      },
+      {
+        "dataset_id": "c2c41538-9ab4-4764-8ffa-1f8292dbcbd5",
+        "dataset_title": "Religiöse und spirituelle Praktiken und Glaubensformen in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.497429"
+      },
+      {
+        "dataset_id": "143fa0d8-226c-4e65-bf2b-7edfabf1b581",
+        "dataset_title": "Tabakkonsum in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.497429"
+      },
+      {
+        "dataset_id": "40815ab9-dea3-4639-bc5a-8898c442f9a8",
+        "dataset_title": "Gemüse in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.497429"
+      },
+      {
+        "dataset_id": "bfccec42-c7e0-42d9-bc8c-58284ae98846",
+        "dataset_title": "Studierende und Abschlüsse auf Tertiärstufe in der Schweiz",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.497429"
+      },
+      {
+        "dataset_id": "e391c26c-f636-4b89-965c-a1ce97280d7f",
+        "dataset_title": "Standorte der automatischen Fuss- und Velozählungen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.497429"
+      },
+      {
+        "dataset_id": "c373843e-0d26-4644-bdb1-1369be7052e2",
+        "dataset_title": "Frauen und Männer in der akademische Karriere in der Schweiz, Studierende und Forscher/innen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.497429"
+      },
+      {
+        "dataset_id": "8bb6a0f7-8347-4dcc-9312-d5239609db68",
+        "dataset_title": "Frauen und Männer in der akademische Karriere in der Schweiz, Studierende und Forscher/innen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.497429"
+      },
+      {
+        "dataset_id": "ac98a692-3e83-402b-8064-4dd38bfe177e",
+        "dataset_title": "Frauen und Männer in der akademische Karriere in der Schweiz, Studierende und Forscher/innen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.497429"
+      },
+      {
+        "dataset_id": "870c27cd-fbbe-40c5-8d38-83a79f6f34d0",
+        "dataset_title": "Frauen und Männer in der akademische Karriere in der Schweiz, Studierende und Forscher/innen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.497429"
+      },
+      {
+        "dataset_id": "6724497f-b324-42d2-8911-5bd2492c06a0",
+        "dataset_title": "Frauen und Männer in der akademische Karriere in der Schweiz, Studierende und Forscher/innen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.497429"
+      },
+      {
+        "dataset_id": "b0f5d933-33ed-45b1-97f8-b209ae9babb3",
+        "dataset_title": "Frauen und Männer in der akademische Karriere in der Schweiz, Studierende und Forscher/innen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.497429"
+      },
+      {
+        "dataset_id": "c2d489a5-a39b-442b-9f3d-b352b2dbb60a",
+        "dataset_title": "Rad-, MTB- und Skatingwege",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.497429"
+      },
+      {
+        "dataset_id": "b5ae1507-d930-4448-a6d0-e08cde338d2b",
+        "dataset_title": "Daten der automatischen Fussgänger- und Velozählung - Viertelstundenwerte",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.497429"
+      },
+      {
+        "dataset_id": "8fbf6a03-0eec-4c16-95a2-997c6a9d0c88",
+        "dataset_title": "Güterverkehr in der Schweiz 2019",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:07.497429"
+      }
+    ]
+  },
+  "MOB-05": {
+    "query": {
+      "query_id": "MOB-05",
+      "query_text": "Parkplätze und Parkhäuser Echtzeitdaten",
+      "query_language": "de",
+      "domain": "mobility",
+      "intent": "Find real-time parking availability data",
+      "expected_themes": [
+        "mobi"
+      ],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "33d60e7a-7cad-4798-85da-9297efbfcb92",
+        "dataset_title": "Parkplätze und Parkhäuser in der Stadt St.Gallen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "5b1469a3-f1cf-4f9a-9ba2-3a88b6b7e5fd",
+        "dataset_title": "Öffentliche Parkhäuser (WFS)",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "414eee39-7265-4be9-940b-a4d73f3ffaac",
+        "dataset_title": "Öffentliche Parkhäuser (WMS)",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "fd694073-15dc-451b-8695-2115018ab399",
+        "dataset_title": "Parkleitsystem Winterthur: Freie Parkplätze in Parkhäusern in Echtzeit",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "521e1239-77f6-465a-a36e-d2ba2d72135b",
+        "dataset_title": "Parkhäuser",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "da92f82a-d804-4c71-98c0-1bb1f5e218eb",
+        "dataset_title": "Öffentlich zugängliche Parkhäuser",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "5e881d89-f9c7-4387-b801-8d354cb36ef5",
+        "dataset_title": "Parkplätze",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "b6826bf9-604f-4303-8ce1-00b988b3187e",
+        "dataset_title": "Aktuelle Belegung der öffentlichen Parkhäuser Basel",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "b195eb62-17aa-4641-8bfe-985043e95f49",
+        "dataset_title": "Zeitreihe der Belegung öffentlicher Parkhäuser Basel",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "ae3d8530-ac0e-43bd-9cb6-6da45d3a34f6",
+        "dataset_title": "Ein- und Ausfahrten öffentlicher Parkhäuser Basel",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "1ed1ca36-2227-433d-8e6b-1a959c34782e",
+        "dataset_title": "Öffentliche Parkierungsanlagen",
+        "relevance": 0,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "4a66ea8f-7e26-46b4-aab1-2ab37696f03d",
+        "dataset_title": "Parkplatz Tarifzonen",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "5463827b-d17e-46a8-8294-1ecdd204c623",
+        "dataset_title": "Freie Parkplätze in der Stadt St.Gallen (PLS)",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "23def0d5-b843-49d7-9688-ef1df2d3956f",
+        "dataset_title": "Parkplätze Emmen",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "af1e8673-1b51-4815-af98-d8ad2125824f",
+        "dataset_title": "Parkplätze (öffentlich)",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "324bb528-ac69-4c56-983a-c6fef716c061",
+        "dataset_title": "Parkleitsystem: Echtzeitinformation zu freien Parkplätzen in verschiedenen Parkhäusern",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "5c2131b4-6921-47d5-acff-d9a543d7989a",
+        "dataset_title": "Öffentliche Parkplätze (WMS)",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "407d328c-33db-415d-bf8a-94ffb728ade8",
+        "dataset_title": "Öffentliche Parkplätze (WFS)",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "2b56437d-7ae9-41ab-a9e8-7cc0760f317a",
+        "dataset_title": "Parkplatz Tarifzonen (WMS)",
+        "relevance": 0,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "f8e5a3f0-6c3b-4b82-acbc-d7f17b6582f0",
+        "dataset_title": "Parkplatz Tarifzonen (WFS)",
+        "relevance": 0,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "30c93438-453c-4444-b2ac-b1c6b8575728",
+        "dataset_title": "Parkplätze und Parkflächen der Stadt St.Gallen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "0c22448e-fd0d-47c3-a54a-143208133bc9",
+        "dataset_title": "Standorte der öffentlichen Parkhäuser Basel",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "cf5c7312-acc7-4f56-b5b7-3b1850a27344",
+        "dataset_title": "Echtzeitdaten am Wahl- und Abstimmungstag – kommunale und regionale Sachgeschäfte und Wahlen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "3805c249-644f-4ad7-8eb1-f794cd06b8c7",
+        "dataset_title": "Smarte Strasse: Parkplatz-Zonen",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "93b9f07a-42d5-4c09-9603-ecc74e5622d4",
+        "dataset_title": "Parkplätze auf öffentlichem Grund",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "7a47d066-5f86-432a-89b4-55fdb2ec077e",
+        "dataset_title": "Echtzeitdaten am Wahltag des Kantons Zürich - eidgenössische und kantonale Wahlen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "2e77d6c1-62ad-42a8-a5e7-3cace4963716",
+        "dataset_title": "Anzahl Parkplätze nach Stadtquartier",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "31a57c55-8c5c-4315-bda5-ba6e0b1c1f6d",
+        "dataset_title": "Echtzeitdaten am Abstimmungstag des Kantons Zürich – eidgenössische und kantonale Vorlagen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "80322953-97c3-4731-81f1-999d83788041",
+        "dataset_title": "öffentlich zugängliche Parkplätze DAV",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      },
+      {
+        "dataset_id": "e3a13282-9e5b-4d23-864f-4aaaf36288c6",
+        "dataset_title": "Echtzeitdaten am Abstimmungstag zu kantonalen Abstimmungsvorlagen",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:08.478189"
+      }
+    ]
+  },
+  "XD-01": {
+    "query": {
+      "query_id": "XD-01",
+      "query_text": "Bevölkerungsentwicklung und Demografie Schweiz",
+      "query_language": "de",
+      "domain": "cross",
+      "intent": "Find population and demographic statistics",
+      "expected_themes": [
+        "soci",
+        "regi"
+      ],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "41dba165-3203-445e-b1c2-fd5094f79d0d",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Schweiz und der Kantone 2020-2050",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "b7bc728e-de3c-4d98-9db7-668e76989af1",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Schweiz und der Kantone 2025-2055",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "b5c72273-1997-4f58-8e01-8c4f6d7a33c4",
+        "dataset_title": "Grenzüberschreitender City Statistics: Demografie (Agglomerationen 2020)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "475ec544-bc7a-4bbb-a521-e4063df90768",
+        "dataset_title": "Grenzüberschreitender City Statistics: Demografie (Agglomerationen 2012)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "f6ac425e-bd4f-4ca4-810d-6e53407e8237",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Schweiz 2025-2055 - Bevölkerungswachstum und Bevölkerungsindikatoren nach Szenario-Variante",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "a7cfad54-5094-4a21-80a5-b59e6e5c50a0",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Schweiz 2025-2055 - Bevölkerung und Bewegungen nach Szenario-Variante, Staatsangehörigkeit (Kategorie), Geschlecht und Alter",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "7582a331-6fd2-4f23-aad9-412a5f82de58",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Schweiz 2025-2055 - Bevölkerung und Bewegungen nach Szenario-Variante, Staatsangehörigkeit (Kategorie), Geschlecht und Altersklasse",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "96e459a9-d4a9-4fa5-8c65-6d6be8052ba5",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Schweiz 2025-2055 - Ziffern und Indikatoren nach Szenario-Variante, Staatsangehörigkeit (Kategorie), Geschlecht und Alter",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "409ad1ab-082a-435a-9d23-2a7d3e14d67f",
+        "dataset_title": "Szenarien der zukünftigen Bevölkerungsentwicklung",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "ef7e7549-c925-41a3-9f8d-29b9965090c1",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Kantone der Schweiz 2020-2050 - Anzahl der Personen nach Altersklassen und Kantonen gemäss 3 Szenarien",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "45fdd5d0-b938-4730-8536-6d2f0c698b92",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Kantone 2025-2055 - zukünftige Bevölkerungsentwicklung nach Kanton, Szenario-Variante, Staatsangehörigkeit (Kategorie), Geschlecht und Altersklasse",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "23405126-07e8-4887-8400-ab0784a26e36",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Kantone 2025-2055, Referenzszenario AR-00-2025 - zukünftige Bevölkerungsentwicklung nach Kanton, Staatsangehörigkeit (Kategorie), Geschlecht und Alter",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "448a95f2-1a15-428e-9e95-c327df5c1c18",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Kantone der Schweiz 2020-2050 - Jugendquotient, Altersquotient und Gesamtquotient nach Kanton gemäss 3 Szenarien",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "90e73b5c-adf6-46af-a497-f2ee12ec9b6d",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Kantone 2025-2055, 'tiefes' Szenario CR-00-2025 - zukünftige Bevölkerungsentwicklung nach Kanton, Staatsangehörigkeit (Kategorie), Geschlecht und Alter",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "9d2406b4-b99b-472c-b795-68bea1378ac4",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Kantone 2025-2055, 'hohes' Szenario BR-00-2025 - zukünftige Bevölkerungsentwicklung nach Kanton, Staatsangehörigkeit (Kategorie), Geschlecht und Alter",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "7ab35303-e31b-42f5-a62a-e13a5889abcd",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Kantone der Schweiz 2020-2050 - Ständige Wohnbevölkerung nach Kanton gemäss 3 Szenarien",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "2aeebd6d-317d-487e-bec6-ac5b1488c7ef",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Kantone 2025-2055, Variante AR-05-2025 'hohes Wanderungssaldo' - zukünftige Bevölkerungsentwicklung nach Kanton, Staatsangehörigkeit (Kategorie), Geschlecht und Alter",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "2dcfa9f6-35b9-4c07-b6b4-2b779718b3af",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Kantone 2025-2055, Variante AR-07-2025 'konstantes Wanderungssaldo' - zukünftige Bevölkerungsentwicklung nach Kanton, Staatsangehörigkeit (Kategorie), Geschlecht und Alter",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "bbdf872b-26a5-4d5a-a72f-763d5038e3fa",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Kantone 2025-2055, Variante AR-06-2025 'tiefes Wanderungssaldo' - zukünftige Bevölkerungsentwicklung nach Kanton, Staatsangehörigkeit (Kategorie), Geschlecht und Alter",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "4a6c7694-f156-4081-b717-91d280bdcdc9",
+        "dataset_title": "Bevölkerungsentwicklung nach institutionellen Gliederungen, 1850-2000",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.485085"
+      },
+      {
+        "dataset_id": "86ddb7d4-e20c-4528-be03-672d9ec96bd8",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung. Ergebnisse des Referenzszenarios",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.486083"
+      },
+      {
+        "dataset_id": "c51b9b38-29bb-47c7-a2cb-ae3a2a56bfef",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung. Ergebnisse des Referenzszenarios",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.486083"
+      },
+      {
+        "dataset_id": "f8080ea8-ac4d-4a34-b4ff-bec8e08abc9d",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Kantone 2025-2055 - demografische Indikatoren nach Kanton, Szenario-Variante und Staatsangehörigkeit (Kategorie)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.486083"
+      },
+      {
+        "dataset_id": "360bb895-aefc-4da3-b242-e3d69ff23671",
+        "dataset_title": "Schwerpunkt: Die Bevölkerungsentwicklung im Laufe der Zeit",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.486083"
+      },
+      {
+        "dataset_id": "3f87a2d2-14dd-41de-b768-e779bd077cb8",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung. Ergebnisse des tiefen Szenarios",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.486083"
+      },
+      {
+        "dataset_id": "b43269b5-7889-45f7-8d49-580556671432",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung. Ergebnisse des hohen Szenarios",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.486083"
+      },
+      {
+        "dataset_id": "e6c21cbf-258c-4cd0-ad6c-e90fe1cb74ad",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung. Ergebnisse des hohen Szenarios",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.486083"
+      },
+      {
+        "dataset_id": "1f512d7a-f11f-4b67-8998-a9635035eca3",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung. Ergebnisse des tiefen Szenarios",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.486083"
+      },
+      {
+        "dataset_id": "30d89611-7c38-44e6-b652-fa7a234f703f",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Kantone 2025-2055 - Ziffern nach Kanton, Szenario-Variante, Staatsangehörigkeit (Kategorie), Geschlecht und Alter",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.486083"
+      },
+      {
+        "dataset_id": "0623397a-74af-4ad0-b211-533bba52b378",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung nach Altersgruppen. Ergebnisse des Referenzszenarios",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:09.486083"
+      }
+    ]
+  },
+  "XD-02": {
+    "query": {
+      "query_id": "XD-02",
+      "query_text": "Energieverbrauch nach Kantonen",
+      "query_language": "de",
+      "domain": "cross",
+      "intent": "Find energy consumption by canton",
+      "expected_themes": [
+        "ener",
+        "regi"
+      ],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "a704ae2d-2fa3-4159-9c31-201c9bd71e26",
+        "dataset_title": "Energieverbrauch nach Träger in Gigawattstunden",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "09e3ba66-c783-4d92-b164-8113f571c1c7",
+        "dataset_title": "Energieverbrauch und erneuerbare Stromproduktion: Anzahl Hauptheizsysteme nach Gemeinden",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "e6df2f87-e3b5-430f-98ec-8709f70c9199",
+        "dataset_title": "Waldflächen nach Kantonen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "7e286305-c896-47b0-9e71-37854a082cc7",
+        "dataset_title": "Holzernte nach Kantonen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "30997152-bd3a-4c0c-bf17-13244b905760",
+        "dataset_title": "Holzernte nach Kantonen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "d16d8a0c-c8a7-465d-ab13-a21c529dc85a",
+        "dataset_title": "Waldflächen nach Kantonen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "4c963c00-a88e-48f4-98ef-d054af455c2f",
+        "dataset_title": "Analyse des schweizerischen Energieverbrauchs nach Verwendungszwecken",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "458a6f99-da5d-432d-af06-577857bba69e",
+        "dataset_title": "Energieverbrauch und CO2-Ausstoss pro Energiebezugsfläche nach Bauperiode",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "3545bcdd-9d2f-4686-b742-c7887c3f1cfc",
+        "dataset_title": "Energieverbräuche Portfolio Immobilien Stadt Zürich",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "089d52cf-4733-487b-94c8-ac66f0b2876f",
+        "dataset_title": "Wachstumsstarke Unternehmen nach Kantonen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "912f238a-7783-42b3-bd90-24432751af90",
+        "dataset_title": "Ex-Post-Analyse des schweizerischen Energieverbrauchs nach Bestimmungsfaktoren",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "9cdac281-9e4a-4dc8-99e0-c9bafe9fbc66",
+        "dataset_title": "Holzernte nach Eigentümertyp und Kantonen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "85588c3d-ec81-421b-8738-62684f8c11be",
+        "dataset_title": "Holzernte nach Eigentümertyp und Kantonen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "2df8b55b-90f9-4c82-9b0c-2ec6879213a1",
+        "dataset_title": "Forstflächen nach Eigentümertyp und Kantonen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "4f505b39-7f86-40d0-b007-0480703444c4",
+        "dataset_title": "Forstflächen nach Eigentümertyp und Kantonen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "6492b882-19bd-409c-9f48-40b41eb4af5f",
+        "dataset_title": "Waldfläche und Holzernte nach Kantonen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "360e76ef-3556-46c4-9f35-d815abba846b",
+        "dataset_title": "Waldfläche und Holzernte nach Kantonen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "249938c3-c33b-46db-aafe-1d7ef74ce95c",
+        "dataset_title": "Wohnungen nach Gebäudekategorie und Kantonen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "f7f37a93-ed14-4847-9dcd-36360f31ad9f",
+        "dataset_title": "Energieverbrauch und erneuerbare Stromproduktion: Anzahl Hauptheizsysteme (Ebene Kanton)",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "77402488-b973-40d9-bb87-ec04f5246588",
+        "dataset_title": "Nationalratswahlen 2023: Panaschierstatistik (Parteien), nach Kantonen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "897e4f5d-ab71-4654-81e4-c411311d69a6",
+        "dataset_title": "Nationalratswahlen 2023: Panaschierstatistik (Kandidierende), nach Kantonen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "3774d80f-f61f-4ae0-b024-e5285b5564bd",
+        "dataset_title": "Nationalratswahlen 2023: Panaschierstatistik (Listen), nach Kantonen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "081b39e9-69c0-4f07-aa55-aa79cf6e37fd",
+        "dataset_title": "Allgemeine Übersicht \"Gebäude\" nach Kantonen 2020",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "9c50aca2-7ba8-467a-86b1-1bc7645b8163",
+        "dataset_title": "Allgemeine Übersicht \"Wohnungen\" nach Kantonen 2024",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "b3f06dff-e8e2-4273-aff4-2f2ed7c3dbe3",
+        "dataset_title": "Allgemeine Übersicht \"Gebäude\" nach Kantonen 2024",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "af039c07-af32-46a9-9380-c6f3e18c004e",
+        "dataset_title": "Allgemeine Übersicht \"Gebäude\" nach Kantonen 2022",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "158b7f7a-0e22-4a77-982f-5211edb4683d",
+        "dataset_title": "Allgemeine Übersicht \"Wohnungen\" nach Kantonen 2023",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "17d17ec0-17aa-4410-92ef-09af1defbaa9",
+        "dataset_title": "Allgemeine Übersicht \"Gebäude\" nach Kantonen 2023",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "0d02279a-00ae-4be5-83fb-54efbddd2b0b",
+        "dataset_title": "Allgemeine Übersicht \"Wohnungen\" nach Kantonen 2020",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      },
+      {
+        "dataset_id": "45d49da1-5ef6-4b99-87cf-ed7691ddb26d",
+        "dataset_title": "Allgemeine Übersicht \"Gebäude\" nach Kantonen 2019",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:10.463253"
+      }
+    ]
+  },
+  "XD-03": {
+    "query": {
+      "query_id": "XD-03",
+      "query_text": "Bildungsstatistik Schulen und Universitäten",
+      "query_language": "de",
+      "domain": "cross",
+      "intent": "Find education statistics",
+      "expected_themes": [
+        "educ"
+      ],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "b1f56db8-a436-41a6-b005-1d83442238b8",
+        "dataset_title": "Schulen - Standort und Informationen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "ad2a5cc0-7b4b-495f-815f-bd06e5bbc23e",
+        "dataset_title": "Schulen - Standort und Informationen (WFS)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "81423087-796b-4f80-b48e-363b246bad1e",
+        "dataset_title": "Schulen - Standort und Informationen (WMS)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "fa0a4f7c-cc7c-4b53-9412-f3946ddb9a59",
+        "dataset_title": "Lernende an Baselbieter Schulen nach Schulstufe und Geschlecht (seit 1986)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "41b161da-899a-4363-82b9-393c557f38ba",
+        "dataset_title": "Coronavirus (COVID-19): Massentests an Schulen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "090b7a82-d341-4dc0-9ac6-2bed270a6550",
+        "dataset_title": "Coronavirus (COVID-19): Massentests an Schulen der Primar- und Sekundarstufe I",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "80d74862-8592-4c4b-b521-67a3f372f09e",
+        "dataset_title": "Lehrkräfte nach Bildungsstufe (öffentliche Schulen)",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "8ded09f6-b73f-4b11-942b-94af885f2ff1",
+        "dataset_title": "Lehrkräfte nach Schuljahr, Kanton und Bildungsstufe (öffentliche Schulen) - in Vollzeitäquivalenten",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "51efaa72-5507-4a1d-a5e3-239505b53b89",
+        "dataset_title": "Lehrkräfte nach Schuljahr, Kanton, Altersklasse und Bildungsstufe (öffentliche Schulen) - in Personen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "76428181-aa98-473e-b50b-ee9aee1a05d5",
+        "dataset_title": "Lehrkräfte nach Schuljahr, Kanton, Beschäftigungsgrad und Bildungsstufe (öffentliche Schulen) - in Personen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "2abd41b8-4d7a-49ce-893b-d51e88c1e7d4",
+        "dataset_title": "Lehrkräfte nach Schuljahr, Kanton, Geschlecht und Bildungsstufe (öffentliche Schulen) - in Personen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "06067680-16a3-4ed6-bded-55818ca24326",
+        "dataset_title": "Frauenanteil bei den Lehrkräften nach Bildungsstufe und Schuljahr (öffentliche Schulen)",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "84ced780-2968-4905-a277-ad971e3034cb",
+        "dataset_title": "Lehrkräfte nach Schuljahr, Kanton, Staatsangehörigkeit (Kategorie) und Bildungsstufe (öffentliche Schulen) - in Personen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "c9b22ea1-b7d0-4bbc-90cd-0adee614a01c",
+        "dataset_title": "Gang dur Züri: Statistische Kennzahlen für Schulen",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "186f42a5-816b-4452-b405-e0f6634d58f5",
+        "dataset_title": "Sekundarstufe II, allgemeinbildende Schulen: Bildungsabschlüsse nach Kanton",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "03276a31-e846-4207-8ba8-ab2665b564c7",
+        "dataset_title": "Coronavirus (COVID-19): Massentests an Schulen der Sekundarstufe II",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "e56f1916-436d-4565-afae-7e1519a959f1",
+        "dataset_title": "Frauenanteil bei den Lehrkräften nach Bildungsstufe (öffentliche Schulen)",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "116c3312-6470-48ce-a314-306711d7bf74",
+        "dataset_title": "Klassen der öffentlichen Schulen nach Schulstufe im Oktober ab 2010",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "b47880ef-4555-4c91-abf4-3c410636400f",
+        "dataset_title": "Formulierte Gesetzesinitiative «Stopp dem Abbau an öffentlichen Schulen!» vom 22. Juni 2017",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "b48b395c-09be-4c36-b1d6-18b6b86b2f18",
+        "dataset_title": "Schülerinnen und Schüler der Mittelschulen des Kantons Thurgau",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "3a8e485f-b184-48f3-9d60-fda4a7d1388f",
+        "dataset_title": "Schülerinnen und Schüler der öffentlichen Volksschule nach Schulgemeinde und Staatsangehörigkeit im Kanton Thurgau",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "a4ee794f-b4fb-4e50-a23a-4e911419bb02",
+        "dataset_title": "Schülerinnen und Schüler der öffentlichen Volksschule nach Schulgemeinde und Erstsprache im Kanton Thurgau",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "c83c3d0f-cce8-48b2-80f0-11e8ab2d10ba",
+        "dataset_title": "Bildungsstatistik 2019",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "35b1392f-a357-455c-b016-b0401030aa76",
+        "dataset_title": "Bildungsstatistik 2020",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "a4ca2d80-5abc-4fe0-a8b4-a91683006cba",
+        "dataset_title": "Bildungsstatistik 2021",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "41201931-a4e9-42fd-be71-372abca4e524",
+        "dataset_title": "Bildungsstatistik 2022",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "fdb7898c-1970-4290-96db-350d66e13c78",
+        "dataset_title": "Schülerinnen und Schüler der öffentlichen Volksschule auf Sekundarstufe I nach Anforderungstypen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "df6179cb-387b-49d7-8f2c-1e7b2d1c1a1b",
+        "dataset_title": "Schülerinnen und Schüler der öffentlichen Volksschule nach Staatsangehörigkeit im Kanton Thurgau",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "c2fd86b6-c136-4116-9c8e-22051a0da415",
+        "dataset_title": "Schülerinnen und Schüler der öffentlichen Volksschule nach Schulgemeinden im Kanton Thurgau",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      },
+      {
+        "dataset_id": "b338e67e-7977-4801-be64-2c3f7f6d6349",
+        "dataset_title": "Kontaktpersonen des Volksschulamts des Kantons Zürich nach Schulgemeinde und Themen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:11.543024"
+      }
+    ]
+  },
+  "XD-04": {
+    "query": {
+      "query_id": "XD-04",
+      "query_text": "Gesundheitsversorgung und Spitäler",
+      "query_language": "de",
+      "domain": "cross",
+      "intent": "Find healthcare facilities and statistics",
+      "expected_themes": [
+        "heal"
+      ],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "9a66d665-a6fc-486b-87cc-f7b038732440",
+        "dataset_title": "Spitäler",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "9dc95a97-e55b-42d3-8d88-47e6b5237848",
+        "dataset_title": "Spitäler und Kliniken",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "ae2acc13-6bda-46e4-afac-5e4d6ae842f4",
+        "dataset_title": "Gesundheitsversorgung (GSV): Patientenkennzahlen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "a7dec630-9db0-4338-ad77-4e07719b593f",
+        "dataset_title": "Erreichbarkeitsanalyse Spitäler und Kliniken",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "d5990c17-9066-4732-9ec1-7ca048a308a5",
+        "dataset_title": "Gesundheitsversorgung (GSV): Spitalkennzahlen",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "0d4249c4-85c1-4656-9f20-67a537fa9b51",
+        "dataset_title": "Gesundheitsversorgung (GSV): Pflegeheime",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "5ba1b0f9-cf90-40e7-bec5-1843bfcbced5",
+        "dataset_title": "Gesundheitsversorgung (GSV): Pflegeheimbewohnende",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "0255b1bb-d099-427c-bdbf-b16fee3507b6",
+        "dataset_title": "Spitäler: Aufwand und Ertrag (seit 2010)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "e9c13aa7-c9f2-4fcd-9893-986ba4e9e85e",
+        "dataset_title": "Spitäler: Kennzahlen (seit 2010)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "3c382c75-5ea7-420c-8994-f5c2c392e714",
+        "dataset_title": "Spitäler: Personal (seit 2010)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "5f84c874-5539-41e0-8f4b-ea0a9dcaf11c",
+        "dataset_title": "Gesundheitsversorgung (GSV): Tagesgäste von Tages- und Nachtpflegeeinrichtungen (TNP)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "06e9897b-16e6-438a-b746-f69b3c578d8e",
+        "dataset_title": "Staatsvertrag vom 6. Februar 2018 zwischen den Kantonen Basel-Stadt und Basel-Landschaft betreffend Planung, Regulation und Aufsicht in der Gesundheitsversorgung",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "9fad0a63-ef51-4b1c-a910-8c9bed19a0d4",
+        "dataset_title": "Gesundheitsversorgung (GSV): Pflegebedürftige im Bereich der Pflege zu Hause (PzH)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "c3a5eb42-28dc-450d-9935-d198e1c319dd",
+        "dataset_title": "Änderung vom 23. Juni 2005 des Finanzhaushaltsgesetzes (§ 30a; Globalbudget für die Spitäler)",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "ebfc853c-abe5-4b41-9516-b9d93af03196",
+        "dataset_title": "Revision des Spitalgesetzes vom 17. November 2011 ; Verselbständigung der Spitäler und der Kantonalen Psychiatrischen Dienste als öffentlich-rechtliche Anstalten",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "8229cb44-bd70-4b88-b404-adce2ac11659",
+        "dataset_title": "Kennzahlen der Schweizer Spitäler 2016",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "c9731cfd-6ec6-4a58-94cb-f7f325824623",
+        "dataset_title": "Kennzahlen der Schweizer Spitäler 2018",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "526968bf-c252-418c-abfc-4587dccd6b1e",
+        "dataset_title": "Kennzahlen der Schweizer Spitäler 2020",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "3dca6b88-970a-40e5-95d1-5ac8db836fb1",
+        "dataset_title": "Kennzahlen der Schweizer Spitäler 2019",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "a4ae1938-9a5a-48c1-aa00-4c7a121a50cc",
+        "dataset_title": "Kennzahlen der Schweizer Spitäler 2023",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "5912f9a8-5a2b-4450-af03-3ef65dce5dd2",
+        "dataset_title": "Kennzahlen der Schweizer Spitäler 2021",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "c5bbf926-39f4-45d7-bf09-56c493a4cebd",
+        "dataset_title": "Angebot der Krankenhäuser nach Grossregion, Kanton und Betriebstyp",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "41d6ce1f-6766-4dd3-8654-9b11bebee8ea",
+        "dataset_title": "Finanzen der sozialen Sicherheit in der Schweiz: Sozialleistungen nach Funktion, in Millionen Franken, in Franken pro Kopf und Anteile in %",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "699b4d85-1829-498b-9401-a59a3f777189",
+        "dataset_title": "Kennzahlen der Schweizer Spitäler 2017",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "91fccd5c-e092-4e3d-b24b-f370517b52aa",
+        "dataset_title": "Kennzahlen der Schweizer Spitäler 2022",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "8628e6c7-5aa6-4ace-a10a-882a9e666825",
+        "dataset_title": "Alters- und Pflegeheime: Bewohnerinnen und Bewohner (seit 2006)",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "c83fa730-04e3-42c2-83a6-be17587969b8",
+        "dataset_title": "Finanzen der sozialen Sicherheit in Europa: Sozialleistungen nach Funktion, Prozentualer Anteil an den Sozialleistungen",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "9c272ec3-cff2-49f2-9d83-3546e80a0c8f",
+        "dataset_title": "Alters- und Pflegeheime nach Standort",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "c249751f-4288-4b8e-b955-b8416355be23",
+        "dataset_title": "Alters- und Pflegeheime: Kennzahlen (seit 2006)",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      },
+      {
+        "dataset_id": "488212db-d506-4c7d-acd2-e47a9f7c22a9",
+        "dataset_title": "Spital",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:12.547577"
+      }
+    ]
+  },
+  "XD-05": {
+    "query": {
+      "query_id": "XD-05",
+      "query_text": "Wirtschaftsstatistik und BIP nach Region",
+      "query_language": "de",
+      "domain": "cross",
+      "intent": "Find economic statistics by region",
+      "expected_themes": [
+        "econ",
+        "regi"
+      ],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "56209e2d-7b47-4adb-af4e-dece575c7481",
+        "dataset_title": "Bruttoinlandsprodukt (BIP) nach Grossregion und Kanton",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "b07facc1-6f05-4fd1-8077-7d183162b431",
+        "dataset_title": "Finanzen der sozialen Sicherheit in Europa: Sozialleistungen, in % des BIP",
+        "relevance": 1,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "39de4f3c-e8b1-4e01-acc2-88a681654d53",
+        "dataset_title": "Landwirtschaftsbetriebe: Beschäftige Personen und Wochenarbeitsstunden nach Region",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "e47b610b-ba46-46bd-815c-0bf9f0ce8cef",
+        "dataset_title": "Kulturfinanzierung durch die öffentliche Hand - Entwicklung nach den Gesamtausgaben der Staatsebenen, dem BIP und in Franken pro Einwohner/in",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "7ead17b5-697d-4ff7-b016-247e87970430",
+        "dataset_title": "Finanzen der sozialen Sicherheit in der Schweiz: Gesamtausgaben, Leistungen und Gesamteinnahmen, in % des BIP",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "91dde242-c253-4c2d-86b3-3b2d60a451d9",
+        "dataset_title": "Landwirtschaftsbetriebe: Betriebsführung, Ausbildung, Eigentumsverhältnisse und Weiterführung nach Region",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "2fb5957d-3e17-4f2c-869a-2abd026278f2",
+        "dataset_title": "Landwirtschaftsbetriebe: Bodenbedeckung im Winter und Bodenbearbeitung nach Region",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "f8d05a23-9ef4-41dd-8bc7-388513ab8322",
+        "dataset_title": "Landwirtschaftsbetriebe: Anzahl Tierplätze, Betriebe und Tiere nach Stallsystem und Region",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "b475be0d-b291-4cf9-bd88-c2d3a733eae1",
+        "dataset_title": "Öffentliche Bildungsausgaben der Kantone und ihrer Gemeinden im Verhältnis zum BIP, zu den Gesamtausgaben und zur Bevölkerung",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "bad63acc-dcc2-4bc8-95a2-92b56455a3a2",
+        "dataset_title": "Landwirtschaftsbetriebe: Innerbetriebliche Diversifikation und Anteil am Gesamtumsatz nach Region",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "21e71325-8b5a-47aa-acb6-8d3883abe63c",
+        "dataset_title": "Landwirtschaftsbetriebe: Benutzte Digitalisierung, Gründe, Risiken und vorgesehene Nutzung nach Region",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "b1f996bd-99cc-44b8-95d0-577e86f5adba",
+        "dataset_title": "Landwirtschaftsbetriebe: Motorisierte Fahrzeuge, nicht motorisierte Maschinen und Hofeinrichtungen nach Region",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "7e8920e9-918d-4f65-b19f-0ce51dd77da0",
+        "dataset_title": "Natürliche Bevölkerungsbewegung nach Staatsangehörigkeit und Region (städtisch/ländlich), 1999-2024",
+        "relevance": 2,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "cd583885-8cef-4c2f-ae84-a6275babc6e2",
+        "dataset_title": "Landwirtschaftsbetriebe: Bewässerung im Freiland im Kalenderjahr nach Region",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "0a9ff317-ffdd-4317-a5c9-640b940656aa",
+        "dataset_title": "Beschäftigte nach Grossregion und Wirtschaftssektor",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "33f7094c-3a52-4edd-ba98-6a497128071c",
+        "dataset_title": "Bruttoinlandsprodukt Graubünden und Regionen, seit 2000",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "6f0e6de9-aa1f-474d-a7be-2d337205d8f2",
+        "dataset_title": "Wertschöpfung, nominal und real, nach Wirtschaftszweigen ab 1995",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "92038aed-98d2-4df8-80a7-f87d94533a48",
+        "dataset_title": "Landwirtschaftsbetriebe: Dauer der Beschäftigung von familienfremden Arbeitskräften nach Region",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "efa1a320-06b1-4565-b7d0-04436278e304",
+        "dataset_title": "Landwirtschaftsbetriebe: Jahresarbeitstunden  der beschäftigten Personen nach Region",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "b6fc0336-eb3f-454c-9a3d-4466ab298377",
+        "dataset_title": "Offene Stellen nach Grossregion",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "3332123b-c0eb-4761-8ef9-f494441e557a",
+        "dataset_title": "Betriebe nach voraussichtlicher Beschäftigungsentwicklung und Grossregion (in %)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "b949ea9d-75f8-45c0-b9a2-0f61ca859f19",
+        "dataset_title": "Ankünfte und Logiernächte auf Campingplätzen nach Grossregion",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "bfb99490-22fd-4bc7-a933-8041d5f4ef7d",
+        "dataset_title": "Anzahl Campingplätze und vorhandene Stellplätze nach Tourismusregion",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "428893e6-1e5c-43ff-bf17-ba76ab8fd516",
+        "dataset_title": "Anzahl Campingplätze und vorhandene Stellplätze nach Grossregion",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "bff00fac-7d44-49e1-bc04-4e7670ab2e59",
+        "dataset_title": "Weibliche Vornamen der Neugeborenen nach Sprachregion und Kanton",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "387e88d5-076b-46d8-a687-3bbbc2f62ea9",
+        "dataset_title": "Männliche Vornamen der Neugeborenen nach Sprachregion und Kanton",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "2fec0685-a522-400c-ba75-995a5ac0887b",
+        "dataset_title": "Schutzmassnahmen Kultur- und Denkmalschutzobjekte national / regional",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "85141451-5fd0-4df0-87a6-7fe1e0562e51",
+        "dataset_title": "Schutzmassnahmen Natur- und Landschaftsschutzobjekte national / regional",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "075d4aa0-1a5a-4a49-b43f-716b170c551a",
+        "dataset_title": "Ankünfte und Logiernächte auf Campingplätzen nach Tourismusregion",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      },
+      {
+        "dataset_id": "ec970ddb-625a-4c9d-b260-2a48c09b7dcc",
+        "dataset_title": "Wellness und Dayspa in der Region Zürich (Zürich Tourismus)",
+        "relevance": 3,
+        "annotator": "heuristic",
+        "timestamp": "2026-03-06T18:59:13.549184"
+      }
+    ]
+  }
+}

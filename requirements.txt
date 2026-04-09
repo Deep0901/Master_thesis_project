@@ -1,0 +1,56 @@
+# OGD Fuzzy Retrieval System - Requirements
+# Master Thesis: Improving Access to Swiss OGD through Fuzzy HCIR
+# Author: Deep Shukla
+
+# Core Dependencies
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Web Framework
+streamlit>=1.28.0
+
+# API Client
+requests>=2.28.0
+urllib3>=1.26.0
+
+# Data Processing
+pandas>=2.0.0
+
+# Natural Language Processing (optional)
+# Uncomment if using real language detection
+# langdetect>=1.0.9
+# spacy>=3.5.0
+
+# LLM Integration (optional)
+# Uncomment if using OpenAI normalization
+# openai>=1.0.0
+
+# Embedding Models (optional)
+# Uncomment if using real sentence transformers
+# sentence-transformers>=2.2.0
+# torch>=2.0.0
+
+# Vector Search (optional)
+# Uncomment for production with large datasets
+# faiss-cpu>=1.7.0
+
+# Testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# Development Tools
+black>=23.0.0
+mypy>=1.0.0
+flake8>=6.0.0
+
+# Documentation
+# mkdocs>=1.4.0
+# mkdocs-material>=9.0.0
+
+# Jupyter (for analysis)
+jupyter>=1.0.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# PDF Processing (for proposal reading)
+PyPDF2>=3.0.0

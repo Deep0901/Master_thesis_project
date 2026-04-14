@@ -1284,6 +1284,120 @@ class ExplanationGenerator:
 # BASELINE RANKING SYSTEMS (FOR COMPARISON)
 # ============================================================================
 
+def dataset_identity_key(dataset: Dict) -> str:
+    """Build a stable identity key used to remove duplicate datasets."""
+    name = str(dataset.get('name') or '').strip().lower()
+    if name:
+        return f"name:{name}"
+
+    dataset_id = str(dataset.get('id') or '').strip().lower()
+    if dataset_id:
+        return f"id:{dataset_id}"
+
+    title = dataset.get('title', {})
+    if isinstance(title, dict):
+        title_text = str(
+            title.get('en')
+            or title.get('de')
+            or title.get('fr')
+            or title.get('it')
+            or next(iter(title.values()), '')
+        ).strip().lower()
+    else:
+        title_text = str(title or '').strip().lower()
+
+    org = dataset.get('organization', {}) or {}
+    if isinstance(org, dict):
+        org_name = str(org.get('name') or org.get('title') or '').strip().lower()
+    else:
+        org_name = str(org).strip().lower()
+
+    return f"fallback:{title_text}|{org_name}"
+
+
+def deduplicate_datasets(datasets: List[Dict]) -> List[Dict]:
+    """Remove duplicate datasets while preserving first-seen order."""
+    unique: List[Dict] = []
+    seen_keys: set[str] = set()
+
+    for dataset in datasets:
+        key = dataset_identity_key(dataset)
+        if key in seen_keys:
+            continue
+        seen_keys.add(key)
+        unique.append(dataset)
+
+    return unique
+
+
+def dataset_display_key(dataset: Dict) -> str:
+    """Build a display-level key to collapse repeated title rows in UI."""
+    title = dataset.get('title', {})
+    if isinstance(title, dict):
+        title_text = str(
+            title.get('en')
+            or title.get('de')
+            or title.get('fr')
+            or title.get('it')
+            or next(iter(title.values()), '')
+        ).strip().lower()
+    else:
+        title_text = str(title or '').strip().lower()
+
+    org = dataset.get('organization', {}) or {}
+    if isinstance(org, dict):
+        org_text = str(org.get('title') or org.get('name') or '').strip().lower()
+    else:
+        org_text = str(org).strip().lower()
+
+    return f"{title_text}|{org_text}"
+
+
+def deduplicate_display_datasets(datasets: List[Dict]) -> List[Dict]:
+    """Deduplicate raw datasets by visible title and organization for cleaner output."""
+    unique: List[Dict] = []
+    seen_keys: set[str] = set()
+
+    for dataset in datasets:
+        key = dataset_display_key(dataset)
+        if key in seen_keys:
+            continue
+        seen_keys.add(key)
+        unique.append(dataset)
+
+    return unique
+
+
+def ranked_result_display_key(result: DatasetResult) -> str:
+    """Build a display-level key for ranked results."""
+    title_text = str(
+        result.title.get('en')
+        or result.title.get('de')
+        or result.title.get('fr')
+        or result.title.get('it')
+        or next(iter(result.title.values()), '')
+    ).strip().lower()
+    org_text = str(result.organization or '').strip().lower()
+    return f"{title_text}|{org_text}"
+
+
+def deduplicate_ranked_results(results: List[DatasetResult]) -> List[DatasetResult]:
+    """Deduplicate ranked outputs by visible title and organization."""
+    unique: List[DatasetResult] = []
+    seen_keys: set[str] = set()
+
+    for result in results:
+        key = ranked_result_display_key(result)
+        if key in seen_keys:
+            continue
+        seen_keys.add(key)
+        unique.append(result)
+
+    for index, result in enumerate(unique, start=1):
+        result.rank = index
+
+    return unique
+
 class PortalDefaultRanker:
     """
     Simulates the portal's default ranking (as returned by API).
@@ -1292,6 +1406,7 @@ class PortalDefaultRanker:
     
     def rank(self, datasets: List[Dict], query: str) -> List[Dict]:
         """Return datasets in their original API order."""
+        datasets = deduplicate_datasets(datasets)
         for i, ds in enumerate(datasets):
             ds['_relevance_score'] = 1.0 - (i * 0.02)  # Decreasing by position
             ds['_ranking_method'] = 'portal_default'
@@ -1340,6 +1455,7 @@ class BM25Ranker:
     
     def rank(self, datasets: List[Dict], query: str) -> List[Dict]:
         """Rank datasets using BM25."""
+        datasets = deduplicate_datasets(datasets)
         query_terms = self._tokenize(query)
         
         if not query_terms or not datasets:
@@ -1425,6 +1541,8 @@ class FuzzyHCIRRanker:
         Returns:
             List of DatasetResult with rankings and explanations
         """
+        datasets = deduplicate_datasets(datasets)
+
         # Process query
         query_info = self.query_processor.process(query)
         keywords = query_info['keywords']
@@ -1980,6 +2098,9 @@ def main():
                     rows=settings.get('num_results', 20),
                     fq=fq
                 )
+
+            raw_results = deduplicate_datasets(raw_results)
+            raw_results = deduplicate_display_datasets(raw_results)
             
             if raw_results:
                 # Process query for info display
@@ -1994,9 +2115,9 @@ def main():
                 
                 # Apply ranking
                 if settings['ranking_method'] == "Compare All":
-                    results_fuzzy = fuzzy_ranker.rank(raw_results.copy(), query)
-                    results_portal = portal_ranker.rank(raw_results.copy(), query)
-                    results_bm25 = bm25_ranker.rank(raw_results.copy(), query)
+                    results_fuzzy = deduplicate_ranked_results(fuzzy_ranker.rank(raw_results.copy(), query))
+                    results_portal = deduplicate_display_datasets(portal_ranker.rank(raw_results.copy(), query))
+                    results_bm25 = deduplicate_display_datasets(bm25_ranker.rank(raw_results.copy(), query))
                     
                     render_comparison_view(results_fuzzy, results_portal, results_bm25, query)
                     
@@ -2006,7 +2127,7 @@ def main():
                         render_result_card(result, settings)
                 
                 elif settings['ranking_method'] == "Fuzzy HCIR (Research)":
-                    results = fuzzy_ranker.rank(raw_results, query)
+                    results = deduplicate_ranked_results(fuzzy_ranker.rank(raw_results, query))
                     
                     st.markdown(f"### 📊 Found {total_count} datasets • Showing top {len(results)}")
                     
@@ -2014,7 +2135,7 @@ def main():
                         render_result_card(result, settings)
                 
                 elif settings['ranking_method'] == "Portal Default":
-                    portal_ranker.rank(raw_results, query)
+                    raw_results = deduplicate_display_datasets(portal_ranker.rank(raw_results, query))
                     
                     st.markdown(f"### 📊 Found {total_count} datasets (Portal Default Ranking)")
                     
@@ -2037,7 +2158,7 @@ def main():
                         st.markdown("---")
                 
                 else:  # BM25
-                    bm25_ranker.rank(raw_results, query)
+                    raw_results = deduplicate_display_datasets(bm25_ranker.rank(raw_results, query))
                     st.markdown(f"### 📊 Found {total_count} datasets (BM25 Ranking)")
                     
                     for i, ds in enumerate(raw_results):

@@ -49,12 +49,16 @@ This repository contains the implementation of a fuzzy logic-based retrieval sys
 
 ```
 thesis/
-├── code/
+├── code/                     # Main application code
+│   ├── config.py
+│   ├── main.py
 │   ├── fuzzy_system/         # Fuzzy inference engine
+│   │   ├── calibrated_variables.py
 │   │   ├── linguistic_variables.py
 │   │   ├── membership_functions.py
 │   │   ├── fuzzy_rules.py
-│   │   └── inference_engine.py
+│   │   ├── inference_engine.py
+│   │   └── production_engine.py
 │   ├── query_processing/     # Query parsing & normalization
 │   │   ├── query_parser.py
 │   │   └── llm_normalizer.py
@@ -64,18 +68,43 @@ thesis/
 │   │   ├── ai_semantic_baseline.py
 │   │   └── explanation_generator.py
 │   ├── data_collection/      # CKAN API integration
-│   │   └── ckan_api_client.py
-│   └── prototype/            # Web application
-│       └── app.py
+│   │   ├── ckan_api_client.py
+│   │   ├── comprehensive_collector.py
+│   │   └── metadata_collector.py
+│   ├── prototype/            # Web application
+│   │   ├── app.py
+│   │   ├── swiss_ogd_portal.py
+│   │   ├── portal_analysis_app.py
+│   │   └── analytics_dashboard.py
+│   ├── visualization/        # Data visualization utilities
+│   │   └── membership_plots.py
+│   └── tests/                # Unit and integration tests
+│       ├── test_fuzzy_engine.py
+│       └── test_integration.py
+├── analytics/                # Statistical analysis
+│   ├── statistical_analysis.py
+│   └── statistical_analysis_report.json
 ├── data/                     # Datasets and cache
-├── docs/                     # Documentation
-│   ├── design/               # Design specifications
-│   └── evaluation/           # Study protocols
-├── evaluation/               # Evaluation materials
-│   └── test_queries/         # Benchmark queries
-├── figures/                  # Visualizations
-├── notes/                    # Research notes
-└── THESIS_ROADMAP.md         # Project planning
+│   ├── raw/                  # Original datasets
+│   │   ├── ogd_metadata_20260306_183841.csv
+│   │   ├── ogd_metadata_20260306_183841.json
+│   │   └── ogd_representative_sample.json
+│   └── processed/            # Processed datasets
+├── evaluation/               # Evaluation materials and results
+│   ├── annotation_tool.py
+│   ├── evaluation_framework.py
+│   ├── experiment_runner.py
+│   ├── benchmark_queries.json
+│   ├── benchmark_queries_v2.json
+│   ├── experiment_results.json
+│   ├── ground_truth_auto.json
+│   ├── ground_truth/         # Ground truth data
+│   ├── raters/               # Rater data
+│   ├── results/              # Evaluation results
+│   └── test_queries/         # Test queries
+│       └── benchmark_queries.json
+├── requirements.txt          # Python dependencies
+└── README.md                 # This file
 ```
 
 ## 🚀 Quick Start

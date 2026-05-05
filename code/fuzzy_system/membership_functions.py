@@ -67,8 +67,30 @@ def triangular(x: Union[float, np.ndarray], a: float, b: float, c: float) -> Uni
         - At x=30 days: membership = 0 (no longer recent)
     """
     x = np.asarray(x)
-    return np.maximum(0, np.minimum((x - a) / (b - a + 1e-10), 
-                                     (c - x) / (c - b + 1e-10)))
+
+    if a == b and b == c:
+        return np.ones_like(x, dtype=float)
+
+    result = np.zeros_like(x, dtype=float)
+
+    if a == b:
+        rising = x <= b
+        result[rising] = 1.0
+        falling = (x > b) & (x < c)
+        result[falling] = (c - x[falling]) / (c - b + 1e-10)
+        return result
+
+    if b == c:
+        rising = (x > a) & (x < b)
+        result[rising] = (x[rising] - a) / (b - a + 1e-10)
+        result[x >= b] = 1.0
+        return result
+
+    rising = (x > a) & (x <= b)
+    falling = (x > b) & (x < c)
+    result[rising] = (x[rising] - a) / (b - a + 1e-10)
+    result[falling] = (c - x[falling]) / (c - b + 1e-10)
+    return result
 
 
 def trapezoidal(x: Union[float, np.ndarray], a: float, b: float, 
@@ -96,10 +118,28 @@ def trapezoidal(x: Union[float, np.ndarray], a: float, b: float,
         - Declining membership outside that range
     """
     x = np.asarray(x)
-    return np.maximum(0, np.minimum(
-        np.minimum((x - a) / (b - a + 1e-10), 1),
-        (d - x) / (d - c + 1e-10)
-    ))
+
+    if a == b and c == d:
+        return np.where((x >= a) & (x <= d), 1.0, 0.0)
+
+    result = np.zeros_like(x, dtype=float)
+    rising = (x > a) & (x < b)
+    plateau = (x >= b) & (x <= c)
+    falling = (x > c) & (x < d)
+
+    if b != a:
+        result[rising] = (x[rising] - a) / (b - a + 1e-10)
+    else:
+        result[x <= b] = 1.0
+
+    result[plateau] = 1.0
+
+    if d != c:
+        result[falling] = (d - x[falling]) / (d - c + 1e-10)
+    else:
+        result[x >= c] = 1.0
+
+    return np.clip(result, 0.0, 1.0)
 
 
 def gaussian(x: Union[float, np.ndarray], mean: float, sigma: float) -> Union[float, np.ndarray]:

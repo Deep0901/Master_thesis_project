@@ -189,7 +189,9 @@ class QueryParser:
         ],
         "mobility": [
             "transport", "verkehr", "traffic", "mobilité", "mobilità",
-            "road", "strasse", "route", "strada", "rail", "bahn"
+            "road", "strasse", "route", "strada", "rail", "bahn",
+            "mobility", "bicycle", "bike", "biking", "cycling", "cycle",
+            "fahrrad", "velo", "vélo", "bicicletta", "transit", "transportation"
         ],
         "health": [
             "health", "gesundheit", "santé", "salute",
@@ -363,6 +365,7 @@ class QueryParser:
             r'\b(der|die|das|und|oder|in|auf|mit|für|von|bei)\b',
             r'\b(le|la|les|de|du|des|et|ou|dans|sur|avec|pour)\b',
             r'\b(il|lo|la|di|da|e|o|in|su|con|per)\b',
+            r'\b(data|dataset|datasets|related|show|statistics|statistic)\b',
             r'\b(recent|complete|full|new|old|latest)\b',
             r'\b(aktuell|vollständig|neu|alt)\b',
             r'\b(récent|complet|nouveau|ancien)\b',

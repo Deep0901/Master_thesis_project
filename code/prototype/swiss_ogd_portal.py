@@ -24,6 +24,7 @@ import streamlit as st
 import requests
 import pandas as pd
 import numpy as np
+import html
 import time
 import json
 import re
@@ -444,6 +445,15 @@ class DatasetResult:
         return formats[:5]
 
 
+def safe_html_text(value: Any, fallback: str = '') -> str:
+    """Return a safe, non-null text value for HTML rendering."""
+    if value is None:
+        return fallback
+    if isinstance(value, dict):
+        value = value.get('en') or value.get('de') or value.get('fr') or value.get('it') or next(iter(value.values()), fallback)
+    return html.escape(str(value)) if value != '' else fallback
+
+
 # ============================================================================
 # OPENDATA.SWISS CKAN API CLIENT
 # ============================================================================
@@ -690,9 +700,23 @@ class CalibratedFuzzyEngine:
     def _triangular_mf(self, x: float, params: List[float]) -> float:
         """Triangular membership function."""
         a, b, c = params
-        if x <= a or x >= c:
+        if a == b and b == c:
+            return 1.0
+        if a == b:
+            if x <= b:
+                return 1.0
+            if x < c:
+                return (c - x) / (c - b) if c != b else 1.0
             return 0.0
-        elif a < x <= b:
+        if b == c:
+            if x >= b:
+                return 1.0
+            if x > a:
+                return (x - a) / (b - a) if b != a else 1.0
+            return 0.0
+        if x < a or x > c:
+            return 0.0
+        elif a <= x <= b:
             return (x - a) / (b - a) if b != a else 1.0
         else:  # b < x < c
             return (c - x) / (c - b) if c != b else 1.0
@@ -700,14 +724,16 @@ class CalibratedFuzzyEngine:
     def _trapezoidal_mf(self, x: float, params: List[float]) -> float:
         """Trapezoidal membership function."""
         a, b, c, d = params
-        if x <= a or x >= d:
+        if a == b and c == d:
+            return 1.0 if a <= x <= d else 0.0
+        if x < a or x > d:
             return 0.0
-        elif a < x <= b:
-            return (x - a) / (b - a) if b != a else 1.0
-        elif b < x <= c:
+        elif a <= x <= b:
+            return 1.0 if b == a else (x - a) / (b - a)
+        elif b < x < c:
             return 1.0
-        else:  # c < x < d
-            return (d - x) / (d - c) if d != c else 1.0
+        else:  # c <= x <= d
+            return 1.0 if d == c else (d - x) / (d - c)
     
     def _compute_membership(
         self,
@@ -966,22 +992,32 @@ class MultilingualQueryProcessor:
                'of', 'with', 'by', 'from', 'is', 'are', 'was', 'were', 'be', 'been',
                'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would',
                'could', 'should', 'may', 'might', 'must', 'shall', 'can', 'this',
-               'that', 'these', 'those', 'i', 'you', 'he', 'she', 'it', 'we', 'they'},
+             'that', 'these', 'those', 'i', 'you', 'he', 'she', 'it', 'we', 'they',
+             'data', 'dataset', 'datasets', 'related', 'show', 'statistics', 'statistic'},
         'de': {'der', 'die', 'das', 'den', 'dem', 'des', 'ein', 'eine', 'einer',
                'einem', 'einen', 'und', 'oder', 'aber', 'in', 'auf', 'an', 'zu',
                'für', 'von', 'mit', 'bei', 'nach', 'über', 'unter', 'vor', 'durch',
                'ist', 'sind', 'war', 'waren', 'sein', 'hat', 'haben', 'wird',
                'werden', 'kann', 'können', 'muss', 'müssen', 'soll', 'sollen',
-               'ich', 'du', 'er', 'sie', 'es', 'wir', 'ihr'},
+             'ich', 'du', 'er', 'sie', 'es', 'wir', 'ihr', 'daten', 'datensatz', 'zusammenhang', 'statistik'},
         'fr': {'le', 'la', 'les', 'un', 'une', 'des', 'et', 'ou', 'mais', 'dans',
                'sur', 'à', 'de', 'pour', 'par', 'avec', 'sans', 'sous', 'vers',
                'est', 'sont', 'était', 'être', 'avoir', 'a', 'ont', 'fait',
-               'je', 'tu', 'il', 'elle', 'nous', 'vous', 'ils', 'elles',
-               'ce', 'cette', 'ces', 'qui', 'que', 'quoi', 'dont', 'où'},
+             'je', 'tu', 'il', 'elle', 'nous', 'vous', 'ils', 'elles',
+             'ce', 'cette', 'ces', 'qui', 'que', 'quoi', 'dont', 'où', 'données', 'jeu', 'statistiques'},
         'it': {'il', 'lo', 'la', 'i', 'gli', 'le', 'un', 'uno', 'una', 'e', 'o',
                'ma', 'in', 'su', 'a', 'di', 'da', 'per', 'con', 'tra', 'fra',
                'è', 'sono', 'era', 'essere', 'avere', 'ha', 'hanno', 'fatto',
-               'io', 'tu', 'lui', 'lei', 'noi', 'voi', 'loro', 'che', 'chi'}
+             'io', 'tu', 'lui', 'lei', 'noi', 'voi', 'loro', 'che', 'chi', 'dati', 'insieme', 'statistiche'}
+    }
+
+    THEME_KEYWORDS = {
+        'environment': {'environment', 'umwelt', 'environnement', 'ambiente', 'pollution', 'climate', 'clima'},
+        'mobility': {'mobility', 'transport', 'verkehr', 'traffic', 'road', 'rail', 'transit', 'bicycle', 'bike', 'biking', 'cycling', 'cycle', 'velo', 'vélo', 'fahrrad', 'bicicletta'},
+        'health': {'health', 'gesundheit', 'santé', 'salute', 'hospital'},
+        'education': {'education', 'bildung', 'éducation', 'istruzione', 'school'},
+        'economy': {'economy', 'wirtschaft', 'économie', 'economia', 'finance', 'employment'},
+        'population': {'population', 'bevölkerung', 'demographic', 'demographie'}
     }
     
     # Vague predicates in multiple languages
@@ -1039,6 +1075,17 @@ class MultilingualQueryProcessor:
         keywords = [w for w in words if w not in self.all_stopwords and len(w) > 2]
         
         return keywords
+
+    def extract_themes(self, query: str) -> List[str]:
+        """Infer broad query themes from the normalized query."""
+        words = set(re.findall(r'\b\w+\b', query.lower()))
+        themes = []
+
+        for theme, keywords in self.THEME_KEYWORDS.items():
+            if words & keywords:
+                themes.append(theme)
+
+        return themes
     
     def detect_vague_predicates(self, query: str) -> Dict[str, bool]:
         """
@@ -1062,12 +1109,38 @@ class MultilingualQueryProcessor:
         Returns:
             Dictionary with language, keywords, vague predicates, etc.
         """
+        keywords = self.extract_keywords(query)
+        themes = self.extract_themes(query)
+
+        try:
+            from code.config import load_config_from_env
+            from code.query_processing import create_normalizer
+
+            config = load_config_from_env()
+            if config.enable_llm_normalization:
+                normalizer = create_normalizer(use_openai=(config.llm.provider == 'openai'))
+                normalization = normalizer.normalize(query)
+                llm_tokens = []
+                for text in [
+                    normalization.normalized_query,
+                    normalization.english_translation,
+                    ' '.join(normalization.synonyms),
+                    ' '.join(normalization.related_terms),
+                ]:
+                    llm_tokens.extend(re.findall(r'\b\w+\b', text.lower()))
+                keywords = list(dict.fromkeys(keywords + [token for token in llm_tokens if len(token) > 2]))
+        except Exception:
+            pass
+
+        vague_predicates = self.detect_vague_predicates(query)
+
         return {
             'original': query,
             'language': self.detect_language(query),
-            'keywords': self.extract_keywords(query),
-            'vague_predicates': self.detect_vague_predicates(query),
-            'has_vague_terms': any(self.detect_vague_predicates(query).values())
+            'keywords': keywords,
+            'themes': themes,
+            'vague_predicates': vague_predicates,
+            'has_vague_terms': any(vague_predicates.values())
         }
 
 
@@ -1077,13 +1150,137 @@ class MultilingualQueryProcessor:
 
 class SimilarityCalculator:
     """
-    Calculate query-document similarity using TF-IDF inspired approach.
+    Calculate query-document similarity using BM25.
     """
-    
+
+    def __init__(self):
+        self._document_count = 0
+        self._document_frequencies: Dict[str, int] = {}
+        self._average_document_length = 0.0
+        self._k1 = 1.5
+        self._b = 0.75
+
+    @staticmethod
+    def _flatten_text(value: Any) -> str:
+        if value is None:
+            return ''
+        if isinstance(value, dict):
+            return ' '.join(
+                SimilarityCalculator._flatten_text(item)
+                for item in value.values()
+                if item is not None
+            )
+        if isinstance(value, (list, tuple, set)):
+            return ' '.join(SimilarityCalculator._flatten_text(item) for item in value)
+        return str(value)
+
+    @staticmethod
+    def _tokenize(text: str) -> List[str]:
+        return re.findall(r'\b\w+\b', text.lower())
+
+    def fit(self, datasets: List[Dict]) -> None:
+        self._document_count = len(datasets)
+        self._document_frequencies = {}
+        total_length = 0
+
+        for dataset in datasets:
+            doc_tokens_list = self._tokenize(self._get_doc_text(dataset))
+            total_length += len(doc_tokens_list)
+            doc_tokens = set(doc_tokens_list)
+            for token in doc_tokens:
+                self._document_frequencies[token] = self._document_frequencies.get(token, 0) + 1
+
+        self._average_document_length = total_length / self._document_count if self._document_count else 0.0
+
+    def _idf(self, term: str) -> float:
+        if self._document_count <= 0:
+            return 1.0
+        document_frequency = self._document_frequencies.get(term, 0)
+        numerator = self._document_count - document_frequency + 0.5
+        denominator = document_frequency + 0.5
+        if numerator <= 0 or denominator <= 0:
+            return 0.0
+        return math.log((numerator / denominator) + 1.0)
+
+    def _get_doc_text(self, dataset: Dict) -> str:
+        title_text = self._flatten_text(dataset.get('title', {}))
+        desc_text = self._flatten_text(dataset.get('description', {}))
+        tags_text = self._flatten_text(dataset.get('tags', []))
+        groups_text = self._flatten_text(dataset.get('groups', []))
+        org_text = self._flatten_text(dataset.get('organization', {}))
+
+        parts = [
+            title_text,
+            title_text,
+            title_text,
+            tags_text,
+            tags_text,
+            groups_text,
+            groups_text,
+        ]
+        
+        # Only include description if we have structured fields
+        if title_text or tags_text or groups_text:
+            # Include description with reduced weight (only once instead of full weight)
+            if desc_text:
+                parts.append(desc_text)
+        else:
+            # If no structured fields, rely on description and org
+            parts.extend([desc_text, org_text])
+
+        return ' '.join(part for part in parts if part)
+
+    def _apply_theme_boost(self, score: float, dataset: Dict, query_themes: Optional[List[str]] = None, query_terms: Optional[List[str]] = None) -> float:
+        title_text = self._flatten_text(dataset.get('title', '')).lower()
+        tags_text = self._flatten_text(dataset.get('tags', [])).lower()
+        groups_text = self._flatten_text(dataset.get('groups', [])).lower()
+        searchable_text = ' '.join([title_text, tags_text, groups_text])
+
+        if query_terms:
+            high_priority = {'bicycle', 'bike', 'biking', 'cycling', 'cycle', 'velo', 'vélo', 'fahrrad', 'bicicletta'}
+            medium_priority = {'mobility', 'transport', 'verkehr', 'traffic', 'transit', 'transportation'}
+            low_priority = {'data', 'dataset', 'datasets', 'related', 'show', 'statistics', 'statistic'}
+
+            exact_matches = 0.0
+            for term in query_terms:
+                term_l = term.lower()
+                if term_l in searchable_text:
+                    if term_l in high_priority:
+                        exact_matches += 1.6
+                    elif term_l in medium_priority:
+                        exact_matches += 1.15
+                    elif term_l in low_priority:
+                        exact_matches += 0.75
+                    else:
+                        exact_matches += 1.0
+
+            if exact_matches:
+                score = min(score * (1.0 + min(0.12 * exact_matches, 0.45)), 1.0)
+
+        if not query_themes:
+            return score
+
+        theme_terms = {
+            'environment': ['environment', 'umwelt', 'environnement', 'ambiente', 'pollution', 'climate'],
+            'mobility': ['mobility', 'transport', 'verkehr', 'traffic', 'road', 'rail', 'bicycle', 'bike', 'cycling', 'velo', 'vélo', 'fahrrad', 'transit', 'transportation'],
+            'health': ['health', 'gesundheit', 'santé', 'salute', 'hospital'],
+            'education': ['education', 'bildung', 'éducation', 'istruzione', 'school'],
+            'economy': ['economy', 'wirtschaft', 'économie', 'economia', 'finance', 'employment'],
+            'population': ['population', 'bevölkerung', 'demographic', 'demographie']
+        }
+
+        boost = 0.0
+        for theme in query_themes:
+            if any(term in searchable_text for term in theme_terms.get(theme, [theme])):
+                boost += 0.12
+
+        return min(score * (1.0 + min(boost, 0.30)), 1.0)
+
     def calculate(
         self,
         query_keywords: List[str],
-        dataset: Dict
+        dataset: Dict,
+        query_themes: Optional[List[str]] = None
     ) -> float:
         """
         Calculate similarity between query and dataset.
@@ -1097,73 +1294,74 @@ class SimilarityCalculator:
         """
         if not query_keywords:
             return 0.5  # Neutral if no keywords
-        
-        # Build document text
-        doc_parts = []
-        
-        # Title
-        title = dataset.get('title', {})
-        if isinstance(title, dict):
-            doc_parts.extend(str(v).lower() for v in title.values() if v)
-        elif title:
-            doc_parts.append(str(title).lower())
-        
-        # Description
-        desc = dataset.get('description', {})
-        if isinstance(desc, dict):
-            doc_parts.extend(str(v).lower() for v in desc.values() if v)
-        elif desc:
-            doc_parts.append(str(desc).lower())
-        
-        # Tags
-        tags = dataset.get('tags', [])
-        if isinstance(tags, list):
-            for tag in tags:
-                if isinstance(tag, dict):
-                    doc_parts.append(str(tag.get('name', '')).lower())
-                else:
-                    doc_parts.append(str(tag).lower())
-        
-        # Groups/Themes
-        groups = dataset.get('groups', [])
-        for group in groups:
-            if isinstance(group, dict):
-                doc_parts.append(str(group.get('name', '')).lower())
-        
-        doc_text = ' '.join(doc_parts)
-        
-        # Calculate match score
-        matches = 0
-        weighted_matches = 0
-        
-        for keyword in query_keywords:
-            kw_lower = keyword.lower()
-            
-            # Exact match
-            if kw_lower in doc_text:
-                matches += 1
-                
-                # Weight by where it appears
-                title_text = ' '.join(str(v).lower() for v in 
-                    (title.values() if isinstance(title, dict) else [title]) if v)
-                
-                if kw_lower in title_text:
-                    weighted_matches += 2.0  # Title match is worth more
-                else:
-                    weighted_matches += 1.0
-        
-        if not query_keywords:
-            return 0.5
-        
-        # Normalize
-        base_score = matches / len(query_keywords)
-        weighted_score = weighted_matches / (len(query_keywords) * 2)
-        
-        # Combine
-        final_score = 0.6 * weighted_score + 0.4 * base_score
-        
-        return min(1.0, final_score)
 
+        doc_text = self._get_doc_text(dataset).lower()
+        doc_tokens = self._tokenize(doc_text)
+
+        if not doc_tokens:
+            return 0.0
+
+        query_tokens = self._tokenize(' '.join(query_keywords))
+        if not query_tokens:
+            return 0.0
+
+        query_term_freq = defaultdict(int)
+        for token in query_tokens:
+            query_term_freq[token] += 1
+
+        doc_term_freq = defaultdict(int)
+        for token in doc_tokens:
+            doc_term_freq[token] += 1
+
+        shared_terms = set(query_term_freq).intersection(doc_term_freq)
+        if not shared_terms:
+            return self._apply_theme_boost(0.0, dataset, query_themes=query_themes, query_terms=query_tokens)
+        document_length = len(doc_tokens)
+        average_document_length = self._average_document_length or float(document_length or 1)
+
+        score = 0.0
+        for term in query_term_freq:
+            tf = doc_term_freq.get(term, 0)
+            if tf <= 0:
+                continue
+
+            idf = self._idf(term)
+            if idf <= 0:
+                continue
+
+            numerator = tf * (self._k1 + 1.0)
+            denominator = tf + self._k1 * (1.0 - self._b + self._b * (document_length / average_document_length))
+            if denominator <= 0:
+                continue
+
+            query_boost = (1.0 + math.log(query_term_freq[term])) if query_term_freq[term] > 1 else 1.0
+            term_l = term.lower()
+            high_priority = {'bicycle', 'bike', 'biking', 'cycling', 'cycle', 'velo', 'vélo', 'fahrrad', 'bicicletta'}
+            medium_priority = {'mobility', 'transport', 'verkehr', 'traffic', 'transit', 'transportation'}
+            low_priority = {'data', 'dataset', 'datasets', 'related', 'show', 'statistics', 'statistic'}
+            
+            if term_l in high_priority:
+                query_boost *= 2.0  # Increased from 1.6
+            elif term_l in medium_priority:
+                query_boost *= 1.3  # Increased from 1.15
+            elif term_l in low_priority:
+                query_boost *= 0.5  # Increased penalty from 0.75
+            
+            score += idf * (numerator / denominator) * query_boost
+
+        coverage = len(shared_terms) / float(len(set(query_tokens)))
+        
+        # Penalize if no high-priority terms are matched
+        high_priority = {'bicycle', 'bike', 'biking', 'cycling', 'cycle', 'velo', 'vélo', 'fahrrad', 'bicicletta'}
+        high_priority_in_query = any(term.lower() in high_priority for term in query_tokens)
+        high_priority_matched = any(term.lower() in high_priority for term in shared_terms)
+        
+        if high_priority_in_query and not high_priority_matched:
+            coverage *= 0.65  # Penalize 35% if high-priority terms are in query but not matched
+        
+        similarity = (score / (score + 1.0) if score > 0 else 0.0) * coverage
+
+        return self._apply_theme_boost(similarity, dataset, query_themes=query_themes, query_terms=query_tokens)
 
 # ============================================================================
 # EXPLANATION GENERATOR
@@ -1547,6 +1745,8 @@ class FuzzyHCIRRanker:
         query_info = self.query_processor.process(query)
         keywords = query_info['keywords']
         vague_predicates = query_info['vague_predicates']
+
+        self.similarity_calculator.fit(datasets)
         
         results = []
         
@@ -1572,7 +1772,11 @@ class FuzzyHCIRRanker:
             resource_count = len(resources) if resources else 0
             
             # 4. Similarity
-            similarity = self.similarity_calculator.calculate(keywords, ds)
+            similarity = self.similarity_calculator.calculate(
+                keywords,
+                ds,
+                query_themes=query_info.get('themes', [])
+            )
             
             # Fuzzy inference
             relevance, fuzzified = self.fuzzy_engine.infer(
@@ -1775,7 +1979,16 @@ def get_format_badge_class(fmt: str) -> str:
 
 
 def render_result_card(result: DatasetResult, settings: Dict):
-    """Render a single result card."""
+    #started change
+    if result is None:
+        return
+
+    if not hasattr(result, "title") or result.title is None:
+        return
+    #end change
+
+    #"""Render a single result card."""
+
     # Determine relevance class
     score_pct = int(result.relevance_score * 100)
     if score_pct >= 70:
@@ -1792,19 +2005,41 @@ def render_result_card(result: DatasetResult, settings: Dict):
         badge_class = "score-low"
     
     # Get title
-    title = result.title.get('en') or result.title.get('de') or \
-            result.title.get('fr') or next(iter(result.title.values()), 'Untitled')
+    #commented
+    # title = safe_html_text(result.title, 'Untitled')
+
+    #start change
+    # ✅ FIX 4: SAFE TITLE HANDLING
+    raw_title = result.title
+
+    if isinstance(raw_title, dict):
+        raw_title = (
+            raw_title.get('en') or 
+            raw_title.get('de') or 
+            raw_title.get('fr') or 
+            raw_title.get('it') or 
+            next(iter(raw_title.values()), "Untitled")
+        )
+    elif not raw_title or str(raw_title).strip() == "":
+        raw_title = "Untitled"
+
+    title = safe_html_text(raw_title, "Untitled")
+    #end change
+
+    organization = safe_html_text(result.organization, 'Unknown')
+    description = safe_html_text(result.description)
     
     # Format badges HTML
     format_badges = ' '.join([
-        f'<span class="format-badge {get_format_badge_class(fmt)}">{fmt}</span>'
+        f'<span class="format-badge {get_format_badge_class(fmt)}">{safe_html_text(fmt)}</span>'
         for fmt in result.format_list
     ])
     
     # Tags HTML
     tags_html = ' '.join([
-        f'<span class="tag-pill">{tag}</span>'
+        f'<span class="tag-pill">{safe_html_text(tag)}</span>'
         for tag in result.tags[:5]
+        if tag is not None and str(tag).strip()
     ])
     
     # Card HTML
@@ -1823,7 +2058,7 @@ def render_result_card(result: DatasetResult, settings: Dict):
                     </a>
                 </h3>
                 <p style="color: #555; font-size: 0.9rem; margin: 0 0 10px 0; line-height: 1.5;">
-                    {result.description[:250]}{'...' if len(result.description) > 250 else ''}
+                    {description[:250]}{'...' if len(description) > 250 else ''}
                 </p>
                 <div style="display: flex; flex-wrap: wrap; gap: 15px; font-size: 0.85rem; color: #666;">
                     <span class="org-badge">
@@ -1831,7 +2066,7 @@ def render_result_card(result: DatasetResult, settings: Dict):
                             <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
                             <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
                         </svg>
-                        {result.organization}
+                        {organization}
                     </span>
                     <span>📅 Modified: {result.days_since_modified} days ago</span>
                     <span>📁 {len(result.resources)} resources</span>
@@ -1847,7 +2082,8 @@ def render_result_card(result: DatasetResult, settings: Dict):
     st.markdown(card_html, unsafe_allow_html=True)
     
     # Show explanation if enabled
-    if settings.get('show_explanations') and result.factors:
+    explanation_text = (result.explanation or '').strip()
+    if settings.get('show_explanations') and result.factors and explanation_text and explanation_text.lower() != 'none':
         with st.expander("📊 Why this ranking?", expanded=False):
             col1, col2 = st.columns([1, 1])
             
@@ -1872,7 +2108,7 @@ def render_result_card(result: DatasetResult, settings: Dict):
                 st.progress(result.factors.resource_score)
             
             st.markdown("---")
-            st.markdown(result.explanation)
+            st.markdown(explanation_text)
 
 
 def render_comparison_view(
@@ -2086,6 +2322,8 @@ def main():
     # Perform search
     if query and search_clicked:
         with st.spinner("Searching opendata.swiss..."):
+            display_limit = int(settings.get('num_results', 20) or 20)
+
             # Get data
             if "Demo" in settings['data_source']:
                 raw_results = get_demo_data()
@@ -2093,9 +2331,15 @@ def main():
             else:
                 # Build filter query
                 fq = f"groups:{settings['theme']}" if settings['theme'] else None
+
+                # NOTE: Keep scoring stable regardless of UI display limit.
+                # We fetch a fixed-size corpus and then slice for display.
+                # This prevents corpus-dependent BM25/IDF stats from changing
+                # when the user adjusts "Results per page".
+                scoring_corpus_size = 50
                 raw_results, total_count = api_client.search(
                     query, 
-                    rows=settings.get('num_results', 20),
+                    rows=max(scoring_corpus_size, display_limit),
                     fq=fq
                 )
 
@@ -2123,23 +2367,40 @@ def main():
                     
                     st.markdown("---")
                     st.markdown("### 🏆 Fuzzy HCIR Results")
-                    for result in results_fuzzy[:10]:
+                    for result in results_fuzzy[:display_limit]:
                         render_result_card(result, settings)
                 
+                # elif settings['ranking_method'] == "Fuzzy HCIR (Research)":
+                #     results = deduplicate_ranked_results(fuzzy_ranker.rank(raw_results, query))
+                    
+                #     st.markdown(f"### 📊 Found {total_count} datasets • Showing top {len(results)}")
+                    
+                #     for result in results:
+                #         render_result_card(result, settings)
+
+                #start change
                 elif settings['ranking_method'] == "Fuzzy HCIR (Research)":
                     results = deduplicate_ranked_results(fuzzy_ranker.rank(raw_results, query))
-                    
-                    st.markdown(f"### 📊 Found {total_count} datasets • Showing top {len(results)}")
-                    
-                    for result in results:
-                        render_result_card(result, settings)
+
+                    # ✅ FILTER INVALID RESULTS (CRITICAL FIX)
+                    results = [r for r in results if r and hasattr(r, "title") and r.title]
+
+                    shown = min(display_limit, len(results))
+
+                    st.markdown(f"### 📊 Found {total_count} datasets • Showing top {shown}")
+
+                    for result in results[:shown]:
+                        _ = render_result_card(result, settings)
+                
+                # change done till here only
+
                 
                 elif settings['ranking_method'] == "Portal Default":
                     raw_results = deduplicate_display_datasets(portal_ranker.rank(raw_results, query))
                     
                     st.markdown(f"### 📊 Found {total_count} datasets (Portal Default Ranking)")
                     
-                    for i, ds in enumerate(raw_results):
+                    for i, ds in enumerate(raw_results[:display_limit]):
                         # Quick card for portal results
                         title = ds.get('title', {})
                         if isinstance(title, dict):
@@ -2161,7 +2422,7 @@ def main():
                     raw_results = deduplicate_display_datasets(bm25_ranker.rank(raw_results, query))
                     st.markdown(f"### 📊 Found {total_count} datasets (BM25 Ranking)")
                     
-                    for i, ds in enumerate(raw_results):
+                    for i, ds in enumerate(raw_results[:display_limit]):
                         title = ds.get('title', {})
                         if isinstance(title, dict):
                             title_str = title.get('en') or title.get('de') or 'Untitled'

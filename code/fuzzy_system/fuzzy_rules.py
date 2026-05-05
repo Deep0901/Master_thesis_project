@@ -233,6 +233,24 @@ class RuleBase:
             consequent=("relevance_score", "very_low"),
             description="Datasets with empty metadata rank very low"
         )
+
+        # Rule 15b: Generic weak thematic match catch-all
+        self.add_rule(
+            antecedents=[
+                ("thematic_similarity", "somewhat_relevant")
+            ],
+            consequent=("relevance_score", "low"),
+            description="Weak thematic matches should still be handled by fuzzy rules"
+        )
+
+        # Rule 15c: Strong exact matches should rank well even when other inputs are modest
+        self.add_rule(
+            antecedents=[
+                ("thematic_similarity", "exact_match")
+            ],
+            consequent=("relevance_score", "good"),
+            description="Exact thematic matches should always produce a strong relevance signal"
+        )
         
         # =================================================================
         # ADDITIONAL NUANCED RULES

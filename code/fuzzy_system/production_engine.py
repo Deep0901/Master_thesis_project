@@ -93,9 +93,23 @@ class MembershipFunction:
     def _triangular(self, x: float) -> float:
         """Triangular MF: [a, b, c]"""
         a, b, c = self.parameters[:3]
-        if x <= a or x >= c:
+        if a == b and b == c:
+            return 1.0
+        if a == b:
+            if x <= b:
+                return 1.0
+            if x < c:
+                return (c - x) / (c - b) if c != b else 1.0
             return 0.0
-        elif a < x <= b:
+        if b == c:
+            if x >= b:
+                return 1.0
+            if x > a:
+                return (x - a) / (b - a) if b != a else 1.0
+            return 0.0
+        if x < a or x > c:
+            return 0.0
+        elif a <= x <= b:
             return (x - a) / (b - a) if b != a else 1.0
         else:
             return (c - x) / (c - b) if c != b else 1.0
@@ -103,14 +117,16 @@ class MembershipFunction:
     def _trapezoidal(self, x: float) -> float:
         """Trapezoidal MF: [a, b, c, d]"""
         a, b, c, d = self.parameters[:4]
-        if x <= a or x >= d:
+        if a == b and c == d:
+            return 1.0 if a <= x <= d else 0.0
+        if x < a or x > d:
             return 0.0
-        elif a < x <= b:
-            return (x - a) / (b - a) if b != a else 1.0
-        elif b < x <= c:
+        elif a <= x <= b:
+            return 1.0 if b == a else (x - a) / (b - a)
+        elif b < x < c:
             return 1.0
         else:
-            return (d - x) / (d - c) if d != c else 1.0
+            return 1.0 if d == c else (d - x) / (d - c)
     
     def _gaussian(self, x: float) -> float:
         """Gaussian MF: [mean, sigma]"""

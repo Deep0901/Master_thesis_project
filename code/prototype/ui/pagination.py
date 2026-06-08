@@ -40,7 +40,7 @@ def render_pagination_controls(
             "◀ Previous",
             disabled=(current_page <= 0),
             key=f"pag_prev_{key_suffix}",
-            use_container_width=True,
+            width="stretch",
         ):
             should_go_prev = True
             new_page_index = max(0, current_page - 1)
@@ -71,7 +71,7 @@ def render_pagination_controls(
             "Next ▶",
             disabled=(current_page >= total_pages - 1),
             key=f"pag_next_{key_suffix}",
-            use_container_width=True,
+            width="stretch",
         ):
             should_go_next = True
             new_page_index = min(total_pages - 1, current_page + 1)

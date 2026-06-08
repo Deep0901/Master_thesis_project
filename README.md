@@ -136,6 +136,26 @@ pip install -r requirements.txt
 streamlit run code/prototype/app.py
 ```
 
+Prototype features (UI):
+- **Advanced Options → Factor weights** (Recency/Completeness/Resources/Similarity)
+- **Faceted filtering** (Organizations, Data formats, Licenses)
+- **True pagination** (Previous/Next page)
+- **Visual explanations** (radar/spider chart comparing top 3 results)
+- **Implicit feedback logging** per result (👍 / 👎) to `evaluation/results/implicit_feedback.jsonl`
+
+Dynamic calibration (optional):
+```bash
+c:/thesis/.venv/Scripts/python.exe analytics/dynamic_calibration.py --sample 2000
+```
+This writes `analytics/fuzzy_calibration_live.json`, which the prototype will auto-load if present.
+
+Periodic calibration (optional, runs every 24h):
+```bash
+c:/thesis/.venv/Scripts/python.exe analytics/dynamic_calibration.py --sample 2000 --interval-minutes 1440
+```
+Notes:
+- Default sampling is `random_pages` (randomized pages across the portal). Use `--sampling recent` to calibrate only on most-recent datasets.
+
 Then open http://localhost:8501 in your browser.
 
 ### Running Tests

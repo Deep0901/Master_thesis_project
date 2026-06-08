@@ -277,7 +277,7 @@ def render_overview_page():
         fig = px.bar(df_themes, x='Datasets', y='Theme', orientation='h',
                     color='Datasets', color_continuous_scale='viridis')
         fig.update_layout(height=400, showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
     
     # Top organizations
     if stats['organizations']:
@@ -293,7 +293,7 @@ def render_overview_page():
         fig = px.bar(df_orgs, x='Organization', y='Datasets',
                     color='Datasets', color_continuous_scale='plasma')
         fig.update_layout(xaxis_tickangle=-45)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
 
 def render_metadata_analysis_page():
@@ -323,7 +323,7 @@ def render_metadata_analysis_page():
             fig = px.histogram(recency_df, x='days_since_modified', nbins=30,
                              title="Days Since Last Modification")
             fig.update_layout(xaxis_title="Days", yaxis_title="Count")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
         
         with col2:
             # Statistics
@@ -344,7 +344,7 @@ def render_metadata_analysis_page():
         st.subheader("📆 Updates by Year")
         yearly = recency_df.groupby('year').size().reset_index(name='count')
         fig = px.bar(yearly, x='year', y='count', title="Dataset Updates by Year")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
     
     # Analyze completeness
     st.subheader("📊 Completeness Analysis")
@@ -359,19 +359,19 @@ def render_metadata_analysis_page():
             fig.add_vline(x=completeness_df['completeness'].mean(), 
                          line_dash="dash", line_color="red",
                          annotation_text="Mean")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
         
         with col2:
             fig = px.histogram(completeness_df, x='resource_count', nbins=20,
                              title="Resource Count Distribution")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
         
         # Correlation
         st.subheader("🔗 Resource Count vs Completeness")
         fig = px.scatter(completeness_df, x='resource_count', y='completeness',
                         color='format_diversity', size='format_diversity',
                         title="Resources vs Completeness (colored by format diversity)")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
 
 def render_fuzzy_analysis_page():
@@ -439,7 +439,7 @@ def render_fuzzy_analysis_page():
         height=400,
         legend=dict(yanchor="top", y=0.99, xanchor="right", x=0.99)
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
     
     # Interactive inference
     st.subheader("🔮 Interactive Fuzzy Inference")
@@ -542,7 +542,7 @@ def render_evaluation_page():
         fig = px.bar(df, x='System', y=['MAP', 'nDCG@10', 'P@10'],
                     title="Ranking System Performance Comparison",
                     barmode='group')
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
         
         st.dataframe(df.set_index('System'))
         return
@@ -574,7 +574,7 @@ def render_evaluation_page():
                     title="Ranking System Performance",
                     barmode='group',
                     color_discrete_sequence=px.colors.qualitative.Set2)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
         
         # Detailed table
         st.dataframe(df.set_index('System').style.highlight_max(axis=0))

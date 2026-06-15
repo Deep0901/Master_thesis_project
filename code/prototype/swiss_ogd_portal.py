@@ -35,6 +35,7 @@ try:
         deduplicate_ranked_results,
     )
     from code.prototype.ranking.fuzzy import FuzzyHCIRRanker, MultilingualQueryProcessor
+    from code.prototype.ranking.models import normalize_text, safe_html_text
     from code.prototype.ui.components import (
         render_comparison_view,
         render_header,
@@ -53,6 +54,7 @@ except Exception:  # Streamlit runs with script dir on sys.path
         deduplicate_ranked_results,
     )
     from ranking.fuzzy import FuzzyHCIRRanker, MultilingualQueryProcessor
+    from ranking.models import normalize_text, safe_html_text
     from ui.components import render_comparison_view, render_header, render_result_card, render_sidebar
     from ui.pagination import render_pagination_controls, render_pagination_summary
 
@@ -65,7 +67,7 @@ except Exception:  # Streamlit runs with script dir on sys.path
 def configure_page() -> None:
     st.set_page_config(
         page_title="opendata.swiss | Fuzzy Search Research",
-        page_icon="🇨🇭",
+        page_icon=None,
         layout="wide",
         initial_sidebar_state="expanded",
         menu_items={
@@ -163,10 +165,10 @@ def main() -> None:
     col1, col2 = st.columns([4, 1])
     with col1:
         query = st.text_input(
-            "🔍 Search Swiss Open Government Data",
-            placeholder="e.g., 'recent air quality data', 'complete transport statistics'",
-            key="search_query",
-        )
+                "Search Swiss Open Government Data",
+                placeholder="e.g., 'recent air quality data', 'complete transport statistics'",
+                key="search_query",
+            )
 
     with col2:
         st.markdown("<br>", unsafe_allow_html=True)
@@ -183,7 +185,7 @@ def main() -> None:
 
     for col, example in zip(example_cols, example_queries):
         with col:
-            if st.button(f"📝 {example}", key=f"example_{example}"):
+            if st.button(f"{example}", key=f"example_{example}"):
                 query = example
                 search_clicked = True
 
@@ -225,8 +227,7 @@ def main() -> None:
         if query_info.get("has_vague_terms"):
             vague_found = [k for k, v in (query_info.get("vague_predicates") or {}).items() if v]
             st.info(
-                "🧠 **Fuzzy query detected!** Found vague terms: "
-                + ", ".join(vague_found)
+                "Fuzzy query detected! Found vague terms: " + ", ".join(vague_found)
                 + ". The fuzzy system will interpret these contextually."
             )
 
@@ -246,7 +247,7 @@ def main() -> None:
             render_comparison_view(results_fuzzy, results_portal, results_bm25, query)
 
             st.markdown("---")
-            st.markdown("### 🏆 Fuzzy HCIR Results")
+            st.markdown("### Fuzzy HCIR Results")
             for result in results_fuzzy[:display_limit]:
                 render_result_card(result, settings, query, "Compare All")
             return
@@ -263,7 +264,7 @@ def main() -> None:
             results = [r for r in results if r and hasattr(r, "title") and r.title]
 
             if settings.get("show_explanations") and len(results) >= 3:
-                with st.expander("📡 Visual explanation: compare top 3", expanded=False):
+                with st.expander("Visual explanation: compare top 3", expanded=False):
                     fig = build_top3_radar_figure(results[:3])
                     st.plotly_chart(fig, use_container_width=True)
 
@@ -318,30 +319,26 @@ def main() -> None:
 
         if ranking_method == "Portal Default":
             portal_results = deduplicate_display_datasets(portal_ranker.rank(raw_results, query))
-            st.markdown(f"### 📊 Found {total_count} datasets (Portal Default Ranking)")
+            st.markdown(f"### Found {total_count} datasets (Portal Default Ranking)")
 
             for i, ds in enumerate(portal_results[:display_limit]):
                 title = ds.get("title", {})
-                if isinstance(title, dict):
-                    title_str = title.get("en") or title.get("de") or "Untitled"
-                else:
-                    title_str = str(title)
+                title_str = normalize_text(title, "Untitled")
 
-                st.markdown(f"**#{i + 1}** [{title_str}](https://opendata.swiss/en/dataset/{ds.get('name', '')})")
+                safe_title = safe_html_text(title_str, "Untitled")
+                st.markdown(f"**#{i + 1}** [{safe_title}](https://opendata.swiss/en/dataset/{ds.get('name', '')})")
             return
 
         if ranking_method == "BM25 Keyword":
             bm25_results = deduplicate_display_datasets(bm25_ranker.rank(raw_results, query))
-            st.markdown(f"### 📊 Found {total_count} datasets (BM25 Keyword Ranking)")
+            st.markdown(f"### Found {total_count} datasets (BM25 Keyword Ranking)")
 
             for i, ds in enumerate(bm25_results[:display_limit]):
                 title = ds.get("title", {})
-                if isinstance(title, dict):
-                    title_str = title.get("en") or title.get("de") or "Untitled"
-                else:
-                    title_str = str(title)
+                title_str = normalize_text(title, "Untitled")
 
-                st.markdown(f"**#{i + 1}** [{title_str}](https://opendata.swiss/en/dataset/{ds.get('name', '')})")
+                safe_title = safe_html_text(title_str, "Untitled")
+                st.markdown(f"**#{i + 1}** [{safe_title}](https://opendata.swiss/en/dataset/{ds.get('name', '')})")
             return
 
         st.error("Unknown ranking method.")

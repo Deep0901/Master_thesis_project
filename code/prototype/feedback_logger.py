@@ -1,6 +1,6 @@
 """Implicit feedback logging for the Streamlit prototype.
 
-Stores per-result 👍/👎 judgments for later evaluation (e.g., Precision@K, NDCG).
+Stores per-result positive/negative judgments for later evaluation (e.g., Precision@K, NDCG).
 """
 
 from __future__ import annotations

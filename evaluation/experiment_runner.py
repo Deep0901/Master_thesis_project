@@ -24,7 +24,7 @@ import json
 import time
 import numpy as np
 from pathlib import Path
-from typing import Dict, List, Tuple, Any
+from typing import Dict, List, Tuple, Any, Optional
 from datetime import datetime
 from collections import defaultdict
 import requests
@@ -39,6 +39,7 @@ from evaluation.evaluation_framework import (
     EvaluationEngine, EvaluationQuery, RankingResult, 
     RelevanceJudgment, IRMetrics
 )
+from code.prototype.ranking.fuzzy import FuzzyHCIRRanker
 
 
 # =============================================================================
@@ -369,10 +370,8 @@ class MetadataQualityRanker(BaseRetriever):
 
 class FuzzyRetriever(BaseRetriever):
     """
-    Our approach: Fuzzy inference-based ranking.
-    
-    Uses calibrated fuzzy membership functions and rule base
-    to compute relevance scores.
+    Legacy fuzzy ranking used by the original benchmark runner.
+    Preserved for backward compatibility and regression comparison.
     """
     
     name = "fuzzy_hcir"
@@ -571,6 +570,56 @@ class FuzzyRetriever(BaseRetriever):
         return scored_results
 
 
+class FuzzyHCIRRankerAdapter(BaseRetriever):
+    """
+    Adapter for the application fuzzy ranker.
+
+    This class fetches the same portal candidate metadata as the legacy
+    FuzzyRetriever, then delegates ranking to the application-level
+    FuzzyHCIRRanker. It converts DatasetResult output back into the
+    benchmark's expected (dataset_uuid, score) tuple form.
+    """
+
+    name = "fuzzy_hcir"
+
+    def __init__(self):
+        self.rank_engine = FuzzyHCIRRanker()
+
+    def _fetch_candidate_datasets(self, query: str, num_results: int = 100) -> List[Dict[str, Any]]:
+        params = {'q': query, 'rows': num_results}
+        try:
+            resp = requests.get(f"{self.BASE_URL}/package_search", params=params, timeout=30)
+            resp.raise_for_status()
+            return resp.json()['result']['results']
+        except Exception as e:
+            print(f"FuzzyHCIRRankerAdapter search error: {e}")
+            return []
+
+    def search(self, query: str, num_results: int = 100) -> List[Tuple[str, float]]:
+        datasets = self._fetch_candidate_datasets(query, num_results=num_results)
+        if not datasets:
+            return []
+
+        ranked_results = self.rank_engine.rank(datasets, query)
+
+        # Map the original candidate metadata to CKAN UUID values.
+        uuid_by_key = {}
+        for ds in datasets:
+            ds_id = str(ds.get('id', ''))
+            ds_name = str(ds.get('name', ''))
+            if ds_id:
+                uuid_by_key[ds_id] = ds_id
+            if ds_name:
+                uuid_by_key[ds_name] = ds_id
+
+        converted_results: List[Tuple[str, float]] = []
+        for result in ranked_results:
+            dataset_uuid = uuid_by_key.get(result.id, result.id)
+            converted_results.append((dataset_uuid, result.relevance_score))
+
+        return converted_results
+
+
 # =============================================================================
 # EXPERIMENT RUNNER
 # =============================================================================
@@ -697,7 +746,7 @@ def main():
     runner.add_system(PortalBaseline())
     runner.add_system(KeywordBaseline())
     runner.add_system(MetadataQualityRanker())
-    runner.add_system(FuzzyRetriever())
+    runner.add_system(FuzzyHCIRRankerAdapter())
     
     # Run experiment
     results = runner.generate_report()

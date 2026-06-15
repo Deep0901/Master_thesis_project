@@ -5,7 +5,7 @@ import re
 from collections import defaultdict
 from typing import Dict, List
 
-from .models import DatasetResult
+from .models import DatasetResult, normalize_text
 
 
 def dataset_identity_key(dataset: Dict) -> str:
@@ -19,22 +19,10 @@ def dataset_identity_key(dataset: Dict) -> str:
         return f"id:{dataset_id}"
 
     title = dataset.get("title", {})
-    if isinstance(title, dict):
-        title_text = str(
-            title.get("en")
-            or title.get("de")
-            or title.get("fr")
-            or title.get("it")
-            or next(iter(title.values()), "")
-        ).strip().lower()
-    else:
-        title_text = str(title or "").strip().lower()
+    title_text = normalize_text(title, "").strip().lower()
 
     org = dataset.get("organization", {}) or {}
-    if isinstance(org, dict):
-        org_name = str(org.get("name") or org.get("title") or "").strip().lower()
-    else:
-        org_name = str(org).strip().lower()
+    org_name = normalize_text(org, "").strip().lower()
 
     return f"fallback:{title_text}|{org_name}"
 
@@ -57,22 +45,10 @@ def deduplicate_datasets(datasets: List[Dict]) -> List[Dict]:
 def dataset_display_key(dataset: Dict) -> str:
     """Build a display-level key to collapse repeated title rows in UI."""
     title = dataset.get("title", {})
-    if isinstance(title, dict):
-        title_text = str(
-            title.get("en")
-            or title.get("de")
-            or title.get("fr")
-            or title.get("it")
-            or next(iter(title.values()), "")
-        ).strip().lower()
-    else:
-        title_text = str(title or "").strip().lower()
+    title_text = normalize_text(title, "").strip().lower()
 
     org = dataset.get("organization", {}) or {}
-    if isinstance(org, dict):
-        org_text = str(org.get("title") or org.get("name") or "").strip().lower()
-    else:
-        org_text = str(org).strip().lower()
+    org_text = normalize_text(org, "").strip().lower()
 
     return f"{title_text}|{org_text}"
 
@@ -94,14 +70,9 @@ def deduplicate_display_datasets(datasets: List[Dict]) -> List[Dict]:
 
 def ranked_result_display_key(result: DatasetResult) -> str:
     """Build a display-level key for ranked results."""
-    title_text = str(
-        result.title.get("en")
-        or result.title.get("de")
-        or result.title.get("fr")
-        or result.title.get("it")
-        or next(iter(result.title.values()), "")
-    ).strip().lower()
-    org_text = str(result.organization or "").strip().lower()
+    # result.title may be a dict of localized strings or a plain string
+    title_text = normalize_text(result.title, "").strip().lower()
+    org_text = normalize_text(result.organization, "").strip().lower()
     return f"{title_text}|{org_text}"
 
 

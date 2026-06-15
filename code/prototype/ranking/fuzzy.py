@@ -8,6 +8,9 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
+import ast
+import html as _html
+import re
 
 from .baselines import deduplicate_datasets
 from .models import DatasetResult, FuzzyMembership, RankingFactors
@@ -895,35 +898,35 @@ class ExplanationGenerator:
     """Generates human-readable explanations for ranking decisions."""
 
     RECENCY_EXPLANATIONS = {
-        "very_recent": "📅 Very recent data (updated within the last month)",
-        "recent": "📅 Recently updated data (within the past year)",
-        "moderate": "📅 Moderately recent data (1-3 years old)",
-        "old": "📅 Older dataset (more than 3 years since update)",
-        "very_old": "📅 Historical data (not recently updated)",
+        "very_recent": "Very recent data (updated within the last month)",
+        "recent": "Recently updated data (within the past year)",
+        "moderate": "Moderately recent data (1-3 years old)",
+        "old": "Older dataset (more than 3 years since update)",
+        "very_old": "Historical data (not recently updated)",
     }
 
     COMPLETENESS_EXPLANATIONS = {
-        "complete": "📋 Excellent metadata documentation",
-        "high": "📋 Well-documented with comprehensive metadata",
-        "medium": "📋 Adequately documented metadata",
-        "partial": "📋 Partial metadata documentation",
-        "low": "📋 Minimal metadata available",
+        "complete": "Excellent metadata documentation",
+        "high": "Well-documented with comprehensive metadata",
+        "medium": "Adequately documented metadata",
+        "partial": "Partial metadata documentation",
+        "low": "Minimal metadata available",
     }
 
     RESOURCE_EXPLANATIONS = {
-        "comprehensive": "📁 Extensive resource collection with multiple formats",
-        "rich": "📁 Multiple resources and formats available",
-        "moderate": "📁 Several resources provided",
-        "limited": "📁 Limited resources available",
-        "minimal": "📁 Single resource only",
+        "comprehensive": "Extensive resource collection with multiple formats",
+        "rich": "Multiple resources and formats available",
+        "moderate": "Several resources provided",
+        "limited": "Limited resources available",
+        "minimal": "Single resource only",
     }
 
     SIMILARITY_EXPLANATIONS = {
-        "exact_match": "🎯 Excellent match to your search terms",
-        "highly_relevant": "🎯 Highly relevant to your query",
-        "relevant": "🎯 Relevant to your search",
-        "somewhat_relevant": "🎯 Partially matches your query",
-        "not_relevant": "🎯 Limited relevance to search terms",
+        "exact_match": "Excellent match to your search terms",
+        "highly_relevant": "Highly relevant to your query",
+        "relevant": "Relevant to your search",
+        "somewhat_relevant": "Partially matches your query",
+        "not_relevant": "Limited relevance to search terms",
     }
 
     def generate(
@@ -955,13 +958,13 @@ class ExplanationGenerator:
 
         sim_exp = self.SIMILARITY_EXPLANATIONS.get(
             factors.similarity_term,
-            f"🎯 Similarity: {int(factors.similarity_score * 100)}%",
+            f"Similarity: {int(factors.similarity_score * 100)}%",
         )
         factor_lines.append(sim_exp)
 
         rec_exp = self.RECENCY_EXPLANATIONS.get(
             factors.recency_term,
-            f"📅 Recency score: {int(factors.recency_score * 100)}%",
+            f"Recency score: {int(factors.recency_score * 100)}%",
         )
         if vague_predicates.get("recency"):
             factor_lines.insert(0, f"**{rec_exp}** ← You asked for recent data")
@@ -970,7 +973,7 @@ class ExplanationGenerator:
 
         comp_exp = self.COMPLETENESS_EXPLANATIONS.get(
             factors.completeness_term,
-            f"📋 Completeness: {int(factors.completeness_score * 100)}%",
+            f"Completeness: {int(factors.completeness_score * 100)}%",
         )
         if vague_predicates.get("completeness"):
             factor_lines.insert(0, f"**{comp_exp}** ← You asked for complete data")
@@ -979,7 +982,7 @@ class ExplanationGenerator:
 
         res_exp = self.RESOURCE_EXPLANATIONS.get(
             factors.resource_term,
-            f"📁 Resources: {int(factors.resource_score * 100)}%",
+            f"Resources: {int(factors.resource_score * 100)}%",
         )
         factor_lines.append(res_exp)
 
@@ -1080,26 +1083,90 @@ class FuzzyHCIRRanker:
                 display_score=relevance,
             )
 
-            title = ds.get("title", {})
-            if isinstance(title, str):
-                title = {"en": title}
-
-            description = ds.get("description", {})
-            if isinstance(description, dict):
-                desc_text = (
-                    description.get("en")
-                    or description.get("de")
-                    or description.get("fr")
-                    or next(iter(description.values()), "")
+            title_field = ds.get("title", {})
+            # Normalize title: extract a plain string from localized dicts or strings
+            if isinstance(title_field, dict):
+                title_text = (
+                    title_field.get("en")
+                    or title_field.get("de")
+                    or title_field.get("fr")
+                    or title_field.get("it")
+                    or next(iter(title_field.values()), "")
                 )
+            elif isinstance(title_field, str):
+                title_text = _html.unescape(title_field)
             else:
-                desc_text = str(description) if description else ""
+                title_text = _html.unescape(str(title_field)) if title_field is not None else ""
+            # Strip any HTML tags from title
+            title = re.sub(r"<[^>]+>", "", _html.unescape(title_text))
+
+            # Normalize and sanitize description: remove HTML tags
+            def _coerce_to_text(v: Any) -> str:
+                if v is None:
+                    return ""
+                if isinstance(v, dict):
+                    return (
+                        v.get("en")
+                        or v.get("de")
+                        or v.get("fr")
+                        or v.get("it")
+                        or next(iter(v.values()), "")
+                    )
+                if isinstance(v, (list, tuple)):
+                    return " ".join(str(x) for x in v if x is not None)
+                # Try to parse stringified dict/json
+                if isinstance(v, str):
+                    s = v.strip()
+                    if (s.startswith("{") and s.endswith("}")) or (s.startswith('[') and s.endswith(']')):
+                        try:
+                            parsed = ast.literal_eval(s)
+                            return _coerce_to_text(parsed)
+                        except Exception:
+                            try:
+                                parsed = json.loads(s)
+                                return _coerce_to_text(parsed)
+                            except Exception:
+                                pass
+                    return s
+                return str(v)
+
+            raw_desc = _coerce_to_text(ds.get("description", {}))
+            # Unescape HTML entities then strip tags for safety
+            raw_desc = _html.unescape(raw_desc)
+            desc_text = re.sub(r"<[^>]+>", "", raw_desc)
 
             org = ds.get("organization", {})
+            # Coerce organization to a clean name string
+            org_name = None
             if isinstance(org, dict):
-                org_name = org.get("title") or org.get("name") or "Unknown"
+                org_name = org.get("title") or org.get("name") or org.get("en") or org.get("de") or next(iter(org.values()), None)
+            elif isinstance(org, str):
+                # try to parse stringified dict
+                s = _html.unescape(org.strip())
+                if s.startswith("{"):
+                    try:
+                        parsed = ast.literal_eval(s)
+                        if isinstance(parsed, dict):
+                            org_name = parsed.get("title") or parsed.get("name") or parsed.get("en") or next(iter(parsed.values()), None)
+                    except Exception:
+                        try:
+                            parsed = json.loads(s)
+                            if isinstance(parsed, dict):
+                                org_name = parsed.get("title") or parsed.get("name") or parsed.get("en") or next(iter(parsed.values()), None)
+                            else:
+                                org_name = s
+                        except Exception:
+                            org_name = s
+                else:
+                    org_name = org
             else:
-                org_name = str(org) if org else "Unknown"
+                org_name = str(org) if org else None
+
+            if not org_name:
+                org_name = "Unknown"
+            # If org_name is itself a dict (e.g., localized titles), pick a language
+            if isinstance(org_name, dict):
+                org_name = org_name.get("en") or org_name.get("de") or org_name.get("fr") or org_name.get("it") or next(iter(org_name.values()), "Unknown")
 
             groups = ds.get("groups", [])
             themes = [g.get("name", "") for g in groups if isinstance(g, dict)]

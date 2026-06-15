@@ -37,7 +37,7 @@ def render_pagination_controls(
 
     with pcol1:
         if st.button(
-            "◀ Previous",
+            "Previous",
             disabled=(current_page <= 0),
             key=f"pag_prev_{key_suffix}",
             width="stretch",
@@ -68,7 +68,7 @@ def render_pagination_controls(
 
     with pcol4:
         if st.button(
-            "Next ▶",
+            "Next",
             disabled=(current_page >= total_pages - 1),
             key=f"pag_next_{key_suffix}",
             width="stretch",
@@ -87,8 +87,8 @@ def render_pagination_summary(
 ) -> None:
     """Render a summary line with pagination info.
     
-    Example: "📊 Found 1,234 datasets • Showing 20 results (page 1/62)"
+    Example: "Found 1,234 datasets • Showing 20 results (page 1/62)"
     """
     st.markdown(
-        f"### 📊 Found {found_count:,} datasets • Showing {displayed_count} results (page {current_page + 1}/{total_pages})"
+        f"### Found {found_count:,} datasets • Showing {displayed_count} results (page {current_page + 1}/{total_pages})"
     )

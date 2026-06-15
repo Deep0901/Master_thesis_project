@@ -12,9 +12,9 @@ except Exception:  # Streamlit script-dir execution
     from feedback_logger import append_feedback_event, build_event
 
 try:
-    from code.prototype.ranking.models import DatasetResult, safe_html_text
+    from code.prototype.ranking.models import DatasetResult, normalize_text, safe_html_text
 except Exception:  # Streamlit script-dir execution
-    from ranking.models import DatasetResult, safe_html_text
+    from ranking.models import DatasetResult, normalize_text, safe_html_text
 
 from .style import SWISS_GOV_CSS
 
@@ -29,7 +29,7 @@ def render_header() -> None:
         <div style="display: flex; align-items: center;">
             <div class="swiss-cross"></div>
             <div>
-                <h1>🔍 opendata.swiss | Fuzzy Search</h1>
+                <h1>opendata.swiss | Fuzzy Search</h1>
                 <p>Research Prototype - Human-Centered Information Retrieval</p>
             </div>
         </div>
@@ -42,17 +42,17 @@ def render_header() -> None:
 def render_sidebar() -> Dict:
     """Render sidebar with settings, filters, and advanced options."""
     with st.sidebar:
-        st.markdown("### 🔧 Search Settings")
+        st.markdown("### Search Settings")
 
         data_source = st.radio(
             "Data Source",
-            ["🌐 Live API (opendata.swiss)", "📦 Demo Data"],
+            ["Live API (opendata.swiss)", "Demo Data"],
             index=0,
         )
 
         st.markdown("---")
 
-        st.markdown("### 📊 Ranking Method")
+        st.markdown("### Ranking Method")
         ranking_method = st.selectbox(
             "Select ranking algorithm",
             ["Fuzzy HCIR (Research)", "Portal Default", "BM25 Keyword", "Compare All"],
@@ -61,7 +61,7 @@ def render_sidebar() -> Dict:
 
         st.markdown("---")
 
-        st.markdown("### 🏷️ Filters")
+        st.markdown("### Filters")
 
         themes = [
             "All Themes",
@@ -87,7 +87,7 @@ def render_sidebar() -> Dict:
 
         st.markdown("---")
 
-        st.markdown("### 🎯 Faceted Search")
+        st.markdown("### Faceted Search")
         st.caption("Narrow down results before ranking is applied")
 
         org_options = st.session_state.get("facet_org_options", [])
@@ -97,7 +97,7 @@ def render_sidebar() -> Dict:
         )
         license_options = st.session_state.get("facet_license_options", [])
 
-        with st.expander("🏢 **Organizations**", expanded=False):
+        with st.expander("Organizations", expanded=False):
             selected_orgs = st.multiselect(
                 "Filter by organization",
                 options=org_options,
@@ -110,7 +110,7 @@ def render_sidebar() -> Dict:
         if not selected_orgs:
             selected_orgs = []
 
-        with st.expander("📄 **Data Formats**", expanded=False):
+        with st.expander("Data Formats", expanded=False):
             selected_formats = st.multiselect(
                 "Filter by data format",
                 options=fmt_options,
@@ -123,7 +123,7 @@ def render_sidebar() -> Dict:
         if not selected_formats:
             selected_formats = []
 
-        with st.expander("⚖️ **Licenses**", expanded=False):
+        with st.expander("Licenses", expanded=False):
             selected_licenses = st.multiselect(
                 "Filter by license",
                 options=license_options,
@@ -139,18 +139,18 @@ def render_sidebar() -> Dict:
         # Display active filters summary
         active_filters = []
         if selected_orgs:
-            active_filters.append(f"📊 Orgs: {', '.join(selected_orgs[:2])}" + (f" +{len(selected_orgs)-2}" if len(selected_orgs) > 2 else ""))
+            active_filters.append(f"Orgs: {', '.join(selected_orgs[:2])}" + (f" +{len(selected_orgs)-2}" if len(selected_orgs) > 2 else ""))
         if selected_formats:
-            active_filters.append(f"📋 Formats: {', '.join(selected_formats[:2])}" + (f" +{len(selected_formats)-2}" if len(selected_formats) > 2 else ""))
+            active_filters.append(f"Formats: {', '.join(selected_formats[:2])}" + (f" +{len(selected_formats)-2}" if len(selected_formats) > 2 else ""))
         if selected_licenses:
-            active_filters.append(f"⚖️ Licenses: {', '.join(selected_licenses[:2])}" + (f" +{len(selected_licenses)-2}" if len(selected_licenses) > 2 else ""))
+            active_filters.append(f"Licenses: {', '.join(selected_licenses[:2])}" + (f" +{len(selected_licenses)-2}" if len(selected_licenses) > 2 else ""))
         
         if active_filters:
-            st.info("🔍 Active filters:\n" + "\n".join(active_filters))
+            st.info("Active filters:\n" + "\n".join(active_filters))
 
         st.markdown("---")
 
-        with st.expander("⚙️ Advanced Options"):
+        with st.expander("Advanced Options"):
             num_results = st.slider("Results per page", 10, 50, 20)
             show_explanations = st.checkbox("Show ranking explanations", value=True)
             show_factors = st.checkbox("Show factor breakdown", value=True)
@@ -165,7 +165,7 @@ def render_sidebar() -> Dict:
 
         st.markdown(
             """
-        ### 📖 About This Prototype
+        ### About This Prototype
 
         This is a research prototype for the Master Thesis:
 
@@ -236,19 +236,7 @@ def render_result_card(result: DatasetResult, settings: Dict, query: str, rankin
         relevance_class = "low-relevance"
         badge_class = "score-low"
 
-    raw_title = result.title
-    if isinstance(raw_title, dict):
-        raw_title = (
-            raw_title.get("en")
-            or raw_title.get("de")
-            or raw_title.get("fr")
-            or raw_title.get("it")
-            or next(iter(raw_title.values()), "Untitled")
-        )
-    elif not raw_title or str(raw_title).strip() == "":
-        raw_title = "Untitled"
-
-    title = safe_html_text(raw_title, "Untitled")
+    title = safe_html_text(result.title, "Untitled")
 
     organization = safe_html_text(result.organization, "Unknown")
     description = safe_html_text(result.description)
@@ -293,8 +281,8 @@ def render_result_card(result: DatasetResult, settings: Dict, query: str, rankin
                         </svg>
                         {organization}
                     </span>
-                    <span>📅 Modified: {result.days_since_modified} days ago</span>
-                    <span>📁 {len(result.resources)} resources</span>
+                    <span>Modified: {result.days_since_modified} days ago</span>
+                    <span>{len(result.resources)} resources</span>
                 </div>
                 <div style="margin-top: 8px;">
                     {tags_html}
@@ -311,7 +299,7 @@ def render_result_card(result: DatasetResult, settings: Dict, query: str, rankin
 
     fb_col1, fb_col2, fb_col3 = st.columns([1, 1, 8])
     with fb_col1:
-        if st.button("👍", key=f"{feedback_key}:up", disabled=bool(voted), help="Was this result helpful?"):
+        if st.button("Helpful", key=f"{feedback_key}:up", disabled=bool(voted), help="Was this result helpful?"):
             st.session_state.setdefault("feedback_votes", {})[feedback_key] = True
             event = build_event(
                 query=query,
@@ -332,7 +320,7 @@ def render_result_card(result: DatasetResult, settings: Dict, query: str, rankin
             path = append_feedback_event(event)
             st.toast(f"Feedback saved to {path}")
     with fb_col2:
-        if st.button("👎", key=f"{feedback_key}:down", disabled=bool(voted), help="Was this result not helpful?"):
+        if st.button("Not helpful", key=f"{feedback_key}:down", disabled=bool(voted), help="Was this result not helpful?"):
             st.session_state.setdefault("feedback_votes", {})[feedback_key] = True
             event = build_event(
                 query=query,
@@ -353,11 +341,11 @@ def render_result_card(result: DatasetResult, settings: Dict, query: str, rankin
             path = append_feedback_event(event)
             st.toast(f"Feedback saved to {path}")
     with fb_col3:
-        st.caption("Was this result helpful? (👍 / 👎)")
+        st.caption("Was this result helpful? (Yes / No)")
 
     explanation_text = (result.explanation or "").strip()
     if settings.get("show_explanations") and result.factors and explanation_text and explanation_text.lower() != "none":
-        with st.expander("📊 Why this ranking?", expanded=False):
+        with st.expander("Why this ranking?", expanded=False):
             # Import the radar chart builder
             try:
                 from code.prototype.visual_explanations import build_individual_factor_radar
@@ -375,17 +363,16 @@ def render_result_card(result: DatasetResult, settings: Dict, query: str, rankin
 
             with col1:
                 st.markdown("**Factor Scores:**")
-                st.markdown(f"🎯 **Similarity:** {result.factors.similarity_term}")
+                st.markdown(f"**Similarity:** {result.factors.similarity_term}")
                 st.progress(result.factors.similarity_score)
 
-                st.markdown(f"📅 **Recency:** {result.factors.recency_term}")
+                st.markdown(f"**Recency:** {result.factors.recency_term}")
                 st.progress(result.factors.recency_score)
 
             with col2:
-                st.markdown(f"📋 **Completeness:** {result.factors.completeness_term}")
+                st.markdown(f"**Completeness:** {result.factors.completeness_term}")
                 st.progress(result.factors.completeness_score)
-
-                st.markdown(f"📁 **Resources:** {result.factors.resource_term}")
+                st.markdown(f"**Resources:** {result.factors.resource_term}")
                 st.progress(result.factors.resource_score)
 
             st.markdown("---")
@@ -398,7 +385,7 @@ def render_comparison_view(
     results_bm25: List[Dict],
     query: str,
 ) -> None:
-    st.markdown("### 📊 Ranking Comparison")
+    st.markdown("### Ranking Comparison")
     st.markdown("Compare how different algorithms rank the same datasets.")
 
     comparison_data = []
@@ -408,7 +395,7 @@ def render_comparison_view(
     bm25_ranks = {r.get("name", ""): i + 1 for i, r in enumerate(results_bm25)}
 
     for result in results_fuzzy[:10]:
-        title = result.title.get("en") or result.title.get("de") or "Untitled"
+        title = normalize_text(result.title, "Untitled")
         comparison_data.append(
             {
                 "Dataset": title[:50] + ("..." if len(title) > 50 else ""),
@@ -422,7 +409,7 @@ def render_comparison_view(
     df = pd.DataFrame(comparison_data)
     st.dataframe(df, use_container_width=True)
 
-    st.markdown("### 📈 Method Characteristics")
+    st.markdown("### Method Characteristics")
 
     col1, col2, col3 = st.columns(3)
 

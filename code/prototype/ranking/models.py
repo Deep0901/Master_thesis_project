@@ -1,26 +1,66 @@
 from __future__ import annotations
 
+import ast
 import html
+import json
+import re
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
 
-def safe_html_text(value: Any, fallback: str = "") -> str:
-    """Return a safe, non-null text value for HTML rendering."""
+def normalize_text(value: Any, fallback: str = "") -> str:
+    """Normalize metadata values into clean plain text."""
     if value is None:
         return fallback
+
     if isinstance(value, dict):
-        value = (
-            value.get("en")
-            or value.get("de")
-            or value.get("fr")
-            or value.get("it")
-            or next(iter(value.values()), fallback)
-        )
+        for lang in ("en", "de", "fr", "it"):
+            candidate = value.get(lang)
+            if candidate:
+                normalized = normalize_text(candidate, fallback)
+                if normalized:
+                    return normalized
+        for candidate in value.values():
+            normalized = normalize_text(candidate, fallback)
+            if normalized:
+                return normalized
+        return fallback
+
     if isinstance(value, (list, tuple)):
-        value = " ".join(str(item) for item in value if item is not None)
-    return html.escape(str(value)) if str(value) != "" else fallback
+        normalized_items = [normalize_text(item, fallback) for item in value if item is not None]
+        joined = " ".join(item for item in normalized_items if item)
+        return joined.strip() or fallback
+
+    if isinstance(value, str):
+        trimmed = value.strip()
+        if not trimmed:
+            return fallback
+
+        if (trimmed.startswith("{") and trimmed.endswith("}")) or (
+            trimmed.startswith("[") and trimmed.endswith("]")
+        ):
+            try:
+                parsed = json.loads(trimmed)
+                return normalize_text(parsed, fallback)
+            except Exception:
+                try:
+                    parsed = ast.literal_eval(trimmed)
+                    return normalize_text(parsed, fallback)
+                except Exception:
+                    pass
+
+        unescaped = html.unescape(trimmed)
+        cleaned = re.sub(r"<[^>]+>", "", unescaped)
+        return cleaned.strip() or fallback
+
+    return str(value).strip() or fallback
+
+
+def safe_html_text(value: Any, fallback: str = "") -> str:
+    """Return a safe, escaped text value for HTML rendering."""
+    text = normalize_text(value, fallback)
+    return html.escape(text) if text != "" else fallback
 
 
 @dataclass
@@ -59,9 +99,9 @@ class DatasetResult:
     """A ranked dataset with full metadata and explanation."""
 
     id: str
-    title: Dict[str, str]
+    title: Any
     description: str
-    organization: str
+    organization: Any
     resources: List[Dict]
     themes: List[str]
     tags: List[str]

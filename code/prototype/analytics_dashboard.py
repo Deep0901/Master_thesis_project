@@ -24,7 +24,7 @@ import time
 # Page config
 st.set_page_config(
     page_title="Swiss OGD Analytics | Research Dashboard",
-    page_icon="📊",
+    page_icon=None,
     layout="wide"
 )
 
@@ -220,7 +220,7 @@ def compute_fuzzy_distribution(values: List[float], variable: str) -> Dict[str, 
 
 def render_overview_page():
     """Render the overview dashboard page."""
-    st.title("📊 Swiss OGD Analytics Dashboard")
+    st.title("Swiss OGD Analytics Dashboard")
     st.markdown("Real-time analytics for opendata.swiss portal and fuzzy ranking research")
     
     # Load data
@@ -265,7 +265,7 @@ def render_overview_page():
     
     # Theme distribution
     if stats['themes']:
-        st.subheader("📁 Theme Distribution")
+        st.subheader("Theme Distribution")
         theme_data = []
         for theme in stats['themes']:
             theme_data.append({
@@ -281,7 +281,7 @@ def render_overview_page():
     
     # Top organizations
     if stats['organizations']:
-        st.subheader("🏛️ Top Publishing Organizations")
+        st.subheader("Top Publishing Organizations")
         org_data = []
         for org in stats['organizations'][:20]:
             org_data.append({
@@ -298,7 +298,7 @@ def render_overview_page():
 
 def render_metadata_analysis_page():
     """Render metadata quality analysis page."""
-    st.title("📋 Metadata Quality Analysis")
+    st.title("Metadata Quality Analysis")
     st.markdown("Analysis of dataset metadata completeness and quality distribution")
     
     # Load sample data
@@ -313,7 +313,7 @@ def render_metadata_analysis_page():
     st.success(f"Loaded {len(datasets)} datasets for analysis")
     
     # Analyze recency
-    st.subheader("📅 Recency Distribution")
+    st.subheader("Recency Distribution")
     recency_df = analyze_recency(datasets)
     
     if not recency_df.empty:
@@ -341,13 +341,13 @@ def render_metadata_analysis_page():
                 st.write(f"- P{p}: {val:.0f} days")
         
         # Year distribution
-        st.subheader("📆 Updates by Year")
+        st.subheader("Updates by Year")
         yearly = recency_df.groupby('year').size().reset_index(name='count')
         fig = px.bar(yearly, x='year', y='count', title="Dataset Updates by Year")
         st.plotly_chart(fig, width="stretch")
     
     # Analyze completeness
-    st.subheader("📊 Completeness Analysis")
+    st.subheader("Completeness Analysis")
     completeness_df = analyze_completeness(datasets)
     
     if not completeness_df.empty:
@@ -367,7 +367,7 @@ def render_metadata_analysis_page():
             st.plotly_chart(fig, width="stretch")
         
         # Correlation
-        st.subheader("🔗 Resource Count vs Completeness")
+        st.subheader("Resource Count vs Completeness")
         fig = px.scatter(completeness_df, x='resource_count', y='completeness',
                         color='format_diversity', size='format_diversity',
                         title="Resources vs Completeness (colored by format diversity)")
@@ -376,7 +376,7 @@ def render_metadata_analysis_page():
 
 def render_fuzzy_analysis_page():
     """Render fuzzy system analysis page."""
-    st.title("🧠 Fuzzy System Analysis")
+    st.title("Fuzzy System Analysis")
     st.markdown("Analyze fuzzy membership function calibration and inference behavior")
     
     # Import fuzzy components
@@ -395,7 +395,7 @@ def render_fuzzy_analysis_page():
     similarity_var = CalibratedOGDVariables.create_similarity_variable()
     
     # Plot membership functions
-    st.subheader("📈 Membership Function Visualization")
+    st.subheader("Membership Function Visualization")
     
     variable_choice = st.selectbox(
         "Select Variable",
@@ -442,7 +442,7 @@ def render_fuzzy_analysis_page():
     st.plotly_chart(fig, width="stretch")
     
     # Interactive inference
-    st.subheader("🔮 Interactive Fuzzy Inference")
+    st.subheader("Interactive Fuzzy Inference")
     st.markdown("Adjust inputs to see how the fuzzy system computes relevance scores")
     
     col1, col2 = st.columns(2)
@@ -501,7 +501,7 @@ def render_fuzzy_analysis_page():
 
 def render_evaluation_page():
     """Render evaluation results page."""
-    st.title("📈 Evaluation Results")
+    st.title("Evaluation Results")
     st.markdown("Analysis of ranking system evaluation experiments")
     
     # Check for evaluation results
@@ -526,7 +526,7 @@ def render_evaluation_page():
         """)
         
         # Show placeholder metrics
-        st.subheader("📊 Expected Metrics")
+        st.subheader("Expected Metrics")
         
         placeholder_data = {
             'System': ['Portal Default', 'BM25', 'Metadata Quality', 'Fuzzy HCIR'],
@@ -551,7 +551,7 @@ def render_evaluation_page():
     if 'experiment' in eval_results:
         exp = eval_results['experiment']
         
-        st.subheader("📊 System Performance Metrics")
+        st.subheader("System Performance Metrics")
         
         # Create comparison dataframe
         systems = list(exp.get('results', {}).keys())
@@ -582,7 +582,7 @@ def render_evaluation_page():
 
 def render_about_page():
     """Render about page."""
-    st.title("ℹ️ About This Research")
+    st.title("About This Research")
     
     st.markdown("""
     ## Improving Access to Swiss Open Government Data through Fuzzy Human-Centered Information Retrieval
@@ -638,22 +638,22 @@ def render_about_page():
 def main():
     """Main dashboard application."""
     # Sidebar navigation
-    st.sidebar.title("🇨🇭 Swiss OGD Research")
+    st.sidebar.title("Swiss OGD Research")
     
     page = st.sidebar.radio(
         "Navigate",
-        ["📊 Overview", "📋 Metadata Analysis", "🧠 Fuzzy System", 
-         "📈 Evaluation", "ℹ️ About"]
+        ["Overview", "Metadata Analysis", "Fuzzy System", 
+         "Evaluation", "About"]
     )
     
     # Render selected page
-    if page == "📊 Overview":
+    if page == "Overview":
         render_overview_page()
-    elif page == "📋 Metadata Analysis":
+    elif page == "Metadata Analysis":
         render_metadata_analysis_page()
-    elif page == "🧠 Fuzzy System":
+    elif page == "Fuzzy System":
         render_fuzzy_analysis_page()
-    elif page == "📈 Evaluation":
+    elif page == "Evaluation":
         render_evaluation_page()
     else:
         render_about_page()

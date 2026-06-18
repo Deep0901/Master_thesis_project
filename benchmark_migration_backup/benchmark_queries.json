@@ -1,0 +1,208 @@
+{
+  "benchmark_queries": [
+    {
+      "id": "env_001",
+      "domain": "environment",
+      "query_de": "aktuelle Luftqualitätsdaten Schweiz",
+      "query_en": "recent air quality data Switzerland",
+      "query_type": "vague",
+      "vague_predicates": ["recent", "aktuelle"],
+      "expected_relevance": {
+        "datasets_containing": ["luftqualität", "air quality", "NABEL", "pollution"],
+        "preference_recency": "high",
+        "preference_completeness": "moderate"
+      }
+    },
+    {
+      "id": "env_002", 
+      "domain": "environment",
+      "query_de": "umfassende Klimadaten mit vielen Ressourcen",
+      "query_en": "comprehensive climate data with many resources",
+      "query_type": "vague",
+      "vague_predicates": ["comprehensive", "many", "umfassende", "vielen"],
+      "expected_relevance": {
+        "datasets_containing": ["klima", "climate", "temperatur", "niederschlag"],
+        "preference_recency": "moderate",
+        "preference_completeness": "high",
+        "preference_resources": "high"
+      }
+    },
+    {
+      "id": "env_003",
+      "domain": "environment",
+      "query_de": "Gewässerqualität Seen",
+      "query_en": "water quality lakes",
+      "query_type": "precise",
+      "vague_predicates": [],
+      "expected_relevance": {
+        "datasets_containing": ["wasser", "water", "see", "lake", "gewässer"],
+        "preference_recency": "moderate",
+        "preference_completeness": "moderate"
+      }
+    },
+    {
+      "id": "env_004",
+      "domain": "environment",
+      "query_de": "vollständige Biodiversitätsdaten",
+      "query_en": "complete biodiversity data",
+      "query_type": "vague",
+      "vague_predicates": ["complete", "vollständige"],
+      "expected_relevance": {
+        "datasets_containing": ["biodiversität", "biodiversity", "arten", "species"],
+        "preference_completeness": "very_high"
+      }
+    },
+    {
+      "id": "env_005",
+      "domain": "environment",
+      "query_de": "Waldfläche Statistik historisch",
+      "query_en": "forest area statistics historical",
+      "query_type": "precise",
+      "vague_predicates": [],
+      "expected_relevance": {
+        "datasets_containing": ["wald", "forest", "fläche", "area"],
+        "preference_recency": "low"
+      }
+    },
+    {
+      "id": "mob_001",
+      "domain": "mobility",
+      "query_de": "aktuelle Verkehrsdaten Echtzeit",
+      "query_en": "recent traffic data real-time",
+      "query_type": "vague",
+      "vague_predicates": ["recent", "aktuelle", "real-time", "Echtzeit"],
+      "expected_relevance": {
+        "datasets_containing": ["verkehr", "traffic", "stau", "strasse"],
+        "preference_recency": "very_high"
+      }
+    },
+    {
+      "id": "mob_002",
+      "domain": "mobility",
+      "query_de": "umfangreiche ÖV-Fahrplandaten",
+      "query_en": "extensive public transport timetable data",
+      "query_type": "vague",
+      "vague_predicates": ["extensive", "umfangreiche"],
+      "expected_relevance": {
+        "datasets_containing": ["fahrplan", "timetable", "öv", "public transport", "sbb"],
+        "preference_completeness": "high",
+        "preference_resources": "high"
+      }
+    },
+    {
+      "id": "mob_003",
+      "domain": "mobility",
+      "query_de": "Velowege Routen GPS",
+      "query_en": "bicycle routes GPS",
+      "query_type": "precise",
+      "vague_predicates": [],
+      "expected_relevance": {
+        "datasets_containing": ["velo", "bicycle", "fahrrad", "route", "weg"]
+      }
+    },
+    {
+      "id": "mob_004",
+      "domain": "mobility",
+      "query_de": "gut dokumentierte Unfallstatistik",
+      "query_en": "well documented accident statistics",
+      "query_type": "vague",
+      "vague_predicates": ["well documented", "gut dokumentierte"],
+      "expected_relevance": {
+        "datasets_containing": ["unfall", "accident", "verkehrssicherheit"],
+        "preference_completeness": "high"
+      }
+    },
+    {
+      "id": "mob_005",
+      "domain": "mobility",
+      "query_de": "Parkplätze Verfügbarkeit Städte",
+      "query_en": "parking availability cities",
+      "query_type": "precise",
+      "vague_predicates": [],
+      "expected_relevance": {
+        "datasets_containing": ["parkplatz", "parking", "parken"]
+      }
+    },
+    {
+      "id": "misc_001",
+      "domain": "general",
+      "query_de": "hochwertige Bevölkerungsdaten aktuell",
+      "query_en": "high quality population data recent",
+      "query_type": "vague",
+      "vague_predicates": ["high quality", "hochwertige", "recent", "aktuell"],
+      "expected_relevance": {
+        "datasets_containing": ["bevölkerung", "population", "einwohner"],
+        "preference_recency": "high",
+        "preference_completeness": "high"
+      }
+    },
+    {
+      "id": "misc_002",
+      "domain": "general",
+      "query_de": "einfach zugängliche Geodaten",
+      "query_en": "easily accessible geodata",
+      "query_type": "vague",
+      "vague_predicates": ["easily accessible", "einfach zugängliche"],
+      "expected_relevance": {
+        "datasets_containing": ["geo", "karte", "map", "koordinaten"],
+        "preference_resources": "high"
+      }
+    },
+    {
+      "id": "misc_003",
+      "domain": "general",
+      "query_de": "Energieverbrauch Statistik",
+      "query_en": "energy consumption statistics",
+      "query_type": "precise",
+      "vague_predicates": [],
+      "expected_relevance": {
+        "datasets_containing": ["energie", "energy", "verbrauch", "strom"]
+      }
+    },
+    {
+      "id": "misc_004",
+      "domain": "general",
+      "query_de": "neue Datensätze Gesundheit",
+      "query_en": "new datasets health",
+      "query_type": "vague",
+      "vague_predicates": ["new", "neue"],
+      "expected_relevance": {
+        "datasets_containing": ["gesundheit", "health", "spital", "hospital"],
+        "preference_recency": "very_high"
+      }
+    },
+    {
+      "id": "misc_005",
+      "domain": "general",
+      "query_de": "detaillierte Wirtschaftsindikatoren",
+      "query_en": "detailed economic indicators",
+      "query_type": "vague",
+      "vague_predicates": ["detailed", "detaillierte"],
+      "expected_relevance": {
+        "datasets_containing": ["wirtschaft", "economy", "bip", "gdp"],
+        "preference_completeness": "high"
+      }
+    }
+  ],
+  "evaluation_config": {
+    "metrics": ["MAP", "nDCG@10", "P@5", "P@10", "MRR"],
+    "systems_to_compare": [
+      "portal_default",
+      "bm25_baseline", 
+      "fuzzy_hcir",
+      "metadata_quality"
+    ],
+    "relevance_levels": {
+      "highly_relevant": 3,
+      "relevant": 2,
+      "marginally_relevant": 1,
+      "not_relevant": 0
+    },
+    "annotation_guidelines": {
+      "highly_relevant": "Dataset directly answers the query with high-quality, accessible data",
+      "relevant": "Dataset is related and useful for the query topic",
+      "marginally_relevant": "Dataset has some connection but limited usefulness",
+      "not_relevant": "Dataset has no meaningful connection to the query"
+    }
+  }
+}

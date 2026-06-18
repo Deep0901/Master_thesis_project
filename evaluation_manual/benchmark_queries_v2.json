@@ -1,0 +1,178 @@
+[
+  {
+    "query_id": "ENV-01",
+    "query_text": "Aktuelle Luftqualitätsdaten für Schweizer Städte",
+    "query_language": "de",
+    "domain": "environment",
+    "intent": "Find current air quality measurements for Swiss cities",
+    "expected_themes": [
+      "envi",
+      "heal"
+    ],
+    "ground_truth": []
+  },
+  {
+    "query_id": "ENV-02",
+    "query_text": "Biodiversität und Artenschutz in der Schweiz",
+    "query_language": "de",
+    "domain": "environment",
+    "intent": "Find datasets about biodiversity and species protection",
+    "expected_themes": [
+      "envi",
+      "agri"
+    ],
+    "ground_truth": []
+  },
+  {
+    "query_id": "ENV-03",
+    "query_text": "Wasserqualität in Schweizer Seen und Flüssen",
+    "query_language": "de",
+    "domain": "environment",
+    "intent": "Find water quality monitoring data",
+    "expected_themes": [
+      "envi"
+    ],
+    "ground_truth": []
+  },
+  {
+    "query_id": "ENV-04",
+    "query_text": "Lärmbelastung und Lärmkarten Schweiz",
+    "query_language": "de",
+    "domain": "environment",
+    "intent": "Find noise pollution maps and measurements",
+    "expected_themes": [
+      "envi",
+      "regi"
+    ],
+    "ground_truth": []
+  },
+  {
+    "query_id": "ENV-05",
+    "query_text": "Klimawandel und CO2-Emissionen Schweiz",
+    "query_language": "de",
+    "domain": "environment",
+    "intent": "Find climate change and emissions data",
+    "expected_themes": [
+      "envi",
+      "ener"
+    ],
+    "ground_truth": []
+  },
+  {
+    "query_id": "MOB-01",
+    "query_text": "Öffentlicher Verkehr Fahrplandaten Schweiz",
+    "query_language": "de",
+    "domain": "mobility",
+    "intent": "Find public transport timetable/schedule data",
+    "expected_themes": [
+      "mobi",
+      "regi"
+    ],
+    "ground_truth": []
+  },
+  {
+    "query_id": "MOB-02",
+    "query_text": "Verkehrsunfälle Statistik Schweiz",
+    "query_language": "de",
+    "domain": "mobility",
+    "intent": "Find traffic accident statistics",
+    "expected_themes": [
+      "mobi",
+      "just"
+    ],
+    "ground_truth": []
+  },
+  {
+    "query_id": "MOB-03",
+    "query_text": "Elektromobilität Ladestationen Schweiz",
+    "query_language": "de",
+    "domain": "mobility",
+    "intent": "Find electric vehicle charging station locations",
+    "expected_themes": [
+      "mobi",
+      "ener"
+    ],
+    "ground_truth": []
+  },
+  {
+    "query_id": "MOB-04",
+    "query_text": "Veloverkehr und Radwege in der Schweiz",
+    "query_language": "de",
+    "domain": "mobility",
+    "intent": "Find bicycle traffic and cycling infrastructure data",
+    "expected_themes": [
+      "mobi",
+      "regi"
+    ],
+    "ground_truth": []
+  },
+  {
+    "query_id": "MOB-05",
+    "query_text": "Parkplätze und Parkhäuser Echtzeitdaten",
+    "query_language": "de",
+    "domain": "mobility",
+    "intent": "Find real-time parking availability data",
+    "expected_themes": [
+      "mobi"
+    ],
+    "ground_truth": []
+  },
+  {
+    "query_id": "XD-01",
+    "query_text": "Bevölkerungsentwicklung und Demografie Schweiz",
+    "query_language": "de",
+    "domain": "cross",
+    "intent": "Find population and demographic statistics",
+    "expected_themes": [
+      "soci",
+      "regi"
+    ],
+    "ground_truth": []
+  },
+  {
+    "query_id": "XD-02",
+    "query_text": "Energieverbrauch nach Kantonen",
+    "query_language": "de",
+    "domain": "cross",
+    "intent": "Find energy consumption by canton",
+    "expected_themes": [
+      "ener",
+      "regi"
+    ],
+    "ground_truth": []
+  },
+  {
+    "query_id": "XD-03",
+    "query_text": "Bildungsstatistik Schulen und Universitäten",
+    "query_language": "de",
+    "domain": "cross",
+    "intent": "Find education statistics",
+    "expected_themes": [
+      "educ"
+    ],
+    "ground_truth": []
+  },
+  {
+    "query_id": "XD-04",
+    "query_text": "Gesundheitsversorgung und Spitäler",
+    "query_language": "de",
+    "domain": "cross",
+    "intent": "Find healthcare facilities and statistics",
+    "expected_themes": [
+      "heal"
+    ],
+    "ground_truth": []
+  },
+  {
+    "query_id": "XD-05",
+    "query_text": "Wirtschaftsstatistik und BIP nach Region",
+    "query_language": "de",
+    "domain": "cross",
+    "intent": "Find economic statistics by region",
+    "expected_themes": [
+      "econ",
+      "regi"
+    ],
+    "ground_truth": []
+  }
+]

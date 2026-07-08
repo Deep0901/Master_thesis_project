@@ -1,0 +1,80 @@
+[
+  {
+    "id": "1",
+    "name": "one",
+    "title": {
+      "en": "Alpha"
+    },
+    "metadata_created": null,
+    "metadata_modified": "2026-06-28T16:38:19.843002",
+    "temporal_coverage_start": null,
+    "temporal_coverage_end": null,
+    "accrual_periodicity": null,
+    "organization_name": "org-a",
+    "organization_title": "Org A",
+    "publisher": "Org A",
+    "contact_points": [],
+    "description": {
+      "en": "First dataset"
+    },
+    "keywords": [
+      {
+        "name": "k1"
+      }
+    ],
+    "themes": [
+      "theme-a"
+    ],
+    "num_resources": 2,
+    "resource_formats": [
+      "CSV"
+    ],
+    "has_api": true,
+    "has_download": true,
+    "license_id": "cc-by",
+    "spatial_coverage": null,
+    "language": [
+      "en"
+    ],
+    "days_since_modified": 10,
+    "title_length": 5,
+    "description_length": 13,
+    "num_keywords": 1,
+    "completeness_score": 0.6944444444444444
+  },
+  {
+    "id": "1",
+    "name": "two",
+    "title": {
+      "de": "Beta"
+    },
+    "metadata_created": null,
+    "metadata_modified": "2026-06-18T16:38:19.843002",
+    "temporal_coverage_start": null,
+    "temporal_coverage_end": null,
+    "accrual_periodicity": null,
+    "organization_name": "org-b",
+    "organization_title": "Org B",
+    "publisher": "Org B",
+    "contact_points": [],
+    "description": {
+      "de": "Second dataset with more text"
+    },
+    "keywords": [],
+    "themes": [
+      "theme-b"
+    ],
+    "num_resources": 0,
+    "resource_formats": [],
+    "has_api": false,
+    "has_download": false,
+    "license_id": null,
+    "spatial_coverage": null,
+    "language": [],
+    "days_since_modified": 20,
+    "title_length": 4,
+    "description_length": 29,
+    "num_keywords": 0,
+    "completeness_score": 0.4166666666666667
+  }
+]

@@ -1,0 +1,195 @@
+{
+  "collection_timestamp": "20260708_000000",
+  "portal_total_datasets": 2,
+  "datasets_downloaded": 2,
+  "download_duration_seconds": 1.23,
+  "batch_size": 100,
+  "api_endpoint": "https://opendata.swiss/api/3/action/package_search",
+  "collector_version": "1.1",
+  "average_completeness": 0.5555555555555556,
+  "average_title_length": 4.5,
+  "average_description_length": 21.0,
+  "average_resources_per_dataset": 1.0,
+  "average_keywords": 0.5,
+  "average_days_since_modified": 15.0,
+  "median_days_since_modified": 15.0,
+  "minimum_days_since_modified": 10,
+  "maximum_days_since_modified": 20,
+  "duplicate_dataset_count": 1,
+  "duplicate_dataset_ids": [
+    "1"
+  ],
+  "datasets_with_api": {
+    "count": 1,
+    "percentage": 50.0
+  },
+  "datasets_with_download": {
+    "count": 1,
+    "percentage": 50.0
+  },
+  "datasets_without_resources": {
+    "count": 1,
+    "percentage": 50.0
+  },
+  "missing_title_count": 0,
+  "missing_description_count": 0,
+  "missing_publisher_count": 0,
+  "missing_license_count": 1,
+  "missing_keywords_count": 1,
+  "missing_language_count": 1,
+  "missing_resources_count": 1,
+  "languages_distribution": {
+    "en": {
+      "count": 1,
+      "percentage": 100.0
+    }
+  },
+  "resource_format_distribution": {
+    "CSV": {
+      "count": 1,
+      "percentage": 100.0
+    }
+  },
+  "theme_distribution": {
+    "theme-a": {
+      "count": 1,
+      "percentage": 50.0
+    },
+    "theme-b": {
+      "count": 1,
+      "percentage": 50.0
+    }
+  },
+  "organization_distribution": {
+    "org-a": {
+      "count": 1,
+      "percentage": 50.0
+    },
+    "org-b": {
+      "count": 1,
+      "percentage": 50.0
+    }
+  },
+  "license_distribution": {
+    "cc-by": {
+      "count": 1,
+      "percentage": 100.0
+    }
+  },
+  "resource_count_distribution": {
+    "2": {
+      "count": 1,
+      "percentage": 50.0
+    },
+    "0": {
+      "count": 1,
+      "percentage": 50.0
+    }
+  },
+  "top_20_publishers": [
+    {
+      "name": "Org A",
+      "count": 1,
+      "percentage": 50.0
+    },
+    {
+      "name": "Org B",
+      "count": 1,
+      "percentage": 50.0
+    }
+  ],
+  "top_20_resource_formats": [
+    {
+      "name": "CSV",
+      "count": 1,
+      "percentage": 100.0
+    }
+  ],
+  "top_20_themes": [
+    {
+      "name": "theme-a",
+      "count": 1,
+      "percentage": 50.0
+    },
+    {
+      "name": "theme-b",
+      "count": 1,
+      "percentage": 50.0
+    }
+  ],
+  "top_20_languages": [
+    {
+      "name": "en",
+      "count": 1,
+      "percentage": 100.0
+    }
+  ],
+  "metadata_completeness_distribution": {
+    "0.42": {
+      "count": 1,
+      "percentage": 50.0
+    },
+    "0.69": {
+      "count": 1,
+      "percentage": 50.0
+    }
+  },
+  "summary_statistics": {
+    "days_since_modified": {
+      "count": 2,
+      "mean": 15.0,
+      "median": 15.0,
+      "std_dev": 5.0,
+      "min": 10,
+      "max": 20,
+      "p10": 11.0,
+      "p25": 12.5,
+      "p50": 15.0,
+      "p75": 17.5,
+      "p90": 19.0
+    },
+    "completeness_score": {
+      "count": 2,
+      "mean": 0.5555555555555556,
+      "median": 0.5555555555555556,
+      "std_dev": 0.13888888888888887,
+      "min": 0.4166666666666667,
+      "max": 0.6944444444444444,
+      "p25": 0.4861111111111111,
+      "p75": 0.6249999999999999,
+      "p95": 0.6805555555555556
+    },
+    "title_length": {
+      "count": 2,
+      "mean": 4.5,
+      "median": 4.5,
+      "std_dev": 0.5,
+      "min": 4,
+      "max": 5
+    },
+    "description_length": {
+      "count": 2,
+      "mean": 21.0,
+      "median": 21.0,
+      "std_dev": 8.0,
+      "min": 13,
+      "max": 29
+    },
+    "keywords_per_dataset": {
+      "count": 2,
+      "mean": 0.5,
+      "median": 0.5,
+      "std_dev": 0.5,
+      "min": 0,
+      "max": 1
+    },
+    "resources_per_dataset": {
+      "count": 2,
+      "mean": 1.0,
+      "median": 1.0,
+      "std_dev": 1.0,
+      "min": 0,
+      "max": 2
+    }
+  }
+}

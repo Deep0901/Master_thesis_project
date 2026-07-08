@@ -16,9 +16,15 @@ Thesis: Improving Access to Swiss OGD through Fuzzy HCIR
 
 import requests
 import json
+import hashlib
+import shutil
 import time
 import logging
 import os
+import platform
+import subprocess
+import statistics
+import sys
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass, field, asdict
@@ -32,6 +38,8 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+COLLECTOR_VERSION = "1.1"
 
 
 @dataclass
@@ -171,6 +179,12 @@ class OpenDataSwissCollector:
         self.session.headers.update({
             'User-Agent': 'OGD-Research-Thesis/1.0 (University of Fribourg)'
         })
+
+        self.portal_statistics: Dict[str, Any] = {}
+        self.collection_context: Dict[str, Any] = {}
+        self.collection_started_at: Optional[datetime] = None
+        self.collection_finished_at: Optional[datetime] = None
+        self.api_request_count: int = 0
         
         # Rate limiting
         self.request_delay = 0.2  # seconds between requests
@@ -183,18 +197,26 @@ class OpenDataSwissCollector:
             time.sleep(self.request_delay - elapsed)
         self.last_request_time = time.time()
     
-    def _api_call(self, endpoint: str, params: Dict = None) -> Dict:
-        """Make a rate-limited API call."""
-        self._rate_limit()
+    def _api_call(self, endpoint: str, params: Dict = None, retries: int = 3) -> Dict:
+        """Make a rate-limited API call with basic retry handling."""
         url = f"{self.BASE_URL}/{endpoint}"
-        
-        try:
-            response = self.session.get(url, params=params, timeout=30)
-            response.raise_for_status()
-            return response.json()
-        except requests.RequestException as e:
-            logger.error(f"API call failed: {e}")
-            raise
+        last_error = None
+
+        for attempt in range(1, retries + 1):
+            self._rate_limit()
+            self.api_request_count += 1
+            try:
+                response = self.session.get(url, params=params, timeout=30)
+                response.raise_for_status()
+                return response.json()
+            except requests.RequestException as e:
+                last_error = e
+                logger.warning(f"API call failed (attempt {attempt}/{retries}) for {endpoint}: {e}")
+                if attempt < retries:
+                    time.sleep(min(2.0 * attempt, 5.0))
+
+        logger.error(f"API call failed after {retries} attempts: {last_error}")
+        raise last_error if last_error else requests.RequestException(f"API call failed: {endpoint}")
     
     def get_portal_statistics(self) -> Dict:
         """
@@ -213,25 +235,30 @@ class OpenDataSwissCollector:
         
         # Themes/groups
         result = self._api_call('group_list', {'all_fields': True})
+        groups = result.get('result', [])
         stats['themes'] = [
-            {'name': g['name'], 'title': g.get('title', g['name']), 
+            {'name': g.get('name', ''), 'title': g.get('title', g.get('name', '')),
              'count': g.get('package_count', 0)}
-            for g in result['result']
-        ] if isinstance(result['result'], list) and isinstance(result['result'][0], dict) else result['result']
+            for g in groups
+        ] if isinstance(groups, list) and (not groups or isinstance(groups[0], dict)) else groups
         
         # Organizations
         result = self._api_call('organization_list', {'all_fields': True})
-        if isinstance(result['result'], list):
-            if len(result['result']) > 0 and isinstance(result['result'][0], dict):
+        organizations = result.get('result', [])
+        if isinstance(organizations, list):
+            if len(organizations) > 0 and isinstance(organizations[0], dict):
                 stats['organizations'] = [
-                    {'name': o['name'], 'title': o.get('title', o['name']),
+                    {'name': o.get('name', ''), 'title': o.get('title', o.get('name', '')),
                      'count': o.get('package_count', 0)}
-                    for o in result['result']
+                    for o in organizations
                 ]
             else:
-                stats['organizations'] = result['result']
+                stats['organizations'] = organizations
+        else:
+            stats['organizations'] = organizations
         
         stats['collection_timestamp'] = datetime.now().isoformat()
+        self.portal_statistics = stats
         
         return stats
     
@@ -255,6 +282,14 @@ class OpenDataSwissCollector:
             List of DatasetMetadataRecord objects
         """
         logger.info("Starting comprehensive data collection...")
+        self.collection_started_at = datetime.now()
+        self.collection_finished_at = None
+        self.collection_context = {
+            'batch_size': batch_size,
+            'api_endpoint': f"{self.BASE_URL}/package_search",
+            'requested_max_datasets': max_datasets,
+            'themes': themes or []
+        }
         
         # Get total count
         query_params = {'rows': 0}
@@ -263,17 +298,25 @@ class OpenDataSwissCollector:
         
         result = self._api_call('package_search', query_params)
         total_available = result['result']['count']
+        self.collection_context['portal_total_datasets'] = total_available
         
         total_to_collect = min(total_available, max_datasets) if max_datasets else total_available
-        logger.info(f"Collecting {total_to_collect} of {total_available} available datasets")
+        self.collection_context['datasets_downloaded_target'] = total_to_collect
+        logger.info(f"Portal reports {total_available:,} datasets")
+        logger.info(f"Collecting {total_to_collect:,} of {total_available:,} available datasets")
         
         all_records = []
         collected = 0
+        batch_number = 0
         
         while collected < total_to_collect:
             # Calculate batch
             remaining = total_to_collect - collected
             current_batch = min(batch_size, remaining)
+            batch_number += 1
+            logger.info(
+                f"Downloading batch {batch_number}: offset={collected}, size={current_batch}"
+            )
             
             # Fetch batch
             params = {
@@ -297,8 +340,8 @@ class OpenDataSwissCollector:
                 collected += len(datasets)
                 
                 # Progress logging
-                if collected % 500 == 0 or collected >= total_to_collect:
-                    logger.info(f"Progress: {collected}/{total_to_collect} ({100*collected/total_to_collect:.1f}%)")
+                progress = 100 * collected / total_to_collect if total_to_collect else 100.0
+                logger.info(f"Progress: {collected:,}/{total_to_collect:,} ({progress:.1f}%)")
                 
                 # Safety check
                 if len(datasets) == 0:
@@ -311,6 +354,11 @@ class OpenDataSwissCollector:
                 continue
         
         logger.info(f"Collection complete: {len(all_records)} datasets")
+        self.collection_finished_at = datetime.now()
+        self.collection_context['collection_start_time'] = self.collection_started_at.isoformat() if self.collection_started_at else None
+        self.collection_context['collection_end_time'] = self.collection_finished_at.isoformat() if self.collection_finished_at else None
+        if self.collection_started_at and self.collection_finished_at:
+            self.collection_context['collection_duration_seconds'] = (self.collection_finished_at - self.collection_started_at).total_seconds()
         
         # Save raw data
         if save_raw:
@@ -389,7 +437,7 @@ class OpenDataSwissCollector:
         return record
     
     def _save_collection(self, records: List[DatasetMetadataRecord]):
-        """Save collected data for analysis."""
+        """Save collected data and generate reproducible snapshot artifacts."""
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         
         # Save as JSON
@@ -402,6 +450,400 @@ class OpenDataSwissCollector:
         csv_path = self.cache_dir / f"ogd_metadata_{timestamp}.csv"
         self._save_as_csv(records, csv_path)
         logger.info(f"Saved CSV: {csv_path}")
+
+        immutable_dir = Path("data/snapshots") / timestamp
+        latest_dir = Path("data/snapshots/latest")
+        immutable_dir.mkdir(parents=True, exist_ok=True)
+        latest_dir.mkdir(parents=True, exist_ok=True)
+        logger.info(f"Saving snapshot artifacts to: {immutable_dir}")
+
+        snapshot_payload = [asdict(r) for r in records]
+        snapshot_json_path = immutable_dir / "snapshot.json"
+        statistics_path = immutable_dir / "statistics.json"
+        with open(snapshot_json_path, 'w', encoding='utf-8') as f:
+            json.dump(snapshot_payload, f, ensure_ascii=False, indent=2)
+        logger.info(f"Saving snapshot JSON: {snapshot_json_path}")
+
+        statistics_payload = self._build_snapshot_statistics(records, timestamp)
+        with open(statistics_path, 'w', encoding='utf-8') as f:
+            json.dump(statistics_payload, f, ensure_ascii=False, indent=2)
+        logger.info(f"Saving statistics: {statistics_path}")
+
+        metadata_payload: Dict[str, Any]
+        readme_text: str
+        try:
+            metadata_payload = self._build_snapshot_metadata(
+                timestamp=timestamp,
+                raw_json_path=json_path,
+                raw_csv_path=csv_path,
+                snapshot_json_path=snapshot_json_path,
+                statistics_path=statistics_path,
+                record_count=len(records),
+                statistics_payload=statistics_payload,
+            )
+
+            readme_text = self._build_snapshot_readme(metadata_payload, statistics_payload)
+
+            metadata_path = immutable_dir / "snapshot_metadata.json"
+            readme_path = immutable_dir / "README.md"
+            with open(metadata_path, 'w', encoding='utf-8') as f:
+                json.dump(metadata_payload, f, ensure_ascii=False, indent=2)
+            logger.info(f"Saving metadata: {metadata_path}")
+
+            with open(readme_path, 'w', encoding='utf-8') as f:
+                f.write(readme_text)
+            logger.info(f"Saving README: {readme_path}")
+
+            self._copy_snapshot_to_latest(immutable_dir, latest_dir)
+        except Exception as e:
+            logger.exception(f"Snapshot metadata generation failed; preserving immutable snapshot anyway: {e}")
+            self._copy_snapshot_to_latest(immutable_dir, latest_dir, include_metadata=False)
+
+        logger.info("Finished successfully")
+
+    def _copy_snapshot_to_latest(self, source_dir: Path, latest_dir: Path, include_metadata: bool = True):
+        """Copy snapshot artifacts from an immutable folder into the latest folder."""
+        latest_dir.mkdir(parents=True, exist_ok=True)
+        filenames = ["snapshot.json", "statistics.json"]
+        if include_metadata:
+            filenames.extend(["snapshot_metadata.json", "README.md"])
+
+        for filename in filenames:
+            source = source_dir / filename
+            if source.exists():
+                shutil.copy2(source, latest_dir / filename)
+
+    def _sha256_file(self, path: Path) -> str:
+        """Compute the SHA256 checksum for a file."""
+        digest = hashlib.sha256()
+        with open(path, 'rb') as f:
+            for chunk in iter(lambda: f.read(8192), b''):
+                digest.update(chunk)
+        return digest.hexdigest()
+
+    def _get_git_info(self) -> Dict[str, Optional[str]]:
+        """Return git branch and commit hash if the repository is inside a git checkout."""
+        try:
+            branch = subprocess.run(
+                ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+                capture_output=True,
+                text=True,
+                check=True,
+                cwd=Path.cwd(),
+            ).stdout.strip()
+            commit = subprocess.run(
+                ["git", "rev-parse", "HEAD"],
+                capture_output=True,
+                text=True,
+                check=True,
+                cwd=Path.cwd(),
+            ).stdout.strip()
+            return {
+                'git_branch': branch or None,
+                'git_commit_hash': commit or None,
+            }
+        except Exception:
+            return {
+                'git_branch': None,
+                'git_commit_hash': None,
+            }
+
+    def _build_snapshot_statistics(self, records: List[DatasetMetadataRecord], collection_timestamp: str) -> Dict[str, Any]:
+        """Build snapshot-level statistics from collected dataset records."""
+        def mean(values: List[float]) -> Optional[float]:
+            return statistics.fmean(values) if values else None
+
+        def median(values: List[float]) -> Optional[float]:
+            return statistics.median(values) if values else None
+
+        def percentile(values: List[float], pct: float) -> Optional[float]:
+            if not values:
+                return None
+            sorted_values = sorted(values)
+            if len(sorted_values) == 1:
+                return float(sorted_values[0])
+            position = (len(sorted_values) - 1) * pct / 100.0
+            lower = int(position)
+            upper = min(lower + 1, len(sorted_values) - 1)
+            weight = position - lower
+            return sorted_values[lower] * (1 - weight) + sorted_values[upper] * weight
+
+        def stddev(values: List[float]) -> Optional[float]:
+            return statistics.pstdev(values) if len(values) > 1 else 0.0 if values else None
+
+        def distribution_counter(values: List[Any]) -> Dict[str, Dict[str, float]]:
+            counter = Counter(str(v) for v in values if v not in (None, '', []))
+            total = sum(counter.values())
+            return {
+                key: {
+                    'count': count,
+                    'percentage': round((count / total) * 100, 2) if total else 0.0
+                }
+                for key, count in counter.most_common()
+            }
+
+        def top_items(values: List[Any], limit: int = 20) -> List[Dict[str, Any]]:
+            counter = Counter(str(v) for v in values if v not in (None, '', []))
+            total = sum(counter.values())
+            return [
+                {
+                    'name': name,
+                    'count': count,
+                    'percentage': round((count / total) * 100, 2) if total else 0.0,
+                }
+                for name, count in counter.most_common(limit)
+            ]
+
+        def count_ratio(condition_count: int, total_count: int) -> Dict[str, float]:
+            return {
+                'count': condition_count,
+                'percentage': round((condition_count / total_count) * 100, 2) if total_count else 0.0,
+            }
+
+        total = len(records)
+        days_values = [r.days_since_modified for r in records if isinstance(r.days_since_modified, int)]
+        completeness_values = [r.completeness_score for r in records]
+        title_lengths = [r.title_length for r in records]
+        description_lengths = [r.description_length for r in records]
+        keyword_counts = [r.num_keywords for r in records]
+        resource_counts = [r.num_resources for r in records]
+        dataset_ids = [r.id for r in records]
+        duplicate_counts = Counter(dataset_ids)
+        duplicate_dataset_ids = [dataset_id for dataset_id, count in duplicate_counts.items() if count > 1]
+        duplicate_dataset_count = sum(count - 1 for count in duplicate_counts.values() if count > 1)
+
+        missing_title_count = sum(1 for r in records if not (r.title and any(v for v in r.title.values())))
+        missing_description_count = sum(1 for r in records if not (r.description and any(v for v in r.description.values())))
+        missing_publisher_count = sum(1 for r in records if not (r.publisher or r.organization_name))
+        missing_license_count = sum(1 for r in records if not r.license_id)
+        missing_keywords_count = sum(1 for r in records if not r.keywords)
+        missing_language_count = sum(1 for r in records if not r.language)
+        missing_resources_count = sum(1 for r in records if r.num_resources == 0)
+
+        completeness_distribution = Counter(round(r.completeness_score, 2) for r in records)
+        completeness_distribution_payload = {
+            str(bucket): {
+                'count': count,
+                'percentage': round((count / total) * 100, 2) if total else 0.0,
+            }
+            for bucket, count in sorted(completeness_distribution.items(), key=lambda item: float(item[0]))
+        }
+
+        statistics_payload = {
+            'collection_timestamp': collection_timestamp,
+            'portal_total_datasets': self.collection_context.get('portal_total_datasets', len(records)),
+            'datasets_downloaded': total,
+            'download_duration_seconds': self.collection_context.get('collection_duration_seconds'),
+            'batch_size': self.collection_context.get('batch_size'),
+            'api_endpoint': self.collection_context.get('api_endpoint', f"{self.BASE_URL}/package_search"),
+            'collector_version': COLLECTOR_VERSION,
+            'average_completeness': mean(completeness_values),
+            'average_title_length': mean(title_lengths),
+            'average_description_length': mean(description_lengths),
+            'average_resources_per_dataset': mean(resource_counts),
+            'average_keywords': mean(keyword_counts),
+            'average_days_since_modified': mean(days_values),
+            'median_days_since_modified': median(days_values),
+            'minimum_days_since_modified': min(days_values) if days_values else None,
+            'maximum_days_since_modified': max(days_values) if days_values else None,
+            'duplicate_dataset_count': duplicate_dataset_count,
+            'duplicate_dataset_ids': duplicate_dataset_ids,
+            'datasets_with_api': count_ratio(sum(1 for r in records if r.has_api), total),
+            'datasets_with_download': count_ratio(sum(1 for r in records if r.has_download), total),
+            'datasets_without_resources': count_ratio(sum(1 for r in records if r.num_resources == 0), total),
+            'missing_title_count': missing_title_count,
+            'missing_description_count': missing_description_count,
+            'missing_publisher_count': missing_publisher_count,
+            'missing_license_count': missing_license_count,
+            'missing_keywords_count': missing_keywords_count,
+            'missing_language_count': missing_language_count,
+            'missing_resources_count': missing_resources_count,
+            'languages_distribution': distribution_counter(language for record in records for language in record.language),
+            'resource_format_distribution': distribution_counter(format_name for record in records for format_name in record.resource_formats),
+            'theme_distribution': distribution_counter(theme for record in records for theme in record.themes),
+            'organization_distribution': distribution_counter(record.organization_name or record.organization_title for record in records),
+            'license_distribution': distribution_counter(record.license_id for record in records),
+            'resource_count_distribution': distribution_counter(resource_counts),
+            'top_20_publishers': top_items(record.publisher or record.organization_title or record.organization_name for record in records),
+            'top_20_resource_formats': top_items(format_name for record in records for format_name in record.resource_formats),
+            'top_20_themes': top_items(theme for record in records for theme in record.themes),
+            'top_20_languages': top_items(language for record in records for language in record.language),
+            'metadata_completeness_distribution': completeness_distribution_payload,
+            'summary_statistics': {
+                'days_since_modified': {
+                    'count': len(days_values),
+                    'mean': mean(days_values),
+                    'median': median(days_values),
+                    'std_dev': stddev(days_values),
+                    'min': min(days_values) if days_values else None,
+                    'max': max(days_values) if days_values else None,
+                    'p10': percentile(days_values, 10),
+                    'p25': percentile(days_values, 25),
+                    'p50': percentile(days_values, 50),
+                    'p75': percentile(days_values, 75),
+                    'p90': percentile(days_values, 90),
+                },
+                'completeness_score': {
+                    'count': len(completeness_values),
+                    'mean': mean(completeness_values),
+                    'median': median(completeness_values),
+                    'std_dev': stddev(completeness_values),
+                    'min': min(completeness_values) if completeness_values else None,
+                    'max': max(completeness_values) if completeness_values else None,
+                    'p25': percentile(completeness_values, 25),
+                    'p75': percentile(completeness_values, 75),
+                    'p95': percentile(completeness_values, 95),
+                },
+                'title_length': {
+                    'count': len(title_lengths),
+                    'mean': mean(title_lengths),
+                    'median': median(title_lengths),
+                    'std_dev': stddev(title_lengths),
+                    'min': min(title_lengths) if title_lengths else None,
+                    'max': max(title_lengths) if title_lengths else None,
+                },
+                'description_length': {
+                    'count': len(description_lengths),
+                    'mean': mean(description_lengths),
+                    'median': median(description_lengths),
+                    'std_dev': stddev(description_lengths),
+                    'min': min(description_lengths) if description_lengths else None,
+                    'max': max(description_lengths) if description_lengths else None,
+                },
+                'keywords_per_dataset': {
+                    'count': len(keyword_counts),
+                    'mean': mean(keyword_counts),
+                    'median': median(keyword_counts),
+                    'std_dev': stddev(keyword_counts),
+                    'min': min(keyword_counts) if keyword_counts else None,
+                    'max': max(keyword_counts) if keyword_counts else None,
+                },
+                'resources_per_dataset': {
+                    'count': len(resource_counts),
+                    'mean': mean(resource_counts),
+                    'median': median(resource_counts),
+                    'std_dev': stddev(resource_counts),
+                    'min': min(resource_counts) if resource_counts else None,
+                    'max': max(resource_counts) if resource_counts else None,
+                }
+            }
+        }
+
+        return statistics_payload
+
+    def _build_snapshot_metadata(
+        self,
+        *,
+        timestamp: str,
+        raw_json_path: Path,
+        raw_csv_path: Path,
+        snapshot_json_path: Path,
+        statistics_path: Path,
+        record_count: int,
+        statistics_payload: Dict[str, Any],
+    ) -> Dict[str, Any]:
+        """Build descriptive metadata for the generated snapshot."""
+        created_at = self.collection_finished_at.isoformat() if self.collection_finished_at else timestamp
+        collection_duration = self.collection_context.get('collection_duration_seconds')
+
+        return {
+            'snapshot_name': 'latest',
+            'created_at': created_at,
+            'snapshot_timestamp': created_at,
+            'portal_name': 'opendata.swiss',
+            'api_endpoint': self.collection_context.get('api_endpoint', f"{self.BASE_URL}/package_search"),
+            'collection_method': 'CKAN package_search',
+            'collector_class': self.__class__.__name__,
+            'repository': 'Master_thesis_project',
+            'research_project': 'Improving Access to Swiss Open Government Data through Human-Centered Information Retrieval Using Fuzzy Logic-Based Ranking',
+            'thesis': 'Improving Access to Swiss Open Government Data through Human-Centered Information Retrieval Using Fuzzy Logic-Based Ranking',
+            'university': 'University of Fribourg',
+            'batch_size': self.collection_context.get('batch_size'),
+            'pagination_supported': True,
+            'rate_limiting': f'{self.request_delay:.1f}s between requests',
+            'total_api_requests': self.api_request_count,
+            'datasets_downloaded': record_count,
+            'collection_duration_seconds': collection_duration,
+            'collection_start_time': self.collection_context.get('collection_start_time'),
+            'collection_end_time': self.collection_context.get('collection_end_time'),
+            'python_version': sys.version,
+            'platform': platform.platform(),
+            'timestamped_raw_json': str(raw_json_path),
+            'timestamped_raw_csv': str(raw_csv_path),
+            'snapshot_json': str(snapshot_json_path),
+            'statistics_json': str(statistics_path),
+            'snapshot_json_sha256': self._sha256_file(snapshot_json_path) if snapshot_json_path.exists() else None,
+            'statistics_json_sha256': self._sha256_file(statistics_path) if statistics_path.exists() else None,
+            **self._get_git_info(),
+            'collector_version': COLLECTOR_VERSION,
+            'portal_total_datasets': statistics_payload.get('portal_total_datasets'),
+        }
+
+    def _build_snapshot_readme(self, metadata: Dict[str, Any], statistics_payload: Dict[str, Any]) -> str:
+        """Build a README describing the reproducible snapshot folder."""
+        collection_duration = metadata.get('collection_duration_seconds')
+        expected_runtime = 'roughly 30 minutes to several hours depending on portal speed and rate limiting'
+
+        return f"""# Swiss OGD Snapshot
+
+## Purpose
+This folder contains a reproducible snapshot of the opendata.swiss portal collected for the Master's thesis research project.
+
+## Collection Details
+- Collection date: {metadata.get('created_at')}
+- Snapshot timestamp: {metadata.get('snapshot_timestamp')}
+- Portal: {metadata.get('portal_name')}
+- API endpoint: {metadata.get('api_endpoint')}
+- Collector: {metadata.get('collector_class')}
+- Dataset count: {metadata.get('datasets_downloaded')}
+- Portal total datasets reported: {metadata.get('portal_total_datasets')}
+- Collector version: {metadata.get('collector_version')}
+- Python version: {metadata.get('python_version')}
+- Total API requests: {metadata.get('total_api_requests')}
+- Git branch: {metadata.get('git_branch')}
+- Git commit: {metadata.get('git_commit_hash')}
+
+## Research Context
+- Research project: {metadata.get('research_project')}
+- Thesis: {metadata.get('thesis')}
+- University: {metadata.get('university')}
+
+## Folder Contents
+- `snapshot.json`: every collected DatasetMetadataRecord serialized as UTF-8 JSON with indent=2.
+- `statistics.json`: automatically computed portal and dataset statistics.
+- `snapshot_metadata.json`: technical metadata about how the snapshot was produced.
+- `README.md`: this documentation file.
+- Timestamped raw exports are stored separately under `data/raw/` and are preserved.
+
+## Integrity Checks
+- SHA256 snapshot.json: {metadata.get('snapshot_json_sha256')}
+- SHA256 statistics.json: {metadata.get('statistics_json_sha256')}
+
+## How the Snapshot Was Produced
+The collector uses CKAN `package_search` pagination with rate limiting and batches of {metadata.get('batch_size')} datasets. The default collection target is the full portal snapshot (`max_datasets=None`). The timestamped raw JSON and CSV exports are still written first, then the snapshot artifacts in `data/snapshots/latest/` are refreshed.
+
+## How to Reproduce
+1. Run `python -m code.data_collection.comprehensive_collector`.
+2. The collector will fetch the full portal snapshot and overwrite this `latest` directory.
+3. Review `snapshot.json`, `statistics.json`, and `snapshot_metadata.json` for the generated outputs.
+
+## Runtime Notes
+- Expected runtime: {expected_runtime}
+- Measured collection duration seconds: {collection_duration}
+- Rate limiting: {metadata.get('rate_limiting')}
+
+## Reproducibility Statement
+This snapshot is intended for thesis publication and long-term reproducibility. The raw timestamped exports remain available alongside the latest overwriteable snapshot so that future readers can compare the exact frozen snapshot against prior runs.
+
+## Example Structure
+```text
+data/snapshots/latest/
+  README.md
+  snapshot.json
+  snapshot_metadata.json
+  statistics.json
+```
+"""
     
     def _save_as_csv(self, records: List[DatasetMetadataRecord], path: Path):
         """Save records as CSV for statistical analysis."""
@@ -465,7 +907,7 @@ def main():
     print("    Note: For full thesis, collect ALL datasets")
     
     records = collector.collect_all_datasets(
-        max_datasets=500,  # Start with sample; use None for full collection
+        max_datasets=None,
         batch_size=100,
         save_raw=True
     )

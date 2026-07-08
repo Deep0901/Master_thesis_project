@@ -1,0 +1,108 @@
+from __future__ import annotations
+
+from datetime import datetime, timedelta
+from typing import Dict, List
+
+
+def get_demo_data() -> List[Dict]:
+    """Get demo datasets for offline testing."""
+    return [
+        {
+            "name": "air-quality-zurich-2024",
+            "title": {"en": "Air Quality Measurements Zurich 2024", "de": "Luftqualitätsmessungen Zürich 2024"},
+            "description": {
+                "en": "Daily air quality measurements including PM2.5, PM10, NO2, and O3 levels across monitoring stations in the Zurich metropolitan area. Updated regularly with quality-controlled data."
+            },
+            "tags": [{"name": "air quality"}, {"name": "pollution"}, {"name": "environment"}, {"name": "PM2.5"}, {"name": "zurich"}],
+            "groups": [{"name": "environment"}],
+            "resources": [{"format": "CSV"}, {"format": "JSON"}, {"format": "API"}],
+            "organization": {"name": "Stadt Zürich", "title": "City of Zurich"},
+            "metadata_modified": (datetime.now() - timedelta(days=3)).isoformat(),
+            "metadata_created": (datetime.now() - timedelta(days=400)).isoformat(),
+            "license_id": "cc-by-4.0",
+        },
+        {
+            "name": "traffic-volume-swiss-highways-2023",
+            "title": {"en": "Traffic Volume Swiss Highways 2023", "de": "Verkehrsaufkommen Schweizer Autobahnen 2023"},
+            "description": {"en": "Annual traffic volume statistics for Swiss national highways and main roads. Includes vehicle counts, peak hours, and seasonal variations."},
+            "tags": [{"name": "traffic"}, {"name": "transport"}, {"name": "mobility"}, {"name": "highways"}],
+            "groups": [{"name": "mobility"}],
+            "resources": [{"format": "CSV"}, {"format": "PDF"}],
+            "organization": {"name": "ASTRA", "title": "Federal Roads Office"},
+            "metadata_modified": (datetime.now() - timedelta(days=45)).isoformat(),
+            "metadata_created": (datetime.now() - timedelta(days=800)).isoformat(),
+            "license_id": "cc-by-4.0",
+        },
+        {
+            "name": "water-quality-swiss-rivers-2024",
+            "title": {"en": "Water Quality Swiss Rivers 2024", "de": "Wasserqualität Schweizer Flüsse 2024"},
+            "description": {"en": "Comprehensive water quality measurements for major Swiss rivers including pollution indicators, chemical parameters, and biological quality indices."},
+            "tags": [{"name": "water quality"}, {"name": "rivers"}, {"name": "environment"}, {"name": "pollution"}],
+            "groups": [{"name": "environment"}],
+            "resources": [{"format": "CSV"}, {"format": "JSON"}, {"format": "GeoJSON"}],
+            "organization": {"name": "BAFU", "title": "Federal Office for the Environment"},
+            "metadata_modified": (datetime.now() - timedelta(days=10)).isoformat(),
+            "metadata_created": (datetime.now() - timedelta(days=200)).isoformat(),
+            "license_id": "cc-by-4.0",
+        },
+        {
+            "name": "public-transport-punctuality-sbb",
+            "title": {"en": "Public Transport Punctuality Statistics", "de": "Pünktlichkeitsstatistik öffentlicher Verkehr"},
+            "description": {"en": "Statistics on train and bus punctuality across the Swiss public transport network. Monthly aggregated data."},
+            "tags": [{"name": "public transport"}, {"name": "trains"}, {"name": "mobility"}, {"name": "punctuality"}],
+            "groups": [{"name": "mobility"}],
+            "resources": [{"format": "CSV"}],
+            "organization": {"name": "SBB", "title": "Swiss Federal Railways"},
+            "metadata_modified": (datetime.now() - timedelta(days=180)).isoformat(),
+            "metadata_created": (datetime.now() - timedelta(days=1500)).isoformat(),
+            "license_id": "cc-by-4.0",
+        },
+        {
+            "name": "noise-pollution-cities-switzerland",
+            "title": {"en": "Noise Pollution Urban Areas Switzerland", "de": "Lärmbelastung Städte Schweiz"},
+            "description": {"en": "Noise level measurements and mapping data for Swiss urban areas. Includes road traffic noise, railway noise, and aircraft noise exposure data."},
+            "tags": [{"name": "noise"}, {"name": "pollution"}, {"name": "environment"}, {"name": "cities"}, {"name": "health"}],
+            "groups": [{"name": "environment"}],
+            "resources": [{"format": "CSV"}, {"format": "GeoJSON"}, {"format": "PDF"}],
+            "organization": {"name": "BAFU", "title": "Federal Office for the Environment"},
+            "metadata_modified": (datetime.now() - timedelta(days=90)).isoformat(),
+            "metadata_created": (datetime.now() - timedelta(days=600)).isoformat(),
+            "license_id": "cc-by-4.0",
+        },
+        {
+            "name": "forest-inventory-switzerland",
+            "title": {"en": "Swiss National Forest Inventory", "de": "Schweizerisches Landesforstinventar"},
+            "description": {"en": "Complete forest inventory data including forest coverage, tree species distribution, forest health indicators, and biomass estimates."},
+            "tags": [{"name": "forest"}, {"name": "environment"}, {"name": "biodiversity"}, {"name": "vegetation"}],
+            "groups": [{"name": "environment"}],
+            "resources": [{"format": "CSV"}, {"format": "JSON"}, {"format": "GeoJSON"}, {"format": "PDF"}, {"format": "XLSX"}],
+            "organization": {"name": "WSL", "title": "Swiss Federal Research Institute"},
+            "metadata_modified": (datetime.now() - timedelta(days=30)).isoformat(),
+            "metadata_created": (datetime.now() - timedelta(days=2000)).isoformat(),
+            "license_id": "cc-by-4.0",
+        },
+        {
+            "name": "bicycle-infrastructure-network",
+            "title": {"en": "Swiss Bicycle Infrastructure Network", "de": "Veloinfrastruktur Schweiz"},
+            "description": {"en": "Cycling routes, bike lanes, and bicycle parking facilities across Switzerland. Complete network data with quality attributes."},
+            "tags": [{"name": "bicycle"}, {"name": "cycling"}, {"name": "mobility"}, {"name": "infrastructure"}],
+            "groups": [{"name": "mobility"}],
+            "resources": [{"format": "GeoJSON"}, {"format": "CSV"}],
+            "organization": {"name": "ARE", "title": "Federal Office for Spatial Development"},
+            "metadata_modified": (datetime.now() - timedelta(days=60)).isoformat(),
+            "metadata_created": (datetime.now() - timedelta(days=500)).isoformat(),
+            "license_id": "cc-by-4.0",
+        },
+        {
+            "name": "climate-data-meteoswiss",
+            "title": {"en": "Climate Data Switzerland", "de": "Klimadaten Schweiz"},
+            "description": {"en": "Historical and current climate data from MeteoSwiss including temperature, precipitation, and other meteorological parameters."},
+            "tags": [{"name": "climate"}, {"name": "weather"}, {"name": "temperature"}, {"name": "environment"}],
+            "groups": [{"name": "environment"}],
+            "resources": [{"format": "CSV"}, {"format": "JSON"}, {"format": "API"}, {"format": "NetCDF"}],
+            "organization": {"name": "MeteoSwiss", "title": "Federal Office of Meteorology"},
+            "metadata_modified": (datetime.now() - timedelta(days=1)).isoformat(),
+            "metadata_created": (datetime.now() - timedelta(days=3000)).isoformat(),
+            "license_id": "cc-by-4.0",
+        },
+    ]

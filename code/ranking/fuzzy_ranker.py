@@ -363,12 +363,14 @@ class FuzzyRanker:
         # Run fuzzy inference
         try:
             result = self.inference_engine.infer(
-                similarity=thematic_sim,
-                recency=recency,
-                completeness=completeness,
-                resources=resource_avail
+                {
+                    "thematic_similarity": thematic_sim,
+                    "recency": recency,
+                    "completeness": completeness,
+                    "resource_availability": resource_avail,
+                }
             )
-            relevance = result.get("relevance", 0.5)
+            relevance = result.crisp_output / 100.0
         except Exception as e:
             relevance = thematic_sim * 0.6 + (1 - min(recency, 730) / 730) * 0.2 + completeness * 0.2
         

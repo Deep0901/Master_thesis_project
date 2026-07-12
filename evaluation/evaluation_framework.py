@@ -28,6 +28,7 @@ University of Fribourg, Human-IST Institute
 import json
 import math
 import numpy as np
+from sklearn.metrics import cohen_kappa_score
 from typing import List, Dict, Tuple, Optional, Set
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
@@ -290,6 +291,86 @@ class IRMetrics:
             return 0.0
         
         return dcg / idcg
+
+
+def compute_quadratic_weighted_kappa(judge1_grades: List[int], judge2_grades: List[int]) -> float:
+    """Compute quadratic weighted kappa for two grade lists.
+
+    Args:
+        judge1_grades: First judge's relevance grades.
+        judge2_grades: Second judge's relevance grades.
+
+    Returns:
+        Quadratic weighted kappa score in the range [-1, 1].
+    """
+    if len(judge1_grades) != len(judge2_grades):
+        raise ValueError("Judge grade lists must have the same length")
+
+    if not judge1_grades:
+        return 0.0
+
+    score = cohen_kappa_score(judge1_grades, judge2_grades, weights="quadratic")
+    if np.isnan(score):
+        return 1.0 if judge1_grades == judge2_grades else 0.0
+    return float(score)
+
+
+def compute_percentage_agreement(judge1_grades: List[int], judge2_grades: List[int]) -> float:
+    """Compute exact percentage agreement between two judges.
+
+    Args:
+        judge1_grades: First judge's relevance grades.
+        judge2_grades: Second judge's relevance grades.
+
+    Returns:
+        Percentage agreement in the range [0, 100].
+    """
+    if len(judge1_grades) != len(judge2_grades):
+        raise ValueError("Judge grade lists must have the same length")
+
+    if not judge1_grades:
+        return 0.0
+
+    matches = sum(1 for left, right in zip(judge1_grades, judge2_grades) if left == right)
+    return (matches / len(judge1_grades)) * 100.0
+
+
+def compute_disagreement_count(judge1_grades: List[int], judge2_grades: List[int]) -> int:
+    """Count the number of disagreements between two judges.
+
+    Args:
+        judge1_grades: First judge's relevance grades.
+        judge2_grades: Second judge's relevance grades.
+
+    Returns:
+        Number of positions with different grades.
+    """
+    if len(judge1_grades) != len(judge2_grades):
+        raise ValueError("Judge grade lists must have the same length")
+
+    return sum(1 for left, right in zip(judge1_grades, judge2_grades) if left != right)
+
+
+def landis_koch_category(kappa: float) -> str:
+    """Map a kappa score to a Landis and Koch agreement category.
+
+    Args:
+        kappa: Agreement coefficient.
+
+    Returns:
+        Human-readable agreement category.
+    """
+    if kappa < 0.0:
+        return "poor"
+    if kappa < 0.21:
+        return "slight"
+    if kappa < 0.41:
+        return "fair"
+    if kappa < 0.61:
+        return "moderate"
+    if kappa < 0.81:
+        return "substantial"
+    return "almost perfect"
 
 
 # =============================================================================

@@ -1,0 +1,1247 @@
+{
+  "ENV-01": {
+    "query": {
+      "query_id": "ENV-01",
+      "query_text": "Aktuelle Luftqualitätsdaten für Schweizer Städte",
+      "query_language": "de",
+      "domain": "",
+      "intent": "",
+      "expected_themes": [],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "ba3e50ef-193e-4bb9-aec4-14f0c60c9f18",
+        "dataset_title": "Statistik der Schweizer Städte 2020",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "46c3da32-b46b-4244-8ce2-2a532c11dc8b",
+        "dataset_title": "Statistik der Schweizer Städte 2021",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "4ac2c7c8-c53c-43db-8812-249a8ae8587a",
+        "dataset_title": "Statistik der Schweizer Städte 2022",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "51c60b7b-95dc-4170-8553-b3d56b1fa5c3",
+        "dataset_title": "Statistik der Schweizer Städte 2023",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "170cdbf1-6750-47df-88f3-4af662acf880",
+        "dataset_title": "Statistik der Schweizer Städte 2024",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "b72bba72-04fe-46ad-9ff3-55e231928c6d",
+        "dataset_title": "Statistik der Schweizer Städte 2026",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "ad5e9cb5-ad98-4714-82e9-d037f496f39f",
+        "dataset_title": "Statistik der Schweizer Städte 2019",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "257361e4-b678-4786-a059-e45ba6cf0e8f",
+        "dataset_title": "Statistik der Schweizer Städte 2025",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "a122768e-236f-4129-a6b1-343013ed24fe",
+        "dataset_title": "Geteilte Mikromobilität: Aktuelle Verfügbarkeit",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "d27547c7-fa71-49d9-b750-96a3d4262bfa",
+        "dataset_title": "Aktuelle Temperaturen der Gartenbäder",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      }
+    ]
+  },
+  "ENV-02": {
+    "query": {
+      "query_id": "ENV-02",
+      "query_text": "Biodiversität und Artenschutz in der Schweiz",
+      "query_language": "de",
+      "domain": "",
+      "intent": "",
+      "expected_themes": [],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "d0a4c896-3388-42cc-b990-b8527f42e5d3",
+        "dataset_title": "Sachplan Biodiversität, Mitwirkungsverfahren",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "4a3c802f-fe0f-4f66-a8ba-2f5dbb2e558a",
+        "dataset_title": "Sachplan Biodiversität",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "a40b8a2a-459c-452b-9030-e1e3a3f8a030",
+        "dataset_title": "Labiola Biodiversität",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "8f49eb92-1cbc-4da4-a005-506783411520",
+        "dataset_title": "Internetnutzerinnen und -nutzer in der Schweiz",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "6f5fa86c-d6f4-4f44-979c-5d0295d3aa6a",
+        "dataset_title": "Religion und Spiritualität in der Schweiz",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "02d39321-be7c-4d51-a7fb-ab1b77fb2b38",
+        "dataset_title": "Monatliche Heizgradtage und Kühlgradtage in der Schweiz (gewichtet)",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "0e7f61c9-561d-45fd-9067-52e38d7531a5",
+        "dataset_title": "Sprachliche Praktiken in der Schweiz",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "c2c41538-9ab4-4764-8ffa-1f8292dbcbd5",
+        "dataset_title": "Religiöse und spirituelle Praktiken und Glaubensformen in der Schweiz",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "9d742ac4-7d3c-4721-87f3-59817c967274",
+        "dataset_title": "Witterung in der Schweiz",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "bfccec42-c7e0-42d9-bc8c-58284ae98846",
+        "dataset_title": "Studierende und Abschlüsse auf Tertiärstufe in der Schweiz",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      }
+    ]
+  },
+  "ENV-03": {
+    "query": {
+      "query_id": "ENV-03",
+      "query_text": "Wasserqualität in Schweizer Seen und Flüssen",
+      "query_language": "de",
+      "domain": "",
+      "intent": "",
+      "expected_themes": [],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "9fe148fb-458a-4c1e-ab77-ef9ff9338065",
+        "dataset_title": "Badewasserqualität in öffentlichen Badeanstalten an Flüssen und Seen im Kanton Zürich",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "3db9530e-7874-44fe-90fa-379ed56cbb91",
+        "dataset_title": "Wasserqualität an Badeplätzen",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "3867bfb9-44b9-42c6-b313-1da768d14746",
+        "dataset_title": "Seen und Weiher",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "bc5dabe8-1f8f-4433-b4f3-1fabaaf4d555",
+        "dataset_title": "Ökomorphologie Seen",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "c08e1973-b6b8-4bcd-a5f8-515d99aa65eb",
+        "dataset_title": "Phosphorgehalt in Seen",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "ecc1bdbd-afb3-4603-938f-66afa22784f1",
+        "dataset_title": "Regionale Untersuchungsgebiete Wasserqualität",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "e20c5c4a-d8fd-40ca-b638-ea386b2a9c68",
+        "dataset_title": "Fängeranlagen in Bächen und Flüssen - Standort und Informationen",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "9b522a2d-0bf2-4dc8-a149-c7fe5524e6cd",
+        "dataset_title": "Oekomorphologie Seen (WMS)",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "87dfb3b7-cfcd-49e9-8229-11f542b50f65",
+        "dataset_title": "Fängeranlagen in Bächen und Flüssen - Standort und Informationen (WFS)",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "2212a6dd-a373-45e1-a960-6281b53e7a20",
+        "dataset_title": "Fängeranlagen in Bächen und Flüssen - Standort und Informationen (WMS)",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      }
+    ]
+  },
+  "ENV-04": {
+    "query": {
+      "query_id": "ENV-04",
+      "query_text": "Lärmbelastung und Lärmkarten Schweiz",
+      "query_language": "de",
+      "domain": "",
+      "intent": "",
+      "expected_themes": [],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "5f6be783-3fb9-442e-8c0d-677abad241e4",
+        "dataset_title": "Lärmbelastung Aussenräume",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "70e647a8-9971-4900-802d-7305d5d624ae",
+        "dataset_title": "Lärmbelastungskataster für Haupt- und übrige Strassen",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "8f49eb92-1cbc-4da4-a005-506783411520",
+        "dataset_title": "Internetnutzerinnen und -nutzer in der Schweiz",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "50afa295-b629-4d3b-ad2c-eabe8310d7ac",
+        "dataset_title": "Strategische Lärmkarte - Lärmbelastung LDEN",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "1640d75e-dfb0-4cfb-86b6-0a551d9ac224",
+        "dataset_title": "Strategische Lärmkarte - Lärmbelastung LNight",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "6f5fa86c-d6f4-4f44-979c-5d0295d3aa6a",
+        "dataset_title": "Religion und Spiritualität in der Schweiz",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "c2c41538-9ab4-4764-8ffa-1f8292dbcbd5",
+        "dataset_title": "Religiöse und spirituelle Praktiken und Glaubensformen in der Schweiz",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "02d39321-be7c-4d51-a7fb-ab1b77fb2b38",
+        "dataset_title": "Monatliche Heizgradtage und Kühlgradtage in der Schweiz (gewichtet)",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "bfccec42-c7e0-42d9-bc8c-58284ae98846",
+        "dataset_title": "Studierende und Abschlüsse auf Tertiärstufe in der Schweiz",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "b89691ff-6a3e-4482-b02e-b0c9b929cff1",
+        "dataset_title": "Arbeitsorganisation und Arbeitszeitgestaltung in der Schweiz und im europäischen Vergleich 2019",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      }
+    ]
+  },
+  "ENV-05": {
+    "query": {
+      "query_id": "ENV-05",
+      "query_text": "Klimawandel und CO2-Emissionen Schweiz",
+      "query_language": "de",
+      "domain": "",
+      "intent": "",
+      "expected_themes": [],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "55d84485-7d0a-4f99-83b3-e146cdbb51b1",
+        "dataset_title": "CO2-Emissionen im Gebäudebereich nach Energieträgern und Gemeinden",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "71d2a8c1-11e4-4a79-9e35-37d864324054",
+        "dataset_title": "CO2-Emissionen nach Energieträger, Gemeinde und Jahr (seit 2018)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "2a877ca1-f9ff-4c4d-87ad-31a4dedd7173",
+        "dataset_title": "Durchschnittliche CO2-Emissionen nach Treibstoffart (PW)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "1c8723d4-38a3-4bda-a912-7e29fb527cd2",
+        "dataset_title": "Kennzahlen alternativ angetriebene LNF - Durchschnittliche CO2-Emissionen",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "aece8fbb-f1d3-428f-a8cf-75b4566bc49a",
+        "dataset_title": "Kennzahlen alternativ angetriebene PW - Durchschnittliche CO2-Emissionen",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "8ff254fb-703b-40fa-bb7f-80207ad8ee3b",
+        "dataset_title": "CO2-Emissionen im Gebäudebereich nach Energieträgern (Ebene Kanton)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "458a6f99-da5d-432d-af06-577857bba69e",
+        "dataset_title": "Energieverbrauch und CO2-Ausstoss pro Energiebezugsfläche nach Bauperiode",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "edcc92fd-99b6-498c-baea-3bc154833df2",
+        "dataset_title": "Material- und Energieflüsse Schweiz und St.Gallen (EMPA MATCH) Synthese 2020 Konsum (Tonnen & CO2eq)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "b29fc849-78d0-45d5-84be-02e23eb3e5a3",
+        "dataset_title": "Material- und Energieflüsse Schweiz und St.Gallen (EMPA MATCH) Synthese 2020 Entsorgungswege (Tonnen & CO2eq)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "18372511-711b-4e4d-acfb-3a89597eca7c",
+        "dataset_title": "CO2-Gesetz",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      }
+    ]
+  },
+  "MOB-01": {
+    "query": {
+      "query_id": "MOB-01",
+      "query_text": "Öffentlicher Verkehr Fahrplandaten Schweiz",
+      "query_language": "de",
+      "domain": "",
+      "intent": "",
+      "expected_themes": [],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "b0ff96a9-415f-4ecc-91ce-658b010c2318",
+        "dataset_title": "öffentlicher Verkehr",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "0786e547-17aa-43f4-8f8a-caefa265fcdb",
+        "dataset_title": "Öffentlicher Verkehr",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "b94115a8-1f10-4aaa-b8ab-49168847126c",
+        "dataset_title": "Güteklassen öffentlicher Verkehr",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "4f13d6d5-4b4d-4544-8e23-a60e4e0ece0e",
+        "dataset_title": "Liniennetz öffentlicher Verkehr",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "59be5ca1-161a-4689-bbb0-3826f7fbcf67",
+        "dataset_title": "Öffentlicher Verkehr: Haltestelleneinzugsgebiete mit Angebotsstufen",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "fae3e30d-d0ce-4544-b83c-67d832fa0f02",
+        "dataset_title": "Finanzflussrechnung Strasseninfrastruktur und öffentlicher Verkehr",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "22698a23-8627-4cdf-a8cd-10d68aabe7d6",
+        "dataset_title": "Oeffentlicher Verkehr",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "8c669669-698e-4f1b-810c-3e64c1e2c07a",
+        "dataset_title": "Öffentlicher Verkehr: Haltestellen und Liniennetze Bahn, Bus und Schiff",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "1297c5f8-b2ca-47cd-a1ea-32d6178a7407",
+        "dataset_title": "Netz des öffentlichen Verkehrs",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "1f3e675a-f8eb-4deb-84f9-30c206478eaa",
+        "dataset_title": "Haltestellen des öffentlichen Verkehrs",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      }
+    ]
+  },
+  "MOB-02": {
+    "query": {
+      "query_id": "MOB-02",
+      "query_text": "Verkehrsunfälle Statistik Schweiz",
+      "query_language": "de",
+      "domain": "",
+      "intent": "",
+      "expected_themes": [],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "54594836-a7e6-43b3-967c-411eab2e7ade",
+        "dataset_title": "Verkehrsunfälle 2019",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "585c28b4-b33f-46e7-8eb7-4a18b602007f",
+        "dataset_title": "Verkehrsunfälle 2020",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "343411d9-b47c-4453-a07f-b9614924ff60",
+        "dataset_title": "Verkehrsunfälle 2022",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "b2b5bde3-2dc1-4c60-ac40-7e8391f99d38",
+        "dataset_title": "Verkehrsunfälle 2021",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "379b86d9-65d2-49e5-a9ab-c0f673c6c2ad",
+        "dataset_title": "Verkehrsunfälle 2023",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "badcb4d8-2ff9-47b0-a165-ebdc50ec3b57",
+        "dataset_title": "Statistik Sonnenenergie",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "27098f15-5c79-4835-b9a4-bcfd47499bc1",
+        "dataset_title": "Polizeilich registrierte Verkehrsunfälle im Kanton Zürich seit 2011",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "7470756d-0484-429f-bd20-549fd438104b",
+        "dataset_title": "Statistik der Sonderpädagogik",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "ba3e50ef-193e-4bb9-aec4-14f0c60c9f18",
+        "dataset_title": "Statistik der Schweizer Städte 2020",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "b72bba72-04fe-46ad-9ff3-55e231928c6d",
+        "dataset_title": "Statistik der Schweizer Städte 2026",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      }
+    ]
+  },
+  "MOB-03": {
+    "query": {
+      "query_id": "MOB-03",
+      "query_text": "Elektromobilität Ladestationen Schweiz",
+      "query_language": "de",
+      "domain": "",
+      "intent": "",
+      "expected_themes": [],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "3f0a6cf4-56d3-4f9f-bfad-ba8928485d01",
+        "dataset_title": "Smarte Strasse: Elektroauto-Ladestationen",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "857f62bb-5892-4b5f-891f-7cd2f408e182",
+        "dataset_title": "Standorte der IWB Ladestationen für Elektroautos",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "772069a3-ed82-4f75-9394-60d8514d8b8d",
+        "dataset_title": "Belegung der Elektroauto-Ladestationen der IWB",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "efef1e0c-b55d-4b34-9cd9-4327bf38d85a",
+        "dataset_title": "Zeitreihe der Belegung der Elektroauto-Ladestationen der IWB",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "f31baffc-a84a-4755-b1d9-183a9365b5a4",
+        "dataset_title": "Rohdaten-Zeitreihe der Belegung der Elektroauto-Ladestationen der IWB",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "19345c84-c78c-4a62-bc3c-dd2ac372c1c4",
+        "dataset_title": "E-Ladestationen der kantonalen Verwaltung Zürich",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "d59f7920-ebe1-455f-b108-0d2d3337a3e4",
+        "dataset_title": "Anzahl E-Autos und Ladestationen pro Gemeinde",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "df6ecca9-1097-46ad-aa71-97f3f1a32f51",
+        "dataset_title": "Ladestationen für Elektroautos",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "4d7c825b-d73e-4d4b-a5db-e0752fad4cde",
+        "dataset_title": "Kennzahlen alternativ angetriebene LNF",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "98596bd4-f5f8-42db-9c19-a47cef76a634",
+        "dataset_title": "Kennzahlen alternativ angetriebene PW",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      }
+    ]
+  },
+  "MOB-04": {
+    "query": {
+      "query_id": "MOB-04",
+      "query_text": "Veloverkehr und Radwege in der Schweiz",
+      "query_language": "de",
+      "domain": "",
+      "intent": "",
+      "expected_themes": [],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "f13dd245-0c0c-4a35-8a9b-1980f2310fdf",
+        "dataset_title": "Veloinfrastruktur Radwege und Radstreifen",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "389e4170-ff7a-4b57-a3d8-b0651b778dd9",
+        "dataset_title": "Verkehrszähldaten Veloverkehr in Winterthur",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "aa58272d-5f2a-4f9f-96af-16d899d85134",
+        "dataset_title": "Radwege (WMS)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "c8a391ad-b022-48ca-badc-cbb7a20dc34a",
+        "dataset_title": "Radwege (WFS)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "16eed053-fa70-4e54-b9f9-ea2fd0476997",
+        "dataset_title": "Verkehrszähldaten Veloverkehr Kanton Zürich",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "cb777d0e-6c85-4a97-ba38-a6648f44505b",
+        "dataset_title": "WFS Veloinfrastruktur Radwege und Radstreifen auf Staatsstrassen und Velorouten",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "7edf0f57-284b-4b78-adbe-e98999a851a6",
+        "dataset_title": "WMS Veloinfrastruktur Radwege und Radstreifen auf Staatsstrassen und Velorouten",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "a602acbb-16f8-44a6-859c-78e0af6ee6ce",
+        "dataset_title": "Veranstaltungen mit potenziellem Einfluss auf Veloverkehr",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "8f49eb92-1cbc-4da4-a005-506783411520",
+        "dataset_title": "Internetnutzerinnen und -nutzer in der Schweiz",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "6f5fa86c-d6f4-4f44-979c-5d0295d3aa6a",
+        "dataset_title": "Religion und Spiritualität in der Schweiz",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      }
+    ]
+  },
+  "MOB-05": {
+    "query": {
+      "query_id": "MOB-05",
+      "query_text": "Parkplätze und Parkhäuser Echtzeitdaten",
+      "query_language": "de",
+      "domain": "",
+      "intent": "",
+      "expected_themes": [],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "33d60e7a-7cad-4798-85da-9297efbfcb92",
+        "dataset_title": "Parkplätze und Parkhäuser in der Stadt St.Gallen",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "5b1469a3-f1cf-4f9a-9ba2-3a88b6b7e5fd",
+        "dataset_title": "Öffentliche Parkhäuser (WFS)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "414eee39-7265-4be9-940b-a4d73f3ffaac",
+        "dataset_title": "Öffentliche Parkhäuser (WMS)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "5463827b-d17e-46a8-8294-1ecdd204c623",
+        "dataset_title": "Freie Parkplätze in der Stadt St.Gallen (PLS)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "fd694073-15dc-451b-8695-2115018ab399",
+        "dataset_title": "Parkleitsystem Winterthur: Freie Parkplätze in Parkhäusern in Echtzeit",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "8ee79084-9726-449d-879f-9d387b21c1eb",
+        "dataset_title": "Parkhäuser",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "b6826bf9-604f-4303-8ce1-00b988b3187e",
+        "dataset_title": "Aktuelle Belegung der öffentlichen Parkhäuser Basel",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "b195eb62-17aa-4641-8bfe-985043e95f49",
+        "dataset_title": "Zeitreihe der Belegung öffentlicher Parkhäuser Basel",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "5e881d89-f9c7-4387-b801-8d354cb36ef5",
+        "dataset_title": "Parkplätze",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "079f0869-310f-45f9-b91c-1e7f6594b1fd",
+        "dataset_title": "Öffentlich zugängliche Parkhäuser",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      }
+    ]
+  },
+  "XD-01": {
+    "query": {
+      "query_id": "XD-01",
+      "query_text": "Bevölkerungsentwicklung und Demografie Schweiz",
+      "query_language": "de",
+      "domain": "",
+      "intent": "",
+      "expected_themes": [],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "b5c72273-1997-4f58-8e01-8c4f6d7a33c4",
+        "dataset_title": "Grenzüberschreitender City Statistics: Demografie (Agglomerationen 2020)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "41dba165-3203-445e-b1c2-fd5094f79d0d",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Schweiz und der Kantone 2020-2050",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "b7bc728e-de3c-4d98-9db7-668e76989af1",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Schweiz und der Kantone 2025-2055",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "475ec544-bc7a-4bbb-a521-e4063df90768",
+        "dataset_title": "Grenzüberschreitender City Statistics: Demografie (Agglomerationen 2012)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "f6ac425e-bd4f-4ca4-810d-6e53407e8237",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Schweiz 2025-2055 - Bevölkerungswachstum und Bevölkerungsindikatoren nach Szenario-Variante",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "7582a331-6fd2-4f23-aad9-412a5f82de58",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Schweiz 2025-2055 - Bevölkerung und Bewegungen nach Szenario-Variante, Staatsangehörigkeit (Kategorie), Geschlecht und Altersklasse",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "a7cfad54-5094-4a21-80a5-b59e6e5c50a0",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Schweiz 2025-2055 - Bevölkerung und Bewegungen nach Szenario-Variante, Staatsangehörigkeit (Kategorie), Geschlecht und Alter",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "96e459a9-d4a9-4fa5-8c65-6d6be8052ba5",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Schweiz 2025-2055 - Ziffern und Indikatoren nach Szenario-Variante, Staatsangehörigkeit (Kategorie), Geschlecht und Alter",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "ef7e7549-c925-41a3-9f8d-29b9965090c1",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Kantone der Schweiz 2020-2050 - Anzahl der Personen nach Altersklassen und Kantonen gemäss 3 Szenarien",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "45fdd5d0-b938-4730-8536-6d2f0c698b92",
+        "dataset_title": "Szenarien zur Bevölkerungsentwicklung der Kantone 2025-2055 - zukünftige Bevölkerungsentwicklung nach Kanton, Szenario-Variante, Staatsangehörigkeit (Kategorie), Geschlecht und Altersklasse",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      }
+    ]
+  },
+  "XD-02": {
+    "query": {
+      "query_id": "XD-02",
+      "query_text": "Energieverbrauch nach Kantonen",
+      "query_language": "de",
+      "domain": "",
+      "intent": "",
+      "expected_themes": [],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "a704ae2d-2fa3-4159-9c31-201c9bd71e26",
+        "dataset_title": "Energieverbrauch nach Träger in Gigawattstunden",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "09e3ba66-c783-4d92-b164-8113f571c1c7",
+        "dataset_title": "Energieverbrauch und erneuerbare Stromproduktion: Anzahl Hauptheizsysteme nach Gemeinden",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "4c963c00-a88e-48f4-98ef-d054af455c2f",
+        "dataset_title": "Analyse des schweizerischen Energieverbrauchs nach Verwendungszwecken",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "458a6f99-da5d-432d-af06-577857bba69e",
+        "dataset_title": "Energieverbrauch und CO2-Ausstoss pro Energiebezugsfläche nach Bauperiode",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "e6df2f87-e3b5-430f-98ec-8709f70c9199",
+        "dataset_title": "Waldflächen nach Kantonen",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "7e286305-c896-47b0-9e71-37854a082cc7",
+        "dataset_title": "Holzernte nach Kantonen",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "d16d8a0c-c8a7-465d-ab13-a21c529dc85a",
+        "dataset_title": "Waldflächen nach Kantonen",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "30997152-bd3a-4c0c-bf17-13244b905760",
+        "dataset_title": "Holzernte nach Kantonen",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "3545bcdd-9d2f-4686-b742-c7887c3f1cfc",
+        "dataset_title": "Energieverbräuche Portfolio Immobilien Stadt Zürich",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "912f238a-7783-42b3-bd90-24432751af90",
+        "dataset_title": "Ex-Post-Analyse des schweizerischen Energieverbrauchs nach Bestimmungsfaktoren",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      }
+    ]
+  },
+  "XD-03": {
+    "query": {
+      "query_id": "XD-03",
+      "query_text": "Bildungsstatistik Schulen und Universitäten",
+      "query_language": "de",
+      "domain": "",
+      "intent": "",
+      "expected_themes": [],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "b1f56db8-a436-41a6-b005-1d83442238b8",
+        "dataset_title": "Schulen - Standort und Informationen",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "81423087-796b-4f80-b48e-363b246bad1e",
+        "dataset_title": "Schulen - Standort und Informationen (WMS)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "ad2a5cc0-7b4b-495f-815f-bd06e5bbc23e",
+        "dataset_title": "Schulen - Standort und Informationen (WFS)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "f532e3d2-6333-44cb-b2f4-bc0a0453701f",
+        "dataset_title": "Schulen SekII",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "fa0a4f7c-cc7c-4b53-9412-f3946ddb9a59",
+        "dataset_title": "Lernende an Baselbieter Schulen nach Schulstufe und Geschlecht (seit 1986)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "090b7a82-d341-4dc0-9ac6-2bed270a6550",
+        "dataset_title": "Coronavirus (COVID-19): Massentests an Schulen der Primar- und Sekundarstufe I",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "41b161da-899a-4363-82b9-393c557f38ba",
+        "dataset_title": "Coronavirus (COVID-19): Massentests an Schulen",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "d94c19e2-1f56-4c2f-92ae-12db149a0884",
+        "dataset_title": "Lehrkräfte nach Schuljahr, Kanton und Bildungsstufe (öffentliche Schulen) - in Vollzeitäquivalenten",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "61546b51-0256-42c5-96d7-a52deeeabafd",
+        "dataset_title": "Lehrkräfte nach Bildungsstufe (öffentliche Schulen)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "10583306-25a8-461a-8104-e7d9fa270b21",
+        "dataset_title": "Lehrkräfte nach Schuljahr, Kanton, Altersklasse und Bildungsstufe (öffentliche Schulen) - in Personen",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      }
+    ]
+  },
+  "XD-04": {
+    "query": {
+      "query_id": "XD-04",
+      "query_text": "Gesundheitsversorgung und Spitäler",
+      "query_language": "de",
+      "domain": "",
+      "intent": "",
+      "expected_themes": [],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "9a66d665-a6fc-486b-87cc-f7b038732440",
+        "dataset_title": "Spitäler",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "9dc95a97-e55b-42d3-8d88-47e6b5237848",
+        "dataset_title": "Spitäler und Kliniken",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "ae2acc13-6bda-46e4-afac-5e4d6ae842f4",
+        "dataset_title": "Gesundheitsversorgung (GSV): Patientenkennzahlen",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "b6420be7-bfe0-4261-ad11-6ef980f45866",
+        "dataset_title": "Erreichbarkeitsanalyse Spitäler und Kliniken",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "d5990c17-9066-4732-9ec1-7ca048a308a5",
+        "dataset_title": "Gesundheitsversorgung (GSV): Spitalkennzahlen",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "0d4249c4-85c1-4656-9f20-67a537fa9b51",
+        "dataset_title": "Gesundheitsversorgung (GSV): Pflegeheime",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "5ba1b0f9-cf90-40e7-bec5-1843bfcbced5",
+        "dataset_title": "Gesundheitsversorgung (GSV): Pflegeheimbewohnende",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "0255b1bb-d099-427c-bdbf-b16fee3507b6",
+        "dataset_title": "Spitäler: Aufwand und Ertrag (seit 2010)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "5f84c874-5539-41e0-8f4b-ea0a9dcaf11c",
+        "dataset_title": "Gesundheitsversorgung (GSV): Tagesgäste von Tages- und Nachtpflegeeinrichtungen (TNP)",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "e9c13aa7-c9f2-4fcd-9893-986ba4e9e85e",
+        "dataset_title": "Spitäler: Kennzahlen (seit 2010)",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      }
+    ]
+  },
+  "XD-05": {
+    "query": {
+      "query_id": "XD-05",
+      "query_text": "Wirtschaftsstatistik und BIP nach Region",
+      "query_language": "de",
+      "domain": "",
+      "intent": "",
+      "expected_themes": [],
+      "ground_truth": []
+    },
+    "judgments": [
+      {
+        "dataset_id": "56209e2d-7b47-4adb-af4e-dece575c7481",
+        "dataset_title": "Bruttoinlandsprodukt (BIP) nach Grossregion und Kanton",
+        "relevance": 2,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "39de4f3c-e8b1-4e01-acc2-88a681654d53",
+        "dataset_title": "Landwirtschaftsbetriebe: Beschäftige Personen und Wochenarbeitsstunden nach Region",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "b07facc1-6f05-4fd1-8077-7d183162b431",
+        "dataset_title": "Finanzen der sozialen Sicherheit in Europa: Sozialleistungen, in % des BIP",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "91dde242-c253-4c2d-86b3-3b2d60a451d9",
+        "dataset_title": "Landwirtschaftsbetriebe: Betriebsführung, Ausbildung, Eigentumsverhältnisse und Weiterführung nach Region",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "2fb5957d-3e17-4f2c-869a-2abd026278f2",
+        "dataset_title": "Landwirtschaftsbetriebe: Bodenbedeckung im Winter und Bodenbearbeitung nach Region",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "631dedbf-50cf-41ff-89c7-86309de37f0c",
+        "dataset_title": "Kulturfinanzierung durch die öffentliche Hand - Entwicklung nach den Gesamtausgaben der Staatsebenen, dem BIP und in Franken pro Einwohner/in",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "f8d05a23-9ef4-41dd-8bc7-388513ab8322",
+        "dataset_title": "Landwirtschaftsbetriebe: Anzahl Tierplätze, Betriebe und Tiere nach Stallsystem und Region",
+        "relevance": 0,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "7ead17b5-697d-4ff7-b016-247e87970430",
+        "dataset_title": "Finanzen der sozialen Sicherheit in der Schweiz: Gesamtausgaben, Leistungen und Gesamteinnahmen, in % des BIP",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "bad63acc-dcc2-4bc8-95a2-92b56455a3a2",
+        "dataset_title": "Landwirtschaftsbetriebe: Innerbetriebliche Diversifikation und Anteil am Gesamtumsatz nach Region",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      },
+      {
+        "dataset_id": "b475be0d-b291-4cf9-bd88-c2d3a733eae1",
+        "dataset_title": "Öffentliche Bildungsausgaben der Kantone und ihrer Gemeinden im Verhältnis zum BIP, zu den Gesamtausgaben und zur Bevölkerung",
+        "relevance": 1,
+        "annotator": "adjudicated",
+        "notes": ""
+      }
+    ]
+  }
+}

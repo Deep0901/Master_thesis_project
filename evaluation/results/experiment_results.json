@@ -1,0 +1,1633 @@
+{
+  "timestamp": "2026-07-10T21:12:29.820362",
+  "systems": [
+    "Fuzzy",
+    "BM25",
+    "Metadata",
+    "Portal",
+    "Semantic"
+  ],
+  "num_queries": 15,
+  "num_systems": 5,
+  "num_pairwise_comparisons": 40,
+  "query_metrics": [
+    {
+      "query_id": "ENV-01",
+      "system_name": "Fuzzy",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-01",
+      "system_name": "BM25",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-01",
+      "system_name": "Metadata",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-01",
+      "system_name": "Portal",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-01",
+      "system_name": "Semantic",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-02",
+      "system_name": "Fuzzy",
+      "MAP": 0.547619,
+      "P@5": 0.4,
+      "nDCG@10": 0.705074,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "ENV-02",
+      "system_name": "BM25",
+      "MAP": 0.942857,
+      "P@5": 0.8,
+      "nDCG@10": 0.992577,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-02",
+      "system_name": "Metadata",
+      "MAP": 0.75,
+      "P@5": 0.6,
+      "nDCG@10": 0.941616,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-02",
+      "system_name": "Portal",
+      "MAP": 0.833333,
+      "P@5": 0.6,
+      "nDCG@10": 0.97611,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-02",
+      "system_name": "Semantic",
+      "MAP": 0.522222,
+      "P@5": 0.4,
+      "nDCG@10": 0.62678,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "ENV-03",
+      "system_name": "Fuzzy",
+      "MAP": 0.821429,
+      "P@5": 0.8,
+      "nDCG@10": 0.939412,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-03",
+      "system_name": "BM25",
+      "MAP": 0.821088,
+      "P@5": 0.6,
+      "nDCG@10": 0.896293,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-03",
+      "system_name": "Metadata",
+      "MAP": 0.982143,
+      "P@5": 1.0,
+      "nDCG@10": 0.980961,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-03",
+      "system_name": "Portal",
+      "MAP": 0.982143,
+      "P@5": 1.0,
+      "nDCG@10": 0.955132,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-03",
+      "system_name": "Semantic",
+      "MAP": 0.530442,
+      "P@5": 0.4,
+      "nDCG@10": 0.579707,
+      "MRR": 0.25
+    },
+    {
+      "query_id": "ENV-04",
+      "system_name": "Fuzzy",
+      "MAP": 0.798611,
+      "P@5": 0.6,
+      "nDCG@10": 0.922326,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-04",
+      "system_name": "BM25",
+      "MAP": 0.408333,
+      "P@5": 0.4,
+      "nDCG@10": 0.627683,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "ENV-04",
+      "system_name": "Metadata",
+      "MAP": 0.667857,
+      "P@5": 0.6,
+      "nDCG@10": 0.839654,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-04",
+      "system_name": "Portal",
+      "MAP": 0.816667,
+      "P@5": 0.6,
+      "nDCG@10": 0.926758,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-04",
+      "system_name": "Semantic",
+      "MAP": 0.582143,
+      "P@5": 0.4,
+      "nDCG@10": 0.801479,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-05",
+      "system_name": "Fuzzy",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-05",
+      "system_name": "BM25",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-05",
+      "system_name": "Metadata",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-05",
+      "system_name": "Portal",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-05",
+      "system_name": "Semantic",
+      "MAP": 0.8,
+      "P@5": 1.0,
+      "nDCG@10": 0.870125,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-01",
+      "system_name": "Fuzzy",
+      "MAP": 0.790437,
+      "P@5": 0.8,
+      "nDCG@10": 0.870096,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-01",
+      "system_name": "BM25",
+      "MAP": 0.707103,
+      "P@5": 0.8,
+      "nDCG@10": 0.748461,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-01",
+      "system_name": "Metadata",
+      "MAP": 0.707103,
+      "P@5": 0.8,
+      "nDCG@10": 0.755176,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-01",
+      "system_name": "Portal",
+      "MAP": 0.707103,
+      "P@5": 0.8,
+      "nDCG@10": 0.755176,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-01",
+      "system_name": "Semantic",
+      "MAP": 0.617103,
+      "P@5": 0.8,
+      "nDCG@10": 0.651338,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-02",
+      "system_name": "Fuzzy",
+      "MAP": 0.734524,
+      "P@5": 0.8,
+      "nDCG@10": 0.798265,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-02",
+      "system_name": "BM25",
+      "MAP": 0.702778,
+      "P@5": 0.8,
+      "nDCG@10": 0.78849,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-02",
+      "system_name": "Metadata",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-02",
+      "system_name": "Portal",
+      "MAP": 0.97619,
+      "P@5": 1.0,
+      "nDCG@10": 0.993078,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-02",
+      "system_name": "Semantic",
+      "MAP": 0.734524,
+      "P@5": 0.8,
+      "nDCG@10": 0.798265,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-03",
+      "system_name": "Fuzzy",
+      "MAP": 0.988889,
+      "P@5": 1.0,
+      "nDCG@10": 0.999016,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-03",
+      "system_name": "BM25",
+      "MAP": 0.988889,
+      "P@5": 1.0,
+      "nDCG@10": 0.999016,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-03",
+      "system_name": "Metadata",
+      "MAP": 0.988889,
+      "P@5": 1.0,
+      "nDCG@10": 0.999016,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-03",
+      "system_name": "Portal",
+      "MAP": 0.988889,
+      "P@5": 1.0,
+      "nDCG@10": 0.999016,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-03",
+      "system_name": "Semantic",
+      "MAP": 0.888889,
+      "P@5": 1.0,
+      "nDCG@10": 0.975247,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-04",
+      "system_name": "Fuzzy",
+      "MAP": 0.684425,
+      "P@5": 0.6,
+      "nDCG@10": 0.71925,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-04",
+      "system_name": "BM25",
+      "MAP": 0.760268,
+      "P@5": 0.8,
+      "nDCG@10": 0.814773,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-04",
+      "system_name": "Metadata",
+      "MAP": 0.986111,
+      "P@5": 1.0,
+      "nDCG@10": 0.988887,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-04",
+      "system_name": "Portal",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-04",
+      "system_name": "Semantic",
+      "MAP": 0.864435,
+      "P@5": 0.8,
+      "nDCG@10": 0.94835,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-05",
+      "system_name": "Fuzzy",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-05",
+      "system_name": "BM25",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-05",
+      "system_name": "Metadata",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-05",
+      "system_name": "Portal",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-05",
+      "system_name": "Semantic",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-01",
+      "system_name": "Fuzzy",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-01",
+      "system_name": "BM25",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-01",
+      "system_name": "Metadata",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-01",
+      "system_name": "Portal",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-01",
+      "system_name": "Semantic",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-02",
+      "system_name": "Fuzzy",
+      "MAP": 0.775926,
+      "P@5": 0.6,
+      "nDCG@10": 0.921422,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-02",
+      "system_name": "BM25",
+      "MAP": 0.775926,
+      "P@5": 0.6,
+      "nDCG@10": 0.92716,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-02",
+      "system_name": "Metadata",
+      "MAP": 0.680688,
+      "P@5": 0.4,
+      "nDCG@10": 0.870221,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-02",
+      "system_name": "Portal",
+      "MAP": 0.775926,
+      "P@5": 0.6,
+      "nDCG@10": 0.924559,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-02",
+      "system_name": "Semantic",
+      "MAP": 0.709259,
+      "P@5": 0.6,
+      "nDCG@10": 0.88767,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-03",
+      "system_name": "Fuzzy",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.963466,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-03",
+      "system_name": "BM25",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.979103,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-03",
+      "system_name": "Metadata",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.984025,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-03",
+      "system_name": "Portal",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.984025,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-03",
+      "system_name": "Semantic",
+      "MAP": 0.9,
+      "P@5": 1.0,
+      "nDCG@10": 0.914374,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-04",
+      "system_name": "Fuzzy",
+      "MAP": 0.878889,
+      "P@5": 1.0,
+      "nDCG@10": 0.840666,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-04",
+      "system_name": "BM25",
+      "MAP": 0.815437,
+      "P@5": 0.8,
+      "nDCG@10": 0.842634,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-04",
+      "system_name": "Metadata",
+      "MAP": 0.815437,
+      "P@5": 0.8,
+      "nDCG@10": 0.876302,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-04",
+      "system_name": "Portal",
+      "MAP": 0.815437,
+      "P@5": 0.8,
+      "nDCG@10": 0.876302,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-04",
+      "system_name": "Semantic",
+      "MAP": 0.790437,
+      "P@5": 0.8,
+      "nDCG@10": 0.817269,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-05",
+      "system_name": "Fuzzy",
+      "MAP": 0.737585,
+      "P@5": 0.6,
+      "nDCG@10": 0.689536,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-05",
+      "system_name": "BM25",
+      "MAP": 0.651871,
+      "P@5": 0.4,
+      "nDCG@10": 0.891411,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-05",
+      "system_name": "Metadata",
+      "MAP": 0.808333,
+      "P@5": 0.6,
+      "nDCG@10": 0.956491,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-05",
+      "system_name": "Portal",
+      "MAP": 0.808333,
+      "P@5": 0.6,
+      "nDCG@10": 0.956491,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-05",
+      "system_name": "Semantic",
+      "MAP": 0.542347,
+      "P@5": 0.4,
+      "nDCG@10": 0.566578,
+      "MRR": 0.333333
+    }
+  ],
+  "system_summary": [
+    {
+      "system_name": "Fuzzy",
+      "metric": "MAP",
+      "mean": 0.783889,
+      "median": 0.798611,
+      "std": 0.248244,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.641591,
+      "ci_upper": 0.926187
+    },
+    {
+      "system_name": "Fuzzy",
+      "metric": "P@5",
+      "mean": 0.746667,
+      "median": 0.8,
+      "std": 0.277769,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.587444,
+      "ci_upper": 0.905889
+    },
+    {
+      "system_name": "Fuzzy",
+      "metric": "nDCG@10",
+      "mean": 0.824569,
+      "median": 0.921422,
+      "std": 0.245047,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.684103,
+      "ci_upper": 0.965034
+    },
+    {
+      "system_name": "Fuzzy",
+      "metric": "MRR",
+      "mean": 0.833333,
+      "median": 1.0,
+      "std": 0.298142,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.662433,
+      "ci_upper": 1.004234
+    },
+    {
+      "system_name": "BM25",
+      "metric": "MAP",
+      "mean": 0.771637,
+      "median": 0.815437,
+      "std": 0.263349,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.62068,
+      "ci_upper": 0.922593
+    },
+    {
+      "system_name": "BM25",
+      "metric": "P@5",
+      "mean": 0.733333,
+      "median": 0.8,
+      "std": 0.279682,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.573014,
+      "ci_upper": 0.893652
+    },
+    {
+      "system_name": "BM25",
+      "metric": "nDCG@10",
+      "mean": 0.83384,
+      "median": 0.896293,
+      "std": 0.247644,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.691886,
+      "ci_upper": 0.975794
+    },
+    {
+      "system_name": "BM25",
+      "metric": "MRR",
+      "mean": 0.8,
+      "median": 1.0,
+      "std": 0.305505,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.624879,
+      "ci_upper": 0.975121
+    },
+    {
+      "system_name": "Metadata",
+      "metric": "MAP",
+      "mean": 0.825771,
+      "median": 0.982143,
+      "std": 0.255169,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.679503,
+      "ci_upper": 0.972038
+    },
+    {
+      "system_name": "Metadata",
+      "metric": "P@5",
+      "mean": 0.786667,
+      "median": 1.0,
+      "std": 0.287209,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.622033,
+      "ci_upper": 0.9513
+    },
+    {
+      "system_name": "Metadata",
+      "metric": "nDCG@10",
+      "mean": 0.87949,
+      "median": 0.980961,
+      "std": 0.245764,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.738614,
+      "ci_upper": 1.020366
+    },
+    {
+      "system_name": "Metadata",
+      "metric": "MRR",
+      "mean": 0.9,
+      "median": 1.0,
+      "std": 0.270801,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.744772,
+      "ci_upper": 1.055228
+    },
+    {
+      "system_name": "Portal",
+      "metric": "MAP",
+      "mean": 0.846935,
+      "median": 0.97619,
+      "std": 0.247354,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.705147,
+      "ci_upper": 0.988723
+    },
+    {
+      "system_name": "Portal",
+      "metric": "P@5",
+      "mean": 0.8,
+      "median": 1.0,
+      "std": 0.273252,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.643367,
+      "ci_upper": 0.956633
+    },
+    {
+      "system_name": "Portal",
+      "metric": "nDCG@10",
+      "mean": 0.889777,
+      "median": 0.97611,
+      "std": 0.246149,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.74868,
+      "ci_upper": 1.030874
+    },
+    {
+      "system_name": "Portal",
+      "metric": "MRR",
+      "mean": 0.9,
+      "median": 1.0,
+      "std": 0.270801,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.744772,
+      "ci_upper": 1.055228
+    },
+    {
+      "system_name": "Semantic",
+      "metric": "MAP",
+      "mean": 0.698787,
+      "median": 0.734524,
+      "std": 0.244693,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.558524,
+      "ci_upper": 0.839049
+    },
+    {
+      "system_name": "Semantic",
+      "metric": "P@5",
+      "mean": 0.693333,
+      "median": 0.8,
+      "std": 0.299926,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.52141,
+      "ci_upper": 0.865256
+    },
+    {
+      "system_name": "Semantic",
+      "metric": "nDCG@10",
+      "mean": 0.762479,
+      "median": 0.817269,
+      "std": 0.249361,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.619541,
+      "ci_upper": 0.905417
+    },
+    {
+      "system_name": "Semantic",
+      "metric": "MRR",
+      "mean": 0.738889,
+      "median": 1.0,
+      "std": 0.340025,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.54398,
+      "ci_upper": 0.933798
+    }
+  ],
+  "pairwise_statistics": [
+    {
+      "system_a": "Fuzzy",
+      "system_b": "BM25",
+      "metric": "MAP",
+      "statistic": 0.0,
+      "p_value": 0.40081416938293446,
+      "corrected_p_value": 0.557352,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Metadata",
+      "metric": "MAP",
+      "statistic": 0.0,
+      "p_value": 0.26039294361048326,
+      "corrected_p_value": 0.557352,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Portal",
+      "metric": "MAP",
+      "statistic": 0.0,
+      "p_value": 0.09289194088370534,
+      "corrected_p_value": 0.557352,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Semantic",
+      "metric": "MAP",
+      "statistic": 0.0,
+      "p_value": 0.020795215853599107,
+      "corrected_p_value": 0.166362,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Metadata",
+      "metric": "MAP",
+      "statistic": 0.0,
+      "p_value": 0.12819017434510785,
+      "corrected_p_value": 0.557352,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Portal",
+      "metric": "MAP",
+      "statistic": 0.0,
+      "p_value": 0.046399461870904594,
+      "corrected_p_value": 0.324796,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Semantic",
+      "metric": "MAP",
+      "statistic": 0.0,
+      "p_value": 0.09948088075636449,
+      "corrected_p_value": 0.557352,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Portal",
+      "metric": "MAP",
+      "statistic": 0.0,
+      "p_value": 0.13801073756865953,
+      "corrected_p_value": 0.557352,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Semantic",
+      "metric": "MAP",
+      "statistic": 0.0,
+      "p_value": 0.0037017494066892425,
+      "corrected_p_value": 0.033316,
+      "significant": true,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Portal",
+      "system_b": "Semantic",
+      "metric": "MAP",
+      "statistic": 0.0,
+      "p_value": 0.002217721464237049,
+      "corrected_p_value": 0.022177,
+      "significant": true,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "BM25",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 1.0,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Metadata",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 0.31731050786291415,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Portal",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 0.15729920705028516,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Semantic",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 0.33628879040286896,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Metadata",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 0.3804551252503885,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Portal",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 0.2355589199240795,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Semantic",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 0.17971249487899976,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Portal",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 0.31731050786291415,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Semantic",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 0.057779571123597204,
+      "corrected_p_value": 0.520016,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Portal",
+      "system_b": "Semantic",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 0.019630657257290667,
+      "corrected_p_value": 0.196307,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "BM25",
+      "metric": "nDCG@10",
+      "statistic": 0.0,
+      "p_value": 0.7988593499960496,
+      "corrected_p_value": 0.798859,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Metadata",
+      "metric": "nDCG@10",
+      "statistic": 0.0,
+      "p_value": 0.20262160771231197,
+      "corrected_p_value": 0.518865,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Portal",
+      "metric": "nDCG@10",
+      "statistic": 0.0,
+      "p_value": 0.02841686417486375,
+      "corrected_p_value": 0.198918,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Semantic",
+      "metric": "nDCG@10",
+      "statistic": 0.0,
+      "p_value": 0.04085984371280629,
+      "corrected_p_value": 0.245159,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Metadata",
+      "metric": "nDCG@10",
+      "statistic": 0.0,
+      "p_value": 0.05933611988090862,
+      "corrected_p_value": 0.296681,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Portal",
+      "metric": "nDCG@10",
+      "statistic": 0.0,
+      "p_value": 0.02182427562605354,
+      "corrected_p_value": 0.174594,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Semantic",
+      "metric": "nDCG@10",
+      "statistic": 0.0,
+      "p_value": 0.09948088075636449,
+      "corrected_p_value": 0.397924,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Portal",
+      "metric": "nDCG@10",
+      "statistic": 0.0,
+      "p_value": 0.17295491798842066,
+      "corrected_p_value": 0.518865,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Semantic",
+      "metric": "nDCG@10",
+      "statistic": 0.0,
+      "p_value": 0.0028734139278525227,
+      "corrected_p_value": 0.025861,
+      "significant": true,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Portal",
+      "system_b": "Semantic",
+      "metric": "nDCG@10",
+      "statistic": 0.0,
+      "p_value": 0.002217721464237049,
+      "corrected_p_value": 0.022177,
+      "significant": true,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "BM25",
+      "metric": "MRR",
+      "statistic": 0.0,
+      "p_value": 0.5637028616507731,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Metadata",
+      "metric": "MRR",
+      "statistic": 0.0,
+      "p_value": 0.31731050786291415,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Portal",
+      "metric": "MRR",
+      "statistic": 0.0,
+      "p_value": 0.31731050786291415,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Semantic",
+      "metric": "MRR",
+      "statistic": 0.0,
+      "p_value": 0.1974660733580187,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Metadata",
+      "metric": "MRR",
+      "statistic": 0.0,
+      "p_value": 0.0832645166635504,
+      "corrected_p_value": 0.666116,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Portal",
+      "metric": "MRR",
+      "statistic": 0.0,
+      "p_value": 0.0832645166635504,
+      "corrected_p_value": 0.666116,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Semantic",
+      "metric": "MRR",
+      "statistic": 0.0,
+      "p_value": 0.33628879040286896,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Portal",
+      "metric": "MRR",
+      "statistic": 0.0,
+      "p_value": NaN,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Semantic",
+      "metric": "MRR",
+      "statistic": 0.0,
+      "p_value": 0.06559969214707187,
+      "corrected_p_value": 0.655997,
+      "significant": false,
+      "n_queries": 15
+    },
+    {
+      "system_a": "Portal",
+      "system_b": "Semantic",
+      "metric": "MRR",
+      "statistic": 0.0,
+      "p_value": 0.06559969214707187,
+      "corrected_p_value": 0.655997,
+      "significant": false,
+      "n_queries": 15
+    }
+  ],
+  "bootstrap_confidence_intervals": [
+    {
+      "system_a": "Fuzzy",
+      "system_b": "BM25",
+      "metric": "MAP",
+      "mean_difference": 0.012252,
+      "ci_lower": -0.063971,
+      "ci_upper": 0.086397
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Metadata",
+      "metric": "MAP",
+      "mean_difference": -0.041882,
+      "ci_lower": -0.109239,
+      "ci_upper": 0.01932
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Portal",
+      "metric": "MAP",
+      "mean_difference": -0.063046,
+      "ci_lower": -0.127878,
+      "ci_upper": -0.006495
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Semantic",
+      "metric": "MAP",
+      "mean_difference": 0.085102,
+      "ci_lower": 0.026705,
+      "ci_upper": 0.142978
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Metadata",
+      "metric": "MAP",
+      "mean_difference": -0.054134,
+      "ci_lower": -0.119928,
+      "ci_upper": 0.010896
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Portal",
+      "metric": "MAP",
+      "mean_difference": -0.075298,
+      "ci_lower": -0.147475,
+      "ci_upper": -0.01181
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Semantic",
+      "metric": "MAP",
+      "mean_difference": 0.07285,
+      "ci_lower": 0.003929,
+      "ci_upper": 0.150143
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Portal",
+      "metric": "MAP",
+      "mean_difference": -0.021164,
+      "ci_lower": -0.046561,
+      "ci_upper": -0.000526
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Semantic",
+      "metric": "MAP",
+      "mean_difference": 0.126984,
+      "ci_lower": 0.066146,
+      "ci_upper": 0.197195
+    },
+    {
+      "system_a": "Portal",
+      "system_b": "Semantic",
+      "metric": "MAP",
+      "mean_difference": 0.148148,
+      "ci_lower": 0.086068,
+      "ci_upper": 0.216404
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "BM25",
+      "metric": "P@5",
+      "mean_difference": 0.013333,
+      "ci_lower": -0.066667,
+      "ci_upper": 0.08
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Metadata",
+      "metric": "P@5",
+      "mean_difference": -0.04,
+      "ci_lower": -0.12,
+      "ci_upper": 0.026667
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Portal",
+      "metric": "P@5",
+      "mean_difference": -0.053333,
+      "ci_lower": -0.12,
+      "ci_upper": 0.013333
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Semantic",
+      "metric": "P@5",
+      "mean_difference": 0.053333,
+      "ci_lower": -0.013333,
+      "ci_upper": 0.12
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Metadata",
+      "metric": "P@5",
+      "mean_difference": -0.053333,
+      "ci_lower": -0.133333,
+      "ci_upper": 0.026667
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Portal",
+      "metric": "P@5",
+      "mean_difference": -0.066667,
+      "ci_lower": -0.133333,
+      "ci_upper": 0.0
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Semantic",
+      "metric": "P@5",
+      "mean_difference": 0.04,
+      "ci_lower": 0.0,
+      "ci_upper": 0.106667
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Portal",
+      "metric": "P@5",
+      "mean_difference": -0.013333,
+      "ci_lower": -0.04,
+      "ci_upper": 0.0
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Semantic",
+      "metric": "P@5",
+      "mean_difference": 0.093333,
+      "ci_lower": 0.013333,
+      "ci_upper": 0.186667
+    },
+    {
+      "system_a": "Portal",
+      "system_b": "Semantic",
+      "metric": "P@5",
+      "mean_difference": 0.106667,
+      "ci_lower": 0.04,
+      "ci_upper": 0.2
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "BM25",
+      "metric": "nDCG@10",
+      "mean_difference": -0.009271,
+      "ci_lower": -0.07275,
+      "ci_upper": 0.053806
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Metadata",
+      "metric": "nDCG@10",
+      "mean_difference": -0.054921,
+      "ci_lower": -0.118732,
+      "ci_upper": 0.003276
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Portal",
+      "metric": "nDCG@10",
+      "mean_difference": -0.065208,
+      "ci_lower": -0.127706,
+      "ci_upper": -0.007913
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Semantic",
+      "metric": "nDCG@10",
+      "mean_difference": 0.06209,
+      "ci_lower": 6.1e-05,
+      "ci_upper": 0.12648
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Metadata",
+      "metric": "nDCG@10",
+      "mean_difference": -0.04565,
+      "ci_lower": -0.090028,
+      "ci_upper": -0.005399
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Portal",
+      "metric": "nDCG@10",
+      "mean_difference": -0.055936,
+      "ci_lower": -0.105742,
+      "ci_upper": -0.013728
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Semantic",
+      "metric": "nDCG@10",
+      "mean_difference": 0.071361,
+      "ci_lower": -0.001485,
+      "ci_upper": 0.151741
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Portal",
+      "metric": "nDCG@10",
+      "mean_difference": -0.010287,
+      "ci_lower": -0.025181,
+      "ci_upper": 0.001788
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Semantic",
+      "metric": "nDCG@10",
+      "mean_difference": 0.117011,
+      "ci_lower": 0.052239,
+      "ci_upper": 0.191669
+    },
+    {
+      "system_a": "Portal",
+      "system_b": "Semantic",
+      "metric": "nDCG@10",
+      "mean_difference": 0.127298,
+      "ci_lower": 0.06485,
+      "ci_upper": 0.198891
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "BM25",
+      "metric": "MRR",
+      "mean_difference": 0.033333,
+      "ci_lower": -0.066667,
+      "ci_upper": 0.133333
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Metadata",
+      "metric": "MRR",
+      "mean_difference": -0.066667,
+      "ci_lower": -0.2,
+      "ci_upper": 0.066667
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Portal",
+      "metric": "MRR",
+      "mean_difference": -0.066667,
+      "ci_lower": -0.2,
+      "ci_upper": 0.066667
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Semantic",
+      "metric": "MRR",
+      "mean_difference": 0.094444,
+      "ci_lower": -0.05,
+      "ci_upper": 0.261111
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Metadata",
+      "metric": "MRR",
+      "mean_difference": -0.1,
+      "ci_lower": -0.2,
+      "ci_upper": 0.0
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Portal",
+      "metric": "MRR",
+      "mean_difference": -0.1,
+      "ci_lower": -0.2,
+      "ci_upper": 0.0
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Semantic",
+      "metric": "MRR",
+      "mean_difference": 0.061111,
+      "ci_lower": -0.1,
+      "ci_upper": 0.238889
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Portal",
+      "metric": "MRR",
+      "mean_difference": 0.0,
+      "ci_lower": 0.0,
+      "ci_upper": 0.0
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Semantic",
+      "metric": "MRR",
+      "mean_difference": 0.161111,
+      "ci_lower": 0.033333,
+      "ci_upper": 0.311111
+    },
+    {
+      "system_a": "Portal",
+      "system_b": "Semantic",
+      "metric": "MRR",
+      "mean_difference": 0.161111,
+      "ci_lower": 0.033333,
+      "ci_upper": 0.311111
+    }
+  ],
+  "win_loss": [
+    {
+      "system_a": "Fuzzy",
+      "system_b": "BM25",
+      "wins": 4,
+      "losses": 6,
+      "ties": 5
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Metadata",
+      "wins": 3,
+      "losses": 7,
+      "ties": 5
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Portal",
+      "wins": 1,
+      "losses": 9,
+      "ties": 5
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Semantic",
+      "wins": 10,
+      "losses": 1,
+      "ties": 4
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Metadata",
+      "wins": 2,
+      "losses": 8,
+      "ties": 5
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Portal",
+      "wins": 2,
+      "losses": 8,
+      "ties": 5
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Semantic",
+      "wins": 9,
+      "losses": 3,
+      "ties": 3
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Portal",
+      "wins": 2,
+      "losses": 4,
+      "ties": 9
+    },
+    {
+      "system_a": "Metadata",
+      "system_b": "Semantic",
+      "wins": 11,
+      "losses": 1,
+      "ties": 3
+    },
+    {
+      "system_a": "Portal",
+      "system_b": "Semantic",
+      "wins": 12,
+      "losses": 0,
+      "ties": 3
+    }
+  ]
+}

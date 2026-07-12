@@ -1,0 +1,702 @@
+{
+  "timestamp": "2026-07-10T21:13:43.142343",
+  "configurations": [
+    {
+      "configuration": "baseline",
+      "display_name": "Baseline",
+      "description": "Original rule weights (all weights = 1.0)",
+      "category_multipliers": {
+        "metadata_quality": 1.0,
+        "thematic_similarity": 1.0,
+        "recency": 1.0,
+        "resource_availability": 1.0,
+        "other": 1.0
+      },
+      "metrics": {
+        "MAP": 0.819091,
+        "P@5": 0.8,
+        "nDCG@10": 0.861282,
+        "MRR": 0.866667
+      },
+      "num_queries": 15
+    },
+    {
+      "configuration": "metadata_focus",
+      "display_name": "Metadata Focus",
+      "description": "Emphasize metadata quality and resource rules",
+      "category_multipliers": {
+        "metadata_quality": 1.3,
+        "thematic_similarity": 1.0,
+        "recency": 1.0,
+        "resource_availability": 1.2,
+        "other": 1.0
+      },
+      "metrics": {
+        "MAP": 0.819091,
+        "P@5": 0.8,
+        "nDCG@10": 0.861282,
+        "MRR": 0.866667
+      },
+      "num_queries": 15
+    },
+    {
+      "configuration": "similarity_focus",
+      "display_name": "Similarity Focus",
+      "description": "Increase emphasis on thematic-similarity rules",
+      "category_multipliers": {
+        "metadata_quality": 1.0,
+        "thematic_similarity": 1.3,
+        "recency": 1.0,
+        "resource_availability": 1.0,
+        "other": 1.0
+      },
+      "metrics": {
+        "MAP": 0.816287,
+        "P@5": 0.786667,
+        "nDCG@10": 0.860588,
+        "MRR": 0.866667
+      },
+      "num_queries": 15
+    },
+    {
+      "configuration": "recency_focus",
+      "display_name": "Recency Focus",
+      "description": "Increase emphasis on recency rules",
+      "category_multipliers": {
+        "metadata_quality": 1.0,
+        "thematic_similarity": 1.0,
+        "recency": 1.3,
+        "resource_availability": 1.0,
+        "other": 1.0
+      },
+      "metrics": {
+        "MAP": 0.819091,
+        "P@5": 0.8,
+        "nDCG@10": 0.861282,
+        "MRR": 0.866667
+      },
+      "num_queries": 15
+    },
+    {
+      "configuration": "balanced_conservative",
+      "display_name": "Balanced Conservative",
+      "description": "Reduce all rule weights for a more conservative aggregation",
+      "category_multipliers": {
+        "metadata_quality": 0.8,
+        "thematic_similarity": 0.8,
+        "recency": 0.8,
+        "resource_availability": 0.8,
+        "other": 0.85
+      },
+      "metrics": {
+        "MAP": 0.819091,
+        "P@5": 0.8,
+        "nDCG@10": 0.861282,
+        "MRR": 0.866667
+      },
+      "num_queries": 15
+    }
+  ],
+  "query_metrics": [
+    {
+      "query_id": "ENV-01",
+      "configuration": "baseline",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-02",
+      "configuration": "baseline",
+      "MAP": 0.926667,
+      "P@5": 0.8,
+      "nDCG@10": 0.989672,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-03",
+      "configuration": "baseline",
+      "MAP": 0.821088,
+      "P@5": 0.6,
+      "nDCG@10": 0.83358,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-04",
+      "configuration": "baseline",
+      "MAP": 0.590278,
+      "P@5": 0.6,
+      "nDCG@10": 0.727136,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "ENV-05",
+      "configuration": "baseline",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-01",
+      "configuration": "baseline",
+      "MAP": 0.866389,
+      "P@5": 1.0,
+      "nDCG@10": 0.913099,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-02",
+      "configuration": "baseline",
+      "MAP": 0.621825,
+      "P@5": 0.6,
+      "nDCG@10": 0.742424,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-03",
+      "configuration": "baseline",
+      "MAP": 0.988889,
+      "P@5": 1.0,
+      "nDCG@10": 0.999016,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-04",
+      "configuration": "baseline",
+      "MAP": 0.929365,
+      "P@5": 1.0,
+      "nDCG@10": 0.975024,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-05",
+      "configuration": "baseline",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-01",
+      "configuration": "baseline",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-02",
+      "configuration": "baseline",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.983814,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-03",
+      "configuration": "baseline",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.981973,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-04",
+      "configuration": "baseline",
+      "MAP": 0.89,
+      "P@5": 1.0,
+      "nDCG@10": 0.882086,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-05",
+      "configuration": "baseline",
+      "MAP": 0.651871,
+      "P@5": 0.4,
+      "nDCG@10": 0.891411,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-01",
+      "configuration": "metadata_focus",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-02",
+      "configuration": "metadata_focus",
+      "MAP": 0.926667,
+      "P@5": 0.8,
+      "nDCG@10": 0.989672,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-03",
+      "configuration": "metadata_focus",
+      "MAP": 0.821088,
+      "P@5": 0.6,
+      "nDCG@10": 0.83358,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-04",
+      "configuration": "metadata_focus",
+      "MAP": 0.590278,
+      "P@5": 0.6,
+      "nDCG@10": 0.727136,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "ENV-05",
+      "configuration": "metadata_focus",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-01",
+      "configuration": "metadata_focus",
+      "MAP": 0.866389,
+      "P@5": 1.0,
+      "nDCG@10": 0.913099,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-02",
+      "configuration": "metadata_focus",
+      "MAP": 0.621825,
+      "P@5": 0.6,
+      "nDCG@10": 0.742424,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-03",
+      "configuration": "metadata_focus",
+      "MAP": 0.988889,
+      "P@5": 1.0,
+      "nDCG@10": 0.999016,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-04",
+      "configuration": "metadata_focus",
+      "MAP": 0.929365,
+      "P@5": 1.0,
+      "nDCG@10": 0.975024,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-05",
+      "configuration": "metadata_focus",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-01",
+      "configuration": "metadata_focus",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-02",
+      "configuration": "metadata_focus",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.983814,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-03",
+      "configuration": "metadata_focus",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.981973,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-04",
+      "configuration": "metadata_focus",
+      "MAP": 0.89,
+      "P@5": 1.0,
+      "nDCG@10": 0.882086,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-05",
+      "configuration": "metadata_focus",
+      "MAP": 0.651871,
+      "P@5": 0.4,
+      "nDCG@10": 0.891411,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-01",
+      "configuration": "similarity_focus",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-02",
+      "configuration": "similarity_focus",
+      "MAP": 0.926667,
+      "P@5": 0.8,
+      "nDCG@10": 0.989672,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-03",
+      "configuration": "similarity_focus",
+      "MAP": 0.821088,
+      "P@5": 0.6,
+      "nDCG@10": 0.83358,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-04",
+      "configuration": "similarity_focus",
+      "MAP": 0.590278,
+      "P@5": 0.6,
+      "nDCG@10": 0.727136,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "ENV-05",
+      "configuration": "similarity_focus",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-01",
+      "configuration": "similarity_focus",
+      "MAP": 0.835437,
+      "P@5": 0.8,
+      "nDCG@10": 0.904303,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-02",
+      "configuration": "similarity_focus",
+      "MAP": 0.621825,
+      "P@5": 0.6,
+      "nDCG@10": 0.742424,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-03",
+      "configuration": "similarity_focus",
+      "MAP": 0.988889,
+      "P@5": 1.0,
+      "nDCG@10": 0.999016,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-04",
+      "configuration": "similarity_focus",
+      "MAP": 0.929365,
+      "P@5": 1.0,
+      "nDCG@10": 0.975024,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-05",
+      "configuration": "similarity_focus",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-01",
+      "configuration": "similarity_focus",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-02",
+      "configuration": "similarity_focus",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.983814,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-03",
+      "configuration": "similarity_focus",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.984025,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-04",
+      "configuration": "similarity_focus",
+      "MAP": 0.878889,
+      "P@5": 1.0,
+      "nDCG@10": 0.878422,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-05",
+      "configuration": "similarity_focus",
+      "MAP": 0.651871,
+      "P@5": 0.4,
+      "nDCG@10": 0.891411,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-01",
+      "configuration": "recency_focus",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-02",
+      "configuration": "recency_focus",
+      "MAP": 0.926667,
+      "P@5": 0.8,
+      "nDCG@10": 0.989672,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-03",
+      "configuration": "recency_focus",
+      "MAP": 0.821088,
+      "P@5": 0.6,
+      "nDCG@10": 0.83358,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-04",
+      "configuration": "recency_focus",
+      "MAP": 0.590278,
+      "P@5": 0.6,
+      "nDCG@10": 0.727136,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "ENV-05",
+      "configuration": "recency_focus",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-01",
+      "configuration": "recency_focus",
+      "MAP": 0.866389,
+      "P@5": 1.0,
+      "nDCG@10": 0.913099,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-02",
+      "configuration": "recency_focus",
+      "MAP": 0.621825,
+      "P@5": 0.6,
+      "nDCG@10": 0.742424,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-03",
+      "configuration": "recency_focus",
+      "MAP": 0.988889,
+      "P@5": 1.0,
+      "nDCG@10": 0.999016,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-04",
+      "configuration": "recency_focus",
+      "MAP": 0.929365,
+      "P@5": 1.0,
+      "nDCG@10": 0.975024,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-05",
+      "configuration": "recency_focus",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-01",
+      "configuration": "recency_focus",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-02",
+      "configuration": "recency_focus",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.983814,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-03",
+      "configuration": "recency_focus",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.981973,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-04",
+      "configuration": "recency_focus",
+      "MAP": 0.89,
+      "P@5": 1.0,
+      "nDCG@10": 0.882086,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-05",
+      "configuration": "recency_focus",
+      "MAP": 0.651871,
+      "P@5": 0.4,
+      "nDCG@10": 0.891411,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-01",
+      "configuration": "balanced_conservative",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-02",
+      "configuration": "balanced_conservative",
+      "MAP": 0.926667,
+      "P@5": 0.8,
+      "nDCG@10": 0.989672,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-03",
+      "configuration": "balanced_conservative",
+      "MAP": 0.821088,
+      "P@5": 0.6,
+      "nDCG@10": 0.83358,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-04",
+      "configuration": "balanced_conservative",
+      "MAP": 0.590278,
+      "P@5": 0.6,
+      "nDCG@10": 0.727136,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "ENV-05",
+      "configuration": "balanced_conservative",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-01",
+      "configuration": "balanced_conservative",
+      "MAP": 0.866389,
+      "P@5": 1.0,
+      "nDCG@10": 0.913099,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-02",
+      "configuration": "balanced_conservative",
+      "MAP": 0.621825,
+      "P@5": 0.6,
+      "nDCG@10": 0.742424,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-03",
+      "configuration": "balanced_conservative",
+      "MAP": 0.988889,
+      "P@5": 1.0,
+      "nDCG@10": 0.999016,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-04",
+      "configuration": "balanced_conservative",
+      "MAP": 0.929365,
+      "P@5": 1.0,
+      "nDCG@10": 0.975024,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-05",
+      "configuration": "balanced_conservative",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-01",
+      "configuration": "balanced_conservative",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-02",
+      "configuration": "balanced_conservative",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.983814,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-03",
+      "configuration": "balanced_conservative",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.981973,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-04",
+      "configuration": "balanced_conservative",
+      "MAP": 0.89,
+      "P@5": 1.0,
+      "nDCG@10": 0.882086,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-05",
+      "configuration": "balanced_conservative",
+      "MAP": 0.651871,
+      "P@5": 0.4,
+      "nDCG@10": 0.891411,
+      "MRR": 1.0
+    }
+  ]
+}

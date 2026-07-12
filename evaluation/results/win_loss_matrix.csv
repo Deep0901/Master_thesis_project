@@ -1,0 +1,11 @@
+system_a,system_b,wins,losses,ties
+Fuzzy,BM25,4,6,5
+Fuzzy,Metadata,3,7,5
+Fuzzy,Portal,1,9,5
+Fuzzy,Semantic,10,1,4
+BM25,Metadata,2,8,5
+BM25,Portal,2,8,5
+BM25,Semantic,9,3,3
+Metadata,Portal,2,4,9
+Metadata,Semantic,11,1,3
+Portal,Semantic,12,0,3

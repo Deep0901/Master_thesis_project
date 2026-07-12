@@ -1,0 +1,6 @@
+configuration,display_name,description,metadata_quality,thematic_similarity,recency,resource_availability,other,MAP,P@5,nDCG@10,MRR,num_queries
+baseline,Baseline,Original rule weights (all weights = 1.0),1.0,1.0,1.0,1.0,1.0,0.819091,0.8,0.861282,0.866667,15
+metadata_focus,Metadata Focus,Emphasize metadata quality and resource rules,1.3,1.0,1.0,1.2,1.0,0.819091,0.8,0.861282,0.866667,15
+similarity_focus,Similarity Focus,Increase emphasis on thematic-similarity rules,1.0,1.3,1.0,1.0,1.0,0.816287,0.786667,0.860588,0.866667,15
+recency_focus,Recency Focus,Increase emphasis on recency rules,1.0,1.0,1.3,1.0,1.0,0.819091,0.8,0.861282,0.866667,15
+balanced_conservative,Balanced Conservative,Reduce all rule weights for a more conservative aggregation,0.8,0.8,0.8,0.8,0.85,0.819091,0.8,0.861282,0.866667,15

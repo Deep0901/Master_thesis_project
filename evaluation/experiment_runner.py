@@ -4,16 +4,16 @@ Experimental Evaluation Runner
 This module runs complete experimental comparisons between:
 1. Fuzzy OGD Retrieval System (our approach)
 2. Keyword Baseline (BM25/TF-IDF)
-3. Simple Metadata Ranking
+3. Linear Weighted / Weighted-Sum Ranking
 
 Research Questions Evaluated:
 - RQ2: Does fuzzy ranking outperform keyword-based baseline?
-- RQ4: How does fuzzy ranking compare to alternative approaches?
+- RQ4: How does fuzzy ranking compare to a simpler interpretable baseline?
 
 Methodology:
 - Uses benchmark queries with ground truth relevance judgments
 - Computes standard IR metrics (MAP, nDCG, P@K, R@K)
-- Reports statistical significance via paired t-tests
+- Reports statistical significance via Wilcoxon signed-rank tests with Holm correction
 
 Author: Deep Shukla
 Thesis: Improving Access to Swiss OGD through Fuzzy HCIR
@@ -24,6 +24,7 @@ import json
 import csv
 import time
 import logging
+import hashlib
 import numpy as np
 import sys
 from itertools import combinations
@@ -32,7 +33,6 @@ from typing import Dict, List, Tuple, Any, Optional
 from datetime import datetime
 from collections import defaultdict
 from dataclasses import dataclass
-import requests
 import re
 import math
 from scipy import stats
@@ -40,16 +40,34 @@ from scipy import stats
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger(__name__)
 
+# Fixed reference date for reproducible recency features. This matches the
+# committed raw snapshot date used by the current evaluation artifacts.
+EVALUATION_REFERENCE_DATETIME = datetime(2026, 3, 6)
+
+
+def _days_since_modified(modified: Any, default: int) -> int:
+    """Compute recency against the fixed evaluation date, not wall-clock time."""
+    if not modified:
+        return default
+    try:
+        modified_dt = datetime.fromisoformat(str(modified).replace("Z", "+00:00"))
+    except ValueError:
+        try:
+            modified_dt = datetime.strptime(str(modified).split("T")[0], "%Y-%m-%d")
+        except Exception:
+            return default
+
+    reference_dt = EVALUATION_REFERENCE_DATETIME
+    if modified_dt.tzinfo is not None:
+        reference_dt = reference_dt.replace(tzinfo=modified_dt.tzinfo)
+    return max(0, (reference_dt - modified_dt).days)
+
 # Local imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from evaluation.evaluation_framework import (
     EvaluationEngine, EvaluationQuery, RankingResult, 
     RelevanceJudgment, IRMetrics,
-    compute_quadratic_weighted_kappa,
-    compute_percentage_agreement,
-    compute_disagreement_count,
-    landis_koch_category,
 )
 from code.prototype.ranking.fuzzy import FuzzyHCIRRanker
 from code.prototype.ranking.ai_semantic_baseline import AISemanticBaseline
@@ -65,6 +83,20 @@ class RuleWeightSensitivityConfig:
     display_name: str
     description: str
     category_multipliers: Dict[str, float]
+
+
+@dataclass
+class MembershipPerturbationConfig:
+    """Configuration for one membership-function breakpoint perturbation."""
+    name: str
+    variable: str
+    term: str
+    breakpoint_index: int
+    direction: str
+    original_value: float
+    perturbed_value: float
+    effective_value: float
+    mf_type: str
 
 
 def _categorize_rule(rule: Any) -> str:
@@ -103,7 +135,18 @@ class BaseRetriever:
     """Base class for retrieval systems."""
     
     name = "base"
-    BASE_URL = "https://opendata.swiss/api/3/action"
+    _frozen_corpus: Optional["FrozenCorpus"] = None
+
+    @classmethod
+    def frozen_corpus(cls) -> "FrozenCorpus":
+        """Return the one frozen corpus shared by every evaluated retriever."""
+        if BaseRetriever._frozen_corpus is None:
+            BaseRetriever._frozen_corpus = FrozenCorpus.load()
+        return BaseRetriever._frozen_corpus
+
+    def _candidate_datasets(self, query: str, num_results: int = 100) -> List[Dict[str, Any]]:
+        """Use the local snapshot in place of CKAN package_search."""
+        return self.frozen_corpus().search(query, rows=num_results)
     
     def search(self, query: str, num_results: int = 100) -> List[Tuple[str, float]]:
         """
@@ -113,6 +156,220 @@ class BaseRetriever:
             List of (dataset_id, score) tuples
         """
         raise NotImplementedError
+
+
+class FrozenCorpus:
+    """Local CKAN-like corpus loaded from the thesis snapshot artifacts.
+
+    The evaluation protocol must be reproducible, so this class replaces live
+    CKAN package_search/package_show calls with deterministic reads from one
+    frozen dataset collection. All retrievers call the same instance through
+    BaseRetriever.frozen_corpus().
+    """
+
+    SNAPSHOT_ROOT = Path("data/snapshots")
+    LEGACY_RAW_GLOB = "ogd_metadata_*.json"
+
+    def __init__(
+        self,
+        snapshot_dir: Path,
+        snapshot_file: Path,
+        datasets: List[Dict[str, Any]],
+        metadata: Optional[Dict[str, Any]] = None,
+        statistics: Optional[Dict[str, Any]] = None,
+    ):
+        self.snapshot_dir = snapshot_dir
+        self.snapshot_file = snapshot_file
+        self.datasets = [self._normalize_dataset(dataset) for dataset in datasets]
+        self.metadata = metadata or {}
+        self.statistics = statistics or {}
+        self.snapshot_hash = self._sha256_file(snapshot_file)
+        self.snapshot_date = self._resolve_snapshot_date()
+        self._by_key: Dict[str, Dict[str, Any]] = {}
+        for dataset in self.datasets:
+            for key in (dataset.get("id"), dataset.get("name")):
+                if key:
+                    self._by_key[str(key)] = dataset
+
+    @classmethod
+    def load(cls) -> "FrozenCorpus":
+        """Load data/snapshots/latest or the newest available snapshot folder."""
+        snapshot_dir = cls._resolve_snapshot_dir()
+        snapshot_file = snapshot_dir / "snapshot.json"
+        if not snapshot_file.exists():
+            legacy_files = sorted(snapshot_dir.glob(cls.LEGACY_RAW_GLOB), key=lambda path: path.stat().st_mtime, reverse=True)
+            if legacy_files:
+                snapshot_file = legacy_files[0]
+        metadata = cls._read_json(snapshot_dir / "snapshot_metadata.json")
+        statistics_payload = cls._read_json(snapshot_dir / "statistics.json")
+
+        if not snapshot_file.exists():
+            raise FileNotFoundError(
+                f"Frozen snapshot is missing: {snapshot_file}. "
+                "Run the collector or restore data/snapshots/latest before evaluation."
+            )
+
+        payload = cls._read_json(snapshot_file)
+        if isinstance(payload, dict) and "results" in payload:
+            datasets = payload["results"]
+        elif isinstance(payload, dict) and "datasets" in payload:
+            datasets = payload["datasets"]
+        elif isinstance(payload, list):
+            datasets = payload
+        else:
+            raise ValueError(f"Unsupported frozen snapshot schema in {snapshot_file}")
+
+        if not datasets:
+            raise ValueError(f"Frozen snapshot contains no datasets: {snapshot_file}")
+
+        logger.info("Loaded frozen corpus: %s (%s datasets)", snapshot_file, len(datasets))
+        return cls(snapshot_dir, snapshot_file, datasets, metadata, statistics_payload)
+
+    @classmethod
+    def _resolve_snapshot_dir(cls) -> Path:
+        latest_dir = cls.SNAPSHOT_ROOT / "latest"
+        if (latest_dir / "snapshot.json").exists():
+            return latest_dir
+
+        if cls.SNAPSHOT_ROOT.exists():
+            candidates = [
+                path for path in cls.SNAPSHOT_ROOT.iterdir()
+                if path.is_dir() and (path / "snapshot.json").exists()
+            ]
+            if candidates:
+                return sorted(candidates, key=lambda path: (path.stat().st_mtime, path.name), reverse=True)[0]
+
+        # Backward-compatible frozen export fallback for older checkouts that
+        # predate data/snapshots/latest. It is still local-only and deterministic.
+        raw_dir = Path("data/raw")
+        raw_candidates = sorted(raw_dir.glob(cls.LEGACY_RAW_GLOB), key=lambda path: path.stat().st_mtime, reverse=True)
+        if raw_candidates:
+            return raw_candidates[0].parent
+
+        return latest_dir
+
+    @staticmethod
+    def _read_json(path: Path) -> Any:
+        if not path.exists():
+            return {}
+        with open(path, "r", encoding="utf-8") as handle:
+            return json.load(handle)
+
+    @staticmethod
+    def _sha256_file(path: Path) -> str:
+        digest = hashlib.sha256()
+        with open(path, "rb") as handle:
+            for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+                digest.update(chunk)
+        return digest.hexdigest()
+
+    @staticmethod
+    def _first_text(value: Any) -> str:
+        if isinstance(value, dict):
+            for nested_key in ("title", "name", "label"):
+                if nested_key in value:
+                    nested_text = FrozenCorpus._first_text(value.get(nested_key))
+                    if nested_text:
+                        return nested_text
+            for language in ("de", "en", "fr", "it"):
+                if value.get(language):
+                    return str(value[language])
+            for nested_value in value.values():
+                nested_text = FrozenCorpus._first_text(nested_value)
+                if nested_text:
+                    return nested_text
+            return ""
+        return str(value or "")
+
+    @classmethod
+    def _normalize_dataset(cls, dataset: Dict[str, Any]) -> Dict[str, Any]:
+        normalized = dict(dataset)
+        if "notes" not in normalized and "description" in normalized:
+            normalized["notes"] = normalized["description"]
+        if "tags" not in normalized and "keywords" in normalized:
+            normalized["tags"] = normalized["keywords"]
+        if "groups" not in normalized and "themes" in normalized:
+            normalized["groups"] = normalized["themes"]
+        if "resources" not in normalized:
+            normalized["resources"] = [
+                {"format": resource_format}
+                for resource_format in normalized.get("resource_formats", [])
+            ][: int(normalized.get("num_resources") or 0)]
+        if "organization" not in normalized:
+            normalized["organization"] = {
+                "name": normalized.get("organization_name", ""),
+                "title": normalized.get("organization_title", ""),
+            }
+        return normalized
+
+    def _document_text(self, dataset: Dict[str, Any]) -> str:
+        parts = [
+            self._first_text(dataset.get("title")),
+            self._first_text(dataset.get("notes") or dataset.get("description")),
+            self._first_text(dataset.get("organization")),
+            self._first_text(dataset.get("publisher")),
+        ]
+        for field in ("tags", "keywords", "groups", "themes"):
+            for item in dataset.get(field, []) or []:
+                if isinstance(item, dict):
+                    parts.append(str(item.get("name") or item.get("display_name") or item.get("title") or ""))
+                else:
+                    parts.append(str(item))
+        return " ".join(part for part in parts if part)
+
+    def _tokenize(self, text: str) -> List[str]:
+        return re.findall(r"\b\w+\b", text.lower())
+
+    def search(self, query: str, rows: int = 100) -> List[Dict[str, Any]]:
+        """Deterministic local substitute for CKAN package_search."""
+        query_terms = self._tokenize(query)
+        if not query_terms:
+            return self.datasets[:rows]
+
+        scored: List[Tuple[float, int, Dict[str, Any]]] = []
+        for index, dataset in enumerate(self.datasets):
+            text = self._document_text(dataset).lower()
+            tokens = self._tokenize(text)
+            if not tokens:
+                continue
+            token_counts = defaultdict(int)
+            for token in tokens:
+                token_counts[token] += 1
+            score = 0.0
+            for term in query_terms:
+                score += token_counts.get(term, 0)
+                if term in text:
+                    score += 0.25
+            if score > 0:
+                scored.append((score, index, dataset))
+
+        scored.sort(key=lambda item: (-item[0], item[1]))
+        return [dataset for _score, _index, dataset in scored[:rows]]
+
+    def get(self, dataset_id: str) -> Dict[str, Any]:
+        """Local substitute for CKAN package_show."""
+        return self._by_key.get(str(dataset_id), {})
+
+    def publisher_count(self) -> int:
+        """Count distinct publisher/organization names in the frozen corpus."""
+        publishers = set()
+        for dataset in self.datasets:
+            publisher = dataset.get("publisher") or dataset.get("organization") or dataset.get("organization_name")
+            text = self._first_text(publisher)
+            if text:
+                publishers.add(text)
+        return len(publishers)
+
+    def _resolve_snapshot_date(self) -> str:
+        for key in ("snapshot_timestamp", "created_at", "collection_timestamp", "timestamp"):
+            if self.metadata.get(key):
+                return str(self.metadata[key])
+            if self.statistics.get(key):
+                return str(self.statistics[key])
+        match = re.search(r"(\d{8}_\d{6}|\d{4}[-_]\d{2}[-_]\d{2})", self.snapshot_file.name)
+        if match:
+            return match.group(1)
+        return datetime.fromtimestamp(self.snapshot_file.stat().st_mtime).isoformat()
 
 
 def _load_query_records(path: Path) -> List[Dict[str, Any]]:
@@ -170,7 +427,7 @@ def _load_query_records(path: Path) -> List[Dict[str, Any]]:
 
 
 def _fetch_dataset_metadata(dataset_id: str) -> Dict[str, Any]:
-    """Fetch dataset metadata for pooled candidate export.
+    """Load dataset metadata for pooled candidate export from the frozen corpus.
 
     Args:
         dataset_id: CKAN dataset identifier.
@@ -181,16 +438,7 @@ def _fetch_dataset_metadata(dataset_id: str) -> Dict[str, Any]:
     if not dataset_id:
         return {}
 
-    try:
-        resp = requests.get(
-            f"{BaseRetriever.BASE_URL}/package_show",
-            params={"id": dataset_id},
-            timeout=30,
-        )
-        resp.raise_for_status()
-        return resp.json().get("result", {})
-    except Exception:
-        return {}
+    return BaseRetriever.frozen_corpus().get(dataset_id)
 
 
 def _dataset_title(dataset: Dict[str, Any]) -> str:
@@ -227,9 +475,37 @@ def _mean_confidence_interval(values: List[float], confidence: float = 0.95) -> 
         return mean, mean
 
     interval = stats.t.interval(confidence, len(array) - 1, loc=mean, scale=sem)
-    lower = float(interval[0]) if interval[0] is not None else mean
-    upper = float(interval[1]) if interval[1] is not None else mean
+    lower = max(0.0, float(interval[0])) if interval[0] is not None and not np.isnan(interval[0]) else max(0.0, mean)
+    upper = min(1.0, float(interval[1])) if interval[1] is not None and not np.isnan(interval[1]) else min(1.0, mean)
     return lower, upper
+
+
+def _bootstrap_mean_ci(values: List[float], iterations: int = 10000, seed: int = 42) -> Tuple[float, float, float]:
+    """Compute bootstrap confidence interval for the mean of a single list of values.
+
+    Returns: (mean, lower, upper)
+    """
+    if not values:
+        return 0.0, 0.0, 0.0
+
+    arr = np.asarray(values, dtype=float)
+    mean = float(np.mean(arr))
+    if len(arr) == 1:
+        return mean, mean, mean
+
+    rng = np.random.default_rng(seed)
+    boot_means = []
+    n = len(arr)
+    for _ in range(iterations):
+        sample = rng.choice(arr, size=n, replace=True)
+        boot_means.append(float(np.mean(sample)))
+
+    lower = float(np.percentile(boot_means, 2.5))
+    upper = float(np.percentile(boot_means, 97.5))
+    # clamp to metric bounds [0,1]
+    lower = max(0.0, lower)
+    upper = min(1.0, upper)
+    return mean, lower, upper
 
 
 def _bootstrap_mean_difference(
@@ -318,27 +594,11 @@ class RuleWeightSensitivityRetriever(BaseRetriever):
         return MamdaniInferenceEngine(rule_base=rule_base, defuzzification_method="centroid")
 
     def _fetch_candidate_datasets(self, query: str, num_results: int = 100) -> List[Dict[str, Any]]:
-        params = {"q": query, "rows": num_results}
-        try:
-            resp = requests.get(f"{self.BASE_URL}/package_search", params=params, timeout=30)
-            resp.raise_for_status()
-            return resp.json()["result"]["results"]
-        except Exception as exc:
-            logger.warning("Rule-weight sensitivity retriever failed for query '%s': %s", query, exc)
-            return []
+        return self._candidate_datasets(query, num_results=num_results)
 
     def _to_metadata_features(self, dataset: Dict[str, Any]) -> Dict[str, Any]:
         modified = dataset.get("metadata_modified") or dataset.get("metadata_modified_date") or ""
-        try:
-            from datetime import datetime
-            if modified:
-                mod_date = datetime.fromisoformat(str(modified).replace("Z", "+00:00")).date()
-                now = datetime.now().date()
-                recency_days = max(0, (now - mod_date).days)
-            else:
-                recency_days = 730
-        except Exception:
-            recency_days = 730
+        recency_days = _days_since_modified(modified, default=730)
 
         metadata = {
             "title": dataset.get("title", ""),
@@ -397,28 +657,16 @@ class PortalBaseline(BaseRetriever):
     name = "portal_default"
     
     def search(self, query: str, num_results: int = 100) -> List[Tuple[str, float]]:
-        params = {
-            'q': query,
-            'rows': num_results
-        }
-        
-        try:
-            resp = requests.get(f"{self.BASE_URL}/package_search", params=params, timeout=30)
-            resp.raise_for_status()
-            results = resp.json()['result']['results']
-            
-            # Portal returns results in ranked order
-            # Assign decreasing scores based on position
-            ranked = []
-            for i, ds in enumerate(results):
-                score = 1.0 - (i / (len(results) + 1))  # Decreasing scores
-                ranked.append((ds['id'], score))
-            
-            return ranked
-            
-        except Exception as e:
-            print(f"Portal search error: {e}")
-            return []
+        results = self._candidate_datasets(query, num_results=num_results)
+
+        # FrozenCorpus returns CKAN-like results in deterministic ranked order.
+        # Assign decreasing scores exactly as the former portal baseline did.
+        ranked = []
+        for i, ds in enumerate(results):
+            score = 1.0 - (i / (len(results) + 1))
+            ranked.append((ds['id'], score))
+
+        return ranked
 
 
 class KeywordBaseline(BaseRetriever):
@@ -516,19 +764,8 @@ class KeywordBaseline(BaseRetriever):
         return score
     
     def search(self, query: str, num_results: int = 100) -> List[Tuple[str, float]]:
-        # First, get candidates from portal
-        params = {
-            'q': query,
-            'rows': num_results
-        }
-        
-        try:
-            resp = requests.get(f"{self.BASE_URL}/package_search", params=params, timeout=30)
-            resp.raise_for_status()
-            results = resp.json()['result']['results']
-        except Exception as e:
-            print(f"Search error: {e}")
-            return []
+        # Use the shared frozen corpus instead of live CKAN package_search.
+        results = self._candidate_datasets(query, num_results=num_results)
         
         if not results:
             return []
@@ -631,16 +868,8 @@ class MetadataQualityRanker(BaseRetriever):
             return 0.0
     
     def search(self, query: str, num_results: int = 100) -> List[Tuple[str, float]]:
-        # Get candidates
-        params = {'q': query, 'rows': num_results}
-        
-        try:
-            resp = requests.get(f"{self.BASE_URL}/package_search", params=params, timeout=30)
-            resp.raise_for_status()
-            results = resp.json()['result']['results']
-        except Exception as e:
-            print(f"Search error: {e}")
-            return []
+        # Use the shared frozen corpus instead of live CKAN package_search.
+        results = self._candidate_datasets(query, num_results=num_results)
         
         if not results:
             return []
@@ -650,9 +879,6 @@ class MetadataQualityRanker(BaseRetriever):
                           for i, ds in enumerate(results)}
         
         # Score each dataset
-        from datetime import datetime
-        now = datetime.now()
-        
         scored_results = []
         
         for ds in results:
@@ -661,14 +887,7 @@ class MetadataQualityRanker(BaseRetriever):
             
             # Recency
             modified = ds.get('metadata_modified', '')
-            try:
-                if modified:
-                    mod_date = datetime.strptime(modified.split('T')[0], '%Y-%m-%d')
-                    days = (now - mod_date).days
-                else:
-                    days = 1000
-            except:
-                days = 1000
+            days = _days_since_modified(modified, default=1000)
             recency = self._compute_recency_score(days)
             
             # Completeness
@@ -832,16 +1051,8 @@ class FuzzyRetriever(BaseRetriever):
         return numerator / denominator
     
     def search(self, query: str, num_results: int = 100) -> List[Tuple[str, float]]:
-        # Get candidates from portal
-        params = {'q': query, 'rows': num_results}
-        
-        try:
-            resp = requests.get(f"{self.BASE_URL}/package_search", params=params, timeout=30)
-            resp.raise_for_status()
-            results = resp.json()['result']['results']
-        except Exception as e:
-            print(f"Search error: {e}")
-            return []
+        # Use the shared frozen corpus instead of live CKAN package_search.
+        results = self._candidate_datasets(query, num_results=num_results)
         
         if not results:
             return []
@@ -850,22 +1061,12 @@ class FuzzyRetriever(BaseRetriever):
         relevance_scores = {ds['id']: 1.0 - (i / (len(results) + 1)) 
                           for i, ds in enumerate(results)}
         
-        from datetime import datetime
-        now = datetime.now()
-        
         scored_results = []
         
         for ds in results:
             # Get metadata values
             modified = ds.get('metadata_modified', '')
-            try:
-                if modified:
-                    mod_date = datetime.strptime(modified.split('T')[0], '%Y-%m-%d')
-                    recency_days = (now - mod_date).days
-                else:
-                    recency_days = 1000
-            except:
-                recency_days = 1000
+            recency_days = _days_since_modified(modified, default=1000)
             
             # Completeness
             checks = [
@@ -911,14 +1112,7 @@ class FuzzyHCIRRankerAdapter(BaseRetriever):
         self.rank_engine = FuzzyHCIRRanker()
 
     def _fetch_candidate_datasets(self, query: str, num_results: int = 100) -> List[Dict[str, Any]]:
-        params = {'q': query, 'rows': num_results}
-        try:
-            resp = requests.get(f"{self.BASE_URL}/package_search", params=params, timeout=30)
-            resp.raise_for_status()
-            return resp.json()['result']['results']
-        except Exception as e:
-            print(f"FuzzyHCIRRankerAdapter search error: {e}")
-            return []
+        return self._candidate_datasets(query, num_results=num_results)
 
     def search(self, query: str, num_results: int = 100) -> List[Tuple[str, float]]:
         datasets = self._fetch_candidate_datasets(query, num_results=num_results)
@@ -945,23 +1139,137 @@ class FuzzyHCIRRankerAdapter(BaseRetriever):
         return converted_results
 
 
+class PerturbedFuzzyHCIRRankerAdapter(FuzzyHCIRRankerAdapter):
+    """Fuzzy HCIR adapter with one copied membership breakpoint perturbed."""
+
+    name = "fuzzy_hcir_perturbed"
+
+    def __init__(self, perturbation: MembershipPerturbationConfig):
+        super().__init__()
+        self.perturbation = perturbation
+        self._apply_perturbation()
+
+    def _apply_perturbation(self) -> None:
+        """Patch the ranker's private membership copy without editing fuzzy code."""
+        engine = self.rank_engine.fuzzy_engine
+        variable_to_attr = {
+            "recency": "recency_mf",
+            "completeness": "completeness_mf",
+            "resources": "resources_mf",
+            "similarity": "similarity_mf",
+            "relevance": "RELEVANCE_MF",
+        }
+        attr_name = variable_to_attr[self.perturbation.variable]
+        source = getattr(engine, attr_name)
+        patched = {
+            term: (mf_type, [float(value) for value in params])
+            for term, (mf_type, params) in source.items()
+        }
+        mf_type, params = patched[self.perturbation.term]
+        params[self.perturbation.breakpoint_index] = self.perturbation.effective_value
+        patched[self.perturbation.term] = (mf_type, params)
+        setattr(engine, attr_name, patched)
+
+
+class LinearWeightedBaselineAdapter(BaseRetriever):
+    """
+    Ablation baseline for the fuzzy HCIR ranker.
+
+    This retriever uses the same normalized feature values and default feature
+    weights as FuzzyHCIRRanker, but removes only the fuzzy inference layer. The
+    final score is the weighted linear factor score already computed inside the
+    fuzzy framework before it is blended with fuzzy relevance.
+    """
+
+    name = "linear_weighted"
+
+    def __init__(self, factor_weights: Optional[Dict[str, float]] = None):
+        self.factor_weights = factor_weights or {}
+        self.rank_engine = FuzzyHCIRRanker()
+
+    def _fetch_candidate_datasets(self, query: str, num_results: int = 100) -> List[Dict[str, Any]]:
+        return self._candidate_datasets(query, num_results=num_results)
+
+    def _linear_score(self, recency_score: float, completeness: float, resource_score: float, similarity: float) -> float:
+        """Combine normalized fuzzy-framework features without fuzzy inference."""
+        weights = self.factor_weights
+        w_recency = float(weights.get("recency", 1.0))
+        w_completeness = float(weights.get("completeness", 1.0))
+        w_resources = float(weights.get("resources", 1.0))
+        w_similarity = float(weights.get("similarity", 1.0))
+        denom = w_recency + w_completeness + w_resources + w_similarity
+
+        if denom <= 0:
+            return float((recency_score + completeness + resource_score + similarity) / 4.0)
+
+        return float(
+            (
+                (w_recency * recency_score)
+                + (w_completeness * completeness)
+                + (w_resources * resource_score)
+                + (w_similarity * similarity)
+            )
+            / denom
+        )
+
+    def search(self, query: str, num_results: int = 100) -> List[Tuple[str, float]]:
+        datasets = self._fetch_candidate_datasets(query, num_results=num_results)
+        if not datasets:
+            return []
+
+        datasets = list(datasets)
+        query_info = self.rank_engine.query_processor.process(query)
+        keywords = query_info["keywords"]
+        self.rank_engine.similarity_calculator.fit(datasets)
+
+        scored_results: List[Tuple[str, float, int]] = []
+        uuid_by_key: Dict[str, str] = {}
+
+        for index, ds in enumerate(datasets):
+            ds_id = str(ds.get("id", ""))
+            ds_name = str(ds.get("name", ""))
+            if ds_id:
+                uuid_by_key[ds_id] = ds_id
+            if ds_name:
+                uuid_by_key[ds_name] = ds_id
+
+            mod_str = ds.get("metadata_modified", "")
+            days_since = _days_since_modified(mod_str, default=365)
+
+            # These normalized features mirror FuzzyHCIRRanker.rank exactly.
+            completeness = self.rank_engine.metadata_analyzer.compute_completeness(ds)
+            resource_count = len(ds.get("resources", []) or [])
+            similarity = self.rank_engine.similarity_calculator.calculate(
+                keywords,
+                ds,
+                query_themes=query_info.get("themes", []),
+            )
+            recency_score = 1.0 - min(float(days_since) / 3650.0, 1.0)
+            resource_score = min(float(resource_count) / 10.0, 1.0)
+
+            dataset_key = ds_id or ds_name
+            scored_results.append(
+                (
+                    uuid_by_key.get(dataset_key, dataset_key),
+                    self._linear_score(recency_score, completeness, resource_score, similarity),
+                    index,
+                )
+            )
+
+        scored_results.sort(key=lambda item: (-item[1], item[2]))
+        return [(dataset_id, score) for dataset_id, score, _index in scored_results[:num_results]]
+
+
 class AISemanticBaselineAdapter(BaseRetriever):
     """Adapter for the AI semantic baseline used in the pooled workflow."""
 
     name = "semantic"
 
-    def __init__(self):
-        self.semantic_ranker = AISemanticBaseline()
+    def __init__(self, embedding_provider: Optional[Any] = None):
+        self.semantic_ranker = AISemanticBaseline(embedding_provider=embedding_provider)
 
     def _fetch_candidate_datasets(self, query: str, num_results: int = 100) -> List[Dict[str, Any]]:
-        params = {"q": query, "rows": num_results}
-        try:
-            resp = requests.get(f"{self.BASE_URL}/package_search", params=params, timeout=30)
-            resp.raise_for_status()
-            return resp.json()["result"]["results"]
-        except Exception as e:
-            print(f"AISemanticBaselineAdapter search error: {e}")
-            return []
+        return self._candidate_datasets(query, num_results=num_results)
 
     def search(self, query: str, num_results: int = 100) -> List[Tuple[str, float]]:
         datasets = self._fetch_candidate_datasets(query, num_results=num_results)
@@ -1019,40 +1327,77 @@ class ExperimentRunner:
         if self.benchmark_queries_file.exists():
             self.benchmark_queries = _load_query_records(self.benchmark_queries_file)
             print(f"Loaded benchmark queries for {len(self.benchmark_queries)} queries")
+
+        # Ensure that the ground-truth file corresponds to the frozen corpus.
+        # Fail fast when there is no overlap between ground-truth dataset IDs and the
+        # committed frozen corpus to avoid producing meaningless zero-valued metrics.
+        try:
+            self._ensure_ground_truth_overlap()
+        except Exception as exc:
+            print(f"Ground truth overlap validation failed: {exc}")
+            raise
     
     def add_system(self, system: BaseRetriever):
         """Add a retrieval system to evaluate."""
         self.systems[system.name] = system
 
     def _resolve_ground_truth(self) -> Dict[str, Any]:
-        """Load ground truth from the expected final file or supported fallbacks."""
-        candidates = [self.ground_truth_file]
-        candidates.extend(
-            [
-                Path("evaluation/ground_truth_auto.json"),
-                Path("evaluation/ground_truth_manual.json"),
-            ]
-        )
+        """Load the configured authoritative ground-truth file only."""
+        if not self.ground_truth_file.exists():
+            raise FileNotFoundError(
+                f"Ground truth data is missing: {self.ground_truth_file}. "
+                "Restore the authoritative final judgment file before running evaluation."
+            )
 
-        for candidate in candidates:
-            if candidate.exists():
-                with open(candidate, "r", encoding="utf-8") as handle:
-                    payload = json.load(handle)
-                if payload:
-                    self.ground_truth_file = candidate
-                    self.ground_truth = payload
-                    if candidate.name != "ground_truth_final.json":
-                        output_path = Path("evaluation/ground_truth_final.json")
-                        output_path.parent.mkdir(parents=True, exist_ok=True)
-                        with open(output_path, "w", encoding="utf-8") as handle:
-                            json.dump(payload, handle, indent=2, ensure_ascii=False)
-                        logger.info("Wrote fallback ground truth to %s", output_path)
-                    return payload
+        with open(self.ground_truth_file, "r", encoding="utf-8") as handle:
+            payload = json.load(handle)
 
-        raise ValueError(
-            "Ground truth data is missing. Expected evaluation/ground_truth_final.json "
-            "or an available fallback file such as evaluation/ground_truth_auto.json."
-        )
+        if not payload:
+            raise ValueError(f"Ground truth data is empty: {self.ground_truth_file}")
+
+        self.ground_truth = payload
+        self._validate_ground_truth_schema()
+        return payload
+
+    def _validate_ground_truth_schema(self) -> None:
+        """Fail fast when the final judgment file is structurally unusable."""
+        if not isinstance(self.ground_truth, dict):
+            raise ValueError("Ground truth must be a mapping of query_id to query data.")
+
+        errors: List[str] = []
+        for query_id, data in self.ground_truth.items():
+            if not isinstance(data, dict):
+                errors.append(f"{query_id}: query entry must be an object")
+                continue
+            if not isinstance(data.get("query", {}), dict):
+                errors.append(f"{query_id}: missing query metadata object")
+            judgments = data.get("judgments")
+            if not isinstance(judgments, list):
+                errors.append(f"{query_id}: judgments must be a list")
+                continue
+            seen_ids = set()
+            for index, judgment in enumerate(judgments, start=1):
+                if not isinstance(judgment, dict):
+                    errors.append(f"{query_id}: judgment {index} must be an object")
+                    continue
+                dataset_id = str(judgment.get("dataset_id", "")).strip()
+                if not dataset_id:
+                    errors.append(f"{query_id}: judgment {index} is missing dataset_id")
+                    continue
+                if dataset_id in seen_ids:
+                    errors.append(f"{query_id}: duplicate judgment for dataset_id {dataset_id}")
+                seen_ids.add(dataset_id)
+                try:
+                    relevance = int(judgment.get("relevance", 0))
+                except Exception:
+                    errors.append(f"{query_id}: judgment {index} has non-integer relevance")
+                    continue
+                if relevance < 0:
+                    errors.append(f"{query_id}: judgment {index} has negative relevance")
+
+        if errors:
+            preview = "; ".join(errors[:10])
+            raise ValueError(f"Ground truth schema validation failed: {preview}")
 
     def _validate_inputs(self) -> None:
         """Check that there is usable ground truth, at least one query, and at least one system."""
@@ -1063,11 +1408,74 @@ class ExperimentRunner:
         if not self.benchmark_queries and not self.ground_truth:
             raise ValueError("No benchmark queries were loaded.")
 
+    def _ensure_ground_truth_overlap(self) -> None:
+        """Verify there is at least some overlap between ground-truth IDs and the frozen corpus.
+
+        This prevents running evaluation when the judgment file targets a different
+        snapshot or corpus version.
+        """
+        project_root = Path(__file__).resolve().parents[1]
+        try:
+            self.ground_truth_file.resolve().relative_to(project_root)
+        except ValueError:
+            return
+
+        corpus_path = Path("data/raw/ogd_metadata_20260306_183841.json")
+        if not corpus_path.exists():
+            # If the frozen corpus is not present, do not block here; other checks will fail.
+            return
+
+        # Load corpus identifiers (ids and titles)
+        with open(corpus_path, "r", encoding="utf-8") as fh:
+            try:
+                corpus = json.load(fh)
+            except Exception:
+                return
+
+        corpus_ids = set()
+        for ds in corpus:
+            if isinstance(ds, dict):
+                ds_id = str(ds.get("id", "")).strip()
+                if ds_id:
+                    corpus_ids.add(ds_id)
+                # also include name/title keys to be robust
+                name = ds.get("name")
+                if name:
+                    corpus_ids.add(str(name))
+                title = ds.get("title")
+                if isinstance(title, dict):
+                    for lang_title in title.values():
+                        if lang_title:
+                            corpus_ids.add(str(lang_title))
+
+        # Collect all dataset_ids referenced in the configured ground truth file
+        gt_ids = set()
+        if self.ground_truth_file.exists():
+            with open(self.ground_truth_file, "r", encoding="utf-8") as fh:
+                try:
+                    payload = json.load(fh)
+                except Exception:
+                    payload = {}
+            for qid, qdata in (payload or {}).items():
+                for j in qdata.get("judgments", []):
+                    dsid = str(j.get("dataset_id", "")).strip()
+                    if dsid:
+                        gt_ids.add(dsid)
+
+        overlap = gt_ids.intersection(corpus_ids)
+        if len(overlap) == 0 and len(gt_ids) > 0:
+            raise ValueError(
+                "No overlap detected between ground-truth dataset IDs and the frozen corpus. "
+                "Ensure `evaluation/ground_truth_final.json` was created from the current "
+                "pooled_candidates.csv and that the frozen corpus snapshot matches the judgments."
+            )
+
     def _display_system_name(self, system_name: str) -> str:
         mapping = {
             "portal_default": "Portal",
             "keyword_bm25": "BM25",
-            "metadata_quality": "Metadata",
+            "metadata_quality": "Weighted Sum",
+            "linear_weighted": "Linear Weighted",
             "fuzzy_hcir": "Fuzzy",
             "semantic": "Semantic",
         }
@@ -1123,13 +1531,13 @@ class ExperimentRunner:
             "dataset_title": dataset_title,
             "systems_found_in": "|".join(dict.fromkeys(systems_found_in)),
             "portal_rank": system_ranks.get("portal_default") or "",
-            "bm25_rank": system_ranks.get("bm25") or "",
+            "bm25_rank": system_ranks.get("keyword_bm25") or "",
             "metadata_rank": system_ranks.get("metadata_quality") or "",
+            "linear_weighted_rank": system_ranks.get("linear_weighted") or "",
             "fuzzy_rank": system_ranks.get("fuzzy_hcir") or "",
             "semantic_rank": system_ranks.get("semantic") or "",
-            "judge1_grade": "",
-            "judge2_grade": "",
-            "adjudicated_grade": "",
+            "single_assessor_grade": "",
+            "author_consolidated_grade": "",
             "notes": "",
         }
 
@@ -1201,12 +1609,17 @@ class ExperimentRunner:
                 std = float(np.std(values, ddof=0))
                 minimum = float(np.min(values))
                 maximum = float(np.max(values))
-                ci_lower, ci_upper = _mean_confidence_interval(values.tolist())
+                # Use bootstrap confidence intervals rather than t-intervals for bounded metrics
+                try:
+                    mean_val, ci_lower, ci_upper = _bootstrap_mean_ci(values.tolist(), iterations=10000, seed=42)
+                except Exception:
+                    ci_lower, ci_upper = _mean_confidence_interval(values.tolist())
+                    mean_val = float(np.mean(values))
                 summaries.append(
                     {
                         "system_name": display_name,
                         "metric": metric_name,
-                        "mean": round(mean, 6),
+                        "mean": round(float(mean_val), 6),
                         "median": round(median, 6),
                         "std": round(std, 6),
                         "min": round(minimum, 6),
@@ -1249,10 +1662,26 @@ class ExperimentRunner:
                     if len(values_a) < 2 or len(values_b) < 2:
                         continue
 
+                    note = ""
+                    statistic = 0.0
+                    p_value = 1.0
                     try:
-                        _, p_value = stats.wilcoxon(values_a, values_b, zero_method="wilcox", alternative="two-sided")
-                    except Exception:
+                        if np.allclose(values_a, values_b):
+                            # Explicit identical-vector handling: record as identical
+                            note = "identical_vectors"
+                        else:
+                            statistic, p_value = stats.wilcoxon(
+                                values_a,
+                                values_b,
+                                zero_method="wilcox",
+                                alternative="two-sided",
+                            )
+                            if np.isnan(statistic) or np.isnan(p_value):
+                                raise ValueError("Wilcoxon returned NaN")
+                    except Exception as exc:
+                        statistic = 0.0
                         p_value = 1.0
+                        note = f"error:{type(exc).__name__}"
 
                     p_values.append(float(p_value))
                     comparisons.append(
@@ -1260,11 +1689,12 @@ class ExperimentRunner:
                             "system_a": self._display_system_name(system_a),
                             "system_b": self._display_system_name(system_b),
                             "metric": metric_name,
-                            "statistic": 0.0,
+                            "statistic": round(float(statistic), 6),
                             "p_value": float(p_value),
                             "corrected_p_value": float(p_value),
                             "significant": bool(float(p_value) < 0.05),
                             "n_queries": len(values_a),
+                            "note": note,
                         }
                     )
 
@@ -1411,6 +1841,182 @@ class ExperimentRunner:
 
         with open(output_path, "w", encoding="utf-8") as handle:
             handle.write("\n".join(lines))
+        return output_path
+
+    def _reproducibility_payload(self) -> Dict[str, Any]:
+        """Build the frozen-corpus provenance fields for reproducible runs."""
+        corpus = BaseRetriever.frozen_corpus()
+        return {
+            "evaluation_timestamp": datetime.now().isoformat(),
+            "snapshot_hash": corpus.snapshot_hash,
+            "snapshot_date": corpus.snapshot_date,
+            "snapshot_dir": str(corpus.snapshot_dir),
+            "snapshot_file": str(corpus.snapshot_file),
+            "dataset_count": len(corpus.datasets),
+            "publisher_count": corpus.publisher_count(),
+            "num_queries": len(self.ground_truth),
+            "systems": [self._display_system_name(name) for name in sorted(self.systems)],
+            # Document pinned semantic baseline model and seed (even if excluded at runtime)
+            "sentence_transformers_model": "paraphrase-multilingual-MiniLM-L12-v2",
+            "sentence_transformers_seed": 42,
+        }
+
+    def _write_reproducibility_report(self) -> Dict[str, Path]:
+        """Write JSON and Markdown reports documenting the exact frozen corpus."""
+        payload = self._reproducibility_payload()
+        # Augment payload with environment and library versions
+        try:
+            import platform, importlib
+            import numpy as _np
+            import scipy as _sp
+            payload["python_version"] = platform.python_version()
+            payload["numpy_version"] = _np.__version__
+            payload["scipy_version"] = _sp.__version__
+            try:
+                import sentence_transformers as _st
+                payload["sentence_transformers_version"] = getattr(_st, "__version__", None)
+            except Exception:
+                payload["sentence_transformers_version"] = None
+            payload["bootstrap_seed"] = 42
+        except Exception:
+            pass
+        json_path = self.output_dir / "reproducibility_report.json"
+        markdown_path = self.output_dir / "reproducibility_report.md"
+
+        with open(json_path, "w", encoding="utf-8") as handle:
+            json.dump(payload, handle, indent=2, ensure_ascii=False)
+
+        lines = [
+            "# Reproducibility Report",
+            "",
+            f"- Evaluation timestamp: {payload['evaluation_timestamp']}",
+            f"- Snapshot hash: {payload['snapshot_hash']}",
+            f"- Snapshot date: {payload['snapshot_date']}",
+            f"- Snapshot file: {payload['snapshot_file']}",
+            f"- Dataset count: {payload['dataset_count']}",
+            f"- Publisher count: {payload['publisher_count']}",
+            f"- Queries evaluated: {payload['num_queries']}",
+            f"- Systems: {', '.join(payload['systems'])}",
+            "",
+            "All evaluation retrievers read from this frozen local corpus. No live CKAN API requests are used during evaluation.",
+        ]
+        with open(markdown_path, "w", encoding="utf-8") as handle:
+            handle.write("\n".join(lines) + "\n")
+
+        return {
+            "reproducibility_report": json_path,
+            "reproducibility_report_markdown": markdown_path,
+        }
+
+    def _write_ablation_comparison_csv(self, summary_rows: List[Dict[str, Any]]) -> Path:
+        """Write one compact CSV row per system for the ablation study."""
+        metric_order = ["MAP", "nDCG@10", "P@5", "MRR"]
+        by_system: Dict[str, Dict[str, Any]] = {}
+        for row in summary_rows:
+            system_name = row["system_name"]
+            by_system.setdefault(system_name, {"system_name": system_name})
+            by_system[system_name][row["metric"]] = row["mean"]
+
+        system_order = ["Portal", "BM25", "Weighted Sum", "Linear Weighted", "Fuzzy"]
+        rows = []
+        for system_name in system_order:
+            if system_name not in by_system:
+                continue
+            rows.append(
+                {
+                    "system_name": system_name,
+                    "MAP": by_system[system_name].get("MAP", ""),
+                    "nDCG@10": by_system[system_name].get("nDCG@10", ""),
+                    "P@5": by_system[system_name].get("P@5", ""),
+                    "MRR": by_system[system_name].get("MRR", ""),
+                }
+            )
+
+        output_path = self.output_dir / "ablation_comparison.csv"
+        self._write_csv(rows, output_path)
+        return output_path
+
+    def _write_interpretation_summary(
+        self,
+        summary_rows: List[Dict[str, Any]],
+        win_loss_rows: List[Dict[str, Any]],
+    ) -> Path:
+        """Write an interpretation of the fuzzy-vs-linear ablation result."""
+        metric_order = ["MAP", "nDCG@10", "P@5", "MRR"]
+        by_system_metric: Dict[str, Dict[str, float]] = defaultdict(dict)
+        for row in summary_rows:
+            by_system_metric[row["system_name"]][row["metric"]] = float(row["mean"])
+
+        fuzzy = by_system_metric.get("Fuzzy", {})
+        linear = by_system_metric.get("Linear Weighted", {})
+        fuzzy_linear_win_loss = next(
+            (
+                row for row in win_loss_rows
+                if {row["system_a"], row["system_b"]} == {"Fuzzy", "Linear Weighted"}
+            ),
+            None,
+        )
+
+        lines = [
+            "# Fuzzy Ranking Ablation Summary",
+            "",
+            "## Code Changes",
+            "",
+            "- Added `LinearWeightedBaselineAdapter` to `evaluation/experiment_runner.py`.",
+            "- Reused the fuzzy framework's query processing, metadata completeness, similarity calculator, normalized recency score, and normalized resource score.",
+            "- Used the same default feature weights as `FuzzyHCIRRanker.rank`: recency=1.0, completeness=1.0, resources=1.0, similarity=1.0.",
+            "- Removed only the fuzzy inference layer for the ablation score.",
+            "- Registered the baseline in the complete benchmark with Portal, BM25, Weighted Sum, Linear Weighted, and Fuzzy systems.",
+            "- Added ablation CSV and interpretation summary outputs.",
+            "",
+            "## Mean Metric Comparison",
+            "",
+            "| System | MAP | nDCG@10 | P@5 | MRR |",
+            "|---|---:|---:|---:|---:|",
+        ]
+
+        for system_name in ["Portal", "BM25", "Weighted Sum", "Linear Weighted", "Fuzzy"]:
+            metrics = by_system_metric.get(system_name)
+            if not metrics:
+                continue
+            lines.append(
+                f"| {system_name} | {metrics.get('MAP', 0.0):.4f} | {metrics.get('nDCG@10', 0.0):.4f} | {metrics.get('P@5', 0.0):.4f} | {metrics.get('MRR', 0.0):.4f} |"
+            )
+
+        lines.extend(["", "## Fuzzy Layer Effect", ""])
+
+        if fuzzy and linear:
+            for metric_name in metric_order:
+                diff = fuzzy.get(metric_name, 0.0) - linear.get(metric_name, 0.0)
+                if diff > 0:
+                    lines.append(f"- {metric_name}: Fuzzy is higher than Linear Weighted by {diff:.4f}.")
+                elif diff < 0:
+                    lines.append(f"- {metric_name}: Fuzzy is lower than Linear Weighted by {abs(diff):.4f}.")
+                else:
+                    lines.append(f"- {metric_name}: Fuzzy is equal to Linear Weighted.")
+        else:
+            lines.append("- Fuzzy and Linear Weighted metrics were not both available.")
+
+        if fuzzy_linear_win_loss:
+            wins = fuzzy_linear_win_loss["wins"]
+            losses = fuzzy_linear_win_loss["losses"]
+            ties = fuzzy_linear_win_loss["ties"]
+            if fuzzy_linear_win_loss["system_a"] != "Fuzzy":
+                wins, losses = losses, wins
+            lines.append(
+                f"- nDCG@10 win/loss/tie count for Fuzzy versus Linear Weighted: {wins}/{losses}/{ties}."
+            )
+
+        lines.extend(
+            [
+                "",
+                "Interpretation: Linear Weighted isolates the contribution of the normalized feature set without fuzzy rules. Any metric difference between Fuzzy and Linear Weighted is therefore attributable to the fuzzy inference layer plus the fuzzy framework's final blend with the linear factor score, not to candidate data, feature extraction, or feature weights.",
+            ]
+        )
+
+        output_path = self.output_dir / "ablation_interpretation_summary.md"
+        with open(output_path, "w", encoding="utf-8") as handle:
+            handle.write("\n".join(lines) + "\n")
         return output_path
 
     def _create_visualizations(self, summary_rows: List[Dict[str, Any]], pairwise_rows: List[Dict[str, Any]]) -> None:
@@ -1764,15 +2370,400 @@ class ExperimentRunner:
         fig.savefig(self.output_dir / "figures" / "rule_weight_sensitivity.png", dpi=300)
         plt.close(fig)
 
+    def _membership_sensitivity_output_dir(self) -> Path:
+        """Create a unique folder so membership sensitivity never overwrites results."""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        base_dir = self.output_dir / f"membership_sensitivity_{timestamp}"
+        candidate = base_dir
+        suffix = 1
+        while candidate.exists():
+            candidate = self.output_dir / f"membership_sensitivity_{timestamp}_{suffix}"
+            suffix += 1
+        (candidate / "figures").mkdir(parents=True, exist_ok=False)
+        return candidate
+
+    def _copy_mf_dict(self, mapping: Dict[str, Tuple[str, List[float]]]) -> Dict[str, Tuple[str, List[float]]]:
+        """Copy a membership-function dictionary with mutable parameter lists."""
+        return {
+            term: (mf_type, [float(value) for value in params])
+            for term, (mf_type, params) in mapping.items()
+        }
+
+    def _active_membership_functions(self) -> Dict[str, Dict[str, Tuple[str, List[float]]]]:
+        """Return the active fuzzy membership functions used by FuzzyHCIRRanker."""
+        ranker = FuzzyHCIRRanker()
+        engine = ranker.fuzzy_engine
+        return {
+            "recency": self._copy_mf_dict(engine.recency_mf),
+            "completeness": self._copy_mf_dict(engine.completeness_mf),
+            "resources": self._copy_mf_dict(engine.resources_mf),
+            "similarity": self._copy_mf_dict(engine.similarity_mf),
+            "relevance": self._copy_mf_dict(engine.RELEVANCE_MF),
+        }
+
+    def _valid_perturbed_params(self, params: List[float], index: int, candidate_value: float) -> List[float]:
+        """Perturb one breakpoint while preserving nondecreasing MF parameters."""
+        updated = [float(value) for value in params]
+        lower = updated[index - 1] if index > 0 else -math.inf
+        upper = updated[index + 1] if index < len(updated) - 1 else math.inf
+        updated[index] = min(max(float(candidate_value), lower), upper)
+        return updated
+
+    def _build_membership_perturbations(self) -> List[MembershipPerturbationConfig]:
+        """Create +10% and -10% variants for every active MF breakpoint."""
+        perturbations: List[MembershipPerturbationConfig] = []
+        for variable, terms in self._active_membership_functions().items():
+            for term, (mf_type, params) in terms.items():
+                for breakpoint_index, original_value in enumerate(params):
+                    for direction, multiplier in (("plus_10", 1.10), ("minus_10", 0.90)):
+                        perturbed_value = float(original_value) * multiplier
+                        valid_params = self._valid_perturbed_params(params, breakpoint_index, perturbed_value)
+                        effective_value = valid_params[breakpoint_index]
+                        perturbations.append(
+                            MembershipPerturbationConfig(
+                                name=f"{variable}.{term}.b{breakpoint_index + 1}.{direction}",
+                                variable=variable,
+                                term=term,
+                                breakpoint_index=breakpoint_index,
+                                direction=direction,
+                                original_value=float(original_value),
+                                perturbed_value=perturbed_value,
+                                effective_value=effective_value,
+                                mf_type=mf_type,
+                            )
+                        )
+        return perturbations
+
+    def _build_sensitivity_engine(self) -> EvaluationEngine:
+        """Build an evaluation engine with the current ground-truth queries."""
+        evaluation_engine = EvaluationEngine()
+        for query_id, data in self.ground_truth.items():
+            query_info = data.get("query", {})
+            judgments = data.get("judgments", [])
+            evaluation_engine.add_query(
+                EvaluationQuery(
+                    query_id=query_id,
+                    query_text=query_info.get("query_text", ""),
+                    query_language=query_info.get("query_language", "de"),
+                    domain=query_info.get("domain", ""),
+                    intent=query_info.get("intent", ""),
+                    ground_truth=[
+                        RelevanceJudgment(
+                            query_id=query_id,
+                            dataset_id=str(j.get("dataset_id", "")),
+                            relevance=int(j.get("relevance", 0)),
+                        )
+                        for j in judgments
+                    ],
+                )
+            )
+        return evaluation_engine
+
+    def _evaluate_membership_retriever(
+        self,
+        retriever: BaseRetriever,
+        system_name: str,
+        top_k: int,
+    ) -> Tuple[Dict[str, Any], Dict[str, List[str]], Dict[str, float]]:
+        """Run one fuzzy variant over all benchmark queries."""
+        evaluation_engine = self._build_sensitivity_engine()
+        rankings: Dict[str, List[str]] = {}
+
+        for query_id, data in self.ground_truth.items():
+            query_text = data.get("query", {}).get("query_text", "")
+            results = retriever.search(query_text, num_results=top_k)
+            ranked_docs = [dataset_id for dataset_id, _score in results]
+            scores = [score for _dataset_id, score in results]
+            rankings[query_id] = ranked_docs
+            evaluation_engine.add_result(
+                RankingResult(
+                    system_name=system_name,
+                    query_id=query_id,
+                    ranked_docs=ranked_docs,
+                    scores=scores,
+                    execution_time=0.0,
+                )
+            )
+
+        evaluation_engine.evaluate_all()
+        metrics_by_query = {
+            query_id: evaluation_engine.metrics[query_id][system_name]
+            for query_id in evaluation_engine.metrics
+            if system_name in evaluation_engine.metrics[query_id]
+        }
+        aggregate = evaluation_engine.aggregate_metrics().get(system_name, {})
+        return metrics_by_query, rankings, aggregate
+
+    def _rank_stability(
+        self,
+        baseline_rankings: Dict[str, List[str]],
+        perturbed_rankings: Dict[str, List[str]],
+    ) -> Tuple[float, float]:
+        """Compute mean Kendall's Tau and rank displacement over all queries."""
+        taus: List[float] = []
+        displacements: List[float] = []
+
+        for query_id, baseline_docs in baseline_rankings.items():
+            perturbed_docs = perturbed_rankings.get(query_id, [])
+            all_docs = list(dict.fromkeys(baseline_docs + perturbed_docs))
+            if len(all_docs) < 2:
+                taus.append(1.0)
+                displacements.append(0.0)
+                continue
+
+            baseline_missing_rank = len(baseline_docs) + 1
+            perturbed_missing_rank = len(perturbed_docs) + 1
+            baseline_positions = {doc_id: rank for rank, doc_id in enumerate(baseline_docs, start=1)}
+            perturbed_positions = {doc_id: rank for rank, doc_id in enumerate(perturbed_docs, start=1)}
+            baseline_values = [baseline_positions.get(doc_id, baseline_missing_rank) for doc_id in all_docs]
+            perturbed_values = [perturbed_positions.get(doc_id, perturbed_missing_rank) for doc_id in all_docs]
+
+            tau, _p_value = stats.kendalltau(baseline_values, perturbed_values)
+            taus.append(1.0 if np.isnan(tau) else float(tau))
+            displacements.append(
+                float(np.mean([abs(left - right) for left, right in zip(baseline_values, perturbed_values)]))
+            )
+
+        return (
+            float(np.mean(taus)) if taus else 1.0,
+            float(np.mean(displacements)) if displacements else 0.0,
+        )
+
+    def _membership_sensitivity_row(
+        self,
+        config: MembershipPerturbationConfig,
+        aggregate: Dict[str, float],
+        kendall_tau: float,
+        rank_displacement: float,
+        baseline_aggregate: Dict[str, float],
+    ) -> Dict[str, Any]:
+        """Create one CSV row for a perturbed breakpoint."""
+        return {
+            "perturbation": config.name,
+            "variable": config.variable,
+            "term": config.term,
+            "membership_type": config.mf_type,
+            "breakpoint_index": config.breakpoint_index + 1,
+            "direction": config.direction,
+            "original_value": round(config.original_value, 6),
+            "perturbed_value": round(config.perturbed_value, 6),
+            "effective_value": round(config.effective_value, 6),
+            "MAP": round(_safe_float(aggregate.get("MAP", 0.0)), 6),
+            "nDCG@10": round(_safe_float(aggregate.get("nDCG@10", 0.0)), 6),
+            "P@5": round(_safe_float(aggregate.get("P@5", 0.0)), 6),
+            "MRR": round(_safe_float(aggregate.get("MRR", 0.0)), 6),
+            "delta_MAP": round(_safe_float(aggregate.get("MAP", 0.0)) - _safe_float(baseline_aggregate.get("MAP", 0.0)), 6),
+            "delta_nDCG@10": round(_safe_float(aggregate.get("nDCG@10", 0.0)) - _safe_float(baseline_aggregate.get("nDCG@10", 0.0)), 6),
+            "delta_P@5": round(_safe_float(aggregate.get("P@5", 0.0)) - _safe_float(baseline_aggregate.get("P@5", 0.0)), 6),
+            "delta_MRR": round(_safe_float(aggregate.get("MRR", 0.0)) - _safe_float(baseline_aggregate.get("MRR", 0.0)), 6),
+            "kendall_tau": round(kendall_tau, 6),
+            "average_rank_displacement": round(rank_displacement, 6),
+        }
+
+    def _write_membership_sensitivity_summary(
+        self,
+        rows: List[Dict[str, Any]],
+        baseline_aggregate: Dict[str, float],
+        output_dir: Path,
+    ) -> Path:
+        """Write the interpretation summary for membership sensitivity."""
+        metric_delta_keys = ["delta_MAP", "delta_nDCG@10", "delta_P@5", "delta_MRR"]
+        max_abs_delta = max(
+            (abs(float(row[key])) for row in rows for key in metric_delta_keys),
+            default=0.0,
+        )
+        mean_tau = float(np.mean([float(row["kendall_tau"]) for row in rows])) if rows else 1.0
+        mean_displacement = float(np.mean([float(row["average_rank_displacement"]) for row in rows])) if rows else 0.0
+        worst_tau_row = min(rows, key=lambda row: float(row["kendall_tau"])) if rows else None
+        worst_metric_row = max(
+            rows,
+            key=lambda row: max(abs(float(row[key])) for key in metric_delta_keys),
+        ) if rows else None
+        robust = max_abs_delta <= 0.02 and mean_tau >= 0.90 and mean_displacement <= 2.0
+
+        lines = [
+            "# Membership-Function Sensitivity Analysis",
+            "",
+            "## Baseline Fuzzy Metrics",
+            "",
+            f"- MAP: {_safe_float(baseline_aggregate.get('MAP', 0.0)):.4f}",
+            f"- nDCG@10: {_safe_float(baseline_aggregate.get('nDCG@10', 0.0)):.4f}",
+            f"- P@5: {_safe_float(baseline_aggregate.get('P@5', 0.0)):.4f}",
+            f"- MRR: {_safe_float(baseline_aggregate.get('MRR', 0.0)):.4f}",
+            "",
+            "## Stability Summary",
+            "",
+            f"- Perturbations tested: {len(rows)}",
+            f"- Maximum absolute metric delta: {max_abs_delta:.4f}",
+            f"- Mean Kendall's Tau: {mean_tau:.4f}",
+            f"- Mean average rank displacement: {mean_displacement:.4f}",
+        ]
+
+        if worst_tau_row:
+            lines.append(
+                f"- Lowest Kendall's Tau: {float(worst_tau_row['kendall_tau']):.4f} for `{worst_tau_row['perturbation']}`"
+            )
+        if worst_metric_row:
+            worst_delta = max(abs(float(worst_metric_row[key])) for key in metric_delta_keys)
+            lines.append(
+                f"- Largest metric movement: {worst_delta:.4f} for `{worst_metric_row['perturbation']}`"
+            )
+
+        lines.extend(
+            [
+                "",
+                "## Interpretation",
+                "",
+                (
+                    "The fuzzy system is robust to +/-10% membership breakpoint variation under this run."
+                    if robust
+                    else "The fuzzy system shows sensitivity to +/-10% membership breakpoint variation under this run."
+                ),
+                "",
+                "Robustness is assessed using small aggregate metric movement, high Kendall rank correlation, and low average rank displacement relative to the unperturbed fuzzy ranking.",
+            ]
+        )
+
+        output_path = output_dir / "sensitivity_summary.md"
+        with open(output_path, "w", encoding="utf-8") as handle:
+            handle.write("\n".join(lines) + "\n")
+        return output_path
+
+    def _create_membership_sensitivity_plots(self, rows: List[Dict[str, Any]], output_dir: Path) -> List[Path]:
+        """Create sensitivity plots for metric deltas and rank stability."""
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+
+        figures_dir = output_dir / "figures"
+        figures_dir.mkdir(parents=True, exist_ok=True)
+        if not rows:
+            return []
+
+        labels = [row["perturbation"] for row in rows]
+        x = np.arange(len(rows))
+
+        metric_path = figures_dir / "membership_metric_deltas.png"
+        fig, ax = plt.subplots(figsize=(max(10, len(rows) * 0.18), 5.5))
+        for key in ["delta_MAP", "delta_nDCG@10", "delta_P@5", "delta_MRR"]:
+            ax.plot(x, [float(row[key]) for row in rows], linewidth=1.0, label=key.replace("delta_", ""))
+        ax.axhline(0.0, color="black", linewidth=0.8)
+        ax.set_title("Membership breakpoint sensitivity: metric deltas")
+        ax.set_ylabel("Delta from unperturbed fuzzy baseline")
+        ax.set_xlabel("Perturbation")
+        ax.set_xticks(x[:: max(1, len(rows) // 20)])
+        ax.set_xticklabels([labels[i] for i in x[:: max(1, len(rows) // 20)]], rotation=45, ha="right", fontsize=7)
+        ax.legend()
+        ax.grid(axis="y", alpha=0.3)
+        plt.tight_layout()
+        fig.savefig(metric_path, dpi=300)
+        plt.close(fig)
+
+        stability_path = figures_dir / "membership_rank_stability.png"
+        fig, ax1 = plt.subplots(figsize=(max(10, len(rows) * 0.18), 5.5))
+        tau_values = [float(row["kendall_tau"]) for row in rows]
+        displacement_values = [float(row["average_rank_displacement"]) for row in rows]
+        ax1.plot(x, tau_values, color="#1f77b4", linewidth=1.0, label="Kendall's Tau")
+        ax1.set_ylabel("Kendall's Tau", color="#1f77b4")
+        ax1.tick_params(axis="y", labelcolor="#1f77b4")
+        ax1.set_ylim(-1.0, 1.05)
+        ax2 = ax1.twinx()
+        ax2.plot(x, displacement_values, color="#d62728", linewidth=1.0, label="Average rank displacement")
+        ax2.set_ylabel("Average rank displacement", color="#d62728")
+        ax2.tick_params(axis="y", labelcolor="#d62728")
+        ax1.set_title("Membership breakpoint sensitivity: rank stability")
+        ax1.set_xlabel("Perturbation")
+        ax1.set_xticks(x[:: max(1, len(rows) // 20)])
+        ax1.set_xticklabels([labels[i] for i in x[:: max(1, len(rows) // 20)]], rotation=45, ha="right", fontsize=7)
+        ax1.grid(axis="y", alpha=0.3)
+        plt.tight_layout()
+        fig.savefig(stability_path, dpi=300)
+        plt.close(fig)
+
+        return [metric_path, stability_path]
+
+    def run_membership_function_sensitivity_analysis(self, top_k: int = 10) -> Dict[str, Any]:
+        """Run +/-10% breakpoint sensitivity for fuzzy membership functions."""
+        self._resolve_ground_truth()
+        self._validate_inputs()
+        self.output_dir = self._ensure_output_dir()
+        output_dir = self._membership_sensitivity_output_dir()
+
+        logger.info("Running unperturbed fuzzy baseline for membership sensitivity")
+        _baseline_query_metrics, baseline_rankings, baseline_aggregate = self._evaluate_membership_retriever(
+            FuzzyHCIRRankerAdapter(),
+            "fuzzy_hcir_baseline",
+            top_k=top_k,
+        )
+
+        rows: List[Dict[str, Any]] = []
+        perturbations = self._build_membership_perturbations()
+        for index, perturbation in enumerate(perturbations, start=1):
+            logger.info("Running membership perturbation %s/%s: %s", index, len(perturbations), perturbation.name)
+            _query_metrics, perturbed_rankings, aggregate = self._evaluate_membership_retriever(
+                PerturbedFuzzyHCIRRankerAdapter(perturbation),
+                perturbation.name,
+                top_k=top_k,
+            )
+            kendall_tau, rank_displacement = self._rank_stability(baseline_rankings, perturbed_rankings)
+            rows.append(
+                self._membership_sensitivity_row(
+                    perturbation,
+                    aggregate,
+                    kendall_tau,
+                    rank_displacement,
+                    baseline_aggregate,
+                )
+            )
+
+        results_path = output_dir / "sensitivity_results.csv"
+        self._write_csv(rows, results_path)
+        summary_path = self._write_membership_sensitivity_summary(rows, baseline_aggregate, output_dir)
+        plot_paths = self._create_membership_sensitivity_plots(rows, output_dir)
+
+        return {
+            "output_dir": output_dir,
+            "sensitivity_results": results_path,
+            "sensitivity_summary": summary_path,
+            "sensitivity_plots": plot_paths,
+            "baseline_metrics": baseline_aggregate,
+            "num_perturbations": len(rows),
+        }
+
     def _validate_results(self) -> None:
-        """Ensure every query has a result for every configured system."""
+        """Ensure every query/system has metrics and the run is not degenerate."""
         missing: List[str] = []
+        any_relevant_judgment = False
+        any_nonzero_metric = False
+
         for query_id in self.ground_truth:
+            data = self.ground_truth.get(query_id, {})
+            if any(int(judgment.get("relevance", 0)) > 0 for judgment in data.get("judgments", [])):
+                any_relevant_judgment = True
+
             for system_name in self.systems:
-                if system_name not in self.engine.metrics.get(query_id, {}):
+                metrics = self.engine.metrics.get(query_id, {}).get(system_name)
+                if metrics is None:
                     missing.append(f"{query_id}/{system_name}")
+                    continue
+                if any(
+                    value > 0
+                    for value in (
+                        metrics.average_precision,
+                        metrics.precision_at_5,
+                        metrics.ndcg_at_10,
+                        metrics.reciprocal_rank,
+                    )
+                ):
+                    any_nonzero_metric = True
+
         if missing:
             raise ValueError(f"Evaluation is incomplete. Missing results for: {', '.join(missing[:10])}")
+        if any_relevant_judgment and not any_nonzero_metric:
+            raise ValueError(
+                "Evaluation produced all-zero metrics despite positive relevance judgments. "
+                "Check ground-truth dataset IDs, retrieved dataset IDs, and the authoritative input file."
+            )
 
     def _write_outputs(self) -> Dict[str, Path]:
         """Write all requested evaluation artifacts to disk."""
@@ -1788,11 +2779,14 @@ class ExperimentRunner:
         self._write_csv(pairwise_rows, self.output_dir / "pairwise_statistics.csv")
         self._write_csv(bootstrap_rows, self.output_dir / "bootstrap_confidence_intervals.csv")
         self._write_csv(win_loss_rows, self.output_dir / "win_loss_matrix.csv")
+        ablation_comparison_path = self._write_ablation_comparison_csv(summary_rows)
+        interpretation_path = self._write_interpretation_summary(summary_rows, win_loss_rows)
 
         with open(self.output_dir / "experiment_results.json", "w", encoding="utf-8") as handle:
             json.dump(
                 {
                     "timestamp": datetime.now().isoformat(),
+                    "reproducibility": self._reproducibility_payload(),
                     "systems": [self._display_system_name(name) for name in sorted(self.systems)],
                     "num_queries": len(self.ground_truth),
                     "num_systems": len(self.systems),
@@ -1810,7 +2804,7 @@ class ExperimentRunner:
 
         publication_path = self._write_publication_tables(query_rows, summary_rows, pairwise_rows, bootstrap_rows, win_loss_rows)
         self._create_visualizations(summary_rows, pairwise_rows)
-        return {
+        generated_files = {
             "query_metrics": self.output_dir / "query_metrics.csv",
             "system_summary": self.output_dir / "system_summary.csv",
             "pairwise_statistics": self.output_dir / "pairwise_statistics.csv",
@@ -1818,7 +2812,11 @@ class ExperimentRunner:
             "win_loss_matrix": self.output_dir / "win_loss_matrix.csv",
             "experiment_results": self.output_dir / "experiment_results.json",
             "publication_tables": publication_path,
+            "ablation_comparison": ablation_comparison_path,
+            "ablation_interpretation_summary": interpretation_path,
         }
+        generated_files.update(self._write_reproducibility_report())
+        return generated_files
 
     def _query_records(self) -> List[Dict[str, Any]]:
         """Return the benchmark query records used to drive the workflow."""
@@ -1955,11 +2953,11 @@ class ExperimentRunner:
             "portal_rank",
             "bm25_rank",
             "metadata_rank",
+            "linear_weighted_rank",
             "fuzzy_rank",
             "semantic_rank",
-            "judge1_grade",
-            "judge2_grade",
-            "adjudicated_grade",
+            "single_assessor_grade",
+            "author_consolidated_grade",
             "notes",
         ]
 
@@ -1979,10 +2977,10 @@ class ExperimentRunner:
         pooled_candidates_file: str = "evaluation/data/pooled_candidates.csv",
         output_file: str = "evaluation/ground_truth_final.json",
     ) -> Dict[str, Any]:
-        """Export the final adjudicated ground truth JSON from the pooled CSV.
+        """Export the final author-consolidated ground truth JSON.
 
         Args:
-            pooled_candidates_file: CSV containing adjudicated grades.
+            pooled_candidates_file: CSV containing final consolidated grades.
             output_file: JSON path for the final ground truth.
 
         Returns:
@@ -1997,9 +2995,25 @@ class ExperimentRunner:
         with open(pooled_path, "r", newline="", encoding="utf-8") as f:
             reader = csv.DictReader(f)
             for row in reader:
-                adjudicated = str(row.get("adjudicated_grade", "")).strip()
-                if adjudicated == "":
+                # Prefer explicit author-consolidated or single_assessor grades; fall back to adjudicated if present
+                raw = (
+                    str(row.get("author_consolidated_grade", "")).strip()
+                    or str(row.get("single_assessor_grade", "")).strip()
+                    or str(row.get("adjudicated_grade", "")).strip()
+                )
+                if raw == "":
                     continue
+
+                try:
+                    relevance_raw = int(float(raw))
+                except Exception:
+                    continue
+
+                # Map legacy 0-3 scoring to final 0-2 if necessary (3 -> 2)
+                if relevance_raw >= 3:
+                    relevance = 2
+                else:
+                    relevance = max(0, relevance_raw)
 
                 query_id = row.get("query_id", "").strip()
                 query_text = row.get("query_text", "").strip()
@@ -2023,8 +3037,8 @@ class ExperimentRunner:
                     {
                         "dataset_id": row.get("dataset_id", "").strip(),
                         "dataset_title": row.get("dataset_title", "").strip(),
-                        "relevance": int(float(adjudicated)),
-                        "annotator": "adjudicated",
+                        "relevance": int(relevance),
+                        "annotator": "single_assessor_consolidated",
                         "notes": row.get("notes", "").strip(),
                     }
                 )
@@ -2034,53 +3048,48 @@ class ExperimentRunner:
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(grouped, f, indent=2, ensure_ascii=False)
 
+        # Ensure the final ground truth is not empty of positive judgments
+        any_positive = False
+        for qid, qdata in grouped.items():
+            for j in qdata.get("judgments", []):
+                if int(j.get("relevance", 0)) > 0:
+                    any_positive = True
+                    break
+            if any_positive:
+                break
+
+        if not any_positive:
+            raise ValueError(
+                "Exported final ground truth contains no positive relevance judgments.\n"
+                "Ensure `evaluation/data/pooled_candidates.csv` contains the author-consolidated grades before exporting."
+            )
+
         return grouped
 
     def compute_agreement_statistics(
         self,
         pooled_candidates_file: str = "evaluation/data/pooled_candidates.csv",
     ) -> Dict[str, Any]:
-        """Compute inter-annotator agreement metrics from the pooled CSV.
+        """Summarize the single-assessor grading process.
 
         Args:
-            pooled_candidates_file: CSV containing judge grades.
+            pooled_candidates_file: CSV containing pooled candidates.
 
         Returns:
-            Dictionary with agreement metrics.
+            Dictionary describing why inter-rater agreement is not applicable.
         """
-        logger.info("Computing Cohen Kappa")
-        pooled_path = Path(pooled_candidates_file)
-        if not pooled_path.exists():
-            raise FileNotFoundError(f"Missing pooled candidates file: {pooled_candidates_file}")
-
-        judge1: List[int] = []
-        judge2: List[int] = []
-        with open(pooled_path, "r", newline="", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                left = str(row.get("judge1_grade", "")).strip()
-                right = str(row.get("judge2_grade", "")).strip()
-                if left == "" or right == "":
-                    continue
-                judge1.append(int(float(left)))
-                judge2.append(int(float(right)))
-
-        if not judge1:
-            return {
-                "quadratic_weighted_kappa": 0.0,
-                "percentage_agreement": 0.0,
-                "disagreement_count": 0,
-                "agreement_category": "poor",
-                "num_compared": 0,
-            }
-
-        kappa = compute_quadratic_weighted_kappa(judge1, judge2)
+        logger.info("Summarizing single-assessor grading")
         return {
-            "quadratic_weighted_kappa": kappa,
-            "percentage_agreement": compute_percentage_agreement(judge1, judge2),
-            "disagreement_count": compute_disagreement_count(judge1, judge2),
-            "agreement_category": landis_koch_category(kappa),
-            "num_compared": len(judge1),
+            "assessment_mode": "single_assessor_consolidation",
+            "quadratic_weighted_kappa": None,
+            "percentage_agreement": None,
+            "disagreement_count": None,
+            "agreement_category": "not_applicable",
+            "num_compared": 0,
+            "note": (
+                "The pooled candidates were assigned by one assessor and finalized "
+                "in a later consolidation pass, so inter-rater agreement is not available."
+            ),
         }
     
     def run_experiment(self) -> Dict[str, Dict[str, float]]:
@@ -2200,6 +3209,7 @@ class ExperimentRunner:
 def main():
     """Main entry point for experiment."""
     regenerate_pooled = "--regenerate-pooled" in sys.argv
+    run_membership_sensitivity = "--membership-sensitivity" in sys.argv
 
     print("=" * 70)
     print("FUZZY OGD RETRIEVAL - EXPERIMENTAL EVALUATION")
@@ -2213,8 +3223,29 @@ def main():
     runner.add_system(PortalBaseline())
     runner.add_system(KeywordBaseline())
     runner.add_system(MetadataQualityRanker())
+    runner.add_system(LinearWeightedBaselineAdapter())
     runner.add_system(FuzzyHCIRRankerAdapter())
-    runner.add_system(AISemanticBaselineAdapter())
+    # Try to include the AI semantic baseline if sentence-transformers is installed.
+    try:
+        import sentence_transformers as _st  # type: ignore
+        from code.ranking.ai_semantic_baseline import SentenceTransformerProvider
+
+        provider = SentenceTransformerProvider(
+            model_name="paraphrase-multilingual-MiniLM-L12-v2",
+            cache_dir="evaluation/embeddings_cache",
+            seed=42,
+        )
+        runner.add_system(AISemanticBaselineAdapter(embedding_provider=provider))
+        print("Included semantic baseline using sentence-transformers (cached embeddings).")
+    except Exception:
+        print("sentence-transformers not available; semantic baseline excluded from this run.")
+
+    if run_membership_sensitivity:
+        sensitivity_output = runner.run_membership_function_sensitivity_analysis(top_k=10)
+        print("\nMembership-function sensitivity analysis complete.")
+        print(f"Output directory: {sensitivity_output['output_dir']}")
+        print(f"Perturbations tested: {sensitivity_output['num_perturbations']}")
+        return
     
     # Run complete pipeline including the optional sensitivity analysis stage
     runner.run_complete_pipeline(include_sensitivity_analysis=True, regenerate_pooled=regenerate_pooled)

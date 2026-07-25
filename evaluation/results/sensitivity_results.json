@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-10T21:13:43.142343",
+  "timestamp": "2026-07-25T18:09:42.809349",
   "configurations": [
     {
       "configuration": "baseline",
@@ -13,10 +13,10 @@
         "other": 1.0
       },
       "metrics": {
-        "MAP": 0.819091,
-        "P@5": 0.8,
-        "nDCG@10": 0.861282,
-        "MRR": 0.866667
+        "MAP": 0.482801,
+        "P@5": 0.306667,
+        "nDCG@10": 0.532974,
+        "MRR": 0.533333
       },
       "num_queries": 15
     },
@@ -32,10 +32,10 @@
         "other": 1.0
       },
       "metrics": {
-        "MAP": 0.819091,
-        "P@5": 0.8,
-        "nDCG@10": 0.861282,
-        "MRR": 0.866667
+        "MAP": 0.482801,
+        "P@5": 0.306667,
+        "nDCG@10": 0.532974,
+        "MRR": 0.533333
       },
       "num_queries": 15
     },
@@ -51,10 +51,10 @@
         "other": 1.0
       },
       "metrics": {
-        "MAP": 0.816287,
-        "P@5": 0.786667,
-        "nDCG@10": 0.860588,
-        "MRR": 0.866667
+        "MAP": 0.442246,
+        "P@5": 0.293333,
+        "nDCG@10": 0.500368,
+        "MRR": 0.48
       },
       "num_queries": 15
     },
@@ -70,10 +70,10 @@
         "other": 1.0
       },
       "metrics": {
-        "MAP": 0.819091,
-        "P@5": 0.8,
-        "nDCG@10": 0.861282,
-        "MRR": 0.866667
+        "MAP": 0.482801,
+        "P@5": 0.306667,
+        "nDCG@10": 0.532974,
+        "MRR": 0.533333
       },
       "num_queries": 15
     },
@@ -89,10 +89,10 @@
         "other": 0.85
       },
       "metrics": {
-        "MAP": 0.819091,
-        "P@5": 0.8,
-        "nDCG@10": 0.861282,
-        "MRR": 0.866667
+        "MAP": 0.482801,
+        "P@5": 0.306667,
+        "nDCG@10": 0.532974,
+        "MRR": 0.533333
       },
       "num_queries": 15
     }
@@ -109,29 +109,45 @@
     {
       "query_id": "ENV-02",
       "configuration": "baseline",
-      "MAP": 0.926667,
-      "P@5": 0.8,
-      "nDCG@10": 0.989672,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "ENV-03",
       "configuration": "baseline",
-      "MAP": 0.821088,
-      "P@5": 0.6,
-      "nDCG@10": 0.83358,
+      "MAP": 1.0,
+      "P@5": 0.2,
+      "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "ENV-04",
       "configuration": "baseline",
-      "MAP": 0.590278,
-      "P@5": 0.6,
-      "nDCG@10": 0.727136,
-      "MRR": 0.5
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "ENV-05",
+      "configuration": "baseline",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "MOB-01",
+      "configuration": "baseline",
+      "MAP": 0.78567,
+      "P@5": 0.8,
+      "nDCG@10": 0.768315,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-02",
       "configuration": "baseline",
       "MAP": 1.0,
       "P@5": 1.0,
@@ -139,59 +155,43 @@
       "MRR": 1.0
     },
     {
-      "query_id": "MOB-01",
-      "configuration": "baseline",
-      "MAP": 0.866389,
-      "P@5": 1.0,
-      "nDCG@10": 0.913099,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "MOB-02",
-      "configuration": "baseline",
-      "MAP": 0.621825,
-      "P@5": 0.6,
-      "nDCG@10": 0.742424,
-      "MRR": 0.5
-    },
-    {
       "query_id": "MOB-03",
       "configuration": "baseline",
-      "MAP": 0.988889,
-      "P@5": 1.0,
-      "nDCG@10": 0.999016,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "MOB-04",
       "configuration": "baseline",
-      "MAP": 0.929365,
-      "P@5": 1.0,
-      "nDCG@10": 0.975024,
+      "MAP": 0.6,
+      "P@5": 0.4,
+      "nDCG@10": 0.815931,
       "MRR": 1.0
     },
     {
       "query_id": "MOB-05",
       "configuration": "baseline",
       "MAP": 1.0,
-      "P@5": 1.0,
+      "P@5": 0.2,
       "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "XD-01",
       "configuration": "baseline",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
+      "MAP": 0.630159,
+      "P@5": 0.4,
+      "nDCG@10": 0.877544,
       "MRR": 1.0
     },
     {
       "query_id": "XD-02",
       "configuration": "baseline",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 0.983814,
+      "MAP": 0.833333,
+      "P@5": 0.4,
+      "nDCG@10": 0.919721,
       "MRR": 1.0
     },
     {
@@ -199,24 +199,24 @@
       "configuration": "baseline",
       "MAP": 1.0,
       "P@5": 1.0,
-      "nDCG@10": 0.981973,
+      "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "XD-04",
       "configuration": "baseline",
-      "MAP": 0.89,
-      "P@5": 1.0,
-      "nDCG@10": 0.882086,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "XD-05",
       "configuration": "baseline",
-      "MAP": 0.651871,
-      "P@5": 0.4,
-      "nDCG@10": 0.891411,
-      "MRR": 1.0
+      "MAP": 0.392857,
+      "P@5": 0.2,
+      "nDCG@10": 0.6131,
+      "MRR": 0.5
     },
     {
       "query_id": "ENV-01",
@@ -229,29 +229,45 @@
     {
       "query_id": "ENV-02",
       "configuration": "metadata_focus",
-      "MAP": 0.926667,
-      "P@5": 0.8,
-      "nDCG@10": 0.989672,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "ENV-03",
       "configuration": "metadata_focus",
-      "MAP": 0.821088,
-      "P@5": 0.6,
-      "nDCG@10": 0.83358,
+      "MAP": 1.0,
+      "P@5": 0.2,
+      "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "ENV-04",
       "configuration": "metadata_focus",
-      "MAP": 0.590278,
-      "P@5": 0.6,
-      "nDCG@10": 0.727136,
-      "MRR": 0.5
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "ENV-05",
+      "configuration": "metadata_focus",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "MOB-01",
+      "configuration": "metadata_focus",
+      "MAP": 0.78567,
+      "P@5": 0.8,
+      "nDCG@10": 0.768315,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-02",
       "configuration": "metadata_focus",
       "MAP": 1.0,
       "P@5": 1.0,
@@ -259,59 +275,43 @@
       "MRR": 1.0
     },
     {
-      "query_id": "MOB-01",
-      "configuration": "metadata_focus",
-      "MAP": 0.866389,
-      "P@5": 1.0,
-      "nDCG@10": 0.913099,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "MOB-02",
-      "configuration": "metadata_focus",
-      "MAP": 0.621825,
-      "P@5": 0.6,
-      "nDCG@10": 0.742424,
-      "MRR": 0.5
-    },
-    {
       "query_id": "MOB-03",
       "configuration": "metadata_focus",
-      "MAP": 0.988889,
-      "P@5": 1.0,
-      "nDCG@10": 0.999016,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "MOB-04",
       "configuration": "metadata_focus",
-      "MAP": 0.929365,
-      "P@5": 1.0,
-      "nDCG@10": 0.975024,
+      "MAP": 0.6,
+      "P@5": 0.4,
+      "nDCG@10": 0.815931,
       "MRR": 1.0
     },
     {
       "query_id": "MOB-05",
       "configuration": "metadata_focus",
       "MAP": 1.0,
-      "P@5": 1.0,
+      "P@5": 0.2,
       "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "XD-01",
       "configuration": "metadata_focus",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
+      "MAP": 0.630159,
+      "P@5": 0.4,
+      "nDCG@10": 0.877544,
       "MRR": 1.0
     },
     {
       "query_id": "XD-02",
       "configuration": "metadata_focus",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 0.983814,
+      "MAP": 0.833333,
+      "P@5": 0.4,
+      "nDCG@10": 0.919721,
       "MRR": 1.0
     },
     {
@@ -319,24 +319,24 @@
       "configuration": "metadata_focus",
       "MAP": 1.0,
       "P@5": 1.0,
-      "nDCG@10": 0.981973,
+      "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "XD-04",
       "configuration": "metadata_focus",
-      "MAP": 0.89,
-      "P@5": 1.0,
-      "nDCG@10": 0.882086,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "XD-05",
       "configuration": "metadata_focus",
-      "MAP": 0.651871,
-      "P@5": 0.4,
-      "nDCG@10": 0.891411,
-      "MRR": 1.0
+      "MAP": 0.392857,
+      "P@5": 0.2,
+      "nDCG@10": 0.6131,
+      "MRR": 0.5
     },
     {
       "query_id": "ENV-01",
@@ -349,29 +349,45 @@
     {
       "query_id": "ENV-02",
       "configuration": "similarity_focus",
-      "MAP": 0.926667,
-      "P@5": 0.8,
-      "nDCG@10": 0.989672,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "ENV-03",
       "configuration": "similarity_focus",
-      "MAP": 0.821088,
-      "P@5": 0.6,
-      "nDCG@10": 0.83358,
+      "MAP": 1.0,
+      "P@5": 0.2,
+      "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "ENV-04",
       "configuration": "similarity_focus",
-      "MAP": 0.590278,
-      "P@5": 0.6,
-      "nDCG@10": 0.727136,
-      "MRR": 0.5
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "ENV-05",
+      "configuration": "similarity_focus",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "MOB-01",
+      "configuration": "similarity_focus",
+      "MAP": 0.78567,
+      "P@5": 0.8,
+      "nDCG@10": 0.768315,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-02",
       "configuration": "similarity_focus",
       "MAP": 1.0,
       "P@5": 1.0,
@@ -379,84 +395,68 @@
       "MRR": 1.0
     },
     {
-      "query_id": "MOB-01",
-      "configuration": "similarity_focus",
-      "MAP": 0.835437,
-      "P@5": 0.8,
-      "nDCG@10": 0.904303,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "MOB-02",
-      "configuration": "similarity_focus",
-      "MAP": 0.621825,
-      "P@5": 0.6,
-      "nDCG@10": 0.742424,
-      "MRR": 0.5
-    },
-    {
       "query_id": "MOB-03",
       "configuration": "similarity_focus",
-      "MAP": 0.988889,
-      "P@5": 1.0,
-      "nDCG@10": 0.999016,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "MOB-04",
       "configuration": "similarity_focus",
-      "MAP": 0.929365,
-      "P@5": 1.0,
-      "nDCG@10": 0.975024,
+      "MAP": 0.6,
+      "P@5": 0.4,
+      "nDCG@10": 0.815931,
       "MRR": 1.0
     },
     {
       "query_id": "MOB-05",
       "configuration": "similarity_focus",
       "MAP": 1.0,
-      "P@5": 1.0,
+      "P@5": 0.2,
       "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "XD-01",
       "configuration": "similarity_focus",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
+      "MAP": 0.630159,
+      "P@5": 0.4,
+      "nDCG@10": 0.877544,
       "MRR": 1.0
     },
     {
       "query_id": "XD-02",
       "configuration": "similarity_focus",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 0.983814,
-      "MRR": 1.0
+      "MAP": 0.225,
+      "P@5": 0.2,
+      "nDCG@10": 0.430624,
+      "MRR": 0.2
     },
     {
       "query_id": "XD-03",
       "configuration": "similarity_focus",
       "MAP": 1.0,
       "P@5": 1.0,
-      "nDCG@10": 0.984025,
+      "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "XD-04",
       "configuration": "similarity_focus",
-      "MAP": 0.878889,
-      "P@5": 1.0,
-      "nDCG@10": 0.878422,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "XD-05",
       "configuration": "similarity_focus",
-      "MAP": 0.651871,
-      "P@5": 0.4,
-      "nDCG@10": 0.891411,
-      "MRR": 1.0
+      "MAP": 0.392857,
+      "P@5": 0.2,
+      "nDCG@10": 0.6131,
+      "MRR": 0.5
     },
     {
       "query_id": "ENV-01",
@@ -469,29 +469,45 @@
     {
       "query_id": "ENV-02",
       "configuration": "recency_focus",
-      "MAP": 0.926667,
-      "P@5": 0.8,
-      "nDCG@10": 0.989672,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "ENV-03",
       "configuration": "recency_focus",
-      "MAP": 0.821088,
-      "P@5": 0.6,
-      "nDCG@10": 0.83358,
+      "MAP": 1.0,
+      "P@5": 0.2,
+      "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "ENV-04",
       "configuration": "recency_focus",
-      "MAP": 0.590278,
-      "P@5": 0.6,
-      "nDCG@10": 0.727136,
-      "MRR": 0.5
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "ENV-05",
+      "configuration": "recency_focus",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "MOB-01",
+      "configuration": "recency_focus",
+      "MAP": 0.78567,
+      "P@5": 0.8,
+      "nDCG@10": 0.768315,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-02",
       "configuration": "recency_focus",
       "MAP": 1.0,
       "P@5": 1.0,
@@ -499,59 +515,43 @@
       "MRR": 1.0
     },
     {
-      "query_id": "MOB-01",
-      "configuration": "recency_focus",
-      "MAP": 0.866389,
-      "P@5": 1.0,
-      "nDCG@10": 0.913099,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "MOB-02",
-      "configuration": "recency_focus",
-      "MAP": 0.621825,
-      "P@5": 0.6,
-      "nDCG@10": 0.742424,
-      "MRR": 0.5
-    },
-    {
       "query_id": "MOB-03",
       "configuration": "recency_focus",
-      "MAP": 0.988889,
-      "P@5": 1.0,
-      "nDCG@10": 0.999016,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "MOB-04",
       "configuration": "recency_focus",
-      "MAP": 0.929365,
-      "P@5": 1.0,
-      "nDCG@10": 0.975024,
+      "MAP": 0.6,
+      "P@5": 0.4,
+      "nDCG@10": 0.815931,
       "MRR": 1.0
     },
     {
       "query_id": "MOB-05",
       "configuration": "recency_focus",
       "MAP": 1.0,
-      "P@5": 1.0,
+      "P@5": 0.2,
       "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "XD-01",
       "configuration": "recency_focus",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
+      "MAP": 0.630159,
+      "P@5": 0.4,
+      "nDCG@10": 0.877544,
       "MRR": 1.0
     },
     {
       "query_id": "XD-02",
       "configuration": "recency_focus",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 0.983814,
+      "MAP": 0.833333,
+      "P@5": 0.4,
+      "nDCG@10": 0.919721,
       "MRR": 1.0
     },
     {
@@ -559,24 +559,24 @@
       "configuration": "recency_focus",
       "MAP": 1.0,
       "P@5": 1.0,
-      "nDCG@10": 0.981973,
+      "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "XD-04",
       "configuration": "recency_focus",
-      "MAP": 0.89,
-      "P@5": 1.0,
-      "nDCG@10": 0.882086,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "XD-05",
       "configuration": "recency_focus",
-      "MAP": 0.651871,
-      "P@5": 0.4,
-      "nDCG@10": 0.891411,
-      "MRR": 1.0
+      "MAP": 0.392857,
+      "P@5": 0.2,
+      "nDCG@10": 0.6131,
+      "MRR": 0.5
     },
     {
       "query_id": "ENV-01",
@@ -589,29 +589,45 @@
     {
       "query_id": "ENV-02",
       "configuration": "balanced_conservative",
-      "MAP": 0.926667,
-      "P@5": 0.8,
-      "nDCG@10": 0.989672,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "ENV-03",
       "configuration": "balanced_conservative",
-      "MAP": 0.821088,
-      "P@5": 0.6,
-      "nDCG@10": 0.83358,
+      "MAP": 1.0,
+      "P@5": 0.2,
+      "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "ENV-04",
       "configuration": "balanced_conservative",
-      "MAP": 0.590278,
-      "P@5": 0.6,
-      "nDCG@10": 0.727136,
-      "MRR": 0.5
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "ENV-05",
+      "configuration": "balanced_conservative",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "MOB-01",
+      "configuration": "balanced_conservative",
+      "MAP": 0.78567,
+      "P@5": 0.8,
+      "nDCG@10": 0.768315,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-02",
       "configuration": "balanced_conservative",
       "MAP": 1.0,
       "P@5": 1.0,
@@ -619,59 +635,43 @@
       "MRR": 1.0
     },
     {
-      "query_id": "MOB-01",
-      "configuration": "balanced_conservative",
-      "MAP": 0.866389,
-      "P@5": 1.0,
-      "nDCG@10": 0.913099,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "MOB-02",
-      "configuration": "balanced_conservative",
-      "MAP": 0.621825,
-      "P@5": 0.6,
-      "nDCG@10": 0.742424,
-      "MRR": 0.5
-    },
-    {
       "query_id": "MOB-03",
       "configuration": "balanced_conservative",
-      "MAP": 0.988889,
-      "P@5": 1.0,
-      "nDCG@10": 0.999016,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "MOB-04",
       "configuration": "balanced_conservative",
-      "MAP": 0.929365,
-      "P@5": 1.0,
-      "nDCG@10": 0.975024,
+      "MAP": 0.6,
+      "P@5": 0.4,
+      "nDCG@10": 0.815931,
       "MRR": 1.0
     },
     {
       "query_id": "MOB-05",
       "configuration": "balanced_conservative",
       "MAP": 1.0,
-      "P@5": 1.0,
+      "P@5": 0.2,
       "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "XD-01",
       "configuration": "balanced_conservative",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
+      "MAP": 0.630159,
+      "P@5": 0.4,
+      "nDCG@10": 0.877544,
       "MRR": 1.0
     },
     {
       "query_id": "XD-02",
       "configuration": "balanced_conservative",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 0.983814,
+      "MAP": 0.833333,
+      "P@5": 0.4,
+      "nDCG@10": 0.919721,
       "MRR": 1.0
     },
     {
@@ -679,24 +679,24 @@
       "configuration": "balanced_conservative",
       "MAP": 1.0,
       "P@5": 1.0,
-      "nDCG@10": 0.981973,
+      "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "XD-04",
       "configuration": "balanced_conservative",
-      "MAP": 0.89,
-      "P@5": 1.0,
-      "nDCG@10": 0.882086,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "XD-05",
       "configuration": "balanced_conservative",
-      "MAP": 0.651871,
-      "P@5": 0.4,
-      "nDCG@10": 0.891411,
-      "MRR": 1.0
+      "MAP": 0.392857,
+      "P@5": 0.2,
+      "nDCG@10": 0.6131,
+      "MRR": 0.5
     }
   ]
 }

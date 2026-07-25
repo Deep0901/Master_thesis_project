@@ -1,19 +1,15 @@
 """
 AI Semantic Baseline - Embedding-Based Search
 
-Implements AI-driven semantic search using embeddings
-for comparison with the interpretable fuzzy approach.
+Implements an embedding-based semantic search path for comparison with the
+interpretable fuzzy approach.
 
-Research Context:
-- Part of Master Thesis: "Improving Access to Swiss OGD through Fuzzy HCIR"
-- Addresses RQ4: Comparing fuzzy vs AI-driven semantic retrieval
-
-This baseline uses:
-- Sentence transformers for embedding generation
-- Cosine similarity for semantic matching
-- Optional re-ranking with cross-encoders
+The real benchmark no longer treats the mock provider as a semantic baseline.
+Use a pinned sentence-transformer model if semantic comparisons are required;
+the mock provider remains available only as an explicit test/demo double.
 """
 
+import hashlib
 import numpy as np
 from typing import Dict, List, Tuple, Optional, Any
 from dataclasses import dataclass
@@ -84,8 +80,10 @@ class MockEmbeddingProvider(EmbeddingProvider):
     def _get_word_vector(self, word: str) -> np.ndarray:
         """Get or create a consistent vector for a word."""
         if word not in self._word_vectors:
-            # Create deterministic pseudo-random vector based on word hash
-            np.random.seed(hash(word) % (2**32))
+            # Create a deterministic pseudo-random vector from a stable digest.
+            digest = hashlib.sha256(word.encode("utf-8")).digest()
+            seed = int.from_bytes(digest[:4], byteorder="little", signed=False)
+            np.random.seed(seed)
             self._word_vectors[word] = np.random.randn(self.dim)
         return self._word_vectors[word]
     
@@ -124,7 +122,12 @@ class SentenceTransformerProvider(EmbeddingProvider):
     - all-MiniLM-L6-v2 (fast English)
     """
     
-    def __init__(self, model_name: str = "paraphrase-multilingual-MiniLM-L12-v2"):
+    def __init__(
+        self,
+        model_name: str = "paraphrase-multilingual-MiniLM-L12-v2",
+        revision: Optional[str] = None,
+        cache_folder: Optional[str] = None,
+    ):
         """
         Initialize sentence transformer.
         
@@ -132,6 +135,8 @@ class SentenceTransformerProvider(EmbeddingProvider):
             model_name: HuggingFace model name
         """
         self.model_name = model_name
+        self.revision = revision
+        self.cache_folder = cache_folder
         self._model = None
     
     @property
@@ -140,11 +145,15 @@ class SentenceTransformerProvider(EmbeddingProvider):
         if self._model is None:
             try:
                 from sentence_transformers import SentenceTransformer
-                self._model = SentenceTransformer(self.model_name)
+                self._model = SentenceTransformer(
+                    self.model_name,
+                    revision=self.revision,
+                    cache_folder=self.cache_folder,
+                )
             except ImportError:
                 raise ImportError(
-                    "sentence-transformers not installed. "
-                    "Install with: pip install sentence-transformers"
+                    "sentence-transformers not installed. Install the pinned semantic "
+                    "baseline dependency before using semantic comparisons."
                 )
         return self._model
     
@@ -153,6 +162,8 @@ class SentenceTransformerProvider(EmbeddingProvider):
         return self.model.encode(texts, normalize_embeddings=True)
     
     def get_model_name(self) -> str:
+        if self.revision:
+            return f"{self.model_name}@{self.revision}"
         return self.model_name
 
 
@@ -179,6 +190,7 @@ class SemanticIndex:
         self.use_faiss = use_faiss
         
         self.embeddings: Optional[np.ndarray] = None
+        self.embedding_checksum: str = ""
         self.dataset_ids: List[str] = []
         self.dataset_titles: List[str] = []
         self._faiss_index = None
@@ -225,6 +237,7 @@ class SemanticIndex:
         
         # Generate embeddings
         self.embeddings = self.provider.encode(texts)
+        self.embedding_checksum = hashlib.sha256(self.embeddings.tobytes()).hexdigest()
         
         # Build FAISS index if requested
         if self.use_faiss and len(datasets) > 0:
@@ -300,10 +313,10 @@ class AISemanticBaseline:
         Initialize semantic baseline.
         
         Args:
-            embedding_provider: Optional custom provider (defaults to mock)
+            embedding_provider: Optional custom provider (defaults to the real model)
             use_faiss: Whether to use FAISS for search
         """
-        self.provider = embedding_provider or MockEmbeddingProvider()
+        self.provider = embedding_provider or SentenceTransformerProvider()
         self.index = SemanticIndex(self.provider, use_faiss)
         self.datasets: List[Dict] = []
     
@@ -388,8 +401,10 @@ class AISemanticBaseline:
 
 
 def create_semantic_baseline(
-    use_real_model: bool = False,
+    use_real_model: bool = True,
     model_name: str = "paraphrase-multilingual-MiniLM-L12-v2",
+    revision: Optional[str] = None,
+    cache_folder: Optional[str] = None,
     use_faiss: bool = False
 ) -> AISemanticBaseline:
     """
@@ -404,7 +419,7 @@ def create_semantic_baseline(
         Configured AISemanticBaseline
     """
     if use_real_model:
-        provider = SentenceTransformerProvider(model_name)
+        provider = SentenceTransformerProvider(model_name, revision=revision, cache_folder=cache_folder)
     else:
         provider = MockEmbeddingProvider()
     

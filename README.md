@@ -25,10 +25,12 @@ This repository contains the implementation of a fuzzy logic-based retrieval sys
 
 | RQ | Question |
 |----|----------|
-| RQ1 | How can fuzzy logic model vagueness in OGD metadata for query-specific ranking? |
-| RQ2 | How does fuzzy ranking compare to keyword-based retrieval? |
-| RQ3 | How does explainability influence user trust in rankings? |
-| RQ4 | How does fuzzy ranking compare to AI-driven semantic approaches? |
+| RQ1 | How can fuzzy logic be used to effectively retrieve Open Government Datasets within OGD portals? |
+| RQ2 | How can multiple metadata-based relevance criteria be integrated into a unified and interpretable ranking mechanism? |
+| RQ3 | To what extent does a fuzzy logic-based retrieval system support Human-Centered Information Retrieval principles? |
+| RQ4 | How effective are metadata-driven explanations in improving user understanding and trust in ranking decisions? |
+
+The reproducible benchmark excludes the mock semantic prototype; that module remains in the tree only as an optional external-model-dependent prototype.
 
 ## 🏗️ Architecture
 
@@ -118,8 +120,8 @@ thesis/
 
 ```bash
 # Clone the repository
-git clone https://github.com/username/swiss-ogd-fuzzy.git
-cd swiss-ogd-fuzzy
+git clone <repository-url>
+cd thesis
 
 # Create virtual environment
 python -m venv .venv
@@ -161,7 +163,7 @@ Then open http://localhost:8501 in your browser.
 ### Running Tests
 
 ```bash
-pytest tests/ -v
+pytest evaluation/tests -v
 ```
 
 ## 🔧 Configuration
@@ -212,9 +214,46 @@ THEN relevance IS good
 The system is evaluated through:
 
 1. **Benchmark Queries**: 15 queries across Environment & Mobility domains
-2. **Baseline Comparisons**: TF-IDF keyword search, AI semantic search
-3. **User Study**: 15-20 participants, within-subjects design
-4. **Metrics**: Precision@K, NDCG, SUS, Trust scale
+2. **Baseline Comparisons**: portal search, BM25, weighted-sum ranking, fuzzy HCIR
+3. **User Study**: formative questionnaire with n=10 participants
+4. **Metrics**: MAP, P@5, nDCG@10, MRR, Wilcoxon signed-rank tests with Holm correction
+
+### Reproducing Benchmark Results (Table 7.1)
+
+The benchmark uses a frozen corpus snapshot from **2026-03-06**. To reproduce the evaluation:
+
+```bash
+# Ensure the frozen snapshot and final ground-truth file are present
+python evaluation/run_reproducible_experiment.py
+
+# Inspect the generated benchmark artifacts
+python - <<'PY'
+import csv
+with open('evaluation/results/system_summary.csv', encoding='utf-8') as handle:
+    rows = list(csv.DictReader(handle))
+print(rows[0])
+PY
+```
+
+**Snapshot Details:**
+- Path: `data/raw/ogd_metadata_20260306_183841.json`
+- Hash: `a827392f6c788749a71ba3e19103f126e6bafb47ee07329f0301950bc15edfe1`
+- Datasets: 500
+- Date: 2026-03-06 (fixed reference for recency computation)
+
+**Ground Truth:**
+- Path: `evaluation/ground_truth_final.json`
+- Judgments: Single-author assessment with 0-2 scale
+- Queries: 15 (MOB-02 and XD-03 have non-zero metrics on this corpus)
+
+**Systems Evaluated:**
+- Fuzzy HCIR (proposed)
+- BM25 lexical baseline
+- Linear Weighted baseline
+- Weighted-Sum baseline
+- Portal search (default)
+
+All systems evaluate against the same frozen corpus and final ground truth with no live API calls.
 
 ## 🗓️ Timeline
 

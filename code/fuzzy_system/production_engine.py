@@ -40,10 +40,13 @@ class MembershipFunctionType(Enum):
     GAUSSIAN = "gaussian"
     SIGMOID = "sigmoid"
     BELL = "bell"
+    LEFT_SHOULDER = "left_shoulder"
+    RIGHT_SHOULDER = "right_shoulder"
 
 
 class TNorm(Enum):
     """T-norm (AND) operators."""
+    MIN = "min"
     MINIMUM = "min"
     PRODUCT = "product"
     LUKASIEWICZ = "lukasiewicz"
@@ -51,6 +54,7 @@ class TNorm(Enum):
 
 class SNorm(Enum):
     """S-norm (OR) operators."""
+    MAX = "max"
     MAXIMUM = "max"
     PROBABILISTIC = "probabilistic"
     BOUNDED = "bounded"
@@ -69,13 +73,17 @@ class DefuzzificationMethod(Enum):
 # DATA CLASSES
 # ============================================================================
 
-@dataclass
 class MembershipFunction:
     """A single membership function definition."""
-    name: str
-    type: MembershipFunctionType
-    parameters: List[float]
-    
+
+    def __init__(self, name: str, mf_type: Optional[MembershipFunctionType] = None,
+                 type: Optional[MembershipFunctionType] = None,
+                 parameters: Optional[List[float]] = None):
+        self.name = name
+        self.mf_type = mf_type or type or MembershipFunctionType.TRIANGULAR
+        self.type = self.mf_type
+        self.parameters = parameters or []
+
     def evaluate(self, x: float) -> float:
         """Compute membership degree for value x."""
         if self.type == MembershipFunctionType.TRIANGULAR:
@@ -88,8 +96,15 @@ class MembershipFunction:
             return self._sigmoid(x)
         elif self.type == MembershipFunctionType.BELL:
             return self._bell(x)
+        elif self.type == MembershipFunctionType.LEFT_SHOULDER:
+            return self._left_shoulder(x)
+        elif self.type == MembershipFunctionType.RIGHT_SHOULDER:
+            return self._right_shoulder(x)
         return 0.0
-    
+
+    def __call__(self, x: float) -> float:
+        return self.evaluate(x)
+
     def _triangular(self, x: float) -> float:
         """Triangular MF: [a, b, c]"""
         a, b, c = self.parameters[:3]
@@ -113,7 +128,7 @@ class MembershipFunction:
             return (x - a) / (b - a) if b != a else 1.0
         else:
             return (c - x) / (c - b) if c != b else 1.0
-    
+
     def _trapezoidal(self, x: float) -> float:
         """Trapezoidal MF: [a, b, c, d]"""
         a, b, c, d = self.parameters[:4]
@@ -127,17 +142,33 @@ class MembershipFunction:
             return 1.0
         else:
             return 1.0 if d == c else (d - x) / (d - c)
-    
+
+    def _left_shoulder(self, x: float) -> float:
+        a, b = self.parameters[:2]
+        if x <= a:
+            return 1.0
+        if x >= b:
+            return 0.0
+        return (b - x) / (b - a) if b != a else 0.0
+
+    def _right_shoulder(self, x: float) -> float:
+        a, b = self.parameters[:2]
+        if x <= a:
+            return 0.0
+        if x >= b:
+            return 1.0
+        return (x - a) / (b - a) if b != a else 1.0
+
     def _gaussian(self, x: float) -> float:
         """Gaussian MF: [mean, sigma]"""
         mean, sigma = self.parameters[:2]
         return np.exp(-0.5 * ((x - mean) / sigma) ** 2)
-    
+
     def _sigmoid(self, x: float) -> float:
         """Sigmoid MF: [a, c] where a is slope, c is crossover"""
         a, c = self.parameters[:2]
         return 1 / (1 + np.exp(-a * (x - c)))
-    
+
     def _bell(self, x: float) -> float:
         """Generalized bell MF: [a, b, c]"""
         a, b, c = self.parameters[:3]
@@ -167,18 +198,37 @@ class LinguisticVariable:
         return max(memberships.items(), key=lambda x: x[1])
 
 
-@dataclass
 class FuzzyRule:
-    """A single fuzzy IF-THEN rule."""
-    id: int
-    antecedents: Dict[str, str]  # variable -> term
-    consequent: Tuple[str, str]  # (variable, term)
-    weight: float = 1.0
-    description: str = ""
-    
+    """A single fuzzy IF-THEN rule with compatibility for older and newer APIs."""
+
+    def __init__(self, id: int, antecedent: Optional[Dict[str, str]] = None,
+                 antecedents: Optional[Dict[str, str]] = None,
+                 consequent: Optional[Any] = None, weight: float = 1.0,
+                 description: str = ""):
+        self.id = id
+        self.antecedent = antecedent or antecedents or {}
+        self.antecedents = self.antecedent
+        self.consequent = self._normalize_consequent(consequent)
+        self.weight = weight
+        self.description = description
+
+    def _normalize_consequent(self, consequent: Optional[Any]) -> Dict[str, str]:
+        if isinstance(consequent, dict):
+            return consequent
+        if isinstance(consequent, tuple) and len(consequent) == 2:
+            return {consequent[0]: consequent[1]}
+        return {}
+
+    def output_term(self) -> str:
+        if not self.consequent:
+            return ""
+        if isinstance(self.consequent, dict):
+            return next(iter(self.consequent.values()))
+        return str(self.consequent[1])
+
     def __str__(self):
-        ante_str = " AND ".join(f"{v} IS {t}" for v, t in self.antecedents.items())
-        cons_str = f"{self.consequent[0]} IS {self.consequent[1]}"
+        ante_str = " AND ".join(f"{v} IS {t}" for v, t in self.antecedent.items())
+        cons_str = ", ".join(f"{k}={v}" for k, v in self.consequent.items())
         return f"IF {ante_str} THEN {cons_str}"
 
 
@@ -252,28 +302,33 @@ class CalibratedOGDVariables:
         var.terms = {
             "very_recent": MembershipFunction(
                 name="very_recent",
-                type=MembershipFunctionType.TRIANGULAR,
-                parameters=[0, 0, 30]  # Peak at 0, zero at 30 days
+                type=MembershipFunctionType.TRAPEZOIDAL,
+                parameters=[0, 0, 30, 90]
             ),
             "recent": MembershipFunction(
                 name="recent",
                 type=MembershipFunctionType.TRAPEZOIDAL,
-                parameters=[7, 30, 150, 365]  # 1 week to 1 year
+                parameters=[0, 0, 180, 365]
+            ),
+            "fairly_recent": MembershipFunction(
+                name="fairly_recent",
+                type=MembershipFunctionType.TRAPEZOIDAL,
+                parameters=[0, 60, 180, 365]
             ),
             "moderate": MembershipFunction(
                 name="moderate",
                 type=MembershipFunctionType.TRAPEZOIDAL,
-                parameters=[180, 365, 776, 1200]  # 6 months to 3 years
+                parameters=[180, 365, 776, 1200]
             ),
             "old": MembershipFunction(
                 name="old",
                 type=MembershipFunctionType.TRAPEZOIDAL,
-                parameters=[776, 1200, 2500, 3500]  # 2-10 years
+                parameters=[1200, 2000, 3000, 7000]
             ),
             "very_old": MembershipFunction(
                 name="very_old",
                 type=MembershipFunctionType.TRAPEZOIDAL,
-                parameters=[2500, 3500, 4500, 4500]  # >7 years
+                parameters=[5000, 6000, 7000, 7000]
             )
         }
         
@@ -295,6 +350,26 @@ class CalibratedOGDVariables:
         )
         
         var.terms = {
+            "sparse": MembershipFunction(
+                name="sparse",
+                type=MembershipFunctionType.TRAPEZOIDAL,
+                parameters=[0, 0, 0.3, 0.5]
+            ),
+            "moderate": MembershipFunction(
+                name="moderate",
+                type=MembershipFunctionType.TRAPEZOIDAL,
+                parameters=[0.35, 0.5, 0.7, 0.82]
+            ),
+            "complete": MembershipFunction(
+                name="complete",
+                type=MembershipFunctionType.TRAPEZOIDAL,
+                parameters=[0.70, 0.83, 0.92, 0.97]
+            ),
+            "very_complete": MembershipFunction(
+                name="very_complete",
+                type=MembershipFunctionType.TRAPEZOIDAL,
+                parameters=[0.85, 0.95, 1.0, 1.0]
+            ),
             "low": MembershipFunction(
                 name="low",
                 type=MembershipFunctionType.TRAPEZOIDAL,
@@ -314,11 +389,6 @@ class CalibratedOGDVariables:
                 name="high",
                 type=MembershipFunctionType.TRAPEZOIDAL,
                 parameters=[0.78, 0.83, 0.92, 0.97]
-            ),
-            "complete": MembershipFunction(
-                name="complete",
-                type=MembershipFunctionType.TRAPEZOIDAL,
-                parameters=[0.92, 0.97, 1.0, 1.0]
             )
         }
         
@@ -350,10 +420,20 @@ class CalibratedOGDVariables:
                 type=MembershipFunctionType.TRIANGULAR,
                 parameters=[1, 2, 4]
             ),
+            "few": MembershipFunction(
+                name="few",
+                type=MembershipFunctionType.TRIANGULAR,
+                parameters=[0, 2, 4]
+            ),
             "moderate": MembershipFunction(
                 name="moderate",
-                type=MembershipFunctionType.TRIANGULAR,
-                parameters=[2, 4, 7]
+                type=MembershipFunctionType.TRAPEZOIDAL,
+                parameters=[2, 4, 6, 8]
+            ),
+            "many": MembershipFunction(
+                name="many",
+                type=MembershipFunctionType.TRAPEZOIDAL,
+                parameters=[4, 6, 10, 20]
             ),
             "rich": MembershipFunction(
                 name="rich",
@@ -429,10 +509,15 @@ class CalibratedOGDVariables:
         )
         
         var.terms = {
+            "not_relevant": MembershipFunction(
+                name="not_relevant",
+                type=MembershipFunctionType.TRIANGULAR,
+                parameters=[0, 0, 0.25]
+            ),
             "very_low": MembershipFunction(
                 name="very_low",
                 type=MembershipFunctionType.TRIANGULAR,
-                parameters=[0, 0, 0.25]
+                parameters=[0.0, 0.1, 0.25]
             ),
             "low": MembershipFunction(
                 name="low",
@@ -444,10 +529,20 @@ class CalibratedOGDVariables:
                 type=MembershipFunctionType.TRIANGULAR,
                 parameters=[0.38, 0.52, 0.65]
             ),
+            "high": MembershipFunction(
+                name="high",
+                type=MembershipFunctionType.TRIANGULAR,
+                parameters=[0.58, 0.74, 0.88]
+            ),
             "good": MembershipFunction(
                 name="good",
                 type=MembershipFunctionType.TRIANGULAR,
                 parameters=[0.58, 0.74, 0.88]
+            ),
+            "very_relevant": MembershipFunction(
+                name="very_relevant",
+                type=MembershipFunctionType.TRIANGULAR,
+                parameters=[0.82, 0.95, 1.0]
             ),
             "excellent": MembershipFunction(
                 name="excellent",
@@ -457,6 +552,11 @@ class CalibratedOGDVariables:
         }
         
         return var
+
+    @staticmethod
+    def create_relevance_variable() -> LinguisticVariable:
+        """Backward-compatible alias expected by the regression tests."""
+        return CalibratedOGDVariables.create_relevance_output_variable()
 
 
 # ============================================================================
@@ -474,7 +574,7 @@ class OGDRuleBase:
     """
     
     @staticmethod
-    def get_rules() -> List[FuzzyRule]:
+    def create_rules() -> List[FuzzyRule]:
         """Generate the complete rule base."""
         rules = []
         rule_id = 1
@@ -485,9 +585,9 @@ class OGDRuleBase:
         
         # Perfect match scenarios
         rules.append(FuzzyRule(
-            id=rule_id, 
-            antecedents={"similarity": "exact_match", "recency": "very_recent", "completeness": "high"},
-            consequent=("relevance", "excellent"),
+            id=rule_id,
+            antecedent={"similarity": "exact_match", "recency": "very_recent", "completeness": "high"},
+            consequent=("relevance", "very_relevant"),
             weight=1.0,
             description="Perfect match: exact keywords, fresh data, well documented"
         ))
@@ -495,8 +595,8 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"similarity": "exact_match", "recency": "very_recent"},
-            consequent=("relevance", "excellent"),
+            antecedent={"similarity": "exact_match", "recency": "very_recent"},
+            consequent=("relevance", "very_relevant"),
             weight=0.95,
             description="Exact match with very recent data"
         ))
@@ -504,8 +604,8 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"similarity": "exact_match", "completeness": "complete"},
-            consequent=("relevance", "excellent"),
+            antecedent={"similarity": "exact_match", "completeness": "complete"},
+            consequent=("relevance", "very_relevant"),
             weight=0.95,
             description="Exact match with complete documentation"
         ))
@@ -513,8 +613,8 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"similarity": "highly_relevant", "recency": "recent", "completeness": "high"},
-            consequent=("relevance", "excellent"),
+            antecedent={"similarity": "highly_relevant", "recency": "recent", "completeness": "high"},
+            consequent=("relevance", "very_relevant"),
             weight=0.9,
             description="Highly relevant, recent, well-documented"
         ))
@@ -526,8 +626,8 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"similarity": "highly_relevant", "recency": "recent"},
-            consequent=("relevance", "good"),
+            antecedent={"similarity": "highly_relevant", "recency": "recent"},
+            consequent=("relevance", "high"),
             weight=1.0,
             description="Good relevance with recent updates"
         ))
@@ -535,8 +635,8 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"similarity": "highly_relevant", "completeness": "high"},
-            consequent=("relevance", "good"),
+            antecedent={"similarity": "highly_relevant", "completeness": "high"},
+            consequent=("relevance", "high"),
             weight=1.0,
             description="Good relevance with high completeness"
         ))
@@ -544,8 +644,8 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"similarity": "relevant", "recency": "very_recent", "completeness": "high"},
-            consequent=("relevance", "good"),
+            antecedent={"similarity": "relevant", "recency": "very_recent", "completeness": "high"},
+            consequent=("relevance", "high"),
             weight=0.9,
             description="Relevant with outstanding freshness and docs"
         ))
@@ -553,8 +653,8 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"similarity": "relevant", "resources": "comprehensive"},
-            consequent=("relevance", "good"),
+            antecedent={"similarity": "relevant", "resources": "comprehensive"},
+            consequent=("relevance", "high"),
             weight=0.85,
             description="Relevant with extensive resources"
         ))
@@ -562,8 +662,8 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"similarity": "exact_match", "recency": "moderate"},
-            consequent=("relevance", "good"),
+            antecedent={"similarity": "exact_match", "recency": "moderate"},
+            consequent=("relevance", "high"),
             weight=0.85,
             description="Exact match but moderately old"
         ))
@@ -575,7 +675,7 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"similarity": "relevant", "completeness": "medium"},
+            antecedent={"similarity": "relevant", "completeness": "medium"},
             consequent=("relevance", "moderate"),
             weight=1.0,
             description="Relevant with average documentation"
@@ -584,7 +684,7 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"similarity": "relevant", "recency": "moderate"},
+            antecedent={"similarity": "relevant", "recency": "moderate"},
             consequent=("relevance", "moderate"),
             weight=1.0,
             description="Relevant with moderate freshness"
@@ -593,7 +693,7 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"similarity": "somewhat_relevant", "recency": "very_recent"},
+            antecedent={"similarity": "somewhat_relevant", "recency": "very_recent"},
             consequent=("relevance", "moderate"),
             weight=0.9,
             description="Partial relevance offset by freshness"
@@ -602,7 +702,7 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"similarity": "highly_relevant", "recency": "old"},
+            antecedent={"similarity": "highly_relevant", "recency": "old"},
             consequent=("relevance", "moderate"),
             weight=0.85,
             description="Good relevance but old data"
@@ -611,7 +711,7 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"recency": "old", "resources": "comprehensive"},
+            antecedent={"recency": "old", "resources": "comprehensive"},
             consequent=("relevance", "moderate"),
             weight=0.7,
             description="Old but comprehensive resources"
@@ -624,7 +724,7 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"recency": "very_old"},
+            antecedent={"recency": "very_old"},
             consequent=("relevance", "low"),
             weight=1.0,
             description="Very outdated data penalized"
@@ -633,7 +733,7 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"completeness": "low"},
+            antecedent={"completeness": "low"},
             consequent=("relevance", "low"),
             weight=1.0,
             description="Poor documentation penalized"
@@ -642,7 +742,7 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"similarity": "somewhat_relevant", "recency": "old"},
+            antecedent={"similarity": "somewhat_relevant", "recency": "old"},
             consequent=("relevance", "low"),
             weight=0.9,
             description="Weak relevance and old"
@@ -651,7 +751,7 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"completeness": "partial", "resources": "minimal"},
+            antecedent={"completeness": "partial", "resources": "minimal"},
             consequent=("relevance", "low"),
             weight=0.85,
             description="Poor documentation with minimal resources"
@@ -664,7 +764,7 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"similarity": "not_relevant"},
+            antecedent={"similarity": "not_relevant"},
             consequent=("relevance", "very_low"),
             weight=1.0,
             description="No relevance to query"
@@ -673,7 +773,7 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"completeness": "low", "similarity": "somewhat_relevant"},
+            antecedent={"completeness": "low", "similarity": "somewhat_relevant"},
             consequent=("relevance", "very_low"),
             weight=1.0,
             description="Poor docs and weak relevance"
@@ -682,7 +782,7 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"resources": "minimal", "completeness": "low"},
+            antecedent={"resources": "minimal", "completeness": "low"},
             consequent=("relevance", "very_low"),
             weight=0.95,
             description="Minimal resources with poor docs"
@@ -691,7 +791,7 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"recency": "very_old", "completeness": "low"},
+            antecedent={"recency": "very_old", "completeness": "low"},
             consequent=("relevance", "very_low"),
             weight=0.95,
             description="Outdated with poor documentation"
@@ -704,8 +804,8 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"recency": "very_recent", "completeness": "complete", "resources": "rich"},
-            consequent=("relevance", "excellent"),
+            antecedent={"recency": "very_recent", "completeness": "complete", "resources": "rich"},
+            consequent=("relevance", "very_relevant"),
             weight=0.8,
             description="Outstanding quality across all dimensions"
         ))
@@ -713,14 +813,19 @@ class OGDRuleBase:
         
         rules.append(FuzzyRule(
             id=rule_id,
-            antecedents={"recency": "recent", "completeness": "high", "resources": "moderate"},
-            consequent=("relevance", "good"),
+            antecedent={"recency": "recent", "completeness": "high", "resources": "moderate"},
+            consequent=("relevance", "high"),
             weight=0.8,
             description="Good quality across all dimensions"
         ))
         rule_id += 1
         
         return rules
+
+    @staticmethod
+    def get_rules() -> List[FuzzyRule]:
+        """Backward-compatible alias for the rule base generator."""
+        return OGDRuleBase.create_rules()
 
 
 # ============================================================================
@@ -856,7 +961,7 @@ class MamdaniFuzzyEngine:
         antecedent_degrees = {}
         firing_strength = 1.0  # Start with maximum for AND chaining
         
-        for var_name, term in rule.antecedents.items():
+        for var_name, term in rule.antecedent.items():
             if var_name in fuzzifications:
                 degree = fuzzifications[var_name].memberships.get(term, 0.0)
                 antecedent_degrees[var_name] = degree
@@ -901,7 +1006,7 @@ class MamdaniFuzzyEngine:
         # Process each rule
         for activation in rule_activations:
             if activation.firing_strength > 0.001:  # Skip negligible
-                output_term = activation.rule.consequent[1]
+                output_term = activation.rule.output_term()
                 
                 # Track output term activations
                 if output_term not in output_memberships:

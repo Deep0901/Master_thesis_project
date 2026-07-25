@@ -1,15 +1,36 @@
 {
-  "timestamp": "2026-07-10T21:12:29.820362",
+  "timestamp": "2026-07-25T18:09:29.853154",
+  "reproducibility": {
+    "evaluation_timestamp": "2026-07-25T18:09:29.853154",
+    "snapshot_hash": "a827392f6c788749a71ba3e19103f126e6bafb47ee07329f0301950bc15edfe1",
+    "snapshot_date": "20260306_183841",
+    "snapshot_dir": "data\\raw",
+    "snapshot_file": "data\\raw\\ogd_metadata_20260306_183841.json",
+    "dataset_count": 500,
+    "publisher_count": 3,
+    "num_queries": 15,
+    "systems": [
+      "Fuzzy",
+      "BM25",
+      "Linear Weighted",
+      "Weighted Sum",
+      "Portal",
+      "Semantic"
+    ],
+    "sentence_transformers_model": "paraphrase-multilingual-MiniLM-L12-v2",
+    "sentence_transformers_seed": 42
+  },
   "systems": [
     "Fuzzy",
     "BM25",
-    "Metadata",
+    "Linear Weighted",
+    "Weighted Sum",
     "Portal",
     "Semantic"
   ],
   "num_queries": 15,
-  "num_systems": 5,
-  "num_pairwise_comparisons": 40,
+  "num_systems": 6,
+  "num_pairwise_comparisons": 60,
   "query_metrics": [
     {
       "query_id": "ENV-01",
@@ -29,7 +50,15 @@
     },
     {
       "query_id": "ENV-01",
-      "system_name": "Metadata",
+      "system_name": "Linear Weighted",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-01",
+      "system_name": "Weighted Sum",
       "MAP": 0.0,
       "P@5": 0.0,
       "nDCG@10": 0.0,
@@ -54,328 +83,392 @@
     {
       "query_id": "ENV-02",
       "system_name": "Fuzzy",
-      "MAP": 0.547619,
-      "P@5": 0.4,
-      "nDCG@10": 0.705074,
-      "MRR": 0.5
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "ENV-02",
       "system_name": "BM25",
-      "MAP": 0.942857,
-      "P@5": 0.8,
-      "nDCG@10": 0.992577,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "ENV-02",
-      "system_name": "Metadata",
-      "MAP": 0.75,
-      "P@5": 0.6,
-      "nDCG@10": 0.941616,
-      "MRR": 1.0
+      "system_name": "Linear Weighted",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-02",
+      "system_name": "Weighted Sum",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "ENV-02",
       "system_name": "Portal",
-      "MAP": 0.833333,
-      "P@5": 0.6,
-      "nDCG@10": 0.97611,
-      "MRR": 1.0
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "ENV-02",
       "system_name": "Semantic",
-      "MAP": 0.522222,
-      "P@5": 0.4,
-      "nDCG@10": 0.62678,
-      "MRR": 0.5
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
     },
     {
       "query_id": "ENV-03",
       "system_name": "Fuzzy",
-      "MAP": 0.821429,
-      "P@5": 0.8,
-      "nDCG@10": 0.939412,
+      "MAP": 1.0,
+      "P@5": 0.2,
+      "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "ENV-03",
       "system_name": "BM25",
-      "MAP": 0.821088,
-      "P@5": 0.6,
-      "nDCG@10": 0.896293,
+      "MAP": 1.0,
+      "P@5": 0.2,
+      "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "ENV-03",
-      "system_name": "Metadata",
-      "MAP": 0.982143,
-      "P@5": 1.0,
-      "nDCG@10": 0.980961,
+      "system_name": "Linear Weighted",
+      "MAP": 1.0,
+      "P@5": 0.2,
+      "nDCG@10": 1.0,
       "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-03",
+      "system_name": "Weighted Sum",
+      "MAP": 0.142857,
+      "P@5": 0.0,
+      "nDCG@10": 0.333333,
+      "MRR": 0.142857
     },
     {
       "query_id": "ENV-03",
       "system_name": "Portal",
-      "MAP": 0.982143,
-      "P@5": 1.0,
-      "nDCG@10": 0.955132,
-      "MRR": 1.0
+      "MAP": 0.142857,
+      "P@5": 0.0,
+      "nDCG@10": 0.333333,
+      "MRR": 0.142857
     },
     {
       "query_id": "ENV-03",
       "system_name": "Semantic",
-      "MAP": 0.530442,
+      "MAP": 1.0,
+      "P@5": 0.2,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "ENV-04",
+      "system_name": "Fuzzy",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-04",
+      "system_name": "BM25",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-04",
+      "system_name": "Linear Weighted",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-04",
+      "system_name": "Weighted Sum",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-04",
+      "system_name": "Portal",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-04",
+      "system_name": "Semantic",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-05",
+      "system_name": "Fuzzy",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-05",
+      "system_name": "BM25",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-05",
+      "system_name": "Linear Weighted",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-05",
+      "system_name": "Weighted Sum",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-05",
+      "system_name": "Portal",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "ENV-05",
+      "system_name": "Semantic",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "MOB-01",
+      "system_name": "Fuzzy",
+      "MAP": 0.78567,
+      "P@5": 0.8,
+      "nDCG@10": 0.70428,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-01",
+      "system_name": "BM25",
+      "MAP": 0.976543,
+      "P@5": 1.0,
+      "nDCG@10": 0.995779,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-01",
+      "system_name": "Linear Weighted",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.840115,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-01",
+      "system_name": "Weighted Sum",
+      "MAP": 0.906041,
+      "P@5": 0.8,
+      "nDCG@10": 0.817473,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-01",
+      "system_name": "Portal",
+      "MAP": 0.906041,
+      "P@5": 0.8,
+      "nDCG@10": 0.817473,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-01",
+      "system_name": "Semantic",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.840115,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-02",
+      "system_name": "Fuzzy",
+      "MAP": 0.841226,
+      "P@5": 0.8,
+      "nDCG@10": 0.919646,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-02",
+      "system_name": "BM25",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-02",
+      "system_name": "Linear Weighted",
+      "MAP": 0.78567,
+      "P@5": 0.8,
+      "nDCG@10": 0.832898,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-02",
+      "system_name": "Weighted Sum",
+      "MAP": 0.841226,
+      "P@5": 0.8,
+      "nDCG@10": 0.919646,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-02",
+      "system_name": "Portal",
+      "MAP": 0.841226,
+      "P@5": 0.8,
+      "nDCG@10": 0.919646,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-02",
+      "system_name": "Semantic",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-03",
+      "system_name": "Fuzzy",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "MOB-03",
+      "system_name": "BM25",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "MOB-03",
+      "system_name": "Linear Weighted",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "MOB-03",
+      "system_name": "Weighted Sum",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "MOB-03",
+      "system_name": "Portal",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "MOB-03",
+      "system_name": "Semantic",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "MOB-04",
+      "system_name": "Fuzzy",
+      "MAP": 0.52381,
       "P@5": 0.4,
-      "nDCG@10": 0.579707,
+      "nDCG@10": 0.69477,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "MOB-04",
+      "system_name": "BM25",
+      "MAP": 0.683333,
+      "P@5": 0.4,
+      "nDCG@10": 0.867044,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "MOB-04",
+      "system_name": "Linear Weighted",
+      "MAP": 0.367361,
+      "P@5": 0.4,
+      "nDCG@10": 0.559814,
       "MRR": 0.25
     },
     {
-      "query_id": "ENV-04",
-      "system_name": "Fuzzy",
-      "MAP": 0.798611,
-      "P@5": 0.6,
-      "nDCG@10": 0.922326,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "ENV-04",
-      "system_name": "BM25",
-      "MAP": 0.408333,
-      "P@5": 0.4,
-      "nDCG@10": 0.627683,
-      "MRR": 0.5
-    },
-    {
-      "query_id": "ENV-04",
-      "system_name": "Metadata",
-      "MAP": 0.667857,
-      "P@5": 0.6,
-      "nDCG@10": 0.839654,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "ENV-04",
-      "system_name": "Portal",
-      "MAP": 0.816667,
-      "P@5": 0.6,
-      "nDCG@10": 0.926758,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "ENV-04",
-      "system_name": "Semantic",
-      "MAP": 0.582143,
-      "P@5": 0.4,
-      "nDCG@10": 0.801479,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "ENV-05",
-      "system_name": "Fuzzy",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "ENV-05",
-      "system_name": "BM25",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "ENV-05",
-      "system_name": "Metadata",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "ENV-05",
-      "system_name": "Portal",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "ENV-05",
-      "system_name": "Semantic",
-      "MAP": 0.8,
-      "P@5": 1.0,
-      "nDCG@10": 0.870125,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "MOB-01",
-      "system_name": "Fuzzy",
-      "MAP": 0.790437,
-      "P@5": 0.8,
-      "nDCG@10": 0.870096,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "MOB-01",
-      "system_name": "BM25",
-      "MAP": 0.707103,
-      "P@5": 0.8,
-      "nDCG@10": 0.748461,
-      "MRR": 0.5
-    },
-    {
-      "query_id": "MOB-01",
-      "system_name": "Metadata",
-      "MAP": 0.707103,
-      "P@5": 0.8,
-      "nDCG@10": 0.755176,
-      "MRR": 0.5
-    },
-    {
-      "query_id": "MOB-01",
-      "system_name": "Portal",
-      "MAP": 0.707103,
-      "P@5": 0.8,
-      "nDCG@10": 0.755176,
-      "MRR": 0.5
-    },
-    {
-      "query_id": "MOB-01",
-      "system_name": "Semantic",
-      "MAP": 0.617103,
-      "P@5": 0.8,
-      "nDCG@10": 0.651338,
-      "MRR": 0.5
-    },
-    {
-      "query_id": "MOB-02",
-      "system_name": "Fuzzy",
-      "MAP": 0.734524,
-      "P@5": 0.8,
-      "nDCG@10": 0.798265,
-      "MRR": 0.5
-    },
-    {
-      "query_id": "MOB-02",
-      "system_name": "BM25",
-      "MAP": 0.702778,
-      "P@5": 0.8,
-      "nDCG@10": 0.78849,
-      "MRR": 0.5
-    },
-    {
-      "query_id": "MOB-02",
-      "system_name": "Metadata",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "MOB-02",
-      "system_name": "Portal",
-      "MAP": 0.97619,
-      "P@5": 1.0,
-      "nDCG@10": 0.993078,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "MOB-02",
-      "system_name": "Semantic",
-      "MAP": 0.734524,
-      "P@5": 0.8,
-      "nDCG@10": 0.798265,
-      "MRR": 0.5
-    },
-    {
-      "query_id": "MOB-03",
-      "system_name": "Fuzzy",
-      "MAP": 0.988889,
-      "P@5": 1.0,
-      "nDCG@10": 0.999016,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "MOB-03",
-      "system_name": "BM25",
-      "MAP": 0.988889,
-      "P@5": 1.0,
-      "nDCG@10": 0.999016,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "MOB-03",
-      "system_name": "Metadata",
-      "MAP": 0.988889,
-      "P@5": 1.0,
-      "nDCG@10": 0.999016,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "MOB-03",
-      "system_name": "Portal",
-      "MAP": 0.988889,
-      "P@5": 1.0,
-      "nDCG@10": 0.999016,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "MOB-03",
-      "system_name": "Semantic",
-      "MAP": 0.888889,
-      "P@5": 1.0,
-      "nDCG@10": 0.975247,
-      "MRR": 1.0
-    },
-    {
       "query_id": "MOB-04",
-      "system_name": "Fuzzy",
-      "MAP": 0.684425,
-      "P@5": 0.6,
-      "nDCG@10": 0.71925,
-      "MRR": 0.5
-    },
-    {
-      "query_id": "MOB-04",
-      "system_name": "BM25",
-      "MAP": 0.760268,
-      "P@5": 0.8,
-      "nDCG@10": 0.814773,
-      "MRR": 0.5
-    },
-    {
-      "query_id": "MOB-04",
-      "system_name": "Metadata",
-      "MAP": 0.986111,
-      "P@5": 1.0,
-      "nDCG@10": 0.988887,
-      "MRR": 1.0
+      "system_name": "Weighted Sum",
+      "MAP": 0.32629,
+      "P@5": 0.2,
+      "nDCG@10": 0.521814,
+      "MRR": 0.2
     },
     {
       "query_id": "MOB-04",
       "system_name": "Portal",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
-      "MRR": 1.0
+      "MAP": 0.32629,
+      "P@5": 0.2,
+      "nDCG@10": 0.521814,
+      "MRR": 0.2
     },
     {
       "query_id": "MOB-04",
       "system_name": "Semantic",
-      "MAP": 0.864435,
+      "MAP": 1.0,
       "P@5": 0.8,
-      "nDCG@10": 0.94835,
+      "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "MOB-05",
       "system_name": "Fuzzy",
       "MAP": 1.0,
-      "P@5": 1.0,
+      "P@5": 0.2,
       "nDCG@10": 1.0,
       "MRR": 1.0
     },
@@ -383,455 +476,547 @@
       "query_id": "MOB-05",
       "system_name": "BM25",
       "MAP": 1.0,
-      "P@5": 1.0,
+      "P@5": 0.2,
       "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "MOB-05",
-      "system_name": "Metadata",
+      "system_name": "Linear Weighted",
       "MAP": 1.0,
-      "P@5": 1.0,
+      "P@5": 0.2,
       "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "MOB-05",
+      "system_name": "Weighted Sum",
+      "MAP": 0.2,
+      "P@5": 0.2,
+      "nDCG@10": 0.386853,
+      "MRR": 0.2
+    },
+    {
+      "query_id": "MOB-05",
       "system_name": "Portal",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
-      "MRR": 1.0
+      "MAP": 0.2,
+      "P@5": 0.2,
+      "nDCG@10": 0.386853,
+      "MRR": 0.2
     },
     {
       "query_id": "MOB-05",
       "system_name": "Semantic",
       "MAP": 1.0,
-      "P@5": 1.0,
+      "P@5": 0.2,
       "nDCG@10": 1.0,
       "MRR": 1.0
     },
     {
       "query_id": "XD-01",
       "system_name": "Fuzzy",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-01",
-      "system_name": "BM25",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-01",
-      "system_name": "Metadata",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-01",
-      "system_name": "Portal",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-01",
-      "system_name": "Semantic",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 1.0,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-02",
-      "system_name": "Fuzzy",
-      "MAP": 0.775926,
-      "P@5": 0.6,
-      "nDCG@10": 0.921422,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-02",
-      "system_name": "BM25",
-      "MAP": 0.775926,
-      "P@5": 0.6,
-      "nDCG@10": 0.92716,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-02",
-      "system_name": "Metadata",
-      "MAP": 0.680688,
+      "MAP": 0.530159,
       "P@5": 0.4,
-      "nDCG@10": 0.870221,
-      "MRR": 1.0
+      "nDCG@10": 0.699258,
+      "MRR": 0.5
     },
     {
-      "query_id": "XD-02",
-      "system_name": "Portal",
-      "MAP": 0.775926,
-      "P@5": 0.6,
-      "nDCG@10": 0.924559,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-02",
-      "system_name": "Semantic",
-      "MAP": 0.709259,
-      "P@5": 0.6,
-      "nDCG@10": 0.88767,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-03",
-      "system_name": "Fuzzy",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 0.963466,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-03",
+      "query_id": "XD-01",
       "system_name": "BM25",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 0.979103,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-03",
-      "system_name": "Metadata",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 0.984025,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-03",
-      "system_name": "Portal",
-      "MAP": 1.0,
-      "P@5": 1.0,
-      "nDCG@10": 0.984025,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-03",
-      "system_name": "Semantic",
-      "MAP": 0.9,
-      "P@5": 1.0,
-      "nDCG@10": 0.914374,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-04",
-      "system_name": "Fuzzy",
-      "MAP": 0.878889,
-      "P@5": 1.0,
-      "nDCG@10": 0.840666,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-04",
-      "system_name": "BM25",
-      "MAP": 0.815437,
-      "P@5": 0.8,
-      "nDCG@10": 0.842634,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-04",
-      "system_name": "Metadata",
-      "MAP": 0.815437,
-      "P@5": 0.8,
-      "nDCG@10": 0.876302,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-04",
-      "system_name": "Portal",
-      "MAP": 0.815437,
-      "P@5": 0.8,
-      "nDCG@10": 0.876302,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-04",
-      "system_name": "Semantic",
-      "MAP": 0.790437,
-      "P@5": 0.8,
-      "nDCG@10": 0.817269,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-05",
-      "system_name": "Fuzzy",
-      "MAP": 0.737585,
-      "P@5": 0.6,
-      "nDCG@10": 0.689536,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-05",
-      "system_name": "BM25",
-      "MAP": 0.651871,
+      "MAP": 0.696825,
       "P@5": 0.4,
-      "nDCG@10": 0.891411,
+      "nDCG@10": 0.940792,
       "MRR": 1.0
     },
     {
-      "query_id": "XD-05",
-      "system_name": "Metadata",
-      "MAP": 0.808333,
-      "P@5": 0.6,
-      "nDCG@10": 0.956491,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-05",
-      "system_name": "Portal",
-      "MAP": 0.808333,
-      "P@5": 0.6,
-      "nDCG@10": 0.956491,
-      "MRR": 1.0
-    },
-    {
-      "query_id": "XD-05",
-      "system_name": "Semantic",
-      "MAP": 0.542347,
+      "query_id": "XD-01",
+      "system_name": "Linear Weighted",
+      "MAP": 0.441111,
       "P@5": 0.4,
-      "nDCG@10": 0.566578,
+      "nDCG@10": 0.486806,
+      "MRR": 0.25
+    },
+    {
+      "query_id": "XD-01",
+      "system_name": "Weighted Sum",
+      "MAP": 0.463492,
+      "P@5": 0.4,
+      "nDCG@10": 0.501342,
       "MRR": 0.333333
+    },
+    {
+      "query_id": "XD-01",
+      "system_name": "Portal",
+      "MAP": 0.463492,
+      "P@5": 0.4,
+      "nDCG@10": 0.501342,
+      "MRR": 0.333333
+    },
+    {
+      "query_id": "XD-01",
+      "system_name": "Semantic",
+      "MAP": 0.696825,
+      "P@5": 0.4,
+      "nDCG@10": 0.940792,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-02",
+      "system_name": "Fuzzy",
+      "MAP": 0.194444,
+      "P@5": 0.0,
+      "nDCG@10": 0.402983,
+      "MRR": 0.166667
+    },
+    {
+      "query_id": "XD-02",
+      "system_name": "BM25",
+      "MAP": 0.833333,
+      "P@5": 0.4,
+      "nDCG@10": 0.919721,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-02",
+      "system_name": "Linear Weighted",
+      "MAP": 0.225,
+      "P@5": 0.2,
+      "nDCG@10": 0.430624,
+      "MRR": 0.2
+    },
+    {
+      "query_id": "XD-02",
+      "system_name": "Weighted Sum",
+      "MAP": 0.225,
+      "P@5": 0.2,
+      "nDCG@10": 0.430624,
+      "MRR": 0.2
+    },
+    {
+      "query_id": "XD-02",
+      "system_name": "Portal",
+      "MAP": 0.225,
+      "P@5": 0.2,
+      "nDCG@10": 0.430624,
+      "MRR": 0.2
+    },
+    {
+      "query_id": "XD-02",
+      "system_name": "Semantic",
+      "MAP": 0.833333,
+      "P@5": 0.4,
+      "nDCG@10": 0.919721,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-03",
+      "system_name": "Fuzzy",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.871884,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-03",
+      "system_name": "BM25",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.871884,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-03",
+      "system_name": "Linear Weighted",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 0.871884,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-03",
+      "system_name": "Weighted Sum",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-03",
+      "system_name": "Portal",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-03",
+      "system_name": "Semantic",
+      "MAP": 1.0,
+      "P@5": 1.0,
+      "nDCG@10": 1.0,
+      "MRR": 1.0
+    },
+    {
+      "query_id": "XD-04",
+      "system_name": "Fuzzy",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "XD-04",
+      "system_name": "BM25",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "XD-04",
+      "system_name": "Linear Weighted",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "XD-04",
+      "system_name": "Weighted Sum",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "XD-04",
+      "system_name": "Portal",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "XD-04",
+      "system_name": "Semantic",
+      "MAP": 0.0,
+      "P@5": 0.0,
+      "nDCG@10": 0.0,
+      "MRR": 0.0
+    },
+    {
+      "query_id": "XD-05",
+      "system_name": "Fuzzy",
+      "MAP": 0.583333,
+      "P@5": 0.4,
+      "nDCG@10": 0.586883,
+      "MRR": 0.5
+    },
+    {
+      "query_id": "XD-05",
+      "system_name": "BM25",
+      "MAP": 0.267857,
+      "P@5": 0.2,
+      "nDCG@10": 0.447644,
+      "MRR": 0.25
+    },
+    {
+      "query_id": "XD-05",
+      "system_name": "Linear Weighted",
+      "MAP": 0.173611,
+      "P@5": 0.0,
+      "nDCG@10": 0.335604,
+      "MRR": 0.125
+    },
+    {
+      "query_id": "XD-05",
+      "system_name": "Weighted Sum",
+      "MAP": 0.155556,
+      "P@5": 0.0,
+      "nDCG@10": 0.321743,
+      "MRR": 0.111111
+    },
+    {
+      "query_id": "XD-05",
+      "system_name": "Portal",
+      "MAP": 0.155556,
+      "P@5": 0.0,
+      "nDCG@10": 0.321743,
+      "MRR": 0.111111
+    },
+    {
+      "query_id": "XD-05",
+      "system_name": "Semantic",
+      "MAP": 0.611111,
+      "P@5": 0.2,
+      "nDCG@10": 0.909142,
+      "MRR": 1.0
     }
   ],
   "system_summary": [
     {
       "system_name": "Fuzzy",
       "metric": "MAP",
-      "mean": 0.783889,
-      "median": 0.798611,
-      "std": 0.248244,
+      "mean": 0.430576,
+      "median": 0.52381,
+      "std": 0.40641,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.641591,
-      "ci_upper": 0.926187
+      "ci_lower": 0.226958,
+      "ci_upper": 0.635977
     },
     {
       "system_name": "Fuzzy",
       "metric": "P@5",
-      "mean": 0.746667,
-      "median": 0.8,
-      "std": 0.277769,
+      "mean": 0.28,
+      "median": 0.2,
+      "std": 0.333067,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.587444,
-      "ci_upper": 0.905889
+      "ci_lower": 0.12,
+      "ci_upper": 0.466667
     },
     {
       "system_name": "Fuzzy",
       "metric": "nDCG@10",
-      "mean": 0.824569,
-      "median": 0.921422,
-      "std": 0.245047,
+      "mean": 0.458647,
+      "median": 0.586883,
+      "std": 0.402085,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.684103,
-      "ci_upper": 0.965034
+      "ci_lower": 0.253761,
+      "ci_upper": 0.660904
     },
     {
       "system_name": "Fuzzy",
       "metric": "MRR",
-      "mean": 0.833333,
-      "median": 1.0,
-      "std": 0.298142,
+      "mean": 0.411111,
+      "median": 0.5,
+      "std": 0.407643,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.662433,
-      "ci_upper": 1.004234
+      "ci_lower": 0.211111,
+      "ci_upper": 0.622222
     },
     {
       "system_name": "BM25",
       "metric": "MAP",
-      "mean": 0.771637,
-      "median": 0.815437,
-      "std": 0.263349,
+      "mean": 0.497193,
+      "median": 0.683333,
+      "std": 0.444547,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.62068,
-      "ci_upper": 0.922593
+      "ci_lower": 0.269472,
+      "ci_upper": 0.715792
     },
     {
       "system_name": "BM25",
       "metric": "P@5",
-      "mean": 0.733333,
-      "median": 0.8,
-      "std": 0.279682,
+      "mean": 0.32,
+      "median": 0.2,
+      "std": 0.370945,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.573014,
-      "ci_upper": 0.893652
+      "ci_lower": 0.146667,
+      "ci_upper": 0.52
     },
     {
       "system_name": "BM25",
       "metric": "nDCG@10",
-      "mean": 0.83384,
-      "median": 0.896293,
-      "std": 0.247644,
+      "mean": 0.536191,
+      "median": 0.867044,
+      "std": 0.456244,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.691886,
-      "ci_upper": 0.975794
+      "ci_lower": 0.302784,
+      "ci_upper": 0.760162
     },
     {
       "system_name": "BM25",
       "metric": "MRR",
-      "mean": 0.8,
+      "mean": 0.55,
       "median": 1.0,
-      "std": 0.305505,
+      "std": 0.484768,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.624879,
-      "ci_upper": 0.975121
+      "ci_lower": 0.3,
+      "ci_upper": 0.8
     },
     {
-      "system_name": "Metadata",
+      "system_name": "Linear Weighted",
       "metric": "MAP",
-      "mean": 0.825771,
-      "median": 0.982143,
-      "std": 0.255169,
+      "mean": 0.399517,
+      "median": 0.225,
+      "std": 0.418996,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.679503,
-      "ci_upper": 0.972038
+      "ci_lower": 0.191323,
+      "ci_upper": 0.612434
     },
     {
-      "system_name": "Metadata",
+      "system_name": "Linear Weighted",
       "metric": "P@5",
-      "mean": 0.786667,
-      "median": 1.0,
-      "std": 0.287209,
+      "mean": 0.28,
+      "median": 0.2,
+      "std": 0.356277,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.622033,
-      "ci_upper": 0.9513
+      "ci_lower": 0.106667,
+      "ci_upper": 0.48
     },
     {
-      "system_name": "Metadata",
+      "system_name": "Linear Weighted",
       "metric": "nDCG@10",
-      "mean": 0.87949,
-      "median": 0.980961,
-      "std": 0.245764,
+      "mean": 0.42385,
+      "median": 0.430624,
+      "std": 0.392717,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.738614,
-      "ci_upper": 1.020366
+      "ci_lower": 0.224193,
+      "ci_upper": 0.619643
     },
     {
-      "system_name": "Metadata",
+      "system_name": "Linear Weighted",
       "metric": "MRR",
-      "mean": 0.9,
-      "median": 1.0,
-      "std": 0.270801,
+      "mean": 0.355,
+      "median": 0.2,
+      "std": 0.411522,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.744772,
-      "ci_upper": 1.055228
+      "ci_lower": 0.155,
+      "ci_upper": 0.566667
+    },
+    {
+      "system_name": "Weighted Sum",
+      "metric": "MAP",
+      "mean": 0.284031,
+      "median": 0.155556,
+      "std": 0.343995,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.121141,
+      "ci_upper": 0.469619
+    },
+    {
+      "system_name": "Weighted Sum",
+      "metric": "P@5",
+      "mean": 0.24,
+      "median": 0.0,
+      "std": 0.336254,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.08,
+      "ci_upper": 0.426667
+    },
+    {
+      "system_name": "Weighted Sum",
+      "metric": "nDCG@10",
+      "mean": 0.348855,
+      "median": 0.333333,
+      "std": 0.342721,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.179295,
+      "ci_upper": 0.529683
+    },
+    {
+      "system_name": "Weighted Sum",
+      "metric": "MRR",
+      "mean": 0.279153,
+      "median": 0.142857,
+      "std": 0.373717,
+      "min": 0.0,
+      "max": 1.0,
+      "ci_lower": 0.106455,
+      "ci_upper": 0.480635
     },
     {
       "system_name": "Portal",
       "metric": "MAP",
-      "mean": 0.846935,
-      "median": 0.97619,
-      "std": 0.247354,
+      "mean": 0.284031,
+      "median": 0.155556,
+      "std": 0.343995,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.705147,
-      "ci_upper": 0.988723
+      "ci_lower": 0.121141,
+      "ci_upper": 0.469619
     },
     {
       "system_name": "Portal",
       "metric": "P@5",
-      "mean": 0.8,
-      "median": 1.0,
-      "std": 0.273252,
+      "mean": 0.24,
+      "median": 0.0,
+      "std": 0.336254,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.643367,
-      "ci_upper": 0.956633
+      "ci_lower": 0.08,
+      "ci_upper": 0.426667
     },
     {
       "system_name": "Portal",
       "metric": "nDCG@10",
-      "mean": 0.889777,
-      "median": 0.97611,
-      "std": 0.246149,
+      "mean": 0.348855,
+      "median": 0.333333,
+      "std": 0.342721,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.74868,
-      "ci_upper": 1.030874
+      "ci_lower": 0.179295,
+      "ci_upper": 0.529683
     },
     {
       "system_name": "Portal",
       "metric": "MRR",
-      "mean": 0.9,
-      "median": 1.0,
-      "std": 0.270801,
+      "mean": 0.279153,
+      "median": 0.142857,
+      "std": 0.373717,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.744772,
-      "ci_upper": 1.055228
+      "ci_lower": 0.106455,
+      "ci_upper": 0.480635
     },
     {
       "system_name": "Semantic",
       "metric": "MAP",
-      "mean": 0.698787,
-      "median": 0.734524,
-      "std": 0.244693,
+      "mean": 0.542751,
+      "median": 0.696825,
+      "std": 0.457149,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.558524,
-      "ci_upper": 0.839049
+      "ci_lower": 0.307407,
+      "ci_upper": 0.768677
     },
     {
       "system_name": "Semantic",
       "metric": "P@5",
-      "mean": 0.693333,
-      "median": 0.8,
-      "std": 0.299926,
+      "mean": 0.346667,
+      "median": 0.2,
+      "std": 0.389644,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.52141,
-      "ci_upper": 0.865256
+      "ci_lower": 0.16,
+      "ci_upper": 0.56
     },
     {
       "system_name": "Semantic",
       "metric": "nDCG@10",
-      "mean": 0.762479,
-      "median": 0.817269,
-      "std": 0.249361,
+      "mean": 0.573985,
+      "median": 0.909142,
+      "std": 0.470562,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.619541,
-      "ci_upper": 0.905417
+      "ci_lower": 0.321924,
+      "ci_upper": 0.812155
     },
     {
       "system_name": "Semantic",
       "metric": "MRR",
-      "mean": 0.738889,
+      "mean": 0.6,
       "median": 1.0,
-      "std": 0.340025,
+      "std": 0.489898,
       "min": 0.0,
       "max": 1.0,
-      "ci_lower": 0.54398,
-      "ci_upper": 0.933798
+      "ci_lower": 0.333333,
+      "ci_upper": 0.866667
     }
   ],
   "pairwise_statistics": [
@@ -839,401 +1024,661 @@
       "system_a": "Fuzzy",
       "system_b": "BM25",
       "metric": "MAP",
-      "statistic": 0.0,
-      "p_value": 0.40081416938293446,
-      "corrected_p_value": 0.557352,
+      "statistic": 5.0,
+      "p_value": 0.24886387493792206,
+      "corrected_p_value": 0.881482,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "Fuzzy",
-      "system_b": "Metadata",
+      "system_b": "Linear Weighted",
       "metric": "MAP",
-      "statistic": 0.0,
-      "p_value": 0.26039294361048326,
-      "corrected_p_value": 0.557352,
+      "statistic": 6.0,
+      "p_value": 0.3454475304692257,
+      "corrected_p_value": 0.881482,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Weighted Sum",
+      "metric": "MAP",
+      "statistic": 4.0,
+      "p_value": 0.09096894797535775,
+      "corrected_p_value": 0.727752,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "Fuzzy",
       "system_b": "Portal",
       "metric": "MAP",
-      "statistic": 0.0,
-      "p_value": 0.09289194088370534,
-      "corrected_p_value": 0.557352,
+      "statistic": 4.0,
+      "p_value": 0.09096894797535775,
+      "corrected_p_value": 0.727752,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "Fuzzy",
       "system_b": "Semantic",
       "metric": "MAP",
       "statistic": 0.0,
-      "p_value": 0.020795215853599107,
-      "corrected_p_value": 0.166362,
+      "p_value": 0.027707849358079864,
+      "corrected_p_value": 0.304786,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "BM25",
-      "system_b": "Metadata",
+      "system_b": "Linear Weighted",
       "metric": "MAP",
-      "statistic": 0.0,
-      "p_value": 0.12819017434510785,
-      "corrected_p_value": 0.557352,
-      "significant": false,
-      "n_queries": 15
-    },
-    {
-      "system_a": "BM25",
-      "system_b": "Portal",
-      "metric": "MAP",
-      "statistic": 0.0,
+      "statistic": 1.0,
       "p_value": 0.046399461870904594,
-      "corrected_p_value": 0.324796,
+      "corrected_p_value": 0.431144,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Weighted Sum",
+      "metric": "MAP",
+      "statistic": 0.0,
+      "p_value": 0.011718685599768628,
+      "corrected_p_value": 0.17578,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Portal",
+      "metric": "MAP",
+      "statistic": 0.0,
+      "p_value": 0.011718685599768628,
+      "corrected_p_value": 0.17578,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "BM25",
       "system_b": "Semantic",
       "metric": "MAP",
       "statistic": 0.0,
-      "p_value": 0.09948088075636449,
-      "corrected_p_value": 0.557352,
+      "p_value": 0.10880943004054569,
+      "corrected_p_value": 0.727752,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
-      "system_a": "Metadata",
+      "system_a": "Linear Weighted",
+      "system_b": "Weighted Sum",
+      "metric": "MAP",
+      "statistic": 6.0,
+      "p_value": 0.17629637444051116,
+      "corrected_p_value": 0.881482,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Linear Weighted",
       "system_b": "Portal",
       "metric": "MAP",
-      "statistic": 0.0,
-      "p_value": 0.13801073756865953,
-      "corrected_p_value": 0.557352,
+      "statistic": 6.0,
+      "p_value": 0.17629637444051116,
+      "corrected_p_value": 0.881482,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
-      "system_a": "Metadata",
+      "system_a": "Linear Weighted",
       "system_b": "Semantic",
       "metric": "MAP",
       "statistic": 0.0,
-      "p_value": 0.0037017494066892425,
-      "corrected_p_value": 0.033316,
-      "significant": true,
-      "n_queries": 15
+      "p_value": 0.043114446783075355,
+      "corrected_p_value": 0.431144,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Weighted Sum",
+      "system_b": "Portal",
+      "metric": "MAP",
+      "statistic": 0.0,
+      "p_value": 1.0,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15,
+      "note": "identical_vectors"
+    },
+    {
+      "system_a": "Weighted Sum",
+      "system_b": "Semantic",
+      "metric": "MAP",
+      "statistic": 0.0,
+      "p_value": 0.011718685599768628,
+      "corrected_p_value": 0.17578,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "Portal",
       "system_b": "Semantic",
       "metric": "MAP",
       "statistic": 0.0,
-      "p_value": 0.002217721464237049,
-      "corrected_p_value": 0.022177,
-      "significant": true,
-      "n_queries": 15
+      "p_value": 0.011718685599768628,
+      "corrected_p_value": 0.17578,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "Fuzzy",
       "system_b": "BM25",
+      "metric": "P@5",
+      "statistic": 3.0,
+      "p_value": 0.4614509878333607,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Linear Weighted",
+      "metric": "P@5",
+      "statistic": 3.0,
+      "p_value": 1.0,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Weighted Sum",
+      "metric": "P@5",
+      "statistic": 2.0,
+      "p_value": 0.25683925795785656,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Portal",
+      "metric": "P@5",
+      "statistic": 2.0,
+      "p_value": 0.25683925795785656,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Semantic",
+      "metric": "P@5",
+      "statistic": 3.0,
+      "p_value": 0.22067136191984693,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Linear Weighted",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 0.10247043485974937,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Weighted Sum",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 0.023140931308743732,
+      "corrected_p_value": 0.347114,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Portal",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 0.023140931308743732,
+      "corrected_p_value": 0.347114,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Semantic",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 0.31731050786291415,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Linear Weighted",
+      "system_b": "Weighted Sum",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 0.10247043485974937,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Linear Weighted",
+      "system_b": "Portal",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 0.10247043485974937,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Linear Weighted",
+      "system_b": "Semantic",
+      "metric": "P@5",
+      "statistic": 0.0,
+      "p_value": 0.06559969214707187,
+      "corrected_p_value": 0.721597,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Weighted Sum",
+      "system_b": "Portal",
       "metric": "P@5",
       "statistic": 0.0,
       "p_value": 1.0,
       "corrected_p_value": 1.0,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": "identical_vectors"
     },
     {
-      "system_a": "Fuzzy",
-      "system_b": "Metadata",
-      "metric": "P@5",
-      "statistic": 0.0,
-      "p_value": 0.31731050786291415,
-      "corrected_p_value": 1.0,
-      "significant": false,
-      "n_queries": 15
-    },
-    {
-      "system_a": "Fuzzy",
-      "system_b": "Portal",
-      "metric": "P@5",
-      "statistic": 0.0,
-      "p_value": 0.15729920705028516,
-      "corrected_p_value": 1.0,
-      "significant": false,
-      "n_queries": 15
-    },
-    {
-      "system_a": "Fuzzy",
+      "system_a": "Weighted Sum",
       "system_b": "Semantic",
       "metric": "P@5",
       "statistic": 0.0,
-      "p_value": 0.33628879040286896,
-      "corrected_p_value": 1.0,
+      "p_value": 0.025596805385948558,
+      "corrected_p_value": 0.347114,
       "significant": false,
-      "n_queries": 15
-    },
-    {
-      "system_a": "BM25",
-      "system_b": "Metadata",
-      "metric": "P@5",
-      "statistic": 0.0,
-      "p_value": 0.3804551252503885,
-      "corrected_p_value": 1.0,
-      "significant": false,
-      "n_queries": 15
-    },
-    {
-      "system_a": "BM25",
-      "system_b": "Portal",
-      "metric": "P@5",
-      "statistic": 0.0,
-      "p_value": 0.2355589199240795,
-      "corrected_p_value": 1.0,
-      "significant": false,
-      "n_queries": 15
-    },
-    {
-      "system_a": "BM25",
-      "system_b": "Semantic",
-      "metric": "P@5",
-      "statistic": 0.0,
-      "p_value": 0.17971249487899976,
-      "corrected_p_value": 1.0,
-      "significant": false,
-      "n_queries": 15
-    },
-    {
-      "system_a": "Metadata",
-      "system_b": "Portal",
-      "metric": "P@5",
-      "statistic": 0.0,
-      "p_value": 0.31731050786291415,
-      "corrected_p_value": 1.0,
-      "significant": false,
-      "n_queries": 15
-    },
-    {
-      "system_a": "Metadata",
-      "system_b": "Semantic",
-      "metric": "P@5",
-      "statistic": 0.0,
-      "p_value": 0.057779571123597204,
-      "corrected_p_value": 0.520016,
-      "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "Portal",
       "system_b": "Semantic",
       "metric": "P@5",
       "statistic": 0.0,
-      "p_value": 0.019630657257290667,
-      "corrected_p_value": 0.196307,
+      "p_value": 0.025596805385948558,
+      "corrected_p_value": 0.347114,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "Fuzzy",
       "system_b": "BM25",
       "metric": "nDCG@10",
-      "statistic": 0.0,
-      "p_value": 0.7988593499960496,
-      "corrected_p_value": 0.798859,
+      "statistic": 2.0,
+      "p_value": 0.07473549830588248,
+      "corrected_p_value": 0.597884,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "Fuzzy",
-      "system_b": "Metadata",
+      "system_b": "Linear Weighted",
       "metric": "nDCG@10",
-      "statistic": 0.0,
-      "p_value": 0.20262160771231197,
-      "corrected_p_value": 0.518865,
+      "statistic": 5.0,
+      "p_value": 0.24886387493792206,
+      "corrected_p_value": 1.0,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Weighted Sum",
+      "metric": "nDCG@10",
+      "statistic": 6.0,
+      "p_value": 0.09289194088370534,
+      "corrected_p_value": 0.650244,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "Fuzzy",
       "system_b": "Portal",
       "metric": "nDCG@10",
-      "statistic": 0.0,
-      "p_value": 0.02841686417486375,
-      "corrected_p_value": 0.198918,
+      "statistic": 6.0,
+      "p_value": 0.09289194088370534,
+      "corrected_p_value": 0.650244,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "Fuzzy",
       "system_b": "Semantic",
       "metric": "nDCG@10",
       "statistic": 0.0,
-      "p_value": 0.04085984371280629,
-      "corrected_p_value": 0.245159,
+      "p_value": 0.017960477526078766,
+      "corrected_p_value": 0.233486,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "BM25",
-      "system_b": "Metadata",
+      "system_b": "Linear Weighted",
       "metric": "nDCG@10",
       "statistic": 0.0,
-      "p_value": 0.05933611988090862,
-      "corrected_p_value": 0.296681,
+      "p_value": 0.027707849358079864,
+      "corrected_p_value": 0.277078,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Weighted Sum",
+      "metric": "nDCG@10",
+      "statistic": 3.0,
+      "p_value": 0.020879263166351643,
+      "corrected_p_value": 0.250551,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "BM25",
       "system_b": "Portal",
       "metric": "nDCG@10",
-      "statistic": 0.0,
-      "p_value": 0.02182427562605354,
-      "corrected_p_value": 0.174594,
+      "statistic": 3.0,
+      "p_value": 0.020879263166351643,
+      "corrected_p_value": 0.250551,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "BM25",
       "system_b": "Semantic",
       "metric": "nDCG@10",
-      "statistic": 0.0,
-      "p_value": 0.09948088075636449,
-      "corrected_p_value": 0.397924,
+      "statistic": 3.0,
+      "p_value": 0.4652088184521418,
+      "corrected_p_value": 1.0,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
-      "system_a": "Metadata",
+      "system_a": "Linear Weighted",
+      "system_b": "Weighted Sum",
+      "metric": "nDCG@10",
+      "statistic": 13.0,
+      "p_value": 0.4838398513935682,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Linear Weighted",
       "system_b": "Portal",
       "metric": "nDCG@10",
-      "statistic": 0.0,
-      "p_value": 0.17295491798842066,
-      "corrected_p_value": 0.518865,
+      "statistic": 13.0,
+      "p_value": 0.4838398513935682,
+      "corrected_p_value": 1.0,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
-      "system_a": "Metadata",
+      "system_a": "Linear Weighted",
       "system_b": "Semantic",
       "metric": "nDCG@10",
       "statistic": 0.0,
-      "p_value": 0.0028734139278525227,
-      "corrected_p_value": 0.025861,
-      "significant": true,
-      "n_queries": 15
+      "p_value": 0.027707849358079864,
+      "corrected_p_value": 0.277078,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Weighted Sum",
+      "system_b": "Portal",
+      "metric": "nDCG@10",
+      "statistic": 0.0,
+      "p_value": 1.0,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15,
+      "note": "identical_vectors"
+    },
+    {
+      "system_a": "Weighted Sum",
+      "system_b": "Semantic",
+      "metric": "nDCG@10",
+      "statistic": 0.0,
+      "p_value": 0.011718685599768628,
+      "corrected_p_value": 0.17578,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "Portal",
       "system_b": "Semantic",
       "metric": "nDCG@10",
       "statistic": 0.0,
-      "p_value": 0.002217721464237049,
-      "corrected_p_value": 0.022177,
-      "significant": true,
-      "n_queries": 15
+      "p_value": 0.011718685599768628,
+      "corrected_p_value": 0.17578,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "Fuzzy",
       "system_b": "BM25",
       "metric": "MRR",
-      "statistic": 0.0,
-      "p_value": 0.5637028616507731,
-      "corrected_p_value": 1.0,
+      "statistic": 1.0,
+      "p_value": 0.07414989773822231,
+      "corrected_p_value": 0.593199,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "Fuzzy",
-      "system_b": "Metadata",
+      "system_b": "Linear Weighted",
+      "metric": "MRR",
+      "statistic": 6.5,
+      "p_value": 0.3990751965482372,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Weighted Sum",
+      "metric": "MRR",
+      "statistic": 6.0,
+      "p_value": 0.17629637444051116,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Portal",
+      "metric": "MRR",
+      "statistic": 6.0,
+      "p_value": 0.17629637444051116,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Semantic",
+      "metric": "MRR",
+      "statistic": 0.0,
+      "p_value": 0.03389485352468927,
+      "corrected_p_value": 0.390217,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Linear Weighted",
+      "metric": "MRR",
+      "statistic": 0.0,
+      "p_value": 0.04216819709715596,
+      "corrected_p_value": 0.421682,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Weighted Sum",
+      "metric": "MRR",
+      "statistic": 0.0,
+      "p_value": 0.026014479622894226,
+      "corrected_p_value": 0.390217,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Portal",
+      "metric": "MRR",
+      "statistic": 0.0,
+      "p_value": 0.026014479622894226,
+      "corrected_p_value": 0.390217,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Semantic",
       "metric": "MRR",
       "statistic": 0.0,
       "p_value": 0.31731050786291415,
       "corrected_p_value": 1.0,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
-      "system_a": "Fuzzy",
-      "system_b": "Portal",
+      "system_a": "Linear Weighted",
+      "system_b": "Weighted Sum",
       "metric": "MRR",
-      "statistic": 0.0,
-      "p_value": 0.31731050786291415,
+      "statistic": 7.0,
+      "p_value": 0.463071015014588,
       "corrected_p_value": 1.0,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
-      "system_a": "Fuzzy",
+      "system_a": "Linear Weighted",
+      "system_b": "Portal",
+      "metric": "MRR",
+      "statistic": 7.0,
+      "p_value": 0.463071015014588,
+      "corrected_p_value": 1.0,
+      "significant": false,
+      "n_queries": 15,
+      "note": ""
+    },
+    {
+      "system_a": "Linear Weighted",
       "system_b": "Semantic",
       "metric": "MRR",
       "statistic": 0.0,
-      "p_value": 0.1974660733580187,
-      "corrected_p_value": 1.0,
+      "p_value": 0.04216819709715596,
+      "corrected_p_value": 0.421682,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
-      "system_a": "BM25",
-      "system_b": "Metadata",
-      "metric": "MRR",
-      "statistic": 0.0,
-      "p_value": 0.0832645166635504,
-      "corrected_p_value": 0.666116,
-      "significant": false,
-      "n_queries": 15
-    },
-    {
-      "system_a": "BM25",
+      "system_a": "Weighted Sum",
       "system_b": "Portal",
       "metric": "MRR",
       "statistic": 0.0,
-      "p_value": 0.0832645166635504,
-      "corrected_p_value": 0.666116,
+      "p_value": 1.0,
+      "corrected_p_value": 1.0,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": "identical_vectors"
     },
     {
-      "system_a": "BM25",
+      "system_a": "Weighted Sum",
       "system_b": "Semantic",
       "metric": "MRR",
       "statistic": 0.0,
-      "p_value": 0.33628879040286896,
-      "corrected_p_value": 1.0,
+      "p_value": 0.026014479622894226,
+      "corrected_p_value": 0.390217,
       "significant": false,
-      "n_queries": 15
-    },
-    {
-      "system_a": "Metadata",
-      "system_b": "Portal",
-      "metric": "MRR",
-      "statistic": 0.0,
-      "p_value": NaN,
-      "corrected_p_value": 1.0,
-      "significant": false,
-      "n_queries": 15
-    },
-    {
-      "system_a": "Metadata",
-      "system_b": "Semantic",
-      "metric": "MRR",
-      "statistic": 0.0,
-      "p_value": 0.06559969214707187,
-      "corrected_p_value": 0.655997,
-      "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     },
     {
       "system_a": "Portal",
       "system_b": "Semantic",
       "metric": "MRR",
       "statistic": 0.0,
-      "p_value": 0.06559969214707187,
-      "corrected_p_value": 0.655997,
+      "p_value": 0.026014479622894226,
+      "corrected_p_value": 0.390217,
       "significant": false,
-      "n_queries": 15
+      "n_queries": 15,
+      "note": ""
     }
   ],
   "bootstrap_confidence_intervals": [
@@ -1241,300 +1686,460 @@
       "system_a": "Fuzzy",
       "system_b": "BM25",
       "metric": "MAP",
-      "mean_difference": 0.012252,
-      "ci_lower": -0.063971,
-      "ci_upper": 0.086397
+      "mean_difference": -0.066617,
+      "ci_lower": -0.173175,
+      "ci_upper": 0.020371
     },
     {
       "system_a": "Fuzzy",
-      "system_b": "Metadata",
+      "system_b": "Linear Weighted",
       "metric": "MAP",
-      "mean_difference": -0.041882,
-      "ci_lower": -0.109239,
-      "ci_upper": 0.01932
+      "mean_difference": 0.031059,
+      "ci_lower": -0.026911,
+      "ci_upper": 0.099782
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Weighted Sum",
+      "metric": "MAP",
+      "mean_difference": 0.146545,
+      "ci_lower": 0.011995,
+      "ci_upper": 0.30877
     },
     {
       "system_a": "Fuzzy",
       "system_b": "Portal",
       "metric": "MAP",
-      "mean_difference": -0.063046,
-      "ci_lower": -0.127878,
-      "ci_upper": -0.006495
+      "mean_difference": 0.146545,
+      "ci_lower": 0.011995,
+      "ci_upper": 0.30877
     },
     {
       "system_a": "Fuzzy",
       "system_b": "Semantic",
       "metric": "MAP",
-      "mean_difference": 0.085102,
-      "ci_lower": 0.026705,
-      "ci_upper": 0.142978
+      "mean_difference": -0.112175,
+      "ci_lower": -0.216931,
+      "ci_upper": -0.027252
     },
     {
       "system_a": "BM25",
-      "system_b": "Metadata",
+      "system_b": "Linear Weighted",
       "metric": "MAP",
-      "mean_difference": -0.054134,
-      "ci_lower": -0.119928,
-      "ci_upper": 0.010896
+      "mean_difference": 0.097676,
+      "ci_lower": 0.020572,
+      "ci_upper": 0.195133
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Weighted Sum",
+      "metric": "MAP",
+      "mean_difference": 0.213162,
+      "ci_lower": 0.078443,
+      "ci_upper": 0.37183
     },
     {
       "system_a": "BM25",
       "system_b": "Portal",
       "metric": "MAP",
-      "mean_difference": -0.075298,
-      "ci_lower": -0.147475,
-      "ci_upper": -0.01181
+      "mean_difference": 0.213162,
+      "ci_lower": 0.078443,
+      "ci_upper": 0.37183
     },
     {
       "system_a": "BM25",
       "system_b": "Semantic",
       "metric": "MAP",
-      "mean_difference": 0.07285,
-      "ci_lower": 0.003929,
-      "ci_upper": 0.150143
+      "mean_difference": -0.045558,
+      "ci_lower": -0.110873,
+      "ci_upper": 0.0
     },
     {
-      "system_a": "Metadata",
+      "system_a": "Linear Weighted",
+      "system_b": "Weighted Sum",
+      "metric": "MAP",
+      "mean_difference": 0.115486,
+      "ci_lower": -0.001254,
+      "ci_upper": 0.280262
+    },
+    {
+      "system_a": "Linear Weighted",
       "system_b": "Portal",
       "metric": "MAP",
-      "mean_difference": -0.021164,
-      "ci_lower": -0.046561,
-      "ci_upper": -0.000526
+      "mean_difference": 0.115486,
+      "ci_lower": -0.001254,
+      "ci_upper": 0.280262
     },
     {
-      "system_a": "Metadata",
+      "system_a": "Linear Weighted",
       "system_b": "Semantic",
       "metric": "MAP",
-      "mean_difference": 0.126984,
-      "ci_lower": 0.066146,
-      "ci_upper": 0.197195
+      "mean_difference": -0.143234,
+      "ci_lower": -0.267252,
+      "ci_upper": -0.040556
+    },
+    {
+      "system_a": "Weighted Sum",
+      "system_b": "Portal",
+      "metric": "MAP",
+      "mean_difference": 0.0,
+      "ci_lower": 0.0,
+      "ci_upper": 0.0
+    },
+    {
+      "system_a": "Weighted Sum",
+      "system_b": "Semantic",
+      "metric": "MAP",
+      "mean_difference": -0.258721,
+      "ci_lower": -0.422387,
+      "ci_upper": -0.107551
     },
     {
       "system_a": "Portal",
       "system_b": "Semantic",
       "metric": "MAP",
-      "mean_difference": 0.148148,
-      "ci_lower": 0.086068,
-      "ci_upper": 0.216404
+      "mean_difference": -0.258721,
+      "ci_lower": -0.422387,
+      "ci_upper": -0.107551
     },
     {
       "system_a": "Fuzzy",
       "system_b": "BM25",
       "metric": "P@5",
-      "mean_difference": 0.013333,
-      "ci_lower": -0.066667,
-      "ci_upper": 0.08
-    },
-    {
-      "system_a": "Fuzzy",
-      "system_b": "Metadata",
-      "metric": "P@5",
       "mean_difference": -0.04,
-      "ci_lower": -0.12,
-      "ci_upper": 0.026667
-    },
-    {
-      "system_a": "Fuzzy",
-      "system_b": "Portal",
-      "metric": "P@5",
-      "mean_difference": -0.053333,
-      "ci_lower": -0.12,
+      "ci_lower": -0.106667,
       "ci_upper": 0.013333
     },
     {
       "system_a": "Fuzzy",
-      "system_b": "Semantic",
+      "system_b": "Linear Weighted",
       "metric": "P@5",
-      "mean_difference": 0.053333,
-      "ci_lower": -0.013333,
-      "ci_upper": 0.12
+      "mean_difference": 0.0,
+      "ci_lower": -0.053333,
+      "ci_upper": 0.066667
     },
     {
-      "system_a": "BM25",
-      "system_b": "Metadata",
-      "metric": "P@5",
-      "mean_difference": -0.053333,
-      "ci_lower": -0.133333,
-      "ci_upper": 0.026667
-    },
-    {
-      "system_a": "BM25",
-      "system_b": "Portal",
-      "metric": "P@5",
-      "mean_difference": -0.066667,
-      "ci_lower": -0.133333,
-      "ci_upper": 0.0
-    },
-    {
-      "system_a": "BM25",
-      "system_b": "Semantic",
+      "system_a": "Fuzzy",
+      "system_b": "Weighted Sum",
       "metric": "P@5",
       "mean_difference": 0.04,
-      "ci_lower": 0.0,
+      "ci_lower": -0.026667,
       "ci_upper": 0.106667
     },
     {
-      "system_a": "Metadata",
+      "system_a": "Fuzzy",
       "system_b": "Portal",
       "metric": "P@5",
-      "mean_difference": -0.013333,
-      "ci_lower": -0.04,
+      "mean_difference": 0.04,
+      "ci_lower": -0.026667,
+      "ci_upper": 0.106667
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Semantic",
+      "metric": "P@5",
+      "mean_difference": -0.066667,
+      "ci_lower": -0.146667,
       "ci_upper": 0.0
     },
     {
-      "system_a": "Metadata",
-      "system_b": "Semantic",
+      "system_a": "BM25",
+      "system_b": "Linear Weighted",
       "metric": "P@5",
-      "mean_difference": 0.093333,
-      "ci_lower": 0.013333,
-      "ci_upper": 0.186667
+      "mean_difference": 0.04,
+      "ci_lower": 0.0,
+      "ci_upper": 0.08
     },
     {
-      "system_a": "Portal",
-      "system_b": "Semantic",
+      "system_a": "BM25",
+      "system_b": "Weighted Sum",
       "metric": "P@5",
-      "mean_difference": 0.106667,
+      "mean_difference": 0.08,
       "ci_lower": 0.04,
-      "ci_upper": 0.2
-    },
-    {
-      "system_a": "Fuzzy",
-      "system_b": "BM25",
-      "metric": "nDCG@10",
-      "mean_difference": -0.009271,
-      "ci_lower": -0.07275,
-      "ci_upper": 0.053806
-    },
-    {
-      "system_a": "Fuzzy",
-      "system_b": "Metadata",
-      "metric": "nDCG@10",
-      "mean_difference": -0.054921,
-      "ci_lower": -0.118732,
-      "ci_upper": 0.003276
-    },
-    {
-      "system_a": "Fuzzy",
-      "system_b": "Portal",
-      "metric": "nDCG@10",
-      "mean_difference": -0.065208,
-      "ci_lower": -0.127706,
-      "ci_upper": -0.007913
-    },
-    {
-      "system_a": "Fuzzy",
-      "system_b": "Semantic",
-      "metric": "nDCG@10",
-      "mean_difference": 0.06209,
-      "ci_lower": 6.1e-05,
-      "ci_upper": 0.12648
-    },
-    {
-      "system_a": "BM25",
-      "system_b": "Metadata",
-      "metric": "nDCG@10",
-      "mean_difference": -0.04565,
-      "ci_lower": -0.090028,
-      "ci_upper": -0.005399
-    },
-    {
-      "system_a": "BM25",
-      "system_b": "Portal",
-      "metric": "nDCG@10",
-      "mean_difference": -0.055936,
-      "ci_lower": -0.105742,
-      "ci_upper": -0.013728
-    },
-    {
-      "system_a": "BM25",
-      "system_b": "Semantic",
-      "metric": "nDCG@10",
-      "mean_difference": 0.071361,
-      "ci_lower": -0.001485,
-      "ci_upper": 0.151741
-    },
-    {
-      "system_a": "Metadata",
-      "system_b": "Portal",
-      "metric": "nDCG@10",
-      "mean_difference": -0.010287,
-      "ci_lower": -0.025181,
-      "ci_upper": 0.001788
-    },
-    {
-      "system_a": "Metadata",
-      "system_b": "Semantic",
-      "metric": "nDCG@10",
-      "mean_difference": 0.117011,
-      "ci_lower": 0.052239,
-      "ci_upper": 0.191669
-    },
-    {
-      "system_a": "Portal",
-      "system_b": "Semantic",
-      "metric": "nDCG@10",
-      "mean_difference": 0.127298,
-      "ci_lower": 0.06485,
-      "ci_upper": 0.198891
-    },
-    {
-      "system_a": "Fuzzy",
-      "system_b": "BM25",
-      "metric": "MRR",
-      "mean_difference": 0.033333,
-      "ci_lower": -0.066667,
       "ci_upper": 0.133333
     },
     {
-      "system_a": "Fuzzy",
-      "system_b": "Metadata",
-      "metric": "MRR",
+      "system_a": "BM25",
+      "system_b": "Portal",
+      "metric": "P@5",
+      "mean_difference": 0.08,
+      "ci_lower": 0.04,
+      "ci_upper": 0.133333
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Semantic",
+      "metric": "P@5",
+      "mean_difference": -0.026667,
+      "ci_lower": -0.08,
+      "ci_upper": 0.0
+    },
+    {
+      "system_a": "Linear Weighted",
+      "system_b": "Weighted Sum",
+      "metric": "P@5",
+      "mean_difference": 0.04,
+      "ci_lower": 0.0,
+      "ci_upper": 0.08
+    },
+    {
+      "system_a": "Linear Weighted",
+      "system_b": "Portal",
+      "metric": "P@5",
+      "mean_difference": 0.04,
+      "ci_lower": 0.0,
+      "ci_upper": 0.08
+    },
+    {
+      "system_a": "Linear Weighted",
+      "system_b": "Semantic",
+      "metric": "P@5",
       "mean_difference": -0.066667,
+      "ci_lower": -0.133333,
+      "ci_upper": -0.013333
+    },
+    {
+      "system_a": "Weighted Sum",
+      "system_b": "Portal",
+      "metric": "P@5",
+      "mean_difference": 0.0,
+      "ci_lower": 0.0,
+      "ci_upper": 0.0
+    },
+    {
+      "system_a": "Weighted Sum",
+      "system_b": "Semantic",
+      "metric": "P@5",
+      "mean_difference": -0.106667,
       "ci_lower": -0.2,
-      "ci_upper": 0.066667
+      "ci_upper": -0.04
+    },
+    {
+      "system_a": "Portal",
+      "system_b": "Semantic",
+      "metric": "P@5",
+      "mean_difference": -0.106667,
+      "ci_lower": -0.2,
+      "ci_upper": -0.04
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "BM25",
+      "metric": "nDCG@10",
+      "mean_difference": -0.077544,
+      "ci_lower": -0.164965,
+      "ci_upper": -0.006225
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Linear Weighted",
+      "metric": "nDCG@10",
+      "mean_difference": 0.034797,
+      "ci_lower": -0.010503,
+      "ci_upper": 0.084983
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Weighted Sum",
+      "metric": "nDCG@10",
+      "mean_difference": 0.109792,
+      "ci_lower": 0.00305,
+      "ci_upper": 0.239502
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Portal",
+      "metric": "nDCG@10",
+      "mean_difference": 0.109792,
+      "ci_lower": 0.00305,
+      "ci_upper": 0.239502
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Semantic",
+      "metric": "nDCG@10",
+      "mean_difference": -0.115338,
+      "ci_lower": -0.200341,
+      "ci_upper": -0.042943
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Linear Weighted",
+      "metric": "nDCG@10",
+      "mean_difference": 0.112341,
+      "ci_lower": 0.036456,
+      "ci_upper": 0.202583
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Weighted Sum",
+      "metric": "nDCG@10",
+      "mean_difference": 0.187336,
+      "ci_lower": 0.069218,
+      "ci_upper": 0.318044
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Portal",
+      "metric": "nDCG@10",
+      "mean_difference": 0.187336,
+      "ci_lower": 0.069218,
+      "ci_upper": 0.318044
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Semantic",
+      "metric": "nDCG@10",
+      "mean_difference": -0.037794,
+      "ci_lower": -0.109704,
+      "ci_upper": 0.015242
+    },
+    {
+      "system_a": "Linear Weighted",
+      "system_b": "Weighted Sum",
+      "metric": "nDCG@10",
+      "mean_difference": 0.074994,
+      "ci_lower": -0.020862,
+      "ci_upper": 0.206545
+    },
+    {
+      "system_a": "Linear Weighted",
+      "system_b": "Portal",
+      "metric": "nDCG@10",
+      "mean_difference": 0.074994,
+      "ci_lower": -0.020862,
+      "ci_upper": 0.206545
+    },
+    {
+      "system_a": "Linear Weighted",
+      "system_b": "Semantic",
+      "metric": "nDCG@10",
+      "mean_difference": -0.150135,
+      "ci_lower": -0.264586,
+      "ci_upper": -0.049689
+    },
+    {
+      "system_a": "Weighted Sum",
+      "system_b": "Portal",
+      "metric": "nDCG@10",
+      "mean_difference": 0.0,
+      "ci_lower": 0.0,
+      "ci_upper": 0.0
+    },
+    {
+      "system_a": "Weighted Sum",
+      "system_b": "Semantic",
+      "metric": "nDCG@10",
+      "mean_difference": -0.225129,
+      "ci_lower": -0.363775,
+      "ci_upper": -0.094631
+    },
+    {
+      "system_a": "Portal",
+      "system_b": "Semantic",
+      "metric": "nDCG@10",
+      "mean_difference": -0.225129,
+      "ci_lower": -0.363775,
+      "ci_upper": -0.094631
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "BM25",
+      "metric": "MRR",
+      "mean_difference": -0.138889,
+      "ci_lower": -0.294444,
+      "ci_upper": 0.0
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Linear Weighted",
+      "metric": "MRR",
+      "mean_difference": 0.056111,
+      "ci_lower": -0.056667,
+      "ci_upper": 0.166667
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Weighted Sum",
+      "metric": "MRR",
+      "mean_difference": 0.131958,
+      "ci_lower": -0.026667,
+      "ci_upper": 0.308582
     },
     {
       "system_a": "Fuzzy",
       "system_b": "Portal",
       "metric": "MRR",
-      "mean_difference": -0.066667,
-      "ci_lower": -0.2,
-      "ci_upper": 0.066667
+      "mean_difference": 0.131958,
+      "ci_lower": -0.026667,
+      "ci_upper": 0.308582
     },
     {
       "system_a": "Fuzzy",
       "system_b": "Semantic",
       "metric": "MRR",
-      "mean_difference": 0.094444,
-      "ci_lower": -0.05,
-      "ci_upper": 0.261111
+      "mean_difference": -0.188889,
+      "ci_lower": -0.333333,
+      "ci_upper": -0.066667
     },
     {
       "system_a": "BM25",
-      "system_b": "Metadata",
+      "system_b": "Linear Weighted",
       "metric": "MRR",
-      "mean_difference": -0.1,
-      "ci_lower": -0.2,
-      "ci_upper": 0.0
+      "mean_difference": 0.195,
+      "ci_lower": 0.05,
+      "ci_upper": 0.363333
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Weighted Sum",
+      "metric": "MRR",
+      "mean_difference": 0.270847,
+      "ci_lower": 0.106667,
+      "ci_upper": 0.466456
     },
     {
       "system_a": "BM25",
       "system_b": "Portal",
       "metric": "MRR",
-      "mean_difference": -0.1,
-      "ci_lower": -0.2,
-      "ci_upper": 0.0
+      "mean_difference": 0.270847,
+      "ci_lower": 0.106667,
+      "ci_upper": 0.466456
     },
     {
       "system_a": "BM25",
       "system_b": "Semantic",
       "metric": "MRR",
-      "mean_difference": 0.061111,
-      "ci_lower": -0.1,
-      "ci_upper": 0.238889
+      "mean_difference": -0.05,
+      "ci_lower": -0.15,
+      "ci_upper": 0.0
     },
     {
-      "system_a": "Metadata",
+      "system_a": "Linear Weighted",
+      "system_b": "Weighted Sum",
+      "metric": "MRR",
+      "mean_difference": 0.075847,
+      "ci_lower": -0.071296,
+      "ci_upper": 0.249033
+    },
+    {
+      "system_a": "Linear Weighted",
+      "system_b": "Portal",
+      "metric": "MRR",
+      "mean_difference": 0.075847,
+      "ci_lower": -0.071296,
+      "ci_upper": 0.249033
+    },
+    {
+      "system_a": "Linear Weighted",
+      "system_b": "Semantic",
+      "metric": "MRR",
+      "mean_difference": -0.245,
+      "ci_lower": -0.433375,
+      "ci_upper": -0.083333
+    },
+    {
+      "system_a": "Weighted Sum",
       "system_b": "Portal",
       "metric": "MRR",
       "mean_difference": 0.0,
@@ -1542,92 +2147,127 @@
       "ci_upper": 0.0
     },
     {
-      "system_a": "Metadata",
+      "system_a": "Weighted Sum",
       "system_b": "Semantic",
       "metric": "MRR",
-      "mean_difference": 0.161111,
-      "ci_lower": 0.033333,
-      "ci_upper": 0.311111
+      "mean_difference": -0.320847,
+      "ci_lower": -0.529101,
+      "ci_upper": -0.112593
     },
     {
       "system_a": "Portal",
       "system_b": "Semantic",
       "metric": "MRR",
-      "mean_difference": 0.161111,
-      "ci_lower": 0.033333,
-      "ci_upper": 0.311111
+      "mean_difference": -0.320847,
+      "ci_lower": -0.529101,
+      "ci_upper": -0.112593
     }
   ],
   "win_loss": [
     {
       "system_a": "Fuzzy",
       "system_b": "BM25",
-      "wins": 4,
-      "losses": 6,
-      "ties": 5
-    },
-    {
-      "system_a": "Fuzzy",
-      "system_b": "Metadata",
-      "wins": 3,
-      "losses": 7,
-      "ties": 5
-    },
-    {
-      "system_a": "Fuzzy",
-      "system_b": "Portal",
       "wins": 1,
-      "losses": 9,
-      "ties": 5
-    },
-    {
-      "system_a": "Fuzzy",
-      "system_b": "Semantic",
-      "wins": 10,
-      "losses": 1,
-      "ties": 4
-    },
-    {
-      "system_a": "BM25",
-      "system_b": "Metadata",
-      "wins": 2,
-      "losses": 8,
-      "ties": 5
-    },
-    {
-      "system_a": "BM25",
-      "system_b": "Portal",
-      "wins": 2,
-      "losses": 8,
-      "ties": 5
-    },
-    {
-      "system_a": "BM25",
-      "system_b": "Semantic",
-      "wins": 9,
-      "losses": 3,
-      "ties": 3
-    },
-    {
-      "system_a": "Metadata",
-      "system_b": "Portal",
-      "wins": 2,
-      "losses": 4,
+      "losses": 5,
       "ties": 9
     },
     {
-      "system_a": "Metadata",
+      "system_a": "Fuzzy",
+      "system_b": "Linear Weighted",
+      "wins": 4,
+      "losses": 2,
+      "ties": 9
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Weighted Sum",
+      "wins": 5,
+      "losses": 3,
+      "ties": 7
+    },
+    {
+      "system_a": "Fuzzy",
+      "system_b": "Portal",
+      "wins": 5,
+      "losses": 3,
+      "ties": 7
+    },
+    {
+      "system_a": "Fuzzy",
       "system_b": "Semantic",
-      "wins": 11,
+      "wins": 0,
+      "losses": 7,
+      "ties": 8
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Linear Weighted",
+      "wins": 6,
+      "losses": 0,
+      "ties": 9
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Weighted Sum",
+      "wins": 8,
       "losses": 1,
-      "ties": 3
+      "ties": 6
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Portal",
+      "wins": 8,
+      "losses": 1,
+      "ties": 6
+    },
+    {
+      "system_a": "BM25",
+      "system_b": "Semantic",
+      "wins": 1,
+      "losses": 3,
+      "ties": 11
+    },
+    {
+      "system_a": "Linear Weighted",
+      "system_b": "Weighted Sum",
+      "wins": 5,
+      "losses": 3,
+      "ties": 7
+    },
+    {
+      "system_a": "Linear Weighted",
+      "system_b": "Portal",
+      "wins": 5,
+      "losses": 3,
+      "ties": 7
+    },
+    {
+      "system_a": "Linear Weighted",
+      "system_b": "Semantic",
+      "wins": 0,
+      "losses": 6,
+      "ties": 9
+    },
+    {
+      "system_a": "Weighted Sum",
+      "system_b": "Portal",
+      "wins": 0,
+      "losses": 0,
+      "ties": 15
+    },
+    {
+      "system_a": "Weighted Sum",
+      "system_b": "Semantic",
+      "wins": 0,
+      "losses": 8,
+      "ties": 7
     },
     {
       "system_a": "Portal",
       "system_b": "Semantic",
-      "wins": 12,
-      "losses": 0,
-      "ties": 3
+      "wins": 0,
+      "losses": 8,
+      "ties": 7
     }
   ]
 }

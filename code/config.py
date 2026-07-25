@@ -58,7 +58,7 @@ class LLMConfig:
 @dataclass
 class EmbeddingConfig:
     """Embedding model configuration."""
-    provider: str = "mock"  # "mock", "sentence-transformers"
+    provider: str = "sentence-transformers"  # "mock", "sentence-transformers"
     model: str = "paraphrase-multilingual-MiniLM-L12-v2"
     dimension: int = 384
     use_faiss: bool = False

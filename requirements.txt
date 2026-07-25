@@ -27,8 +27,10 @@ pandas>=2.0.0
 
 # Embedding Models (optional)
 # Uncomment if using real sentence transformers
-# sentence-transformers>=2.2.0
-# torch>=2.0.0
+sentence-transformers==2.2.2
+torch>=2.0.1
+# Note: To enable the semantic baseline, install a compatible huggingface hub:
+# pip install "huggingface-hub==0.13.3"  # matches sentence-transformers 2.2.x
 
 # Vector Search (optional)
 # Uncomment for production with large datasets

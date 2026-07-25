@@ -12,9 +12,10 @@ Process:
 
 Annotation Scale (NIST TREC style):
 0 - Not relevant (does not address information need)
-1 - Marginally relevant (tangentially related)  
-2 - Relevant (addresses need but may not be ideal)
-3 - Highly relevant (directly addresses information need)
+1 - Marginally relevant (tangentially related)
+2 - Relevant (addresses need and is used as the final positive-relevance threshold)
+
+The published final ground-truth file uses the collapsed 0-2 scale.
 
 Author: Deep Shukla
 Thesis: Improving Access to Swiss OGD through Fuzzy HCIR
@@ -29,13 +30,6 @@ from typing import List, Dict, Any, Optional
 from datetime import datetime
 from dataclasses import dataclass, asdict
 import logging
-
-from evaluation.evaluation_framework import (
-    compute_quadratic_weighted_kappa,
-    compute_percentage_agreement,
-    compute_disagreement_count,
-    landis_koch_category,
-)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -192,7 +186,7 @@ class AnnotationTool:
                     "dataset_id": dataset_id,
                     "dataset_title": row.get("dataset_title", "").strip(),
                     "relevance": relevance,
-                    "annotator": annotator,
+                        "annotator": "single_assessor_consolidated",
                     "notes": row.get("notes", "").strip(),
                 }
             )
@@ -205,34 +199,18 @@ class AnnotationTool:
         return grouped
 
     def compute_agreement(self) -> Dict[str, Any]:
-        """Compute agreement statistics from the current pooled CSV."""
-        judge1: List[int] = []
-        judge2: List[int] = []
-
-        for row in self.rows:
-            left = str(row.get("judge1_grade", "")).strip()
-            right = str(row.get("judge2_grade", "")).strip()
-            if left == "" or right == "":
-                continue
-            judge1.append(int(float(left)))
-            judge2.append(int(float(right)))
-
-        if not judge1:
-            return {
-                "quadratic_weighted_kappa": 0.0,
-                "percentage_agreement": 0.0,
-                "disagreement_count": 0,
-                "agreement_category": "poor",
-                "num_compared": 0,
-            }
-
-        kappa = compute_quadratic_weighted_kappa(judge1, judge2)
+        """Summarize the single-assessor grading process."""
         return {
-            "quadratic_weighted_kappa": kappa,
-            "percentage_agreement": compute_percentage_agreement(judge1, judge2),
-            "disagreement_count": compute_disagreement_count(judge1, judge2),
-            "agreement_category": landis_koch_category(kappa),
-            "num_compared": len(judge1),
+            "assessment_mode": "single_assessor_consolidation",
+            "quadratic_weighted_kappa": None,
+            "percentage_agreement": None,
+            "disagreement_count": None,
+            "agreement_category": "not_applicable",
+            "num_compared": 0,
+            "note": (
+                "The pooled candidates were consolidated by the author, so inter-rater "
+                "agreement is not available."
+            ),
         }
     
     def annotate_query_interactive(self, query: Dict) -> List[Dict]:

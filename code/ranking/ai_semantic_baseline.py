@@ -18,6 +18,9 @@ import numpy as np
 from typing import Dict, List, Tuple, Optional, Any
 from dataclasses import dataclass
 import time
+import hashlib
+import re
+from pathlib import Path
 
 
 @dataclass
@@ -116,44 +119,110 @@ class MockEmbeddingProvider(EmbeddingProvider):
 
 class SentenceTransformerProvider(EmbeddingProvider):
     """
-    Real embedding provider using sentence-transformers.
-    
-    Recommended models for multilingual OGD retrieval:
-    - paraphrase-multilingual-MiniLM-L12-v2 (fast, multilingual)
-    - distiluse-base-multilingual-cased-v1 (multilingual)
-    - all-MiniLM-L6-v2 (fast English)
+    Real embedding provider using sentence-transformers with caching and seed control.
+
+    The evaluation pipeline pins a multilingual MiniLM model and records the
+    selected revision, cache location, and seed for reproducibility.
     """
-    
-    def __init__(self, model_name: str = "paraphrase-multilingual-MiniLM-L12-v2"):
-        """
-        Initialize sentence transformer.
-        
-        Args:
-            model_name: HuggingFace model name
-        """
+
+    def __init__(
+        self,
+        model_name: str = "paraphrase-multilingual-MiniLM-L12-v2",
+        revision: str = "main",
+        cache_dir: Optional[str] = None,
+        seed: int = 42,
+    ):
         self.model_name = model_name
+        self.revision = revision or "main"
         self._model = None
-    
+        self.seed = int(seed)
+        self.cache_dir = Path(cache_dir) if cache_dir else Path.cwd() / ".cache" / "embeddings" / self._safe_model_dirname()
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
+
+    def _safe_model_dirname(self) -> str:
+        return re.sub(r"[^a-zA-Z0-9_.-]", "_", self.model_name)
+
     @property
     def model(self):
-        """Lazy load the model."""
         if self._model is None:
             try:
+                # Import lazily to avoid heavy dependency at module import time
                 from sentence_transformers import SentenceTransformer
-                self._model = SentenceTransformer(self.model_name)
+                # Seed torch/numpy for deterministic model behaviour where possible
+                try:
+                    import torch
+                    torch.manual_seed(self.seed)
+                    if torch.cuda.is_available():
+                        torch.cuda.manual_seed_all(self.seed)
+                except Exception:
+                    pass
+                np.random.seed(self.seed)
+
+                # sentence-transformers 2.2.x accepts `cache_folder` but not the newer
+                # `revision` keyword used by more recent releases. Keep the model pinning
+                # via the explicit `model_name` input and only pass `revision` when it is
+                # supported by the installed API.
+                try:
+                    self._model = SentenceTransformer(
+                        self.model_name,
+                        revision=self.revision,
+                        cache_folder=str(self.cache_dir),
+                    )
+                except TypeError:
+                    self._model = SentenceTransformer(
+                        self.model_name,
+                        cache_folder=str(self.cache_dir),
+                    )
             except ImportError:
                 raise ImportError(
-                    "sentence-transformers not installed. "
-                    "Install with: pip install sentence-transformers"
+                    "sentence-transformers not installed. Install with: pip install sentence-transformers"
                 )
         return self._model
-    
+
+    def _cache_key(self, texts: List[str]) -> str:
+        digest = hashlib.sha256()
+        for t in texts:
+            if t is None:
+                t = ""
+            digest.update(t.encode("utf-8", errors="ignore"))
+            digest.update(b"\n")
+        digest.update(self.model_name.encode("utf-8"))
+        digest.update(self.revision.encode("utf-8"))
+        digest.update(str(self.seed).encode("utf-8"))
+        return digest.hexdigest()
+
     def encode(self, texts: List[str]) -> np.ndarray:
-        """Encode texts using sentence transformer."""
-        return self.model.encode(texts, normalize_embeddings=True)
-    
+        """Encode texts using sentence transformer with cache.
+
+        The cache key includes the model name and seed so different runs are isolated.
+        """
+        key = self._cache_key(texts)
+        cache_file = self.cache_dir / f"{key}.npy"
+        checksum_file = self.cache_dir / f"{key}.sha256"
+
+        if cache_file.exists():
+            try:
+                arr = np.load(cache_file)
+                return arr
+            except Exception:
+                # Fall through to recompute if cache is corrupt
+                pass
+
+        embeddings = self.model.encode(texts, normalize_embeddings=True)
+
+        try:
+            np.save(cache_file, embeddings)
+            # write checksum for provenance
+            with open(checksum_file, "w", encoding="utf-8") as fh:
+                fh.write(hashlib.sha256(embeddings.tobytes()).hexdigest())
+        except Exception:
+            # Non-fatal: return embeddings even if unable to cache
+            pass
+
+        return embeddings
+
     def get_model_name(self) -> str:
-        return self.model_name
+        return f"{self.model_name}@revision={self.revision}@seed={self.seed}"
 
 
 class SemanticIndex:
@@ -294,16 +363,29 @@ class AISemanticBaseline:
     def __init__(
         self,
         embedding_provider: Optional[EmbeddingProvider] = None,
-        use_faiss: bool = False
+        use_faiss: bool = False,
+        model_name: str = "paraphrase-multilingual-MiniLM-L12-v2",
+        revision: str = "main",
+        cache_dir: Optional[str] = None,
+        seed: int = 42,
     ):
         """
         Initialize semantic baseline.
         
         Args:
-            embedding_provider: Optional custom provider (defaults to mock)
+            embedding_provider: Optional custom provider
             use_faiss: Whether to use FAISS for search
+            model_name: Pinned sentence transformer model name
         """
-        self.provider = embedding_provider or MockEmbeddingProvider()
+        if embedding_provider is not None:
+            self.provider = embedding_provider
+        else:
+            self.provider = SentenceTransformerProvider(
+                model_name=model_name,
+                revision=revision,
+                cache_dir=cache_dir,
+                seed=seed,
+            )
         self.index = SemanticIndex(self.provider, use_faiss)
         self.datasets: List[Dict] = []
     
@@ -388,9 +470,12 @@ class AISemanticBaseline:
 
 
 def create_semantic_baseline(
-    use_real_model: bool = False,
+    use_real_model: bool = True,
     model_name: str = "paraphrase-multilingual-MiniLM-L12-v2",
-    use_faiss: bool = False
+    revision: str = "main",
+    cache_dir: Optional[str] = None,
+    seed: int = 42,
+    use_faiss: bool = False,
 ) -> AISemanticBaseline:
     """
     Factory function to create semantic baseline.
@@ -404,7 +489,12 @@ def create_semantic_baseline(
         Configured AISemanticBaseline
     """
     if use_real_model:
-        provider = SentenceTransformerProvider(model_name)
+        provider = SentenceTransformerProvider(
+            model_name=model_name,
+            revision=revision,
+            cache_dir=cache_dir,
+            seed=seed,
+        )
     else:
         provider = MockEmbeddingProvider()
     

@@ -1,0 +1,25 @@
+{
+  "evaluation_timestamp": "2026-07-25T18:09:35.204305",
+  "snapshot_hash": "a827392f6c788749a71ba3e19103f126e6bafb47ee07329f0301950bc15edfe1",
+  "snapshot_date": "20260306_183841",
+  "snapshot_dir": "data\\raw",
+  "snapshot_file": "data\\raw\\ogd_metadata_20260306_183841.json",
+  "dataset_count": 500,
+  "publisher_count": 3,
+  "num_queries": 15,
+  "systems": [
+    "Fuzzy",
+    "BM25",
+    "Linear Weighted",
+    "Weighted Sum",
+    "Portal",
+    "Semantic"
+  ],
+  "sentence_transformers_model": "paraphrase-multilingual-MiniLM-L12-v2",
+  "sentence_transformers_seed": 42,
+  "python_version": "3.11.9",
+  "numpy_version": "2.4.2",
+  "scipy_version": "1.17.1",
+  "sentence_transformers_version": "2.2.2",
+  "bootstrap_seed": 42
+}

@@ -44,6 +44,11 @@ logger = logging.getLogger(__name__)
 # committed raw snapshot date used by the current evaluation artifacts.
 EVALUATION_REFERENCE_DATETIME = datetime(2026, 3, 6)
 
+SEMANTIC_BASELINE_MODEL_NAME = "paraphrase-multilingual-MiniLM-L12-v2"
+SEMANTIC_BASELINE_REVISION = "main"
+SEMANTIC_BASELINE_SEED = 42
+SEMANTIC_BASELINE_CACHE_NAME = "sentence-transformers_paraphrase-multilingual-MiniLM-L12-v2"
+
 
 def _days_since_modified(modified: Any, default: int) -> int:
     """Compute recency against the fixed evaluation date, not wall-clock time."""
@@ -70,7 +75,7 @@ from evaluation.evaluation_framework import (
     RelevanceJudgment, IRMetrics,
 )
 from code.prototype.ranking.fuzzy import FuzzyHCIRRanker
-from code.prototype.ranking.ai_semantic_baseline import AISemanticBaseline
+from code.ranking.ai_semantic_baseline import AISemanticBaseline
 from code.fuzzy_system.fuzzy_rules import RuleBase
 from code.fuzzy_system.inference_engine import MamdaniInferenceEngine
 from code.ranking.fuzzy_ranker import SimilarityCalculator, MetadataScorer
@@ -1856,9 +1861,10 @@ class ExperimentRunner:
             "publisher_count": corpus.publisher_count(),
             "num_queries": len(self.ground_truth),
             "systems": [self._display_system_name(name) for name in sorted(self.systems)],
-            # Document pinned semantic baseline model and seed (even if excluded at runtime)
-            "sentence_transformers_model": "paraphrase-multilingual-MiniLM-L12-v2",
-            "sentence_transformers_seed": 42,
+            # Document pinned semantic baseline model and seed for reproducibility.
+            "sentence_transformers_model": SEMANTIC_BASELINE_MODEL_NAME,
+            "sentence_transformers_model_revision": SEMANTIC_BASELINE_REVISION,
+            "sentence_transformers_seed": SEMANTIC_BASELINE_SEED,
         }
 
     def _write_reproducibility_report(self) -> Dict[str, Path]:
@@ -3225,20 +3231,33 @@ def main():
     runner.add_system(MetadataQualityRanker())
     runner.add_system(LinearWeightedBaselineAdapter())
     runner.add_system(FuzzyHCIRRankerAdapter())
-    # Try to include the AI semantic baseline if sentence-transformers is installed.
+
+    # Include the AI semantic baseline as a mandatory comparison system.
     try:
         import sentence_transformers as _st  # type: ignore
-        from code.ranking.ai_semantic_baseline import SentenceTransformerProvider
+    except ImportError as exc:
+        raise RuntimeError(
+            "sentence-transformers is required for the reproducible experiment. "
+            "Install dependencies with: pip install -r requirements.txt"
+        ) from exc
 
-        provider = SentenceTransformerProvider(
-            model_name="paraphrase-multilingual-MiniLM-L12-v2",
-            cache_dir="evaluation/embeddings_cache",
-            seed=42,
+    from code.ranking.ai_semantic_baseline import SentenceTransformerProvider
+
+    model_cache_path = Path("evaluation/embeddings_cache") / SEMANTIC_BASELINE_CACHE_NAME
+    if not model_cache_path.exists():
+        raise FileNotFoundError(
+            f"Required semantic baseline cache not found: {model_cache_path}. "
+            "Restore the cached model artifacts under evaluation/embeddings_cache before running the reproducible experiment."
         )
-        runner.add_system(AISemanticBaselineAdapter(embedding_provider=provider))
-        print("Included semantic baseline using sentence-transformers (cached embeddings).")
-    except Exception:
-        print("sentence-transformers not available; semantic baseline excluded from this run.")
+
+    provider = SentenceTransformerProvider(
+        model_name=SEMANTIC_BASELINE_MODEL_NAME,
+        revision=SEMANTIC_BASELINE_REVISION,
+        cache_dir="evaluation/embeddings_cache",
+        seed=SEMANTIC_BASELINE_SEED,
+    )
+    runner.add_system(AISemanticBaselineAdapter(embedding_provider=provider))
+    print("Included semantic baseline using sentence-transformers and local cache.")
 
     if run_membership_sensitivity:
         sensitivity_output = runner.run_membership_function_sensitivity_analysis(top_k=10)

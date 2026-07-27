@@ -8,7 +8,7 @@
   - Bootstrapped CIs are reported in `bootstrap_confidence_intervals.csv` and system means in `system_summary.csv`.
 - Reproducibility:
   - Frozen snapshot: `data/raw/ogd_metadata_20260306_183841.json` (sha256 in reproducibility report).
-  - Pinned semantic model: `paraphrase-multilingual-MiniLM-L12-v2` (seed=42) — recorded in reproducibility report; semantic baseline excluded due to runtime imports unless dependencies are installed.
+  - Pinned semantic model: `paraphrase-multilingual-MiniLM-L12-v2` (revision=main, seed=42) — recorded in reproducibility report and included in the benchmark when the required sentence-transformers dependencies are installed.
 
 Files of interest:
 - `evaluation/results/system_summary.csv`
@@ -17,5 +17,5 @@ Files of interest:
 - `evaluation/results/reproducibility_report.json`
 
 Next recommended actions:
-- If you want the semantic baseline included, install full dependencies (`transformers`, `huggingface-hub==0.13.3`) and re-run the experiment.
+- Ensure the required dependencies are installed (`sentence-transformers`, `torch`, and compatible HuggingFace Hub components) and re-run the experiment.
 - Prepare Appendix A audit artifacts (export annotated CSVs, provenance logs) — I can do this next if you want.

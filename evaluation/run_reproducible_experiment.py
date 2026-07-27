@@ -41,6 +41,13 @@ if __name__ == "__main__":
         print("\nPlease generate the missing files (see evaluation/build_ground_truth.py) before running the experiment.")
         sys.exit(2)
 
+    semantic_cache = Path("evaluation/embeddings_cache/sentence-transformers_paraphrase-multilingual-MiniLM-L12-v2")
+    if not semantic_cache.exists():
+        print("Missing required cached semantic model artifacts:")
+        print(f" - {semantic_cache}")
+        print("\nRestore the cached sentence-transformers model under evaluation/embeddings_cache before running the experiment.")
+        sys.exit(2)
+
     print("Corpus file:", CORPUS)
     print(" - size:", CORPUS.stat().st_size, "bytes")
     print(" - sha256:", sha256(CORPUS))

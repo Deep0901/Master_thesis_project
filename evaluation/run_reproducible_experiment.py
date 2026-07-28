@@ -7,10 +7,15 @@ This script checks for the frozen corpus and final ground-truth file, prints che
 and instructs or executes the main experiment runner.
 """
 import hashlib
-import json
 from pathlib import Path
 import subprocess
 import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from evaluation.reproducibility_verifier import verify_artifacts
 
 CORPUS = Path("data/raw/ogd_metadata_20260306_183841.json")
 GT = Path("evaluation/ground_truth_final.json")
@@ -55,6 +60,16 @@ if __name__ == "__main__":
     print("Ground-truth file:", GT)
     print(" - size:", GT.stat().st_size, "bytes")
     print(" - sha256:", sha256(GT))
+    print()
+
+    issues = verify_artifacts(CORPUS, GT, Path("evaluation/results/reproducibility_report.json"))
+    if issues:
+        print("Reproducibility verification issues:")
+        for issue in issues:
+            print(" -", issue)
+        print()
+    else:
+        print("Reproducibility report hashes match the current corpus and ground-truth files.")
     print()
 
     # Run the experiment

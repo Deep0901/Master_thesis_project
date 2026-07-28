@@ -1851,6 +1851,8 @@ class ExperimentRunner:
     def _reproducibility_payload(self) -> Dict[str, Any]:
         """Build the frozen-corpus provenance fields for reproducible runs."""
         corpus = BaseRetriever.frozen_corpus()
+        ground_truth_path = Path(self.ground_truth_file)
+        ground_truth_hash = hashlib.sha256(ground_truth_path.read_bytes()).hexdigest() if ground_truth_path.exists() else None
         return {
             "evaluation_timestamp": datetime.now().isoformat(),
             "snapshot_hash": corpus.snapshot_hash,
@@ -1861,6 +1863,7 @@ class ExperimentRunner:
             "publisher_count": corpus.publisher_count(),
             "num_queries": len(self.ground_truth),
             "systems": [self._display_system_name(name) for name in sorted(self.systems)],
+            "ground_truth_hash": ground_truth_hash,
             # Document pinned semantic baseline model and seed for reproducibility.
             "sentence_transformers_model": SEMANTIC_BASELINE_MODEL_NAME,
             "sentence_transformers_model_revision": SEMANTIC_BASELINE_REVISION,

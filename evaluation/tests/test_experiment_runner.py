@@ -1,3 +1,4 @@
+import hashlib
 import json
 from pathlib import Path
 
@@ -106,3 +107,19 @@ def test_resolve_ground_truth_does_not_copy_fallback_files(tmp_path, monkeypatch
         runner._resolve_ground_truth()
 
     assert not (evaluation_dir / "ground_truth_final.json").exists()
+
+
+def test_reproducibility_payload_includes_ground_truth_hash(tmp_path):
+    ground_truth = tmp_path / "ground_truth_final.json"
+    queries = tmp_path / "benchmark_queries.json"
+    write_ground_truth(ground_truth)
+    write_queries(queries)
+
+    runner = ExperimentRunner(
+        ground_truth_file=str(ground_truth),
+        benchmark_queries_file=str(queries),
+    )
+
+    payload = runner._reproducibility_payload()
+
+    assert payload["ground_truth_hash"] == hashlib.sha256(ground_truth.read_bytes()).hexdigest()

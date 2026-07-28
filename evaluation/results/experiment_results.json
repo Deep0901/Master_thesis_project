@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-07-25T18:09:29.853154",
+  "timestamp": "2026-07-28T17:01:34.044819",
   "reproducibility": {
-    "evaluation_timestamp": "2026-07-25T18:09:29.853154",
+    "evaluation_timestamp": "2026-07-28T17:01:34.061198",
     "snapshot_hash": "a827392f6c788749a71ba3e19103f126e6bafb47ee07329f0301950bc15edfe1",
     "snapshot_date": "20260306_183841",
     "snapshot_dir": "data\\raw",
@@ -17,7 +17,9 @@
       "Portal",
       "Semantic"
     ],
+    "ground_truth_hash": "385603b162df43d35f6884906d9faebd11063e6bdc3900fd220736e6d406e41f",
     "sentence_transformers_model": "paraphrase-multilingual-MiniLM-L12-v2",
+    "sentence_transformers_model_revision": "main",
     "sentence_transformers_seed": 42
   },
   "systems": [

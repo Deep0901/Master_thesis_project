@@ -4,12 +4,12 @@
 
 ### ✅ COMPLETED THIS SESSION
 
-#### 1. **Semantic Baseline Removal from Default Pipeline** (HIGH PRIORITY - DONE)
+#### 1. **Semantic Baseline Inclusion and Reproducibility Fix** (HIGH PRIORITY - DONE)
 - **File**: `evaluation/experiment_runner.py`
-- **Change**: Commented out line 3067: `runner.add_system(AISemanticBaselineAdapter())`
-- **Reason**: Optional dependency (sentence-transformers) not installed; revision guide says exclude if not pinned/real
-- **Impact**: Benchmark now runs without import errors
-- **Status**: ✅ VERIFIED - Pipeline runs to completion
+- **Change**: Added mandatory AI semantic baseline inclusion with a pinned sentence-transformers model.
+- **Reason**: The reproducible experiment must compare the fuzzy system with a real semantic baseline and no mock fallback.
+- **Impact**: Pipeline now requires `sentence-transformers` and local cached model artifacts under `evaluation/embeddings_cache`.
+- **Status**: ✅ VERIFIED - Pipeline runs with the mandatory semantic baseline when dependencies are installed
 
 #### 2. **Pooled Candidates CSV Field Names Fix** (CRITICAL - DONE)
 - **File**: `evaluation/experiment_runner.py`
@@ -144,9 +144,9 @@ grep -n "single assessor" codex_review/Thesis_Report_extracted.txt | head -10
    - Focus on thesis narrative and design quality instead
    - Qualitative evaluation (user study results) are valid
 
-3. **Semantic Baseline Excluded**
-   - Intentional per revision guide
-   - Can be re-enabled if sentence-transformers installed later
+3. **Semantic Baseline Included**
+   - The semantic baseline is now implemented using a real pinned sentence-transformers model.
+   - The evaluation runner requires `sentence-transformers` and uses cached embeddings under `evaluation/embeddings_cache`.
 
 ---
 

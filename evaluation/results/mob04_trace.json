@@ -1,0 +1,1189 @@
+{
+  "query_id": "MOB-04",
+  "query_text": "Veloverkehr und Radwege in der Schweiz",
+  "picked_candidates_traces": [
+    {
+      "dataset_id": "b317dee9-2e0c-499c-842a-aaeddd0d2255",
+      "title": {
+        "en": "",
+        "de": "Thurgauer Bodenpreis-Basisdaten",
+        "fr": "",
+        "it": ""
+      },
+      "inputs": {
+        "thematic_similarity": 0.0,
+        "recency": 0.0,
+        "completeness": 0.75,
+        "resource_availability": 9.0
+      },
+      "fuzzification": {
+        "thematic_similarity": {
+          "exact_match": 0.0,
+          "highly_relevant": 0.0,
+          "relevant": 0.0,
+          "somewhat_relevant": 0.0,
+          "not_relevant": 1.0
+        },
+        "recency": {
+          "very_recent": 1.0,
+          "recent": 0.0,
+          "moderate": 0.0,
+          "old": 0.0,
+          "very_old": 0.0
+        },
+        "completeness": {
+          "complete": 0.0,
+          "mostly_complete": 0.33333333311111135,
+          "partial": 0.0,
+          "sparse": 0.0,
+          "empty": 0.0
+        },
+        "resource_availability": {
+          "comprehensive": 0.14285714285510204,
+          "good": 0.24999999999375,
+          "limited": 0.0,
+          "minimal": 0.0
+        }
+      },
+      "rule_activations": [
+        {
+          "rule_id": 1,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_recent": 1.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 2,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:recent": 0.0,
+            "completeness:mostly_complete": 0.33333333311111135,
+            "thematic_similarity:highly_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 3,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:complete": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 4,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_recent": 1.0,
+            "thematic_similarity:highly_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 5,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "resource_availability:comprehensive": 0.14285714285510204,
+            "thematic_similarity:highly_relevant": 0.0,
+            "completeness:mostly_complete": 0.33333333311111135
+          }
+        },
+        {
+          "rule_id": 6,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:moderate": 0.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 7,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:partial": 0.0,
+            "thematic_similarity:highly_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 8,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:recent": 0.0,
+            "thematic_similarity:somewhat_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 9,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:mostly_complete": 0.33333333311111135,
+            "resource_availability:limited": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 10,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:old": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 11,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:sparse": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 12,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "resource_availability:minimal": 0.0,
+            "thematic_similarity:somewhat_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 13,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_old": 0.0,
+            "completeness:sparse": 0.0
+          }
+        },
+        {
+          "rule_id": 14,
+          "firing_strength": 1.0,
+          "antecedent_memberships": {
+            "thematic_similarity:not_relevant": 1.0
+          }
+        },
+        {
+          "rule_id": 15,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:empty": 0.0
+          }
+        },
+        {
+          "rule_id": 16,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "thematic_similarity:somewhat_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 17,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 18,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:recent": 0.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 19,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "resource_availability:comprehensive": 0.14285714285510204,
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 20,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:moderate": 0.0,
+            "completeness:partial": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 21,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_recent": 1.0,
+            "resource_availability:good": 0.24999999999375,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 22,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:old": 0.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        }
+      ],
+      "dominant_rules": [
+        {
+          "rule_id": 14,
+          "strength": 1.0
+        }
+      ],
+      "crisp_output": 6.633353193671907,
+      "explanation": "==================================================\nRANKING EXPLANATION\n==================================================\n\nFinal Relevance Score: 6.6/100\n\n--- Input Analysis ---\n  thematic_similarity: 0.00 → 'not_relevant' (μ=1.00)\n  recency: 0.00 → 'very_recent' (μ=1.00)\n  completeness: 0.75 → 'mostly_complete' (μ=0.33)\n  resource_availability: 9.00 → 'good' (μ=0.25)\n\n--- Top Contributing Rules ---\n  1. IF thematic_similarity IS not_relevant THEN relevance_score IS very_low\n     Strength: 1.00\n     Reason: Non-relevant datasets always rank very low"
+    },
+    {
+      "dataset_id": "feb4d5f2-eba4-4b14-a39b-5f3f36bb30c6",
+      "title": {
+        "en": "",
+        "de": "Bibliothekenstatistik der Öffentlichen Bibliotheken im Kanton Thurgau (ab 2020)",
+        "fr": "",
+        "it": ""
+      },
+      "inputs": {
+        "thematic_similarity": 0.11580690049918146,
+        "recency": 0.0,
+        "completeness": 0.75,
+        "resource_availability": 9.0
+      },
+      "fuzzification": {
+        "thematic_similarity": {
+          "exact_match": 0.0,
+          "highly_relevant": 0.0,
+          "relevant": 0.0,
+          "somewhat_relevant": 0.0,
+          "not_relevant": 0.42096549729360994
+        },
+        "recency": {
+          "very_recent": 1.0,
+          "recent": 0.0,
+          "moderate": 0.0,
+          "old": 0.0,
+          "very_old": 0.0
+        },
+        "completeness": {
+          "complete": 0.0,
+          "mostly_complete": 0.33333333311111135,
+          "partial": 0.0,
+          "sparse": 0.0,
+          "empty": 0.0
+        },
+        "resource_availability": {
+          "comprehensive": 0.14285714285510204,
+          "good": 0.24999999999375,
+          "limited": 0.0,
+          "minimal": 0.0
+        }
+      },
+      "rule_activations": [
+        {
+          "rule_id": 1,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_recent": 1.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 2,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:recent": 0.0,
+            "completeness:mostly_complete": 0.33333333311111135,
+            "thematic_similarity:highly_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 3,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:complete": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 4,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_recent": 1.0,
+            "thematic_similarity:highly_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 5,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "resource_availability:comprehensive": 0.14285714285510204,
+            "thematic_similarity:highly_relevant": 0.0,
+            "completeness:mostly_complete": 0.33333333311111135
+          }
+        },
+        {
+          "rule_id": 6,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:moderate": 0.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 7,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:partial": 0.0,
+            "thematic_similarity:highly_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 8,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:recent": 0.0,
+            "thematic_similarity:somewhat_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 9,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:mostly_complete": 0.33333333311111135,
+            "resource_availability:limited": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 10,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:old": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 11,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:sparse": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 12,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "resource_availability:minimal": 0.0,
+            "thematic_similarity:somewhat_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 13,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_old": 0.0,
+            "completeness:sparse": 0.0
+          }
+        },
+        {
+          "rule_id": 14,
+          "firing_strength": 0.42096549729360994,
+          "antecedent_memberships": {
+            "thematic_similarity:not_relevant": 0.42096549729360994
+          }
+        },
+        {
+          "rule_id": 15,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:empty": 0.0
+          }
+        },
+        {
+          "rule_id": 16,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "thematic_similarity:somewhat_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 17,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 18,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:recent": 0.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 19,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "resource_availability:comprehensive": 0.14285714285510204,
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 20,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:moderate": 0.0,
+            "completeness:partial": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 21,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_recent": 1.0,
+            "resource_availability:good": 0.24999999999375,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 22,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:old": 0.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        }
+      ],
+      "dominant_rules": [
+        {
+          "rule_id": 14,
+          "strength": 0.42096549729360994
+        }
+      ],
+      "crisp_output": 8.056620372707854,
+      "explanation": "==================================================\nRANKING EXPLANATION\n==================================================\n\nFinal Relevance Score: 8.1/100\n\n--- Input Analysis ---\n  thematic_similarity: 0.12 → 'not_relevant' (μ=0.42)\n  recency: 0.00 → 'very_recent' (μ=1.00)\n  completeness: 0.75 → 'mostly_complete' (μ=0.33)\n  resource_availability: 9.00 → 'good' (μ=0.25)\n\n--- Top Contributing Rules ---\n  1. IF thematic_similarity IS not_relevant THEN relevance_score IS very_low\n     Strength: 0.42\n     Reason: Non-relevant datasets always rank very low"
+    },
+    {
+      "dataset_id": "f5d4b068-3f63-4cc2-ba6a-2d793a0db2c9",
+      "title": {
+        "en": "",
+        "de": "Fluglärmmonitoring Region Frauenfeld (Iselisberg TG) ab 2021",
+        "fr": "",
+        "it": ""
+      },
+      "inputs": {
+        "thematic_similarity": 0.0,
+        "recency": 0.0,
+        "completeness": 0.75,
+        "resource_availability": 9.0
+      },
+      "fuzzification": {
+        "thematic_similarity": {
+          "exact_match": 0.0,
+          "highly_relevant": 0.0,
+          "relevant": 0.0,
+          "somewhat_relevant": 0.0,
+          "not_relevant": 1.0
+        },
+        "recency": {
+          "very_recent": 1.0,
+          "recent": 0.0,
+          "moderate": 0.0,
+          "old": 0.0,
+          "very_old": 0.0
+        },
+        "completeness": {
+          "complete": 0.0,
+          "mostly_complete": 0.33333333311111135,
+          "partial": 0.0,
+          "sparse": 0.0,
+          "empty": 0.0
+        },
+        "resource_availability": {
+          "comprehensive": 0.14285714285510204,
+          "good": 0.24999999999375,
+          "limited": 0.0,
+          "minimal": 0.0
+        }
+      },
+      "rule_activations": [
+        {
+          "rule_id": 1,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_recent": 1.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 2,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:recent": 0.0,
+            "completeness:mostly_complete": 0.33333333311111135,
+            "thematic_similarity:highly_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 3,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:complete": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 4,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_recent": 1.0,
+            "thematic_similarity:highly_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 5,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "resource_availability:comprehensive": 0.14285714285510204,
+            "thematic_similarity:highly_relevant": 0.0,
+            "completeness:mostly_complete": 0.33333333311111135
+          }
+        },
+        {
+          "rule_id": 6,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:moderate": 0.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 7,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:partial": 0.0,
+            "thematic_similarity:highly_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 8,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:recent": 0.0,
+            "thematic_similarity:somewhat_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 9,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:mostly_complete": 0.33333333311111135,
+            "resource_availability:limited": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 10,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:old": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 11,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:sparse": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 12,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "resource_availability:minimal": 0.0,
+            "thematic_similarity:somewhat_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 13,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_old": 0.0,
+            "completeness:sparse": 0.0
+          }
+        },
+        {
+          "rule_id": 14,
+          "firing_strength": 1.0,
+          "antecedent_memberships": {
+            "thematic_similarity:not_relevant": 1.0
+          }
+        },
+        {
+          "rule_id": 15,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:empty": 0.0
+          }
+        },
+        {
+          "rule_id": 16,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "thematic_similarity:somewhat_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 17,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 18,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:recent": 0.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 19,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "resource_availability:comprehensive": 0.14285714285510204,
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 20,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:moderate": 0.0,
+            "completeness:partial": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 21,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_recent": 1.0,
+            "resource_availability:good": 0.24999999999375,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 22,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:old": 0.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        }
+      ],
+      "dominant_rules": [
+        {
+          "rule_id": 14,
+          "strength": 1.0
+        }
+      ],
+      "crisp_output": 6.633353193671907,
+      "explanation": "==================================================\nRANKING EXPLANATION\n==================================================\n\nFinal Relevance Score: 6.6/100\n\n--- Input Analysis ---\n  thematic_similarity: 0.00 → 'not_relevant' (μ=1.00)\n  recency: 0.00 → 'very_recent' (μ=1.00)\n  completeness: 0.75 → 'mostly_complete' (μ=0.33)\n  resource_availability: 9.00 → 'good' (μ=0.25)\n\n--- Top Contributing Rules ---\n  1. IF thematic_similarity IS not_relevant THEN relevance_score IS very_low\n     Strength: 1.00\n     Reason: Non-relevant datasets always rank very low"
+    },
+    {
+      "dataset_id": "3f8295e7-6758-44a9-b1b5-6cabfa5241e5",
+      "title": {
+        "en": "Max van Berchem image collection",
+        "de": "Bildersammlung Max van Berchem",
+        "fr": "Collection de photographies Max van Berchem",
+        "it": "Collezione Max van Berchem"
+      },
+      "inputs": {
+        "thematic_similarity": 0.18148230834498197,
+        "recency": 0.0,
+        "completeness": 0.75,
+        "resource_availability": 3.0
+      },
+      "fuzzification": {
+        "thematic_similarity": {
+          "exact_match": 0.0,
+          "highly_relevant": 0.0,
+          "relevant": 0.0,
+          "somewhat_relevant": 0.20988205549329178,
+          "not_relevant": 0.09258845822879598
+        },
+        "recency": {
+          "very_recent": 1.0,
+          "recent": 0.0,
+          "moderate": 0.0,
+          "old": 0.0,
+          "very_old": 0.0
+        },
+        "completeness": {
+          "complete": 0.0,
+          "mostly_complete": 0.33333333311111135,
+          "partial": 0.0,
+          "sparse": 0.0,
+          "empty": 0.0
+        },
+        "resource_availability": {
+          "comprehensive": 0.0,
+          "good": 0.0,
+          "limited": 0.6666666666444444,
+          "minimal": 0.0
+        }
+      },
+      "rule_activations": [
+        {
+          "rule_id": 1,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_recent": 1.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 2,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:recent": 0.0,
+            "completeness:mostly_complete": 0.33333333311111135,
+            "thematic_similarity:highly_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 3,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:complete": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 4,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_recent": 1.0,
+            "thematic_similarity:highly_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 5,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "resource_availability:comprehensive": 0.0,
+            "thematic_similarity:highly_relevant": 0.0,
+            "completeness:mostly_complete": 0.33333333311111135
+          }
+        },
+        {
+          "rule_id": 6,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:moderate": 0.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 7,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:partial": 0.0,
+            "thematic_similarity:highly_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 8,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:recent": 0.0,
+            "thematic_similarity:somewhat_relevant": 0.20988205549329178
+          }
+        },
+        {
+          "rule_id": 9,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:mostly_complete": 0.33333333311111135,
+            "resource_availability:limited": 0.6666666666444444,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 10,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:old": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 11,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:sparse": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 12,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "resource_availability:minimal": 0.0,
+            "thematic_similarity:somewhat_relevant": 0.20988205549329178
+          }
+        },
+        {
+          "rule_id": 13,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_old": 0.0,
+            "completeness:sparse": 0.0
+          }
+        },
+        {
+          "rule_id": 14,
+          "firing_strength": 0.09258845822879598,
+          "antecedent_memberships": {
+            "thematic_similarity:not_relevant": 0.09258845822879598
+          }
+        },
+        {
+          "rule_id": 15,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:empty": 0.0
+          }
+        },
+        {
+          "rule_id": 16,
+          "firing_strength": 0.20988205549329178,
+          "antecedent_memberships": {
+            "thematic_similarity:somewhat_relevant": 0.20988205549329178
+          }
+        },
+        {
+          "rule_id": 17,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 18,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:recent": 0.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 19,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "resource_availability:comprehensive": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 20,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:moderate": 0.0,
+            "completeness:partial": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 21,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_recent": 1.0,
+            "resource_availability:good": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 22,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:old": 0.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        }
+      ],
+      "dominant_rules": [
+        {
+          "rule_id": 16,
+          "strength": 0.20988205549329178
+        },
+        {
+          "rule_id": 14,
+          "strength": 0.09258845822879598
+        }
+      ],
+      "crisp_output": 22.671859742656753,
+      "explanation": "==================================================\nRANKING EXPLANATION\n==================================================\n\nFinal Relevance Score: 22.7/100\n\n--- Input Analysis ---\n  thematic_similarity: 0.18 → 'somewhat_relevant' (μ=0.21)\n  recency: 0.00 → 'very_recent' (μ=1.00)\n  completeness: 0.75 → 'mostly_complete' (μ=0.33)\n  resource_availability: 3.00 → 'limited' (μ=0.67)\n\n--- Top Contributing Rules ---\n  1. IF thematic_similarity IS somewhat_relevant THEN relevance_score IS low\n     Strength: 0.21\n     Reason: Weak thematic matches should still be handled by fuzzy rules\n  2. IF thematic_similarity IS not_relevant THEN relevance_score IS very_low\n     Strength: 0.09\n     Reason: Non-relevant datasets always rank very low"
+    },
+    {
+      "dataset_id": "fbbd9f3c-7194-448b-a7b2-1ef5aad83e6b",
+      "title": {
+        "en": "Statistical Yearbook of Switzerland 2006",
+        "de": "Statistisches Jahrbuch der Schweiz 2006",
+        "it": "Annuario statistico della Svizzera 2006",
+        "fr": "Annuaire statistique de la Suisse 2006"
+      },
+      "inputs": {
+        "thematic_similarity": 0.18011304799222816,
+        "recency": 0.0,
+        "completeness": 0.75,
+        "resource_availability": 5.0
+      },
+      "fuzzification": {
+        "thematic_similarity": {
+          "exact_match": 0.0,
+          "highly_relevant": 0.0,
+          "relevant": 0.0,
+          "somewhat_relevant": 0.2007536531476853,
+          "not_relevant": 0.09943475998914188
+        },
+        "recency": {
+          "very_recent": 1.0,
+          "recent": 0.0,
+          "moderate": 0.0,
+          "old": 0.0,
+          "very_old": 0.0
+        },
+        "completeness": {
+          "complete": 0.0,
+          "mostly_complete": 0.33333333311111135,
+          "partial": 0.0,
+          "sparse": 0.0,
+          "empty": 0.0
+        },
+        "resource_availability": {
+          "comprehensive": 0.0,
+          "good": 0.499999999975,
+          "limited": 0.0,
+          "minimal": 0.0
+        }
+      },
+      "rule_activations": [
+        {
+          "rule_id": 1,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_recent": 1.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 2,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:recent": 0.0,
+            "completeness:mostly_complete": 0.33333333311111135,
+            "thematic_similarity:highly_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 3,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:complete": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 4,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_recent": 1.0,
+            "thematic_similarity:highly_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 5,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "resource_availability:comprehensive": 0.0,
+            "thematic_similarity:highly_relevant": 0.0,
+            "completeness:mostly_complete": 0.33333333311111135
+          }
+        },
+        {
+          "rule_id": 6,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:moderate": 0.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 7,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:partial": 0.0,
+            "thematic_similarity:highly_relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 8,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:recent": 0.0,
+            "thematic_similarity:somewhat_relevant": 0.2007536531476853
+          }
+        },
+        {
+          "rule_id": 9,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:mostly_complete": 0.33333333311111135,
+            "resource_availability:limited": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 10,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:old": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 11,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:sparse": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 12,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "resource_availability:minimal": 0.0,
+            "thematic_similarity:somewhat_relevant": 0.2007536531476853
+          }
+        },
+        {
+          "rule_id": 13,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_old": 0.0,
+            "completeness:sparse": 0.0
+          }
+        },
+        {
+          "rule_id": 14,
+          "firing_strength": 0.09943475998914188,
+          "antecedent_memberships": {
+            "thematic_similarity:not_relevant": 0.09943475998914188
+          }
+        },
+        {
+          "rule_id": 15,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "completeness:empty": 0.0
+          }
+        },
+        {
+          "rule_id": 16,
+          "firing_strength": 0.2007536531476853,
+          "antecedent_memberships": {
+            "thematic_similarity:somewhat_relevant": 0.2007536531476853
+          }
+        },
+        {
+          "rule_id": 17,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 18,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:recent": 0.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 19,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "resource_availability:comprehensive": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        },
+        {
+          "rule_id": 20,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:moderate": 0.0,
+            "completeness:partial": 0.0,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 21,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:very_recent": 1.0,
+            "resource_availability:good": 0.499999999975,
+            "thematic_similarity:relevant": 0.0
+          }
+        },
+        {
+          "rule_id": 22,
+          "firing_strength": 0.0,
+          "antecedent_memberships": {
+            "recency:old": 0.0,
+            "completeness:complete": 0.0,
+            "thematic_similarity:exact_match": 0.0
+          }
+        }
+      ],
+      "dominant_rules": [
+        {
+          "rule_id": 16,
+          "strength": 0.2007536531476853
+        },
+        {
+          "rule_id": 14,
+          "strength": 0.09943475998914188
+        }
+      ],
+      "crisp_output": 22.276436980252925,
+      "explanation": "==================================================\nRANKING EXPLANATION\n==================================================\n\nFinal Relevance Score: 22.3/100\n\n--- Input Analysis ---\n  thematic_similarity: 0.18 → 'somewhat_relevant' (μ=0.20)\n  recency: 0.00 → 'very_recent' (μ=1.00)\n  completeness: 0.75 → 'mostly_complete' (μ=0.33)\n  resource_availability: 5.00 → 'good' (μ=0.50)\n\n--- Top Contributing Rules ---\n  1. IF thematic_similarity IS somewhat_relevant THEN relevance_score IS low\n     Strength: 0.20\n     Reason: Weak thematic matches should still be handled by fuzzy rules\n  2. IF thematic_similarity IS not_relevant THEN relevance_score IS very_low\n     Strength: 0.10\n     Reason: Non-relevant datasets always rank very low"
+    }
+  ]
+}

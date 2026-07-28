@@ -4,9 +4,8 @@ AI Semantic Baseline - Embedding-Based Search
 Implements an embedding-based semantic search path for comparison with the
 interpretable fuzzy approach.
 
-The real benchmark no longer treats the mock provider as a semantic baseline.
-Use a pinned sentence-transformer model if semantic comparisons are required;
-the mock provider remains available only as an explicit test/demo double.
+The benchmark uses a pinned sentence-transformers model for semantic comparisons.
+The prototype semantic baseline is implemented with a real sentence-transformers provider and no mock embedding fallback.
 """
 
 import hashlib
@@ -58,58 +57,6 @@ class EmbeddingProvider:
     def get_model_name(self) -> str:
         """Get the name of the model being used."""
         raise NotImplementedError
-
-
-class MockEmbeddingProvider(EmbeddingProvider):
-    """
-    Mock embedding provider for testing without GPU.
-    
-    Generates deterministic pseudo-embeddings based on text features.
-    """
-    
-    def __init__(self, dim: int = 384):
-        """
-        Initialize mock provider.
-        
-        Args:
-            dim: Embedding dimension to simulate
-        """
-        self.dim = dim
-        self._word_vectors: Dict[str, np.ndarray] = {}
-    
-    def _get_word_vector(self, word: str) -> np.ndarray:
-        """Get or create a consistent vector for a word."""
-        if word not in self._word_vectors:
-            # Create a deterministic pseudo-random vector from a stable digest.
-            digest = hashlib.sha256(word.encode("utf-8")).digest()
-            seed = int.from_bytes(digest[:4], byteorder="little", signed=False)
-            np.random.seed(seed)
-            self._word_vectors[word] = np.random.randn(self.dim)
-        return self._word_vectors[word]
-    
-    def encode(self, texts: List[str]) -> np.ndarray:
-        """Generate pseudo-embeddings based on word averaging."""
-        embeddings = []
-        
-        for text in texts:
-            words = text.lower().split()
-            if words:
-                word_vecs = [self._get_word_vector(w) for w in words]
-                embedding = np.mean(word_vecs, axis=0)
-            else:
-                embedding = np.zeros(self.dim)
-            
-            # Normalize
-            norm = np.linalg.norm(embedding)
-            if norm > 0:
-                embedding = embedding / norm
-            
-            embeddings.append(embedding)
-        
-        return np.array(embeddings)
-    
-    def get_model_name(self) -> str:
-        return f"MockEmbedding-{self.dim}d"
 
 
 class SentenceTransformerProvider(EmbeddingProvider):
@@ -401,28 +348,24 @@ class AISemanticBaseline:
 
 
 def create_semantic_baseline(
-    use_real_model: bool = True,
     model_name: str = "paraphrase-multilingual-MiniLM-L12-v2",
     revision: Optional[str] = None,
     cache_folder: Optional[str] = None,
     use_faiss: bool = False
 ) -> AISemanticBaseline:
     """
-    Factory function to create semantic baseline.
+    Factory function to create a real semantic baseline.
     
     Args:
-        use_real_model: Whether to use real sentence transformers
-        model_name: Model name if using real model
+        model_name: Sentence-transformers model name
+        revision: Model revision tag or branch
+        cache_folder: Local cache directory for model files
         use_faiss: Whether to use FAISS for fast search
-        
+    
     Returns:
         Configured AISemanticBaseline
     """
-    if use_real_model:
-        provider = SentenceTransformerProvider(model_name, revision=revision, cache_folder=cache_folder)
-    else:
-        provider = MockEmbeddingProvider()
-    
+    provider = SentenceTransformerProvider(model_name, revision=revision, cache_folder=cache_folder)
     return AISemanticBaseline(provider, use_faiss)
 
 
@@ -454,8 +397,8 @@ if __name__ == "__main__":
         }
     ]
     
-    # Create baseline with mock provider
-    baseline = create_semantic_baseline(use_real_model=False)
+    # Create baseline using the real sentence-transformers model
+    baseline = create_semantic_baseline(cache_folder="evaluation/embeddings_cache")
     baseline.index_datasets(mock_datasets)
     
     # Test searches

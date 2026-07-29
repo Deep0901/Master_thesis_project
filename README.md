@@ -15,7 +15,7 @@
 This repository contains the final implementation and evaluation artifacts for the Master's thesis "Human-Centered Information Retrieval for Swiss Open Government Data Using Fuzzy Logic-Based Ranking". The work implements, evaluates, and documents a retrieval framework that integrates lexical retrieval (BM25-style), metadata-aware scoring, and a Mamdani fuzzy inference reranker to produce explainable dataset rankings for the Swiss Open Government Data (OGD) portal.
 
 Key outcomes:
-- The codebase implements a complete production retrieval path alongside a Streamlit-based prototype UI.  
+- The codebase implements a complete retrieval and evaluation pipeline alongside a Streamlit-based prototype UI.  
 - The ranking pipeline combines lexical similarity, metadata-derived features (recency, completeness, resource availability) and a calibrated Mamdani inference engine.  
 - The evaluation uses a frozen corpus, a 15-query benchmark, and an authoritative final ground-truth to generate reproducible results.  
 - The implementation produces human-readable explanations that map fuzzy memberships and top contributing rules to plain-language statements.
@@ -37,6 +37,8 @@ python evaluation/run_reproducible_experiment.py
 ```
 
 This uses the frozen metadata snapshot, the frozen benchmark queries, and the final ground truth, and it regenerates the evaluation artifacts reported in the thesis. No live CKAN access is required when running the reproducible entry point.
+
+The command regenerates the evaluation tables, statistical outputs, and figures reported in the thesis.
 
 ---
 

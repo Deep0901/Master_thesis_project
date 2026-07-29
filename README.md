@@ -24,11 +24,27 @@ This repository reflects the completed thesis deliverables and evaluation artifa
 
 ---
 
+## Quick Reproduction
+
+From a fresh clone, run the following sequence from the repository root to reproduce the published evaluation:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python evaluation/run_reproducible_experiment.py
+```
+
+This uses the frozen metadata snapshot, the frozen benchmark queries, and the final ground truth, and it regenerates the evaluation artifacts reported in the thesis. No live CKAN access is required when running the reproducible entry point.
+
+---
+
 ## Research Questions
 
-- RQ1: How can fuzzy logic be used to improve dataset retrieval within OGD portals?
+- RQ1: How can fuzzy logic be used to effectively retrieve Open Government Datasets within OGD portals?
 - RQ2: How can multiple metadata-based relevance criteria be integrated into a unified and interpretable ranking mechanism?
-- RQ3: To what extent does a fuzzy logic-based retrieval system support HCIR principles?
+- RQ3: To what extent does a fuzzy logic-based retrieval system support Human-Centered Information Retrieval principles?
 - RQ4: How effective are metadata-driven explanations in improving user understanding and trust in ranking decisions?
 
 ---
@@ -229,7 +245,7 @@ The evaluation compares the following systems (implemented in this repository):
 - Linear Weighted — Linear weighted baseline implemented in `evaluation/experiment_runner.py`
 - Fuzzy HCIR — Proposed Mamdani fuzzy inference reranker implemented in `code/fuzzy_system/` and `code/ranking/fuzzy_ranker.py`
 - Semantic — Real semantic baseline using sentence-transformers with cached embeddings available in `evaluation/embeddings_cache`; implementation in `code/ranking/ai_semantic_baseline.py`.
-- The semantic baseline is pinned to `paraphrase-multilingual-MiniLM-L12-v2` at revision `main` with seed `42`.
+- The semantic baseline uses the `paraphrase-multilingual-MiniLM-L12-v2` sentence-transformers model with seed `42`; the repository does not pin a specific Hugging Face commit revision in code.
 
 All systems are evaluated against the same frozen corpus to ensure a reproducible comparison.
 

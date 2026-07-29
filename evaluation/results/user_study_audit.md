@@ -34,7 +34,8 @@ This artifact records the user-study instrument that was actually used for the t
 
 ## Audit status
 
-- No de-identified item-level response matrix is present in the repository snapshot inspected for this revision.
-- The questionnaire instrument is therefore recorded here as the authoritative audit artifact for the study design.
-- Any future publication of participant-level aggregates should be added alongside this file with the consent and provenance details.
+- The repository snapshot inspected for this revision contains the questionnaire instrument and the study-design description, but no de-identified item-level response matrix.
+- The evaluation protocol documented in the repository is a single-assessor grading workflow for the benchmark and a single-condition formative questionnaire for the user study.
+- The questionnaire instrument in this file is therefore the authoritative audit artifact for the reported study design.
+- Any future publication of anonymized participant-level aggregates should be added alongside this file with explicit consent and provenance details.
 

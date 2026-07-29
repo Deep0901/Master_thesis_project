@@ -10,3 +10,5 @@
 - Systems: Fuzzy, BM25, Linear Weighted, Weighted Sum, Portal, Semantic
 
 All evaluation retrievers read from this frozen local corpus. No live CKAN API requests are used during evaluation.
+
+The repository also records the exact user-study questionnaire used for the formative evaluation and the absence of an anonymized item-level response matrix in the inspected snapshot. The report therefore avoids unsupported causal claims about explanation effects beyond the documented questionnaire instrument.
